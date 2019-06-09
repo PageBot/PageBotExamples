@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document><pre><code class="Python">cid = 'Presentation'
+
+doc.title = 'What is PageBot?'
+page = doc[1]
+box = page['content']
+</code></pre>
+
+<h2>What is PageBot?</h2>
+<pre><code class="Python">page = doc[2]
+box = page['content']
+</code></pre>
+
+<p>Quote</p>
+<pre><code class="Python">page = doc[3]
+box = page['content']
+</code></pre>
+
+<p>Pagebot is...concise single sentence</p>
+<pre><code class="Python">page = doc[4]
+box = page['content']
+</code></pre>
+
+<p>Programmatic design, intelligent typography, Variable fonts</p>
+<pre><code class="Python">page = doc[5]
+box = page['content']
+</code></pre>
+
+<p>Prototype to publish</p>
+<pre><code class="Python">page = doc[6]
+box = page['content']
+</code></pre>
+
+<p>Typographic rules</p>
+<pre><code class="Python">page = doc[7]
+box = page['content']
+</code></pre>
+
+<p>Design target</p>
+<pre><code class="Python">page = doc[8]
+box = page['content']
+</code></pre>
+
+<p>Run, review, adjust rules, run, review</p>
+<pre><code class="Python">page = doc[9]
+box = page['content']
+</code></pre>
+
+<p>Sample of material design spec<br />
+(Using latest variable Roboto font)</p>
+<pre><code class="Python">page = doc[10]
+box = page['content']
+</code></pre>
+
+<p>Code of type rules</p>
+<pre><code class="Python">page = doc[11]
+box = page['content']
+</code></pre>
+
+<p>Output samples<br />
+Adjust code  output again </p>
+<pre><code class="Python">page = doc[12]
+box = page['content']
+</code></pre>
+
+<p>Variable unique solution to typographical issues</p>
+<pre><code class="Python">page = doc[13]
+box = page['content']
+</code></pre>
+
+<p>Prototyping to product in one tool</p></document>
