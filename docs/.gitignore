@@ -1,0 +1,6 @@
+pagebot
+*.md
+
+_export
+_local
+.DS_Store

@@ -1,6 +1,17 @@
 # PageBotExamples
 Working PageBot examples, manual and documentation.
 
+# PageBot Examples
+
+The examples in this folder are very basic, explaining the usage principles of PageBot. 
+
+More practicle examples, templates and application can be found in a separate GitHub repository, https://github.com/PageBot/PageBotExamples
+
+
+# Running PageBot on Google Cloud, start here:
+
+https://developers.google.com/sheets/api/quickstart/python
+
 # What is PageBot®?
 
 PageBot is a page layout program that enables designers to create high quality documents by programming. It is available both as Python library working with [DrawBot](http://www.drawbot.com) and as part of a collection of stand-alone desktop applications. Other contexts such as [Flat](http://xxyxyz.org/flat) and InDesign are currently being developed. They will allow PageBot to output to print ready formats and to run in environments other than Mac OS X such as Posix web servers. The aim of the developers of PageBot is to create a system of scriptable applications to generate professionally
