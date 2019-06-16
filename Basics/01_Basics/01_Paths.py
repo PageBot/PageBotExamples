@@ -14,7 +14,8 @@
 #     01_FilePaths.py
 #
 #     Shows how get pagebot file paths.
-#     Not to be confused with BezierPaths and PageBotPath, which are a different things.
+#     Not to be confused with BezierPaths and PageBotPath, 
+#     which are a different things: paths of polyons to draw.
 #
 import glob
 from pagebot import * # Import all top-level values, such as the getContext, function
@@ -75,7 +76,9 @@ def showFilePaths():
     doc.build()
 
 def makeText(t, page, f, c):
-    return newTextBox(t, font=f, parent=page, conditions=c, fill=0.8, 
+    """Create a new text box with e give layout conditions 
+    and with page as parent."""
+    return newTextBox(t, font=f, parent=page, conditions=c, fill=0.9, 
         margin=GUTTER)
 
 showFilePaths()

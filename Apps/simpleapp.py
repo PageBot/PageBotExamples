@@ -75,7 +75,6 @@ MENUS = (
     )),
 )
 
-
 class PageBotApp(BaseApp):
 
     APPS = {} # Key application.eId, value is PageBotApp instance.
@@ -96,7 +95,7 @@ class PageBotApp(BaseApp):
             minSize=(minW or 200, minH or 200),
             maxSize=(maxW or XXXL, maxH or XXXL))
         self.buildUI(uiWidth)
-         
+
     def buildUI(self, uiWidth):
         dy = pad = pt(6)
         y = pad + dy
@@ -128,8 +127,8 @@ class PageBotApp(BaseApp):
         # D E S I G N  U I
         tab = self.uiDesign = self.window.uiGroup.tabs[0]
 
-        tab.publicationNameLabel = TextBox((pad, y-12, -pad, uiLS), 'Publication name', sizeStyle='mini')
-        tab.publicationName = TextEditor((pad, y, -pad, uiLS), self.publication.name)
+        tab.documentNameLabel = TextBox((pad, y-12, -pad, uiLS), 'Document name', sizeStyle='mini')
+        tab.documentName = TextEditor((pad, y, -pad, uiLS), self.publication.name)
 
         y += uiL-2
         tab.publicationLabel = TextBox((pad, y-8, (uiWidth-pad)/2, uiLS), 
@@ -141,6 +140,7 @@ class PageBotApp(BaseApp):
         tab.publication = PopUpButton((pad, y, (uiWidth-pad)/2-pad, uiH),
             publicationCategories, callback=self.selectCategory, sizeStyle='small')
         tab.publication.set(publicationCategories.index('Magazine'))
+
 
         templateTypes = sorted(PublicationCategories[tab.publication.getItem()])
         tab.templateType = PopUpButton(((uiWidth-pad)/2+pad, y, -pad, uiH), templateTypes, 
@@ -248,7 +248,7 @@ class PageBotApp(BaseApp):
             sizeStyle='small')
         tab.showCropMarks.set(True)
 
-        tab.errors = EditText((pad, -250, -pad, -pad), sizeStyle='small')
+        tab.errors = EditText((pad, -50, -pad, -pad))
         
         # C O N T E N T  U I
         y = pad + dy
@@ -264,9 +264,6 @@ class PageBotApp(BaseApp):
 
         self.window.canvas = DrawView((uiWidth, menuHeight, -0, -0))
 
-    def verbose(self, s):
-        self.uiDesign.errors.set('%s' % s)
-   
     def build(self, view=None, **kwargs):
         #view = self.ui.view
         #for e in self.elements:
@@ -283,8 +280,8 @@ class PageBotApp(BaseApp):
             int(self.uiDesign.paddingLeft.get())
         )
 
-    def getPublicationName(self):
-        return self.uiDesign.publicationName.get()
+    def getDocumentName(self):
+        return self.uiDesign.documentName.get()
 
     def getPaperSize(self):
         w, h = self.publication.PAGE_SIZES[self.uiDesign.pageSize.getItem()]
@@ -314,22 +311,15 @@ class PageBotApp(BaseApp):
     def pageSizesCallback(self, sender):
         pass
 
-    def getPublicationClass(self):
-        return PublicationCategories[self.uiDesign.publication.getItem()][self.uiDesign.templateType.getItem()]        
-    
-    def getPublication(self):
-        publicationClass = self.getPublicationClass()
-
+    def getDocument(self):
+        """Answer the document that fits the current UI settings."""
         w, h = self.getPaperSize()
-        name = self.getPublicationName()
+        name = self.getDocumentName()
         padding = self.getPadding()
         gridX, gridY = self.getGrid(w, h, padding)
-        theme = self.getTheme()
-        # Make a new Document instance for export, based on current publication class
-        return publicationClass(w=w, h=h, name=name, autoPages=1, padding=padding, originTop=False,
-            gridX=gridX, gridY=gridY, theme=theme, context=context)
-
-    def setViewFlags(self, doc):
+        # Make a new Document instance for export
+        doc = Document(w=w, h=h, autoPages=1, padding=padding, originTop=False,
+            gridX=gridX, gridY=gridY, context=context)
         view = doc.view
         view.showCropMarks = showMarks = bool(self.uiDesign.showCropMarks.get())
         view.showRegistrationMarks = showMarks
@@ -346,23 +336,6 @@ class PageBotApp(BaseApp):
             view.padding = pt(48)
         else:
             view.padding = 0
-
-    def getSampleDocument(self):
-        """Answer the sample document that fits the current UI settings, based on the
-        selected publication class."""
-        
-        publication = self.getPublication()
-        doc = publication.newSampleDocument(autoPages=1)
-        self.setViewFlags(doc)
-        return doc
-
-    def getDocument(self):
-        """Answer the document that fits the current UI settings, based on the
-        selected publication class."""
-        
-        publication = self.getPublication()
-        doc = publication.newSampleDocument(autoPages=1)
-        self.setViewFlags(doc)
         return doc
 
     def getTheme(self):
@@ -370,16 +343,57 @@ class PageBotApp(BaseApp):
         themeMood = self.uiDesign.themeMood.getItem()
         return ThemeClasses[themeName](themeMood)
 
+    def buildSample(self, doc):
+        page = doc[1]
+        theme = self.getTheme()
+        if doc.view.showFrame:
+            c = theme.mood.body_bgcolor.lessOpaque()
+            newRect(parent=page, fill=c, conditions=[Fit2Sides()])
+
+        # By default, the typesetter produces a single Galley with content and code blocks.
+        t = Typesetter(doc.context)
+        t.typesetFile(MD_SAMPLE_PATH)
+
+        # Create a Composer for this document, then create pages and fill content.
+        composer = Composer(doc)
+
+        # The composer executes the embedded Python code blocks that indicate where content should go.
+        # by the HtmlContext. Feedback by the code blocks is added to verbose and errors list
+        targets = dict(pub=self, doc=doc, page=page)
+        composer.compose(t.galley, targets=targets)
+
+        """
+        if doc.view.showGrid:
+            c = theme.mood.body_color.lessOpaque()
+            for n in range(len(doc.gridX)):
+                colWidth = doc.gridX[n][0]
+                if n:
+                    conditions = [Left2Col(n), Fit2Height()]
+                else:
+                    conditions = [Left2Left(), Fit2Height()]
+                newRect(parent=page, fill=c, w=colWidth, conditions=conditions)
+        """
+
+        """
+        theme = self.getTheme()
+        newTextBox(str(theme.mood.name), style=headStyle, parent=grp, conditions=[Fit2Width(), Top2Top()])
+        for colorName in sorted(theme.mood.palette.colorNames):
+            color = theme.mood.palette[colorName]
+            newRect(parent=grp, w=32, h=32, fill=color, conditions=[Right2Right(), Float2Top(), Float2Left()])
+        """
+        page.solve()
+
     def selectCategory(self, sender):
         """Select a new category and update the popup of publication types."""
-        templateTypes = sorted(PublicationCategories[self.uiDesign.publication.getItem()])
-        self.uiDesign.templateType.setItems(templateTypes)
-        self.uiDesign.templateType.set(0)
+        templateTypes = sorted(PublicationCategories[tab.publication.getItem()])
+        self.templateType.setItems(templateTypes)
+        self.templateType.set(0)
         self.makeSample(sender) # Create a new sample for this selection.
         
     def makeSample(self, sender):
         """Make a fast sample page as PDF as example of the current UI settings."""
-        doc = self.getSampleDocument()
+        doc = self.getDocument()
+        self.buildSample(doc)
         path = '_export/%s_Sample.pdf' % self.publication.__class__.__name__
         doc.export(path)
         pdfDocument = doc.context.getDocument()
