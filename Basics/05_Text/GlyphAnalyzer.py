@@ -33,4 +33,4 @@ print('Glyph bounding box:', ga.boundingBox)
 print('x-position of verticals:', sorted(ga.verticals.keys()))
 # Y position of horizontal lines
 print('y-position of horizontals:', sorted(ga.horizontals.keys()))
-
+print(ga.stems)
