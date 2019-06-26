@@ -31,11 +31,15 @@ view.padding = PADDING
 view.showOrigin = True
 view.showPadding = True
 view.showFrame = True
+view.showCropMarks = True
 
 page = doc[1] # Get the single page from te document.
 print(page, 'Origin on top:', page.originTop) # Inherited from document
 e = newRect(x=0, y=0, w=100, h=100, parent=page, fill=0.5)
 print(e, 'yAlign', e.yAlign)
+e = newRect(w=100, h=100, parent=page, fill=0.5)
+e.top = page.h
+e.right = page.w
 
 page = page.next
 page.originTop = True # Force this page to have origin on top
@@ -43,6 +47,9 @@ print(page, 'Origin on top:', page.originTop)
 # Auto aligns on top, yAlign initializing from page.originTop
 e = newRect(x=0, y=0, w=100, h=100, parent=page, fill=0.5)
 print(e, 'yAlign', e.yAlign)
+e = newRect(w=100, h=100, parent=page, fill=0.5, yAlign=TOP, xAlign=RIGHT)
+e.top = page.h
+e.right = page.w
 
 #doc.originTop = True
 page = page.next
@@ -50,6 +57,9 @@ print(page, 'Origin on top:', page.originTop) # Inherited from document
 # Auto aligns on top, yAlign initializing from page.originTop
 e = newRect(x=0, y=0, w=100, h=100, parent=page, fill=0.5)
 print(e, 'yAlign', e.yAlign)
+e = newRect(w=100, h=100, parent=page, fill=0.5, yAlign=TOP, xAlign=RIGHT)
+e.top = page.h
+e.right = page.w
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 EXPORT_PATH = '_export/OriginPosition.pdf'
