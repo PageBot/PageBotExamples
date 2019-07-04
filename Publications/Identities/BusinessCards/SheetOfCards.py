@@ -70,6 +70,8 @@ class SheetOfCards(Publication):
 
 # =============================================================================
 #    Sampled identities
+#
+#	 Create random input data for identities and name records
 # .............................................................................
 for themeName in ThemeClasses.keys():
 	pass
@@ -79,11 +81,25 @@ def companyName():
 	name = blurb.getBlurb('business_name')
 	return name[0].upper() + name[1:]
 
-COUNT = 2
+def personRecord():
+	return dict(
+		name=blurb.getBlurb('name'), 
+		position=blurb.getBlurb('position'),
+		address=blurb.getBlurb('address')
+	)
+
+PERSON_COUNT = 16
+PERSONS = []
+ID_COUNT = 25
 ID_DATA = []
 themeNames = list(ThemeClasses.keys())
-for n in range(COUNT):
-		ID_DATA.append(dict(name=companyName(), theme=ThemeClasses[choice(themeNames)]()))
+personNames = []
+for n in range(PERSON_COUNT):
+	PERSONS.append(dict(personRecord()))
+#print(PERSONS)
+
+for n in range(ID_COUNT):
+	ID_DATA.append(dict(name=companyName(), theme=ThemeClasses[choice(themeNames)]()))
 
 for idData in ID_DATA:
 	name = idData['name']
