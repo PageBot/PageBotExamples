@@ -11,9 +11,9 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     05_Document.py
+#     05_StartADocument.py
 #
-#     Shows how to start a document and export it to PNG and 
+#     Shows how to start a document and export it to PNG and
 #     PDF in the simplest steps.
 #
 #     TODO: Floating on second line does not seem to work currently
@@ -53,12 +53,12 @@ def makeDocument():
     page.padding = PADDING
     page.showPadding = True
 
-    
+
     conditions = [Right2Right(), Float2Top(), Float2Left()]
     # TODO: Solve this bug, does not mirror.
     conditions = (
-        Left2Left(), 
-        Float2Top(), 
+        Left2Left(),
+        Float2Top(),
         Float2Right()
     )
     numberOfSquares = 88
