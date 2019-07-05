@@ -46,7 +46,7 @@ from pagebot.toolbox.dating import now
 # Import the measure units that we need
 from pagebot.toolbox.units import inch, pt, mm, em, p
 # Import color stuff, for what is not supplied by the theme
-from pagebot.toolbox.color import blackColor, color
+from pagebot.toolbox.color import blackColor, color, noColor
 # Font findings functions
 from pagebot.fonttoolbox.objects.font import findFont
 
@@ -73,21 +73,27 @@ class LogoTopLeft_BusinessCard(BaseBusinessCard):
     """
     def __init__(self, **kwargs):
         BaseBusinessCard.__init__(self, **kwargs)
+        page = self.getDocument(name='BaseBusinessCard')[1]
+        page.padding = p(2)
         context = self.doc.context
         mood = self.idData['theme'].mood
         style = mood.getStyle('logo')
         bs = context.newString(self.idData['name'], style=style)
         tw, th = bs.size
-        newTextBox(bs, parent=self, w=tw, fill=mood.logo_fill,
-        	conditions=[Right2Right(), Float2TopSide()])
+        newTextBox(bs, parent=page, w=tw, stroke=noColor, fill=noColor,
+        	conditions=[Left2Left(), Float2TopSide()])
         bodyStyle = mood.getStyle('body')
         captionStyle = mood.getStyle('caption')
         bs = context.newString(self.person['name'], style=bodyStyle)
         bs += context.newString('\n'+self.person['position'], style=captionStyle)
-        bs += context.newString('\n\n' + self.person['addressStreet'], style=bodyStyle)
-        bs += context.newString('\n' + self.person['addressCity'], style=bodyStyle)
-        newTextBox(bs, parent=self, fill=mood.logo_fill,
+        bs += context.newString('\n\n' + self.person['addressStreet'], style=captionStyle)
+        bs += context.newString('\n' + self.person['addressCity'], style=captionStyle)
+        bs += context.newString('\n' + self.person['addressTelephone'], style=captionStyle)
+        newTextBox(bs, parent=page, fill=noColor, stroke=noColor,
         	conditions=[Fit2Width(), Middle2Middle()])
+        page.showFrame = True
+        page.showPadding = True
+        page.solve()
 
 class SheetOfCards(Publication):
     """Hold the Document instance that generates a sheet of BusinessCard
@@ -132,6 +138,7 @@ def personRecord():
         position=blurb.getBlurb('position'),
         addressStreet=blurb.getBlurb('address_street_line'),
         addressCity=blurb.getBlurb('address_city_line'),
+        addressTelephone=blurb.getBlurb('telephone'),
     )
 
 def getPersonRecords(count):
@@ -141,8 +148,8 @@ def getPersonRecords(count):
     return persons
 
 
-PERSON_COUNT = 27
-ID_COUNT = 5
+PERSON_COUNT = 9
+ID_COUNT = 10
 ID_DATA = []
 
 themeNames = list(ThemeClasses.keys())
@@ -158,19 +165,19 @@ for idData in ID_DATA:
     theme.selectMood('light')
     mood = theme.mood
     style = mood.getStyle('logo')
-    style['font'] = 'Upgrade-Medium'
+    style['font'] = 'Upgrade-Bold'
     style['fontSize'] = style['leading'] = pt(18)
     #style['fill'] = color(spot=300)
-    style['textFill'] = mood.getStyle('h1')['textFill']
+    style['textFill'] = color(spot=300)
 
     style = mood.getStyle('body')
-    style['font'] = 'Upgrade-Regular'
-    style['leading'] = em(1.1)
+    style['font'] = 'Upgrade-Medium'
+    style['leading'] = em(1.2)
     style['xTextAlign'] = CENTER
 
     style = mood.getStyle('caption')
     style['font'] = 'Upgrade-Italic'
-    style['leading'] = em(1)
+    style['leading'] = em(1.1)
     style['xTextAlign'] = CENTER
 
     ci = CorporateIdentity(name=name, theme=theme)
