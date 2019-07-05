@@ -19,7 +19,7 @@ from pagebot.constants import CENTER # Import some constants that we need.
 from pagebot.toolbox.units import upt, pt
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.contexts.drawbotcontext import DrawBotContext
-from pagebot.toolbox.color import rgb, color, spot, blackColor
+from pagebot.toolbox.color import color, blackColor
 
 context = DrawBotContext()
 
@@ -29,10 +29,10 @@ class FantasyTheme(BaseTheme):
     BASE_COLORS = dict(
         base2=color(1, 0, 0.2), # Filling 2 base colors as source for range.
         dark3=color(1, 0, 0.5), # Overwriting single slot in the matrix.
-        logo=spot(300)
+        logo=color(spot=300)
     )
 # Make another Theme, based on DesignDesign.Space identity colors.
-DDS_LOGO = spot(165)
+DDS_LOGO = color(spot=165)
 class DDSTheme(BaseTheme):
     NAME = 'DesignDesign.Space'
     BASE_COLORS = dict(
@@ -99,12 +99,12 @@ def makeThemePage(themeClass):
 # Define the matrix by theirs palette names.
 colorMatrix = (
     ('black', 'gray', 'white', 'background', 'logoLight', 'logo', 'logoDark'),
-    ('lightest0', 'light0', 'lighter0', 'base0', 'darker0', 'dark0', 'darkest0'),
-    ('lightest1', 'light1', 'lighter1', 'base1', 'darker1', 'dark1', 'darkest1'),
-    ('lightest2', 'light2', 'lighter2', 'base2', 'darker2', 'dark2', 'darkest2'),
-    ('lightest3', 'light3', 'lighter3', 'base3', 'darker3', 'dark3', 'darkest3'),
-    ('lightest4', 'light4', 'lighter4', 'base4', 'darker4', 'dark4', 'darkest4'),
-    ('lightest5', 'light5', 'lighter5', 'base5', 'darker5', 'dark5', 'darkest5'),
+    ('lightest0', 'lighter0', 'light0', 'base0', 'dark0', 'darker0', 'darkest0'),
+    ('lightest1', 'lighter1', 'light1', 'base1', 'dark1', 'darker1', 'darkest1'),
+    ('lightest2', 'lighter2', 'light2', 'base2', 'dark2', 'darker2', 'darkest2'),
+    ('lightest3', 'lighter3', 'light3', 'base3', 'dark3', 'darker3', 'darkest3'),
+    ('lightest4', 'lighter4', 'light4', 'base4', 'dark4', 'darker4', 'darkest4'),
+    ('lightest5', 'lighter5', 'light5', 'base5', 'dark5', 'darker5', 'darkest5'),
 )
 # Make pages for all standard Theme palettes
 for themeName, themeClass in ThemeClasses.items():

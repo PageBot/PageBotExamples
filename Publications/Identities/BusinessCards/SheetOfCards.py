@@ -46,7 +46,7 @@ from pagebot.toolbox.dating import now
 # Import the measure units that we need
 from pagebot.toolbox.units import inch, pt, mm, em, p
 # Import color stuff, for what is not supplied by the theme
-from pagebot.toolbox.color import blackColor
+from pagebot.toolbox.color import blackColor, color
 # Font findings functions
 from pagebot.fonttoolbox.objects.font import findFont
 
@@ -63,27 +63,44 @@ class CorporateIdentity(Publication):
 class BaseBusinessCard(Publication):
     """Holding the Document instance that holds a single page with a
     business card. To be placed as a group of other cards by the SheetOfCards."""
+    def __init__(self, idData=None, person=None, **kwargs):
+        Publication.__init__(self, **kwargs)
+        self.idData = idData or {}
+        self.person = person or {}
 
 class LogoTopLeft_BusinessCard(BaseBusinessCard):
     """
     """
-    def __init__(self, idData=None, person=None, **kwargs):
+    def __init__(self, **kwargs):
         BaseBusinessCard.__init__(self, **kwargs)
-        self.idData = idData or {}
-        self.person = person or {}
+        context = self.doc.context
+        mood = self.idData['theme'].mood
+        style = mood.getStyle('logo')
+        bs = context.newString(self.idData['name'], style=style)
+        tw, th = bs.size
+        newTextBox(bs, parent=self, w=tw, fill=mood.logo_fill,
+        	conditions=[Right2Right(), Float2TopSide()])
+        bodyStyle = mood.getStyle('body')
+        captionStyle = mood.getStyle('caption')
+        bs = context.newString(self.person['name'], style=bodyStyle)
+        bs += context.newString('\n'+self.person['position'], style=captionStyle)
+        bs += context.newString('\n\n' + self.person['addressStreet'], style=bodyStyle)
+        bs += context.newString('\n' + self.person['addressCity'], style=bodyStyle)
+        newTextBox(bs, parent=self, fill=mood.logo_fill,
+        	conditions=[Fit2Width(), Middle2Middle()])
 
 class SheetOfCards(Publication):
     """Hold the Document instance that generates a sheet of BusinessCard
     instances."""
     # Standard "tetris" path of elements, to close up on top-left.
-    CONDIIONS = [Right2Right(), Float2Top(), Float2Left()]
+    CONDITIONS = [Right2Right(), Float2Top(), Float2Left()]
 
     def newCard(self, w, h, idData, person):
-        page = self.openDoc.getLastPage()
+        page = self.document.getLastPage()
         bc = LogoTopLeft_BusinessCard(parent=page, 
                 idData=idData, person=person,
-            w=w, h=h, fill=(random(), 0, random()), margin=p(0.5), 
-            conditions=self.CONDIIONS)
+            w=w, h=h, margin=p(0.5), 
+            conditions=self.CONDITIONS)
         bc.showCropmarks = True
         bc.showRegistrationMarks = True
         page.solve()
@@ -113,7 +130,8 @@ def personRecord():
     return dict(
         name=blurb.getBlurb('name'), 
         position=blurb.getBlurb('position'),
-        address=blurb.getBlurb('address')
+        addressStreet=blurb.getBlurb('address_street_line'),
+        addressCity=blurb.getBlurb('address_city_line'),
     )
 
 def getPersonRecords(count):
@@ -123,8 +141,8 @@ def getPersonRecords(count):
     return persons
 
 
-PERSON_COUNT = 16
-ID_COUNT = 10
+PERSON_COUNT = 27
+ID_COUNT = 5
 ID_DATA = []
 
 themeNames = list(ThemeClasses.keys())
@@ -137,6 +155,24 @@ for idData in ID_DATA:
 
     name = idData['name']
     theme = idData['theme']
+    theme.selectMood('light')
+    mood = theme.mood
+    style = mood.getStyle('logo')
+    style['font'] = 'Upgrade-Medium'
+    style['fontSize'] = style['leading'] = pt(18)
+    #style['fill'] = color(spot=300)
+    style['textFill'] = mood.getStyle('h1')['textFill']
+
+    style = mood.getStyle('body')
+    style['font'] = 'Upgrade-Regular'
+    style['leading'] = em(1.1)
+    style['xTextAlign'] = CENTER
+
+    style = mood.getStyle('caption')
+    style['font'] = 'Upgrade-Italic'
+    style['leading'] = em(1)
+    style['xTextAlign'] = CENTER
+
     ci = CorporateIdentity(name=name, theme=theme)
 
     w, h = BusinessCard
@@ -144,13 +180,12 @@ for idData in ID_DATA:
 
     sheet = SheetOfCards(w=sheetW, h=sheetH, name=name, theme=theme)
     sheetDoc = sheet.newDocument(w=sheetW, h=sheetH, padding=p(4, 3, 5, 3))
-
     persons = getPersonRecords(PERSON_COUNT)
 
     for person in persons:
         sheet.newCard(w=w, h=h, idData=idData, person=person)
 
-    sheetDoc.export('_export/BusinessCards.pdf')
+    sheetDoc.export('_export/BusinessCards-%s.pdf' % name.replace(' ','-'))
 
 # =============================================================================
 #    Create a series of identities, as input data forExport to PDF or other file formats

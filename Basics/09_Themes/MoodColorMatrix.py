@@ -19,7 +19,7 @@ from pagebot.themes.basetheme import BaseTheme
 from pagebot.constants import A4, CENTER
 from pagebot.toolbox.units import upt
 from pagebot.contexts.drawbotcontext import DrawBotContext
-from pagebot.toolbox.color import rgb, color, spot
+from pagebot.toolbox.color import color
 
 context = DrawBotContext()
 

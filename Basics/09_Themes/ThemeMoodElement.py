@@ -20,7 +20,7 @@ from pagebot.conditions import *
 from pagebot.elements import *
 from pagebot.contexts.drawbotcontext import DrawBotContext
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.toolbox.color import color, spot
+from pagebot.toolbox.color import color
 from pagebot.toolbox.units import point2D
 from pagebot.document import Document
 from pagebot.constants import *
@@ -39,14 +39,14 @@ class ThemeSpecimen(Element):
         # Mood: body=dict(color='dark0', bgcolor='lightest0'),
 
         mood = self.theme.mood
-        context.fill(mood.body_bgcolor)
+        context.fill(mood.body_fill)
         x, y = point2D(p)
         context.rect(p[0], p[1], self.w, self.h)
         # Theme name header, iterate until it fits.
         tw = XXXL
         styleHead = copy.copy(self.style)
         styleHead['font'] = boldFont = findFont('PageBot-Bold')
-        styleHead['textFill'] = mood.body_color
+        styleHead['textFill'] = mood.body_textFill
         themeMoodName = '%s:%s' % (self.theme.name, self.theme.mood.name)
         for fontSize in range(24, 0, -1):
             styleHead['fontSize'] = pt(fontSize)
