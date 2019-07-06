@@ -74,11 +74,11 @@ class LogoTopLeft_BusinessCard(BaseBusinessCard):
     def __init__(self, **kwargs):
         BaseBusinessCard.__init__(self, **kwargs)
         page = self.getDocument(name='BaseBusinessCard')[1]
-        page.padding = p(2)
+        page.padding = self.padding = p(2)
         context = self.doc.context
         mood = self.idData['theme'].mood
         style = mood.getStyle('logo')
-        bs = context.newString(self.idData['name'], style=style)
+        bs = context.newString(self.idData['logo'], style=style)
         tw, th = bs.size
         newTextBox(bs, parent=page, w=tw, stroke=noColor, fill=noColor,
         	conditions=[Left2Left(), Float2TopSide()])
@@ -91,8 +91,8 @@ class LogoTopLeft_BusinessCard(BaseBusinessCard):
         bs += context.newString('\n' + self.person['addressTelephone'], style=captionStyle)
         newTextBox(bs, parent=page, fill=noColor, stroke=noColor,
         	conditions=[Fit2Width(), Middle2Middle()])
-        page.showFrame = True
-        page.showPadding = True
+        self.showFrame = True
+        self.showPadding = True
         page.solve()
 
 class SheetOfCards(Publication):
@@ -130,7 +130,11 @@ for themeName in ThemeClasses.keys():
 
 def companyName():
     name = blurb.getBlurb('business_name')
-    return name[0].upper() + name[1:]
+    name = name[0].upper() + name[1:]
+    logo = ''
+    for part in name.split(' '):
+    	logo += part[0].upper()
+    return logo, name
 
 def personRecord():
     return dict(
@@ -149,13 +153,15 @@ def getPersonRecords(count):
 
 
 PERSON_COUNT = 9
-ID_COUNT = 10
+ID_COUNT = 3
 ID_DATA = []
 
 themeNames = list(ThemeClasses.keys())
 
 for n in range(ID_COUNT):
-    ID_DATA.append(dict(name=companyName(), theme=ThemeClasses[choice(themeNames)]()))
+    logo, name = companyName()
+    theme = ThemeClasses[choice(themeNames)]()
+    ID_DATA.append(dict(logo=logo, name=name, theme=theme))
 
 for idData in ID_DATA:
     # For all the identities, create a sheets with filled business cards
@@ -168,7 +174,7 @@ for idData in ID_DATA:
     style['font'] = 'Upgrade-Bold'
     style['fontSize'] = style['leading'] = pt(18)
     #style['fill'] = color(spot=300)
-    style['textFill'] = color(spot=300)
+    style['textFill'] = mood.logo = color(spot=300)
 
     style = mood.getStyle('body')
     style['font'] = 'Upgrade-Medium'
