@@ -54,7 +54,8 @@ doc = Document(w=CW, h=CH) # Default creates just a single page.
 view = doc.view
 view.padding = pt(32)
 view.showFrame = True
-view.showPadding = True
+view.showPadding = False
+view.viewPaddingStroke = color(0, 0.5, 0)
 view.showCropMarks = True
 
 page = doc[1]
@@ -64,6 +65,8 @@ for n in range(1, 5):
     DocWrap(embeddedDoc, parent=page, pn=n, conditions=eConditions, 
         margin=pt(10), 
         showRegistrationMarks=True,
+        showMargin=True,
+        viewMarginStroke=color(1, 0, 0),
         showCropMarks=True, 
         viewCropMarkSize=pt(6),
         viewCropMarkDistance=pt(3)

@@ -73,27 +73,41 @@ class LogoTopLeft_BusinessCard(BaseBusinessCard):
     """
     def __init__(self, **kwargs):
         BaseBusinessCard.__init__(self, **kwargs)
-        page = self.getDocument(name='BaseBusinessCard')[1]
-        page.padding = self.padding = p(2)
+
         context = self.doc.context
         mood = self.idData['theme'].mood
-        style = mood.getStyle('logo')
-        bs = context.newString(self.idData['logo'], style=style)
-        tw, th = bs.size
-        newTextBox(bs, parent=page, w=tw, stroke=noColor, fill=noColor,
-        	conditions=[Left2Left(), Float2TopSide()])
+
         bodyStyle = mood.getStyle('body')
         captionStyle = mood.getStyle('caption')
+        logoStyle = mood.getStyle('logo')
+
+        page = self.getDocument(name='BaseBusinessCard')[1]
+        page.padding = self.padding = p(1)
+
+        bs = context.newString(self.idData['logo'], style=logoStyle)
+        bs += context.newString(' '+self.idData['name'], style=bodyStyle)
+        tw, th = bs.size
+        e = newTextBox(bs, parent=page, w=tw, stroke=noColor, fill=0.7,
+        	conditions=[Left2Left(), Top2Top()])
+        print('===', e.x, tw, th, e.w, e.h)
+
         bs = context.newString(self.person['name'], style=bodyStyle)
         bs += context.newString('\n'+self.person['position'], style=captionStyle)
-        bs += context.newString('\n\n' + self.person['addressStreet'], style=captionStyle)
-        bs += context.newString('\n' + self.person['addressCity'], style=captionStyle)
-        bs += context.newString('\n' + self.person['addressTelephone'], style=captionStyle)
+        bs += context.newString('\n\n'+self.person['addressStreet'], style=captionStyle)
+        bs += context.newString('\n'+self.person['addressCity'], style=captionStyle)
+        bs += context.newString('\n'+self.person['addressTelephone'], style=captionStyle)
         newTextBox(bs, parent=page, fill=noColor, stroke=noColor,
-        	conditions=[Fit2Width(), Middle2Middle()])
+        	conditions=[Left2Left(), Fit2Width(), Middle2Middle()])
+        
         self.showFrame = True
         self.showPadding = True
+        self.showCropMarks = True
+        self.showRegistrationMarks = True
+        self.viewCropMarkSize=pt(16)
+        self.viewCropMarkDistance=pt(8)
+
         page.solve()
+        print('+++', e.x)
 
 class SheetOfCards(Publication):
     """Hold the Document instance that generates a sheet of BusinessCard
@@ -103,9 +117,10 @@ class SheetOfCards(Publication):
 
     def newCard(self, w, h, idData, person):
         page = self.document.getLastPage()
+        page.padding = 0
         bc = LogoTopLeft_BusinessCard(parent=page, 
                 idData=idData, person=person,
-            w=w, h=h, margin=p(0.5), 
+            w=w, h=h, margin=(page.pw - w*3 - 1)/6, 
             conditions=self.CONDITIONS)
         bc.showCropmarks = True
         bc.showRegistrationMarks = True
@@ -129,11 +144,15 @@ for themeName in ThemeClasses.keys():
     #print(themeName)
 
 def companyName():
-    name = blurb.getBlurb('business_name')
-    name = name[0].upper() + name[1:]
-    logo = ''
-    for part in name.split(' '):
-    	logo += part[0].upper()
+    if 0:
+        name = blurb.getBlurb('business_name')
+        name = name[0].upper() + name[1:]
+        logo = ''
+        for part in name.split(' '):
+            logo += part[0].upper()
+    else:
+        name = ''
+        logo = 'LOGO'
     return logo, name
 
 def personRecord():
@@ -153,7 +172,7 @@ def getPersonRecords(count):
 
 
 PERSON_COUNT = 9
-ID_COUNT = 3
+ID_COUNT = 1
 ID_DATA = []
 
 themeNames = list(ThemeClasses.keys())
@@ -172,7 +191,9 @@ for idData in ID_DATA:
     mood = theme.mood
     style = mood.getStyle('logo')
     style['font'] = 'Upgrade-Bold'
-    style['fontSize'] = style['leading'] = pt(18)
+    style['fontSize'] = pt(32)
+    style['leading'] = em(0.8)
+
     #style['fill'] = color(spot=300)
     style['textFill'] = mood.logo = color(spot=300)
 
