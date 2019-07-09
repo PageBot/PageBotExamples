@@ -10,22 +10,18 @@
 #
 
 from pagebot.document import Document
-from pagebot.elements import newRect
-from pagebot.conditions import Center2Center, Middle2Middle
+from pagebot.elements import newText
 from pagebot.toolbox.units import pt
-from pagebot.toolbox.color import color
+from pagebot.fonttoolbox.objects.font import findFont
 
-W, H = pt(300, 200) # Get size units
+# Find the Roboto font that exist in PageBot resources.
+f = findFont('Roboto-Bold')
 # Create document with default 1 page.
-doc = Document(w=W, h=H, originTop=False) 
+doc = Document(w=pt(800), h=pt(190), originTop=False) 
 # First page in the list is uneven (right side)
 page = doc[1] 
-# Create a new rectangle element with position conditions
-newRect(parent=page, fill=color('red'), size=pt(240, 140),
-    # Show measure lines on the element.
-    showDimensions=True, 
-    conditions=[Center2Center(), Middle2Middle()])
-# Make the page apply all conditions.
-page.solve() 
+# Create a new rectangle element with (x, y) conditions
+newText('Hello World', x=30, y=0, 
+    font=f, fontSize=140, textFill=0.2, parent=page)
 # Export the document page as png, so it shows as web image.
-doc.export('_export/RedSquare.png') 
+doc.export('_export/HelloWorld.png') 
