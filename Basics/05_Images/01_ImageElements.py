@@ -76,18 +76,19 @@ def makeDocument():
 
     page.gutter3D = GUTTER # Set all 3 gutters to same value
 
-    path = getResourcesPath() + 'cookbot10.jpg'
+    path = getResourcesPath() + '/images/cookbot10.jpg'
 
     img = newImage(path, padding=0,
-                   parent=page, w=200, h=300,
-                   conditions=(Top2Top(),
+                   parent=page, 
+                   conditions=(Bottom2Bottom(),
                                Fit2Width(),
                                SolveBlock(),
                                #Shrink2BlockBottom()
                                ),
                    yAlign=BOTTOM,
                    fill=color(0, 1, 0, 0.3),
-                   stroke=color(1, 0, 0))
+                   stroke=color(1, 0, 0),
+                   scaleImage=False)
     # Give parent on creation, to have the css chain working.
 
     # Caption falls through the yr2 (with differnt z) and lands on yr1 by Float2BottomSide()
@@ -112,12 +113,11 @@ def makeDocument():
 
     return doc # Answer the doc for further doing.
 
-if __name__ == '__main__':
-    d = makeDocument()
-    d.context.Variable(
-      [dict(name='PagePadding', ui='Slider', args=dict(minValue=10, value=30, maxValue=100)),
-       dict(name='PageSize', ui='Slider', args=dict(minValue=100, value=400, maxValue=800)),
-      #dict(name='ElementOrigin', ui='CheckBox', args=dict(value=False)),
-      ], globals())
-    d.export(EXPORT_PATH)
+d = makeDocument()
+d.context.Variable(
+  [dict(name='PagePadding', ui='Slider', args=dict(minValue=10, value=30, maxValue=100)),
+   dict(name='PageSize', ui='Slider', args=dict(minValue=100, value=400, maxValue=800)),
+  #dict(name='ElementOrigin', ui='CheckBox', args=dict(value=False)),
+  ], globals())
+d.export(EXPORT_PATH)
 

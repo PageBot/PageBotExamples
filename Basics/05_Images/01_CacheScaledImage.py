@@ -52,7 +52,8 @@ if __name__ == '__main__':
 	for n in range(12): # Stop before they become invisible small
 		# Create a range of scaled imaged that try to fit by floating conditions.
 		newImage(path, w=page.pw/factor, mr=M, mb=M, parent=page, 
-			conditions=(Right2Right(), Float2Top(), Float2Left()))
+			conditions=(Right2Right(), Float2Top(), Float2Left()),
+			scaleImage=False)
 		factor *= 1.6
 
 	doc.solve() # Solve the fitting of the scaled images on the page.

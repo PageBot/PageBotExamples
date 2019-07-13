@@ -29,33 +29,32 @@ from pagebot.toolbox.units import pt
 from pagebot import getContext
 context = getContext()
 
-if __name__ == '__main__':
 
-	# Define the path where to find the example image.
-	path = getResourcesPath() + "/images/cookbot1.jpg"
-	# Use the standard DrawBot function to get the width/height of the image from the file.
-	w, h = context.imageSize(path)
+# Define the path where to find the example image.
+path = getResourcesPath() + "/images/cookbot1.jpg"
+# Use the standard DrawBot function to get the width/height of the image from the file.
+w, h = context.imageSize(path)
 
-	# Let's say we want to scale it to 50%. The 0.5 is the multiplication factor.
-	newScale = 0.5
+# Let's say we want to scale it to 50%. The 0.5 is the multiplication factor.
+newScale = 0.5
 
-	# Make a page with the size of the scaled image, rounded to whole pixels.
-	context.newPage(pt(int(w*newScale)), pt(int(h*newScale)))
+# Make a page with the size of the scaled image, rounded to whole pixels.
+context.newPage(pt(int(w*newScale)), pt(int(h*newScale)))
 
-	# Save the “graphics state“, just in case the script is extended later, where other
-	# operation need to work in 100%.
-	context.save()
-	context.scale(newScale) # Make all drawing scale to 50%
-	context.image(path, pt(0, 0)) # Draw the scaled image at the bottom-left corner. It fills the whole page.
-	# Save the page as png file (and also do conversion from jpg to png this way).
-	# Save to _export folder, so the file will not upload into git. Otherwise anyone running this script will update the (same) image.
-	if not os.path.exists('_export/'):
-	    os.makedirs('_export/')
-	# Note that resulting images may look sharper, by has 4.5x the size of the .jpg.
-	context.saveImage('_export/cookbot1-%d.png' % (newScale*100)) # 944Kb size
-	context.saveImage('_export/cookbot1-%d.jpg' % (newScale*100)) # 168Kb size
-	context.saveImage('_export/cookbot1-%d.gif' % (newScale*100)) # 346Kb size
-	# Restore the graphics state, so DrawBot scaling is back to 100% after this.
-	context.restore()
-	print('Done')
+# Save the “graphics state“, just in case the script is extended later, where other
+# operation need to work in 100%.
+context.save()
+context.scale(newScale) # Make all drawing scale to 50%
+context.image(path, pt(0, 0)) # Draw the scaled image at the bottom-left corner. It fills the whole page.
+# Save the page as png file (and also do conversion from jpg to png this way).
+# Save to _export folder, so the file will not upload into git. Otherwise anyone running this script will update the (same) image.
+if not os.path.exists('_export/'):
+    os.makedirs('_export/')
+# Note that resulting images may look sharper, by has 4.5x the size of the .jpg.
+context.saveImage('_export/cookbot1-%d.png' % (newScale*100)) # 944Kb size
+context.saveImage('_export/cookbot1-%d.jpg' % (newScale*100)) # 168Kb size
+context.saveImage('_export/cookbot1-%d.gif' % (newScale*100)) # 346Kb size
+# Restore the graphics state, so DrawBot scaling is back to 100% after this.
+context.restore()
+print('Done')
 
