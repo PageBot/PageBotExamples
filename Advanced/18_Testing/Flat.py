@@ -15,7 +15,7 @@
 # Compares pure Flat and FlatContext functionality.
 
  # Only runs under Flat
-from flat import rgb, font, shape, strike, document
+from flat3 import rgb, font, shape, strike, document
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot import getContext
 from pagebot.toolbox.color import blackColor, color
@@ -62,19 +62,15 @@ def testFlat():
     context.strokeWidth(strokeWidth)
     context.rect(50, 50, 20, 20)
 
-    '''
     print(p.items[0].item.style.width)
     print(context.pages[0].items[0].item.style.width)
-    '''
 
     s = context.pages[0].items[0]
 
-    '''
     print(s.item.style.fill)
     print(s.item.style.stroke)
     print(s.item.style.join)
     print(s.item.style.limit)
-    '''
 
     ''' Draws text. '''
 
@@ -93,13 +89,12 @@ def testFlat():
     context.text('bla', (50, 100)) # TODO: also for native flat.
     context.text(bs, (100, 100))
 
-    '''
+
     print(headline.style.size)
     print(headline.style.leading)
     print(headline.style.color.r)
     print(headline.style.color.g)
-    print(headline.style.color.b)
-    '''
+
 
     ''' Exports file. '''
 

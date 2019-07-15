@@ -18,28 +18,34 @@
 #     which are a different things: paths of polyons to draw.
 #
 import glob
-from pagebot import * # Import all top-level values, such as the getContext, function
+
+# Import all top-level values, such as the getContext() function.
+from pagebot import *
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.units import pt
-# Import a standard page size tuple with format (w, h)
-from pagebot.constants import A3 
 from pagebot.conditions import * 
 from pagebot.elements import *
 from pagebot.document import Document
 from pagebot.toolbox.units import pt
 
-H, W = A3 # Unpack one of the standard page sizes 
+# Import a standard page size tuple with format (w, h) and unpack it.
+from pagebot.constants import A3 
+H, W = A3
 GUTTER = pt(12)
 
 def showFilePaths():
     # Get the context that this script runs in, e.g. DrawBotApp.
-    context = getContext() 
+    context = getContext('Flat')
+    
     # Make a Document instance for this size and context, intializing one page.
     doc = Document(w=W, h=H, originTop=False, autoPages=1, context=context)
+    
     # Get the page.
     page = doc[1]
+    
     # Make a set of conditions for the element positions of this page.
     c = (Left2Left(), Fit2Right(), Float2Top())
+    
     # Find the demo font, as supplied with the PageBot library installation.
     # This is a subset of TYPETR Upgrade Regular.
     f = findFont('PageBot-Regular') 
@@ -71,7 +77,8 @@ def showFilePaths():
     c = (Left2Left(), Float2Top())
     e = makeText(bs, page, f, c)
     e.w = page.pw/2 - 2*GUTTER
-    # Let the page solve all of its child element layout conditions
+    
+    # Let the page solve all of its child element layout conditions.
     page.solve()
     doc.build()
 

@@ -30,7 +30,7 @@ MAX_PAGES = 20
 P = pt(48)
 
 def showAll():
-    context = getContext()
+    context = getContext('Flat')
     doc = Document(w=W, h=H, originTop=False, autoPages=1, context=context)
     page = doc[1]
     page.padding = P
