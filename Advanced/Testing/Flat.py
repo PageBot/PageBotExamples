@@ -33,22 +33,27 @@ FONTNAME = 'BungeeHairline-Regular'
 
 def testFlat():
     context = getContext('Flat')
+
+    # PageBot implementation, to be used for strings and styles.
     pagebotFont = findFont(FONTNAME)
+    pagebotFill = color((180.0 / 255, 0, 125.0 / 255))
+    pagebotStroke = color(100.0 / 255, 180.0 / 255, 0)
+
+    # Native flat implementation of fonts and colors.
     flatFont = font.open(pagebotFont.path)
     flatFill = rgb(180, 0, 125)
-    pagebotFill = color((180.0 / 255, 0, 125.0 / 255))
     flatStroke = rgb(100, 180, 0)
-    pagebotStroke = color(100.0 / 255, 180.0 / 255, 0)
+
+    # Stroke width is the same.
     strokeWidth = 1
 
     ''' Creates a document. '''
 
-    # Flat.
+    # Creating a Flat document.
     doc = document(WIDTH, HEIGHT, 'pt')
-    print(doc)
     p = doc.addpage()
 
-    # Pagebot.
+    # Pagebot equivalent.
     context.newDocument(WIDTH, HEIGHT)
     context.newPage()
 
@@ -98,20 +103,20 @@ def testFlat():
     #print(headline.style.color.r)
     #print(headline.style.color.g)
 
-
-    ''' Exports file. '''
-
-    im = p.image(kind='rgb')
-
+    # Now for conditions and elements.
     c = (Left2Left(), Fit2Right(), Float2Top())
-
     style = dict(fontSize=14, font=pagebotFont)
     msg = 'Testing textBox'
     bs = context.newString(msg, style=style)
     #makeText(bs, page, f, c)
     newTextBox(bs, font=pagebotFont, parent=p, conditions=c, fill=0.9,
-        margin=4)
+            margin=4)
     #print(p.items)
+
+    ''' Exports file. '''
+
+    im = p.image(kind='rgb')
+
 
     # TODO:
     #imagePath = getResourcesPath() + '/images/peppertom_lowres_398x530.png'
