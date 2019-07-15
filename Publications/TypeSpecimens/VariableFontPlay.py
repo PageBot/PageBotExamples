@@ -16,7 +16,7 @@
 #
 from pagebot.elements import Element, newRect
 from pagebot.conditions import *
-from pagebot.style import HalfLetter
+from pagebot.constants import HalfLetter
 from pagebot.toolbox.color import blackColor, color
 
 W, H = HalfLetter

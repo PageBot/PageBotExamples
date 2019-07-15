@@ -27,6 +27,7 @@ from pagebot.fonttoolbox.objects.font import getFont
 
 from pagebot.conditions import *
 from pagebot.elements import *
+from pagebot.elements.paths.glyphpath import GlyphPath
 from pagebot.document import Document
 from pagebot.toolbox.color import color, noColor, blackColor
 from pagebot.toolbox.units import pt
@@ -35,7 +36,7 @@ context = getContext()
 
 PAGE_PADDING = 32
 W, H = A4
-W, H = 500, 500
+W, H = 200, 200
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 EXPORT_PATH = '_export/GlyphPathElement.pdf'

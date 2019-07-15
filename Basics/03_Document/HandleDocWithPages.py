@@ -21,46 +21,40 @@ from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.conditions import *
 from pagebot.toolbox.color import color
+from pagebot.toolbox.units import pt, mm
 
-W, H = 200, 150
+W, H = pt(400, 300)
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 EXPORT_PATH = '_export/HandleDocWithPages.pdf'
 
-def makeDocument():
-    """Make a new document."""
+doc = Document(w=W, h=H, originTop=False, autoPages=1)
+print('One page in the document', doc.pages)
 
-    doc = Document(w=W, h=H, originTop=False, autoPages=1)
-    print('One page in the document', doc.pages)
+view = doc.getView()
+view.showPadding = True
+view.showDimensions = True
+view.showOrigin = True
 
-    view = doc.getView()
-    view.showPadding = True
-    view.showDimensions = True
-    view.showOrigin = True
+page = doc[1] # Get the single page from te document.
+page.name = 'First page'
+page.padding = 20
 
-    page = doc[1] # Get the single page from te document.
-    page.name = 'First page'
-    page.padding = 20
+conditions = (Center2Center(), Middle2Middle())
+# Try other positions
+#conditions= (Left2Left(), Top2TopSide())
+#conditions= (Right2Right(), Top2TopSide())
 
-    conditions = (Center2Center(), Middle2Middle())
-    # Try other positions
-    #conditions= (Left2Left(), Top2TopSide())
-    #conditions= (Right2Right(), Top2TopSide())
+# Position square in the center of the page area.
+# Notice that their alignment (left) does not matter for the conditions.
+# Measures can be any type of units.
+# Their type is show in the measured output.
+newTextBox(page.name, w=mm(86), h=pt(164), parent=page, pl=3, pt=3,
+    showDimensions=True,
+    conditions=conditions, fill=color(0.8))
 
-    # Position square in the center of the page area.
-    # Notice that their alignment (left) does not matter for the conditions.
-    newTextBox(page.name, w=60, h=60, parent=page, pl=3, pt=3,
-               conditions=conditions, fill=color(0.7))
+page.solve()
 
-    page.solve()
 
-    view = doc.getView()
-    view.size =  W, H
-    view.padding = 0 # Don't show cropmarks and such.
-
-    return doc # Answer the doc for further doing.
-
-# Build the document d and "expose" it your DrawBot, export to file.
-d = makeDocument()
-d.export(EXPORT_PATH)
+doc.export(EXPORT_PATH)
 
