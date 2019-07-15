@@ -21,6 +21,8 @@ from pagebot import getContext
 from pagebot.toolbox.color import blackColor, color
 from pagebot import getResourcesPath
 from pagebot.toolbox.units import pt
+from pagebot.conditions import *
+from pagebot.elements import newTextBox
 import os, os.path
 
 WIDTH = 400
@@ -43,6 +45,7 @@ def testFlat():
 
     # Flat.
     doc = document(WIDTH, HEIGHT, 'pt')
+    print(doc)
     p = doc.addpage()
 
     # Pagebot.
@@ -62,15 +65,15 @@ def testFlat():
     context.strokeWidth(strokeWidth)
     context.rect(50, 50, 20, 20)
 
-    print(p.items[0].item.style.width)
-    print(context.pages[0].items[0].item.style.width)
+    #print(p.items[0].item.style.width)
+    #print(context.pages[0].items[0].item.style.width)
 
     s = context.pages[0].items[0]
 
-    print(s.item.style.fill)
-    print(s.item.style.stroke)
-    print(s.item.style.join)
-    print(s.item.style.limit)
+    #print(s.item.style.fill)
+    #print(s.item.style.stroke)
+    #print(s.item.style.join)
+    #print(s.item.style.limit)
 
     ''' Draws text. '''
 
@@ -90,15 +93,24 @@ def testFlat():
     context.text(bs, (100, 100))
 
 
-    print(headline.style.size)
-    print(headline.style.leading)
-    print(headline.style.color.r)
-    print(headline.style.color.g)
+    #print(headline.style.size)
+    #print(headline.style.leading)
+    #print(headline.style.color.r)
+    #print(headline.style.color.g)
 
 
     ''' Exports file. '''
 
     im = p.image(kind='rgb')
+
+    c = (Left2Left(), Fit2Right(), Float2Top())
+
+    style = dict(fontSize=14, font=pagebotFont)
+    msg = 'Testing textBox'
+    bs = context.newString(msg, style=style)
+    #makeText(bs, page, f, c)
+    newTextBox(bs, font=pagebotFont, parent=p, conditions=c, fill=0.9,
+        margin=4)
     #print(p.items)
 
     # TODO:
@@ -111,12 +123,12 @@ def testFlat():
 
     #print('Exporting native')
     doc.pdf('_export/native-flat.pdf')
-    '''
     im.png('_export/native-flat.png')
     im.jpeg('_export/native-flat.jpg')
     p.svg('_export/native-flat.svg')
-    '''
     print(context.doc)
+
+
 
     context.saveDocument('_export/pagebot-flat.pdf')
     #print('Exporting pagebot')
