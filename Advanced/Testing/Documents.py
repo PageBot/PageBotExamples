@@ -68,11 +68,43 @@ def testPages(doc):
     print(' - %s' % type(page))
     print(' - %s' % doc.pages)
 
-def testUnits(context):
-    print(' - Units: %s' % context.units)
-
 def testElements(page):
+    """
+    Functions to be tested:
+
+    def newView(viewId, **kwargs):
+    def newPage(**kwargs):
+    def newTemplate(**kwargs):
+    def newPlacer(**kwargs):
+    def newColumn(**kwargs):
+    def newTextBox(bs='', **kwargs):
+    def newText(bs='', **kwargs):
+    def newRect(**kwargs):
+    def newQuire(**kwargs):
+    def newArtboard(**kwargs):
+    def newGroup(**kwargs):
+    def newOval(**kwargs):
+    def newCircle(**kwargs):
+    def newLine(**kwargs):
+    def newPolygon(points=None, **kwargs):
+    def newRuler(**kwargs):
+    def newPageBotPath(**kwargs):
+    def newPaths(paths=None, **kwargs):
+    def newImage(path=None, **kwargs):
+    def newTable(cols=1, rows=1, **kwargs):
+    def newGalley(**kwargs):
+    """
     conditions = [Right2Right(), Float2Top(), Float2Left()]
+
+    from pagebot.elements.views import viewClasses
+
+    for viewID in viewClasses:
+        view = newView(viewID)
+        print(' - %s' % view)
+
+    page = newPage()
+    print(' - new page %s' % page)
+
 
     for n in range(10):
         newLine(x=100, y=n*100, parent=page, stroke=0)
@@ -81,6 +113,7 @@ def testElements(page):
         newRect(w=40, h=42, mr=4, mt=4, parent=page,
                 fill=color(random()*0.5 + 0.5, 0, 0.5),
                 conditions=conditions)
+
     score = page.solve()
     print(' - %s' % score)
 
@@ -94,14 +127,12 @@ def test():
     objs = {}
 
     for context, path in testContexts:
-        print(context.name)
+        print('* %s' % context.name)
         objs[context.name] = {}
+        print(' - Units: %s' % context.units)
+
         doc = testDocument(context)
         objs[context.name]['doc'] = doc
-
-    for context, path in testContexts:
-        print(context.name)
-        testUnits(context)
 
     for context, path in testContexts:
         print(context.name)
