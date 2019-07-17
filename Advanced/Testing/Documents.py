@@ -15,8 +15,8 @@
 #     Tests pagebot string and style classes in different contexts.
 
 from pagebotcocoa.contexts.drawbot.context import DrawBotContext
-from pagebot.contexts.flatcontext import FlatContext
-from pagebot.contexts.indesigncontext import InDesignContext
+from pagebot.contexts.flat.context import FlatContext
+#from pagebot.contexts.indesigncontext import InDesignContext
 #from pagebot.contexts.htmlcontext import HtmlContext
 #from pagebot.contexts.svgcontext import SvgContext
 #from pagebot.contexts.idmlcontext import IdmlContext
@@ -24,13 +24,15 @@ from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.conditions import *
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.contexts.strings.babelstring import BabelString
-from pagebot.contexts.strings.drawbotstring import DrawBotString
-from pagebot.contexts.strings.flatstring import FlatString
+from pagebot.strings.babelstring import BabelString
+from pagebotcocoa.contexts.drawbot.string import DrawBotString
+from pagebot.contexts.flat.flatstring import FlatString
 from pagebot.toolbox.units import pt
 from pagebot.toolbox.color import noColor, color
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.constants import *
+from random import random
+
 W, H = A5
 H = pt(H)
 W = pt(W)
@@ -74,7 +76,7 @@ def testContext(context, path):
     score = nextPage.solve()
     #print(score)
     doc.build() # Export?
-    
+
 def testAllContexts():
     for context, path in testContexts:
         testContext(context, path)

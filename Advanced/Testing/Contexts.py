@@ -21,28 +21,41 @@ from pagebot.constants import A4Rounded
 from pagebot.strings.babelstring import BabelString
 from pagebot import getContext
 from pagebot.toolbox.units import pt
+from pagebot.document import Document
 
 H, W = A4Rounded
+W = pt(W)
+H = pt(H)
+
 f = Color(0, 1, 0)
 s = Color(1, 0, 0)
 
 def testContexts():
-    for c in getAllContexts():
+    contexts = getAllContexts()
+    print('All contexts: %s' % contexts)
+
+    for c in contexts[:1]:
         testContext(c)
 
 def getRandom():
-    x = (W-100) * random()
-    y = (H-100) * random()
+    x = (W - 100) * random()
+    y = (H - 100) * random()
     return x, y
 
 def testContext(context):
-    if context is None:
-        print('Context is None')
-        return
     print('Context', context)
-    print('Context builder', context.b)
-    #for key, value in context.__dict__.items():
-    #    print(' * %s: %s' % (key, value))
+
+    doc = Document(w=W, h=H, context=context, autoPages=1)
+
+    print('# Context attributes')
+
+    for key, value in context.__dict__.items():
+        print(' * %s: %s' % (key, value))
+
+    print('# Document attributes')
+    for key, value in doc.__dict__.items():
+        print(' * %s: %s' % (key, value))
+
 
     try:
         context.frameDuration(1)
@@ -71,34 +84,38 @@ def testContext(context):
         x, y = getRandom()
         path = getResourcesPath() + "/images/cookbot1.jpg"
         context.image(path, p=pt(x, y), w=pt(100), h=pt(100))
+
         # TODO:
         # - test Bézier path
         # - test glyph path
+        # - test elements
         # ...
-        context.saveImage('_export/%s.pdf' % context.name)
+        path = '_export/%s.pdf' % context.name
+        context.saveImage(path)
+        print('Saved context to %s' % path)
     except Exception as e:
     	    print('Context errors', traceback.format_exc())
+
 def showContexts():
-	print('Here are some examples of how to retrieve different kinds of contexts:')
 	context = getContext() # Creates a DrawBot context on Mac, Flat on others
-	print('Context on Mac', context)
+	print('Context is', context)
+
 	context = getContext() # Still DrawBot, takes the buffered DEFAULT_CONTEXT.
 	print('DrawBot context?', context)
-	context = getContext('DrawBot') # Still DrawBot, takes the buffered DEFAULT_CONTEXT.
-	print('DrawBot context?', context)
+
 	context = getContext(contextType='Flat') # Force Flat.
 	print('Flat context?', context)
+
 	context = getContext(contextType='Flat') # Buffered in DEFAULT_CONTEXT this time.
 	print('Flat context?', context)
 	#context = getContext(contextType='HTML')
 	#print('HTML context?', context)
-	#context = getContext(contextType='InDesign') # To be implemented.
+	#context = getContext(contextType='InDesign')
 	#print('InDesign context?', context)
-	#context = getContext(contextType='IDML') # To be implemented.
+	#context = getContext(contextType='IDML')
 	#print('IDML context?', context)
-	#context = getContext(contextType='SVG') # To be implemented. # Missing valid valid import svgwrite
+	#context = getContext(contextType='SVG')
 	#print(context)
 
-showContexts()
+#showContexts()
 testContexts()
-

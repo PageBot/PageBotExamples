@@ -22,7 +22,7 @@
 import os, os.path
 
 from random import random
-from pagebot.contexts.flatcontext import FlatContext
+from pagebot.contexts.flat.context import FlatContext
 
 context = FlatContext()
 print('Context class is %s' % type(context).__name__)

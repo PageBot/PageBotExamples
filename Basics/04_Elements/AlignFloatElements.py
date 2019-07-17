@@ -17,7 +17,7 @@
 #     Interactive Variable() only works in DrawBot context.
 #
 # Creation of the RootStyle (dictionary) with all available default style parameters filled.
-#TODO from pagebot.contexts.flatcontext import FlatContext
+#TODO from pagebot.contexts.flat.context import FlatContext
 from pagebotcocoa.contexts.drawbot.context import DrawBotContext
 from pagebot.constants import CENTER
 # Document is the main instance holding all information about

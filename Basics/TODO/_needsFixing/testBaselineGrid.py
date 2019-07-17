@@ -14,7 +14,7 @@
 # -----------------------------------------------------------------------------
 #
 from pagebotcocoa.contexts.drawbot.context import DrawBotContext
-from pagebot.contexts.flatcontext import FlatContext
+from pagebot.contexts.flat.context import FlatContext
 
 
 def appendS(fs1, fs2, w, baselineGrid):

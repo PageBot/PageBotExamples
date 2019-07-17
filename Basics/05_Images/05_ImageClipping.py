@@ -15,7 +15,7 @@
 #     Draw images with clipping paths and rotation.
 #
 from random import random
-#from pagebot.contexts.flatcontext import FlatContext
+#from pagebot.contexts.flat.context import FlatContext
 from pagebot import getContext
 
 from pagebot import getResourcesPath
