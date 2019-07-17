@@ -47,8 +47,8 @@ blurb = Blurb()
 txt = blurb.getBlurb('news_headline', noTags=True)
 
 testContexts = (
+    (FlatContext(), '_export/testFlatString.pdf'),
     (DrawBotContext(), '_export/testDrawBotString.pdf'),
-    #(FlatContext(), '_export/testFlatString.pdf'),
     #(InDesignContext(), '_export/testInDesignString.pdf'),
     #(HtmlContext(), '_export/testHtmlString.pdf'),
     #(InDesignContext(), '_export/testInDesignString.pdf'),
@@ -57,20 +57,19 @@ testContexts = (
 
 def testDocument(context):
     doc = Document(w=W, h=H, context=context)
-    print('# Document in %s is %s' % (context, doc))
+    print(' - Document in %s is %s' % (context, doc))
     return doc
 
 def testPages(doc):
     page = doc[1]
-    print('Current page: %s' % page)
+    print(' - %s' % 'Current page: %s' % page)
     nextPage = page.next
-    print('Next page: %s' % nextPage)
-    print(type(page))
-    print(doc.pages)
+    print(' - %s' % 'Next page: %s' % nextPage)
+    print(' - %s' % type(page))
+    print(' - %s' % doc.pages)
 
 def testUnits(context):
-    print('Units: %s' % context.units)
-
+    print(' - Units: %s' % context.units)
 
 def testElements(page):
     conditions = [Right2Right(), Float2Top(), Float2Left()]
@@ -78,29 +77,50 @@ def testElements(page):
     for n in range(10):
         newLine(x=100, y=n*100, parent=page, stroke=0)
 
-    '''
     for n in range(10):
-        newRect(w=40, h=42, mr=4, mt=4, parent=nextPage,
+        newRect(w=40, h=42, mr=4, mt=4, parent=page,
                 fill=color(random()*0.5 + 0.5, 0, 0.5),
                 conditions=conditions)
-    score = nextPage.solve()
-    #print(score)
-    '''
+    score = page.solve()
+    print(' - %s' % score)
 
 def build(doc):
     doc.build() # Export?
 
+def export(context):
+    context.saveDocument('_export/Test-Documents-%s.pdf' % context.name)
+
 def test():
+    objs = {}
+
     for context, path in testContexts:
+        print(context.name)
+        objs[context.name] = {}
         doc = testDocument(context)
+        objs[context.name]['doc'] = doc
+
+    for context, path in testContexts:
+        print(context.name)
         testUnits(context)
+
+    for context, path in testContexts:
+        print(context.name)
+        doc = objs[context.name]['doc']
         testPages(doc)
+
+    for context, path in testContexts:
+        print(context.name)
+        doc = objs[context.name]['doc']
         # TODO: maybe make this work?
         #page = doc.pages[-1]
-        page = doc.pages[1]
-        print(page)
-        print(type(page))
-        #testElements(page)
+        page = doc.pages[1][0]
+        print(' - %s' % page)
+        print(' - %s' % type(page))
+        testElements(page)
+
+    for context, path in testContexts:
+        doc = objs[context.name]['doc']
         build(doc)
+        export(context)
 
 test()
