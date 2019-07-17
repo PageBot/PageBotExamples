@@ -37,6 +37,8 @@ W, H = A5
 H = pt(H)
 W = pt(W)
 M = 100
+SQ = 50
+
 s = 36
 
 roboto = findFont('Roboto-Regular')
@@ -67,6 +69,9 @@ def testPages(doc):
     print(' - %s' % 'Next page: %s' % nextPage)
     print(' - %s' % type(page))
     print(' - %s' % doc.pages)
+    new_page = newPage()
+    print(' - new page %s' % new_page)
+    print(' - %s' % doc.pages)
 
 def testElements(page):
     """
@@ -94,7 +99,9 @@ def testElements(page):
     def newTable(cols=1, rows=1, **kwargs):
     def newGalley(**kwargs):
     """
-    conditions = [Right2Right(), Float2Top(), Float2Left()]
+
+    # Conditions.
+    c = [Right2Right(), Float2Top(), Float2Left()]
 
     from pagebot.elements.views import viewClasses
 
@@ -102,17 +109,19 @@ def testElements(page):
         view = newView(viewID)
         print(' - %s' % view)
 
-    page = newPage()
-    print(' - new page %s' % page)
+    new_page = newPage()
+    print(' - new page %s' % new_page)
 
+    o = newOval(w=SQ, h=SQ, parent=page, conditions=c, fill=(1, 0, 0), stroke=0)
 
+    for n in range(10):
+        col = color(random()*0.5 + 0.5, 0, 0.5)
+        newRect(w=SQ, h=SQ, mr=4, mt=4, parent=page, fill=col, conditions=c)
+
+    # FIXME: no output in Flat.
     for n in range(10):
         newLine(x=100, y=n*100, parent=page, stroke=0)
 
-    for n in range(10):
-        newRect(w=40, h=42, mr=4, mt=4, parent=page,
-                fill=color(random()*0.5 + 0.5, 0, 0.5),
-                conditions=conditions)
 
     score = page.solve()
     print(' - %s' % score)
@@ -142,6 +151,7 @@ def test():
     for context, path in testContexts:
         print(context.name)
         doc = objs[context.name]['doc']
+
         # TODO: maybe make this work?
         #page = doc.pages[-1]
         page = doc.pages[1][0]

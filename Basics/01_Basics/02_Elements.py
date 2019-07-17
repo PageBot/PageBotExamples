@@ -26,7 +26,7 @@ from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.elements.paths.pagebotpath import PageBotPath
 from pagebot.constants import A3
 
-context = getContext('Flat')
+context = getContext()
 
 # Landscape A3.
 H, W = A3
