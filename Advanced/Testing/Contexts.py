@@ -18,7 +18,7 @@ from random import random
 from pagebot import getAllContexts, getResourcesPath
 from pagebot.toolbox.color import Color
 from pagebot.constants import A4Rounded
-from pagebot.contexts.strings.babelstring import BabelString
+from pagebot.strings.babelstring import BabelString
 from pagebot import getContext
 from pagebot.toolbox.units import pt
 
@@ -90,12 +90,12 @@ def showContexts():
 	print('Flat context?', context)
 	context = getContext(contextType='Flat') # Buffered in DEFAULT_CONTEXT this time.
 	print('Flat context?', context)
-	context = getContext(contextType='HTML')
-	print('HTML context?', context)
-	context = getContext(contextType='InDesign') # To be implemented.
-	print('InDesign context?', context)
-	context = getContext(contextType='IDML') # To be implemented.
-	print('IDML context?', context)
+	#context = getContext(contextType='HTML')
+	#print('HTML context?', context)
+	#context = getContext(contextType='InDesign') # To be implemented.
+	#print('InDesign context?', context)
+	#context = getContext(contextType='IDML') # To be implemented.
+	#print('IDML context?', context)
 	#context = getContext(contextType='SVG') # To be implemented. # Missing valid valid import svgwrite
 	#print(context)
 

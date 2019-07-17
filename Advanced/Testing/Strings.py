@@ -51,7 +51,7 @@ txt = blurb.getBlurb('news_headline', noTags=True)
 
 testContexts = (
     (DrawBotContext(), '_export/testDrawBotString.pdf'),
-    #(FlatContext(), '_export/testFlatString.pdf'),
+    (FlatContext(), '_export/testFlatString.pdf'),
     #(InDesignContext(), '_export/testInDesignString.pdf'),
     #(HtmlContext(), '_export/testHtmlString.pdf'),
     #(InDesignContext(), '_export/testInDesignString.pdf'),
@@ -76,6 +76,8 @@ def drawLines(page):
 
 def testContext(context, path):
     doc = Document(w=W, h=H, context=context, autoPages=1)
+    #context.newDocument(W, H, 'pt')
+    #context.newPage()
     page = doc[1]
 
     #print('Units: %s' % context.units)

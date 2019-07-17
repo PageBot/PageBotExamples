@@ -17,7 +17,7 @@
 import drawBot
 import math, os, random
 import inspect
-from pagebot.contexts.drawbotcontext import DrawBotContext
+from pagebotcocoa.contexts.drawbot.context import DrawBotContext
 
 attrs = []
 

@@ -16,7 +16,7 @@
 #     for DrawBotContext documents and HtmlContext documents, both
 #     using the same MarkDown file as source. 
 #
-from pagebot.contexts.drawbotcontext import DrawBotContext
+from pagebotcocoa.contexts.drawbot.context import DrawBotContext
 from pagebot.contexts.htmlcontext import HtmlContext
 from pagebot.document import Document
 from pagebot.elements import *

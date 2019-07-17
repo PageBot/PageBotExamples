@@ -185,7 +185,7 @@ def title(name):
     context.fontSize(42)
     context.text(name, (100, HEIGHT - 100))
 
-import pagebot.contexts.drawbotcontext
+import pagebotcocoa.contexts.drawbot.context
 import pagebot.contexts.flatcontext
 
 context.newPage(WIDTH, HEIGHT)
@@ -195,7 +195,7 @@ connections = []
 drawnclasses = {}
 positions = []
 classes = []
-classes.extend(inspect.getmembers(sys.modules['pagebot.contexts.drawbotcontext']))
+classes.extend(inspect.getmembers(sys.modules['pagebotcocoa.contexts.drawbot.context']))
 classes.extend(inspect.getmembers(sys.modules['pagebot.contexts.flatcontext']))
 drawClasses(classes)
 

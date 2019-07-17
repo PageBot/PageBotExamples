@@ -13,7 +13,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-from pagebot.contexts.drawbotcontext import DrawBotContext
+from pagebotcocoa.contexts.drawbot.context import DrawBotContext
 from pagebot.contexts.flatcontext import FlatContext
 
 

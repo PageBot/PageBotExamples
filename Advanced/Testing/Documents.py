@@ -14,7 +14,7 @@
 #
 #     Tests pagebot string and style classes in different contexts.
 
-from pagebot.contexts.drawbotcontext import DrawBotContext
+from pagebotcocoa.contexts.drawbot.context import DrawBotContext
 from pagebot.contexts.flatcontext import FlatContext
 from pagebot.contexts.indesigncontext import InDesignContext
 #from pagebot.contexts.htmlcontext import HtmlContext

@@ -13,7 +13,7 @@
 #
 #     MakeSamplePhotoBook.py
 #
-from pagebot.contexts.drawbotcontext import DrawBotContext
+from pagebotcocoa.contexts.drawbot.context import DrawBotContext
 from pagebot.publications.books import PhotoBook
 
 context = DrawBotContext()

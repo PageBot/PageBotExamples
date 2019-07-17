@@ -13,7 +13,7 @@
 #
 #     08-HeadlineAlignment.py
 #
-from pagebot.contexts.drawbotcontext import DrawBotContext
+from pagebotcocoa.contexts.drawbot.context import DrawBotContext
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.units import em, p, pt
 from pagebot.constants import *

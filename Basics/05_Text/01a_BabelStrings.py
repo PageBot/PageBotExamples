@@ -19,7 +19,7 @@
 #     implemented.
 #
 
-from pagebot.contexts.drawbotcontext import DrawBotContext
+from pagebotcocoa.contexts.drawbot.context import DrawBotContext
 from pagebot.contexts.flatcontext import FlatContext
 from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.color import color
