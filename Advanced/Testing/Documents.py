@@ -105,23 +105,33 @@ def testElements(page):
 
     from pagebot.elements.views import viewClasses
 
+    # Testing newView().
+
     for viewID in viewClasses:
         view = newView(viewID)
         print(' - %s' % view)
 
+    # Testing newPage().
+
     new_page = newPage()
     print(' - new page %s' % new_page)
 
-    o = newOval(w=SQ, h=SQ, parent=page, conditions=c, fill=(1, 0, 0), stroke=0)
+    oval = newOval(w=SQ, h=SQ, parent=page, conditions=c, fill=(1, 0, 0), stroke=0)
+    print(' - new oval %s' % oval)
+
+    circle = newCircle(w=SQ, h=SQ, parent=page, conditions=c, fill=(1, 0, 0), stroke=0)
+    print(' - new circle %s' % circle)
 
     for n in range(10):
         col = color(random()*0.5 + 0.5, 0, 0.5)
         newRect(w=SQ, h=SQ, mr=4, mt=4, parent=page, fill=col, conditions=c)
 
+
+    # Testing new Line)
     # FIXME: no output in Flat.
+
     for n in range(10):
         newLine(x=100, y=n*100, parent=page, stroke=0)
-
 
     score = page.solve()
     print(' - %s' % score)
