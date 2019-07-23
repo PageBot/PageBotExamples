@@ -32,6 +32,7 @@ from pagebot.toolbox.color import noColor, color
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.constants import *
 from random import random
+import traceback
 
 W, H = A5
 H = pt(H)
@@ -51,7 +52,7 @@ txt = blurb.getBlurb('news_headline', noTags=True)
 testContexts = (
     (FlatContext(), '_export/testFlatString.pdf'),
     (DrawBotContext(), '_export/testDrawBotString.pdf'),
-    (InDesignContext(), '_export/testInDesignString.pdf'),
+    (InDesignContext(), './_export/testInDesignString.pdf'),
     #(HtmlContext(), '_export/testHtmlString.pdf'),
     #(InDesignContext(), '_export/testInDesignString.pdf'),
     #(IdmlContext(), '_export/testIdmlString.pdf')
@@ -73,7 +74,7 @@ def testPages(doc):
     print(' - new page %s' % new_page)
     print(' - %s' % doc.pages)
 
-def testElements(page):
+def testElements(context, page):
     """
     Functions to be tested:
 
@@ -126,15 +127,27 @@ def testElements(page):
         col = color(random()*0.5 + 0.5, 0, 0.5)
         newRect(w=SQ, h=SQ, mr=4, mt=4, parent=page, fill=col, conditions=c)
 
-
     # Testing new Line)
     # FIXME: no output in Flat.
 
     for n in range(10):
         newLine(x=100, y=n*100, parent=page, stroke=0)
 
+    testTextBox(context, page)
+
     score = page.solve()
     print(' - %s' % score)
+
+
+def testTextBox(context, page):
+
+    style = dict(font=bungee, fontSize=pt(32), baselineShift=6)
+    bs = context.newString(txt, style=style)
+
+    tb = newTextBox(bs, context=context, x=M, y=H-10*M, w=W/2, h=300,
+            parent=page, stroke=color(0.3, 0.2, 0.1, 0.5),
+            style=dict(hyphenation=True, language='en', leading=200))
+
 
 def build(doc):
     doc.build() # Export?
@@ -167,11 +180,19 @@ def test():
         page = doc.pages[1][0]
         print(' - %s' % page)
         print(' - %s' % type(page))
-        testElements(page)
+        try:
+            testElements(context, page)
+        except:
+            'Error running testElements for context %s' % context
+            print(traceback.format_exc())
 
     for context, path in testContexts:
         doc = objs[context.name]['doc']
-        build(doc)
-        export(context)
+        try:
+            build(doc)
+            export(context)
+        except:
+            'Error buiding and exporting context %s' % context
+            print(traceback.format_exc())
 
 test()
