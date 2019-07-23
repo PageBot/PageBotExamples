@@ -16,7 +16,7 @@
 
 from pagebotcocoa.contexts.drawbot.context import DrawBotContext
 from pagebot.contexts.flat.context import FlatContext
-#from pagebot.contexts.indesigncontext import InDesignContext
+from indesigncontext.context import InDesignContext
 #from pagebot.contexts.htmlcontext import HtmlContext
 #from pagebot.contexts.svgcontext import SvgContext
 #from pagebot.contexts.idmlcontext import IdmlContext
@@ -51,7 +51,7 @@ txt = blurb.getBlurb('news_headline', noTags=True)
 testContexts = (
     (FlatContext(), '_export/testFlatString.pdf'),
     (DrawBotContext(), '_export/testDrawBotString.pdf'),
-    #(InDesignContext(), '_export/testInDesignString.pdf'),
+    (InDesignContext(), '_export/testInDesignString.pdf'),
     #(HtmlContext(), '_export/testHtmlString.pdf'),
     #(InDesignContext(), '_export/testInDesignString.pdf'),
     #(IdmlContext(), '_export/testIdmlString.pdf')
