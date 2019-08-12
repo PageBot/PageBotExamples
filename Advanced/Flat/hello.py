@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 
 from pagebot.fonttoolbox.objects.font import findFont
-roboto = findFont('Roboto-Regular')
 from flat import rgb, font, shape, strike, document
 
+roboto = findFont('Bungee-Regular')
+print('bla')
+print(roboto)
 red = rgb(255, 0, 0)
+print(roboto.path)
 lato = font.open(roboto.path)
 figure = shape().stroke(red).width(2.5)
 headline = strike(lato).color(red).size(20, 24)
