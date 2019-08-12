@@ -15,7 +15,7 @@
 # Compares pure Flat and FlatContext functionality.
 
  # Only runs under Flat
-from flat3 import rgb, font, shape, strike, document
+from flat import rgb, font, shape, strike, document
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot import getContext
 from pagebot.toolbox.color import blackColor, color
