@@ -24,9 +24,9 @@ from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.conditions import *
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.strings.babelstring import BabelString
-from pagebotcocoa.contexts.drawbot.string import DrawBotString
-from pagebot.contexts.flat.flatstring import FlatString
+#from pagebot.strings.babelstring import BabelString
+#from pagebotcocoa.contexts.drawbot.drawbotstring import DrawBotString
+#from pagebot.contexts.flat.flatstring import FlatString
 from pagebot.toolbox.units import pt
 from pagebot.toolbox.color import noColor, color
 from pagebot.contributions.filibuster.blurb import Blurb
@@ -39,7 +39,6 @@ H = pt(H)
 W = pt(W)
 M = 100
 SQ = 50
-
 s = 36
 
 roboto = findFont('Roboto-Regular')
@@ -192,7 +191,9 @@ def test():
             build(doc)
             export(context)
         except:
-            'Error buiding and exporting context %s' % context
+            msg = '!!!Error buiding and exporting context %s' % context
+            print(msg)
             print(traceback.format_exc())
+            break
 
 test()
