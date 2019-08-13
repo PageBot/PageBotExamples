@@ -65,7 +65,7 @@ Similarly, the first line indent of a new tag is set to firstTagIndent if define
 
 ~~~
 
-from pagebot.contributions.filibuster.blurb import blurb
+from pagebot.contributions.filibuster.blurb import Blurb
 box.bs += context.newString(blurb.getBlurb('article')+'\n' + blurb.getBlurb('article')+'\n', style=styles['p'])
 
 ~~~

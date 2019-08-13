@@ -19,7 +19,7 @@
 from pagebot import getResourcesPath
 
 #import pagebot # Import to know the path of non-Python resources.
-from pagebot.contributions.filibuster.blurb import blurb
+from pagebot.contributions.filibuster.blurb import Blurb
 
 # Creation of the RootStyle (dictionary) with all available
 # default style parameters filled.

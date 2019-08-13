@@ -32,13 +32,13 @@ from random import choice, random
 # likely will be a FlatContext
 from pagebot.contexts import getContext
 # Blob random text for content in case no name records are given
-from pagebot.contributions.filibuster.blurb import blurb
+from pagebot.contributions.filibuster.blurb import Blurb
 # Import the generic Publication class, that ours will inherit from.
-from pagebot.publications.publication import Publication 
+from pagebot.publications.publication import Publication
 # Get all types of elements, constants and conditions.
 from pagebot.constants import *
 from pagebot.conditions import *
-from pagebot.elements import * 
+from pagebot.elements import *
 # Import base themes to use as template and alter where necessary.
 from pagebot.themes import ThemeClasses
 # Get needed DateTime generator
@@ -98,7 +98,7 @@ class LogoTopLeft_BusinessCard(BaseBusinessCard):
         bs += context.newString('\n'+self.person['addressTelephone'], style=captionStyle)
         newTextBox(bs, parent=page, fill=noColor, stroke=noColor,
         	conditions=[Left2Left(), Fit2Width(), Middle2Middle()])
-        
+
         self.showFrame = True
         self.showPadding = True
         self.showCropMarks = True
@@ -118,21 +118,21 @@ class SheetOfCards(Publication):
     def newCard(self, w, h, idData, person):
         page = self.document.getLastPage()
         page.padding = 0
-        bc = LogoTopLeft_BusinessCard(parent=page, 
+        bc = LogoTopLeft_BusinessCard(parent=page,
                 idData=idData, person=person,
-            w=w, h=h, margin=(page.pw - w*3 - 1)/6, 
+            w=w, h=h, margin=(page.pw - w*3 - 1)/6,
             conditions=self.CONDITIONS)
         bc.showCropmarks = True
         bc.showRegistrationMarks = True
         page.solve()
         # If we managed to fit it on the same page, then keep it.
-        # Otherwise move it to a next page. 
+        # Otherwise move it to a next page.
         if bc.bottom < 0:
         	page = page.next
         	page.appendElement(bc)
 
 
-    
+
 # =============================================================================
 #    Sampled identities
 #
@@ -157,7 +157,7 @@ def companyName():
 
 def personRecord():
     return dict(
-        name=blurb.getBlurb('name'), 
+        name=blurb.getBlurb('name'),
         position=blurb.getBlurb('position'),
         addressStreet=blurb.getBlurb('address_street_line'),
         addressCity=blurb.getBlurb('address_city_line'),

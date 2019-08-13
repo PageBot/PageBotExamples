@@ -51,7 +51,7 @@ cc = ['List', 'of', 'things']
 <p>Blocks of text [p] are glued together here if possible. The first line indent of a new text box is set to firstColumnIndent.<br />
 Similarly, the first line indent of a new tag is set to firstTagIndent if defined. Otherwise firstLineIndent is used.</p>
 <pre><code>
-from pagebot.contributions.filibuster.blurb import blurb
+from pagebot.contributions.filibuster.blurb import Blurb
 box.bs += context.newString(blurb.getBlurb('article')+'\n' + blurb.getBlurb('article')+'\n', style=styles['p'])
 
 </code></pre>
