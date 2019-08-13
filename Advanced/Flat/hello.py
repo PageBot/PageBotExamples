@@ -16,20 +16,29 @@ bungee = findFont('Bungee-Regular')
 bungeeFlat = font.open(bungee.path)
 
 blurb = Blurb()
-txt = blurb.getBlurb('news_headline', noTags=True)
+txt = blurb.getBlurb('book_pseudoscientific', noTags=True)
 
 headline = strike(bungeeFlat).color(red).size(20, 24)
 body = strike(bungeeFlat).color(black).size(12, 14)
-#p = paragraph('bla bla bla')
 
-figure = shape().stroke(red).width(2.5)
+redStroke = shape().stroke(red).width(0.5)
+blackFill = shape().nostroke().fill(black)
+blackStroke = shape().stroke(black).width(0.2)
 
 d = document(w, h, 'pt')
 d.meta('hello')
 p = d.addpage()
-p.place(figure.circle(50, 50, 20))
+p.place(redStroke.circle(50, 50, 20))
+p.place(blackFill.rectangle(200, 200, 20, 40))
+
 p.place(headline.text('Hello world!')).frame(10, 10, 80, 80)
-p.place(body.text(txt)).frame(100, 100, 100, 100)
+w = 200
+h = 100
+x = 50
+y = 100
+p.place(body.text(txt)).frame(x, y, w, h)
+p.place(blackStroke.rectangle(x, y, w, h))
+
 
 # Export.
 p.image(kind='rgb').png('hello.png')
