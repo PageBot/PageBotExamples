@@ -17,9 +17,9 @@ black = rgb(0, 0, 0)
 white = rgb(255, 255, 255)
 bungee = findFont('Bungee-Regular')
 bungeeFlat = font.open(bungee.path)
-cotg = '../../docs/stylewars/dondi-white-children-of-the-grave-pt3-martha-cooper.png'
-i = image.open(cotg)
-print(i.kind)
+cotg3 = '../../docs/stylewars/dondi-white-children-of-the-grave-pt3-martha-cooper.png'
+cotg3image = image.open(cotg3)
+#print(i.kind)
 
 line = 12
 blurb = Blurb()
@@ -44,7 +44,7 @@ h0 = h - 2 * padding
 x = padding
 y = padding
 
-p.place(i)
+p.place(cotg3image)
 p.place(blackFill.rectangle(padding, padding, w0, 24))
 p.place(headline.text(title)).frame(padding, padding, w0, 24)
 y += 24
@@ -79,7 +79,12 @@ if placedText.overflow():
         elif s[0]=='+':
             print(u'Add "{}" to position {}'.format(s[-1],i))
 
-    print(unusedText)
+    #print(unusedText)
+    p1 = d.addpage()
+    x = padding
+    y = padding
+    p1.place(cotg3image)
+    placedText = p1.place(body.text(unusedText)).frame(x, y, w0, h0 - y)
 
 
 # Export.
