@@ -12,22 +12,35 @@ w = int(w)
 h = int(h)
 documentName = 'layout'
 
+# Colors.
 red = rgb(255, 0, 0)
 black = rgb(0, 0, 0)
 white = rgb(255, 255, 255)
-bungee = findFont('Bungee-Regular')
-bungeeFlat = font.open(bungee.path)
-cotg3 = '../../docs/stylewars/dondi-white-children-of-the-grave-pt3-martha-cooper.png'
-cotg3image = image.open(cotg3)
-#print(i.kind)
+
+# Fonts.
+f = findFont('Bungee-Regular')
+bungee = font.open(f.path)
+f = findFont('BungeeOutline-Regular')
+bungeeOutline = font.open(f.path)
+f = findFont('PageBot-Book')
+pageBotBook = font.open(f.path)
+
+# Images.
+cotg3src = '../../docs/stylewars/dondi-white-children-of-the-grave-pt3-martha-cooper.png'
+cotg3image = image.open(cotg3src)
+cotg2src = '../../docs/stylewars/dondi-white-children-of-the-grave-pt2.jpg'
+cotg2image = image.open(cotg2src)
 
 line = 12
 blurb = Blurb()
 
+h1Outline = strike(bungeeOutline).color(red).size(20, 24)
+h1 = strike(bungee).color(white).size(20, 24)
+intro = strike(bungee).color(white).size(10, 12)
+body = strike(pageBotBook).color(white).size(16, 18)
+
 title = blurb.getBlurb('stylewars_original')
 txt = blurb.getBlurb('stylewars_documentary')
-headline = strike(bungeeFlat).color(red).size(20, 24)
-body = strike(bungeeFlat).color(white).size(10, 12)
 
 redStroke = shape().stroke(red).width(0.5)
 blackFill = shape().nostroke().fill(black)
@@ -46,13 +59,14 @@ y = padding
 
 p.place(cotg3image)
 p.place(blackFill.rectangle(padding, padding, w0, 24))
-p.place(headline.text(title)).frame(padding, padding, w0, 24)
+p.place(h1.text(title)).frame(padding, padding, w0, 24)
+p.place(h1Outline.text(title)).frame(padding, padding, w0, 24)
 y += 24
 
 #p.place(blackStroke.rectangle(x, y, w0, h0))
 #p.place(whiteFill.rectangle(x, y, w0, h0))
-t0 = body.text(txt)
-strikeWidth = body.width(txt)
+t0 = intro.text(txt)
+strikeWidth = intro.width(txt)
 print(strikeWidth/ w0)
 placedText = p.place(t0).frame(x, y, w0, h0 - y)
 
@@ -70,7 +84,6 @@ if placedText.overflow():
     usedText = ''.join(placedText.lines())
     unusedText = ''
 
-
     for i,s in enumerate(difflib.ndiff(t2, usedText)):
         if s[0]==' ': continue
         elif s[0]=='-':
@@ -83,9 +96,8 @@ if placedText.overflow():
     p1 = d.addpage()
     x = padding
     y = padding
-    p1.place(cotg3image)
+    p1.place(cotg2image)
     placedText = p1.place(body.text(unusedText)).frame(x, y, w0, h0 - y)
-
 
 # Export.
 export = '_export'
