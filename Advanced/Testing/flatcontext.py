@@ -10,7 +10,7 @@
 #     Supporting DrawBot, www.drawbot.com
 # -----------------------------------------------------------------------------
 #
-#     testBabelStrings.py
+#     flatcontext.py
 #
 # Compares pure Flat and FlatContext functionality.
 
@@ -60,20 +60,20 @@ def testFlat():
     ''' Draws a figure. '''
 
     # Flat.
-    figure = shape().fill(flatFill).stroke(flatStroke).width(strokeWidth)
-    r = figure.rectangle(50, 50, 20, 20)
-    p.place(r)
+    #figure = shape().fill(flatFill).stroke(flatStroke).width(strokeWidth)
+    #r = figure.rectangle(50, 50, 20, 20)
+    #p.place(r)
 
-        # Pagebot.
-    context.fill(pagebotFill)
-    context.stroke(pagebotStroke)
-    context.strokeWidth(strokeWidth)
-    context.rect(50, 50, 20, 20)
+    # Pagebot.
+    #context.fill(pagebotFill)
+    #context.stroke(pagebotStroke)
+    #context.strokeWidth(strokeWidth)
+    #context.rect(50, 50, 20, 20)
 
     #print(p.items[0].item.style.width)
     #print(context.pages[0].items[0].item.style.width)
 
-    s = context.pages[0].items[0]
+    #s = context.pages[0].items[0]
 
     #print(s.item.style.fill)
     #print(s.item.style.stroke)
@@ -85,10 +85,10 @@ def testFlat():
     msg = 'Hello world!'
 
     # Flat.
-    headline = strike(flatFont).color(flatStroke).size(FONTSIZE, LEADING, units='pt')
-    t = headline.text(msg)
-    entity = p.place(t)
-    entity.frame(100, 100, 380, 80)
+
+    header = strike(flatFont).color(flatStroke).size(FONTSIZE, LEADING, units='pt')
+    t = header.text(msg)
+    placedText = p.place(t).frame(100, 100, 380, 80)
 
     # Pagebot.
     style = dict(font=pagebotFont, fontSize=FONTSIZE, textFill=pagebotStroke,
@@ -107,7 +107,9 @@ def testFlat():
     c = (Left2Left(), Fit2Right(), Float2Top())
     style = dict(fontSize=14, font=pagebotFont)
     msg = 'Testing textBox'
+    print(msg)
     bs = context.newString(msg, style=style)
+    print(type(bs))
     #makeText(bs, page, f, c)
     newTextBox(bs, font=pagebotFont, parent=p, conditions=c, fill=0.9,
             margin=4)
@@ -131,7 +133,7 @@ def testFlat():
     im.png('_export/native-flat.png')
     im.jpeg('_export/native-flat.jpg')
     p.svg('_export/native-flat.svg')
-    print(context.doc)
+    #print(context.doc)
 
 
 
