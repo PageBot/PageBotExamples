@@ -35,7 +35,7 @@ def testContexts():
     print('All contexts: %s' % contexts)
 
     for i, c in enumerate(contexts):
-        if i == 1:
+        if i in (0, 1):
             #print(c)
             testContext(c)
 
@@ -49,6 +49,8 @@ def testContext(context):
 
     doc = Document(w=W, h=H, context=context, autoPages=1)
 
+
+    '''
     print('# Context attributes')
 
     for key, value in context.__dict__.items():
@@ -57,35 +59,47 @@ def testContext(context):
     print('# Document attributes')
     for key, value in doc.__dict__.items():
         print(' * %s: %s' % (key, value))
+    '''
 
 
     try:
+        sq = 100
         context.frameDuration(1)
         context.newDrawing()
         context.newPage(w=W, h=H)
         context.fill(f)
         context.stroke(s)
-        x, y = getRandom()
-        context.rect(x, y, pt(100), pt(100))
-        x, y = getRandom()
-        context.oval(x, y, pt(100), pt(100))
-        x, y = getRandom()
-        context.circle(x, y, pt(100))
+        x = 0
+        y = 0
+        #context.rect(x, y, pt(sq), pt(sq))
+        y += sq
+
+        context.oval(x, y, pt(sq), pt(sq))
+        y += sq
+
+        context.circle(x, y, pt(sq))
+        y += sq
+
         bla = context.newString('BabelString No Style')
         print('String is BabelString', isinstance(bla, BabelString))
-        x, y = getRandom()
         context.text(bla, pt(x, y))
-        x, y = getRandom()
+        y += sq
         context.text('plain string', pt(x, y))
+        y += sq
+
         style = {'font': 'Helvetica', 'textFill': f}
         bla = context.newString('Babel String with Style', style=style)
-        x, y = getRandom()
         context.text('bla2', pt(x, y))
-        x, y = getRandom()
+        y += sq
+
         context.text(bla, pt(x, y))
-        x, y = getRandom()
+        x = sq
+        y = sq
+
+
         path = getResourcesPath() + "/images/cookbot1.jpg"
-        context.image(path, p=pt(x, y))#, w=pt(100), h=pt(100))
+        context.image(path, p=pt(0, 0), w=pt(100), h=pt(100))
+
 
         # TODO:
         # - test Bézier path
