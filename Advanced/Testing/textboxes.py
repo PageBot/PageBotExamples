@@ -40,9 +40,12 @@ txt = blurb.getBlurb('news_headline', noTags=True)
 
 def test():
     doc = Document(w=W, h=H)
-    print(doc.pages)
-    print(len(doc))
+    #print(doc.pages)
+    #print(len(doc))
     page = doc[1]
+
+    print(doc.context)
+    print(page)
     print('# Testing text boxes in %s' % doc)
     # Create a new BabelString with the DrawBot FormttedString inside.
     style=dict(font=roboto, fontSize=40, textFill=(1, 0, 0))
@@ -51,7 +54,7 @@ def test():
     # Adding or appending strings are added to the internal formatted string.
     # Adding plain strings take over the existing style.
     bs += ' and more,'
-    
+
     # Reusing the same style different text fill color.
     style['textFill'] = 0.1, 0.5, 0.9
     bs += page.newString(' more and', style=style)
@@ -66,7 +69,7 @@ def test():
     bs = page.newString(txt, style=style)
 
     tb = newTextBox(bs, x=M, y=H-5*M, w=W/2, h=300, parent=page, stroke=color(0.3, 0.2, 0.1, 0.5), style=dict(hyphenation=True, language='en', leading=200))
- 
+
     for baseline in tb.baselines:
         s = dict(stroke=color(1, 0, 0))
         newLine(x=M, y=H-5*M-baseline, w=W/2, h=0, style=s, stroke=color(0.5), strokeWidth=0.5, parent=page)
@@ -75,6 +78,6 @@ def test():
     print(doc.pages)
     print(len(doc))
     doc.build()
-        
+
 
 test()

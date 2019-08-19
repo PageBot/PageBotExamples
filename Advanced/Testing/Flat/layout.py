@@ -26,9 +26,9 @@ f = findFont('PageBot-Book')
 pageBotBook = font.open(f.path)
 
 # Images.
-cotg3src = '../../docs/stylewars/dondi-white-children-of-the-grave-pt3-martha-cooper.png'
+cotg3src = '../../../docs/stylewars/dondi-white-children-of-the-grave-pt3-martha-cooper.png'
 cotg3image = image.open(cotg3src)
-cotg2src = '../../docs/stylewars/dondi-white-children-of-the-grave-pt2.jpg'
+cotg2src = '../../../docs/stylewars/dondi-white-children-of-the-grave-pt2.jpg'
 cotg2image = image.open(cotg2src)
 
 line = 12

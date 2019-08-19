@@ -31,7 +31,7 @@ FONTSIZE = 24
 LEADING = 36
 FONTNAME = 'BungeeHairline-Regular'
 
-def testFlat():
+def testFlatContext():
     context = getContext('Flat')
 
     # PageBot implementation, to be used for strings and styles.
@@ -50,12 +50,13 @@ def testFlat():
     ''' Creates a document. '''
 
     # Creating a Flat document.
-    doc = document(WIDTH, HEIGHT, 'pt')
-    p = doc.addpage()
+    flatDoc = document(WIDTH, HEIGHT, 'pt')
+    flatPage = flatDoc.addpage()
 
     # Pagebot equivalent.
     context.newDocument(WIDTH, HEIGHT)
-    context.newPage()
+    pbPage = context.newPage()
+    print(pbPage)
 
     ''' Draws a figure. '''
 
@@ -88,7 +89,7 @@ def testFlat():
 
     header = strike(flatFont).color(flatStroke).size(FONTSIZE, LEADING, units='pt')
     t = header.text(msg)
-    placedText = p.place(t).frame(100, 100, 380, 80)
+    placedText = flatPage.place(t).frame(100, 100, 380, 80)
 
     # Pagebot.
     style = dict(font=pagebotFont, fontSize=FONTSIZE, textFill=pagebotStroke,
@@ -110,14 +111,14 @@ def testFlat():
     print(msg)
     bs = context.newString(msg, style=style)
     print(type(bs))
-    #makeText(bs, page, f, c)
-    newTextBox(bs, font=pagebotFont, parent=p, conditions=c, fill=0.9,
+
+    newTextBox(bs, font=pagebotFont, parent=pbPage, conditions=c, fill=0.9,
             margin=4)
     #print(p.items)
 
     ''' Exports file. '''
 
-    im = p.image(kind='rgb')
+    im = flatPage.image(kind='rgb')
 
 
     # TODO:
@@ -129,13 +130,11 @@ def testFlat():
         os.mkdir('_export')
 
     #print('Exporting native')
-    doc.pdf('_export/native-flat.pdf')
-    im.png('_export/native-flat.png')
-    im.jpeg('_export/native-flat.jpg')
-    p.svg('_export/native-flat.svg')
+    flatDoc.pdf('_export/native-flat.pdf')
+    #im.png('_export/native-flat.png')
+    #im.jpeg('_export/native-flat.jpg')
+    #p.svg('_export/native-flat.svg')
     #print(context.doc)
-
-
 
     context.saveDocument('_export/pagebot-flat.pdf')
     #print('Exporting pagebot')
@@ -143,4 +142,4 @@ def testFlat():
     #context.saveDocument('_export/pagebot-flat.jpg')
     #context.saveDocument('_export/pagebot-flat.svg')
 
-testFlat()
+testFlatContext()

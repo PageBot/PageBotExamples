@@ -54,6 +54,7 @@ print(placedText.overflow())
 p.place(blackStroke.rectangle(x, y, w, h))
 
 # Export.
-p.image(kind='rgb').png('hello.png')
-p.svg('hello.svg')
-d.pdf('hello.pdf')
+
+p.image(kind='rgb').png('_export/hello.png')
+p.svg('_export/hello.svg')
+d.pdf('_export/hello.pdf')

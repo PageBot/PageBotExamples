@@ -25,7 +25,7 @@ for k in drawBot.__dict__.keys():
     if not (k in math.__dict__ or k in os.__dict__ or k in random.__dict__):
         #print(k)
         attrs.append(k)
-        
+
 print('Not in PageBot')
 
 base = DrawBotContext.__mro__[1]
@@ -41,4 +41,3 @@ print('Not in DrawBot')
 for k in DrawBotContext.__dict__.keys():
     if k not in attrs:
         print('* %s' % k)
-    
