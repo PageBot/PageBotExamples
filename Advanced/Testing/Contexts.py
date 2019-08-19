@@ -34,8 +34,10 @@ def testContexts():
     contexts = getAllContexts()
     print('All contexts: %s' % contexts)
 
-    for c in contexts[:1]:
-        testContext(c)
+    for i, c in enumerate(contexts):
+        if i == 1:
+            #print(c)
+            testContext(c)
 
 def getRandom():
     x = (W - 100) * random()
@@ -83,7 +85,7 @@ def testContext(context):
         context.text(bla, pt(x, y))
         x, y = getRandom()
         path = getResourcesPath() + "/images/cookbot1.jpg"
-        context.image(path, p=pt(x, y), w=pt(100), h=pt(100))
+        context.image(path, p=pt(x, y))#, w=pt(100), h=pt(100))
 
         # TODO:
         # - test Bézier path
