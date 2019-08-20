@@ -74,11 +74,12 @@ def testContext(context):
         #context.rect(x, y, pt(sq), pt(sq))
         y += sq
 
-        context.oval(x, y, pt(sq), pt(sq))
+        #context.oval(x, y, pt(sq), pt(sq))
         y += sq
 
         context.circle(x, y, pt(sq))
         y += sq
+        '''
 
         bla = context.newString('BabelString No Style')
         print('String is BabelString', isinstance(bla, BabelString))
@@ -96,10 +97,10 @@ def testContext(context):
         x = sq
         y = sq
 
-
         path = getResourcesPath() + "/images/cookbot1.jpg"
         context.image(path, p=pt(0, 0), w=pt(100), h=pt(100))
 
+        '''
 
         # TODO:
         # - test Bézier path

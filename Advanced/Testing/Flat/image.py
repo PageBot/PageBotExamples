@@ -13,6 +13,7 @@ h = int(h)
 documentName = 'image'
 
 d = document(w, h, 'pt')
+print(d.height)
 d.meta(documentName)
 p = d.addpage()
 
