@@ -52,7 +52,7 @@ d.meta(documentName)
 p = d.addpage()
 p.place(redStroke.circle(50, 50, 20))
 padding = 10
-w0 = w - 2* padding
+w0 = w - 2 * padding
 h0 = h - 2 * padding
 x = padding
 y = padding
