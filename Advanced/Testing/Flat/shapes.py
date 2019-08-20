@@ -55,7 +55,6 @@ p.place(greenStroke.ellipse(x + r, y + r, r *0.7, r))
 p.place(lightBlueStroke.ellipse(x + r, y + r, r, r * 0.7))
 
 x += sq + padding
-
 p.place(whiteStroke.rectangle(x, y, sq, sq))
 p.place(redStroke.line(x, y+r, x+r, y+sq))
 p.place(redStroke.line(x+r, y+sq, x+sq, y+r))
@@ -70,8 +69,16 @@ y += padding
 coordinates = (x, y+r, x+r, y+sq, x+sq, y+r, x+r, y)
 p.place(lightBlueStroke.polygon(coordinates))
 
+y -= padding
+x += sq + padding
+p.place(whiteStroke.rectangle(x, y, sq, sq))
+
+offset = 10
+commands = (moveto(x, y), lineto(x+r, y+r), curveto(x+r+offset, y+r-offset, x+sq-offset, y+sq+offset, x+sq, y+sq))
+p.place(lightBlueStroke.path(commands))
+
 # Export.
 
-#p.image(kind='rgb').png('_export/%s.png' % documentName)
-#p.svg('_export/%s.svg' % documentName)
+p.image(kind='rgb').png('_export/%s.png' % documentName)
+p.svg('_export/%s.svg' % documentName)
 d.pdf('_export/%s.pdf' % documentName)
