@@ -16,7 +16,7 @@ from pagebot import getResourcesPath
 from pagebot.toolbox.finder import Finder
 from pagebot.document import Document
 from pagebot.contexts.sketchcontext import SketchContext
-from pagebotcocoa.contexts.drawbot.context import DrawBotContext
+from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
 from pagebot.constants import *
 from pagebot.typesetter import Typesetter
 from pagebot.composer import Composer

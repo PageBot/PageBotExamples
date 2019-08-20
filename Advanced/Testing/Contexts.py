@@ -70,14 +70,14 @@ def testContext(context):
         context.fill(f)
         context.stroke(s)
         x = 0
-        y = 0
-        #context.rect(x, y, pt(sq), pt(sq))
+        y = sq
+        context.rect(x, y, pt(sq), pt(sq))
         y += sq
 
-        #context.oval(x, y, pt(sq), pt(sq))
+        context.oval(x, y, pt(sq), 0.5*pt(sq))
         y += sq
 
-        context.circle(x, y, pt(sq))
+        #context.circle(x, y, pt(sq))
         y += sq
         '''
 

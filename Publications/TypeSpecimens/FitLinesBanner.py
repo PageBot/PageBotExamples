@@ -18,7 +18,7 @@ from pagebot.elements import *
 from pagebot.elements.variablefonts.animationframe import AnimationFrame
 from pagebot.document import Document
 from pagebot.constants import Letter, RIGHT
-from pagebotcocoa.contexts.drawbot.context import DrawBotContext
+from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
 from pagebot.toolbox.units import em
 from pagebot.toolbox.color import blackColor, whiteColor
 

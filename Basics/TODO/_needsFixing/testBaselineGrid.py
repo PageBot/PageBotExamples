@@ -13,8 +13,8 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-from pagebotcocoa.contexts.drawbot.context import DrawBotContext
-from pagebot.contexts.flat.context import FlatContext
+from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot.contexts.flat.flatcontext import FlatContext
 
 
 def appendS(fs1, fs2, w, baselineGrid):

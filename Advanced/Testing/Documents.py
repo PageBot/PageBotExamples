@@ -14,8 +14,8 @@
 #
 #     Pagebot documents tests. Should become unit tests when finished.
 
-from pagebotcocoa.contexts.drawbot.context import DrawBotContext
-from pagebot.contexts.flat.context import FlatContext
+from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot.contexts.flat.flatcontext import FlatContext
 from indesigncontext.context import InDesignContext
 #from pagebot.contexts.htmlcontext import HtmlContext
 #from pagebot.contexts.svgcontext import SvgContext

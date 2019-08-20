@@ -24,9 +24,9 @@ from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.constants import *
 from pagebot.style import getRootStyle
 
-from pagebot.contexts.flat.context import FlatContext
+from pagebot.contexts.flat.flatcontext import FlatContext
 from pagebot.contexts.flat.flatstring import FlatString
-from pagebotcocoa.contexts.drawbot.context import DrawBotContext
+from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
 from pagebotcocoa.contexts.drawbot.string import DrawBotString
 #from pagebot.contexts.indesigncontext import InDesignContext
 #from pagebot.contexts.htmlcontext import HtmlContext

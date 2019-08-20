@@ -18,7 +18,7 @@ from pagebot.themes import ThemeClasses
 from pagebot.themes import BaseTheme, FreshAndShiny
 from pagebot.conditions import *
 from pagebot.elements import *
-from pagebotcocoa.contexts.drawbot.context import DrawBotContext
+from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import point2D

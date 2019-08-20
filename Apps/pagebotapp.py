@@ -22,7 +22,7 @@ from pagebot.constants import *
 from pagebot.composer import Composer
 from pagebot.typesetter import Typesetter
 from pagebot.themes import ThemeClasses, BaseTheme, DEFAULT_THEME_CLASS
-from pagebotcocoa.contexts.drawbot.context import DrawBotContext
+from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.conditions import *
 from pagebot.document import Document

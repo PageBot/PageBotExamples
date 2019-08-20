@@ -18,7 +18,7 @@ from pagebot.themes.basetheme import BaseTheme
 from pagebot.constants import CENTER # Import some constants that we need.
 from pagebot.toolbox.units import upt, pt
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebotcocoa.contexts.drawbot.context import DrawBotContext
+from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
 from pagebot.toolbox.color import color, blackColor
 
 context = DrawBotContext()

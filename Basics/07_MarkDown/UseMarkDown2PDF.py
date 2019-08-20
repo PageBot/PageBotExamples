@@ -20,7 +20,7 @@
 #     applicatin communicate with each other through a shared "targets"
 #     dictionary. 
 #
-from pagebotcocoa.contexts.drawbot.context import DrawBotContext
+from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
 from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.conditions import *

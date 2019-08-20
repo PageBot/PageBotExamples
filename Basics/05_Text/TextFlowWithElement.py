@@ -23,7 +23,7 @@ from pagebot.elements import *
 from pagebot.document import Document
 from pagebot.toolbox.color import color, blackColor, whiteColor, noColor
 from pagebot.toolbox.units import pt, em
-from pagebotcocoa.contexts.drawbot.context import DrawBotContext
+from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
 from pagebot.fonttoolbox.objects.font import findFont
 
 # Document is the main instance holding all information about the document

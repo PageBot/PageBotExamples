@@ -18,7 +18,7 @@
 #     The overflow text takes the same parameters for the Formatted String as the 
 #     original text had.
 #
-from pagebotcocoa.contexts.drawbot.context import DrawBotContext
+from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
 
 context = DrawBotContext()
 

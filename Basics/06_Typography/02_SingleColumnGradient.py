@@ -16,7 +16,7 @@
 #     baselines, using the view.showBaselineGrid = True display option.
 #     The text column includes a footnote reference with baseline shift.
 #
-#from pagebot.contexts.flat.context import FlatContext
+#from pagebot.contexts.flat.flatcontext import FlatContext
 from pagebot import getContext
 
 from pagebot.fonttoolbox.objects.font import findFont
