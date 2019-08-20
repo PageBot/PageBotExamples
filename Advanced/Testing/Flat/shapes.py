@@ -16,6 +16,7 @@ h = int(h)
 red = rgb(255, 0, 0)
 green = rgb(0, 255, 0)
 blue = rgb(0, 0, 255)
+lightBlue = rgb(100, 200, 255)
 black = rgb(0, 0, 0)
 white = rgb(255, 255, 255)
 
@@ -25,6 +26,7 @@ strokeWidth = 0.5
 redStroke = shape().stroke(red).width(strokeWidth)
 greenStroke = shape().stroke(green).width(strokeWidth)
 blueStroke = shape().stroke(blue).width(strokeWidth)
+lightBlueStroke = shape().stroke(lightBlue).width(strokeWidth)
 blackStroke = shape().stroke(black).width(strokeWidth)
 whiteStroke = shape().stroke(white).width(strokeWidth)
 
@@ -40,20 +42,36 @@ x = padding
 y = padding
 
 sq = 100
-radius = sq / 2
+r = sq / 2
 
 d = document(w, h, 'pt')
 d.meta(documentName)
 p = d.addpage()
 
 p.place(blackFill.rectangle(0, 0, w, h))
-p.place(redStroke.circle(x + radius, y + radius, radius))
-p.place(greenStroke.ellipse(x + radius, y + radius, radius *0.7, radius))
-p.place(blueStroke.ellipse(x + radius, y + radius, radius, radius * 0.7))
 p.place(whiteStroke.rectangle(x, y, sq, sq))
+p.place(redStroke.circle(x + r, y + r, r))
+p.place(greenStroke.ellipse(x + r, y + r, r *0.7, r))
+p.place(lightBlueStroke.ellipse(x + r, y + r, r, r * 0.7))
+
+x += sq + padding
+
+p.place(whiteStroke.rectangle(x, y, sq, sq))
+p.place(redStroke.line(x, y+r, x+r, y+sq))
+p.place(redStroke.line(x+r, y+sq, x+sq, y+r))
+p.place(redStroke.line(x+sq, y+r, x+r, y))
+p.place(redStroke.line(x+r, y, x, y+r))
+
+x += padding
+coordinates = (x, y+r, x+r, y+sq, x+sq, y+r, x+r, y)
+p.place(greenStroke.polyline(coordinates))
+x -= padding
+y += padding
+coordinates = (x, y+r, x+r, y+sq, x+sq, y+r, x+r, y)
+p.place(lightBlueStroke.polygon(coordinates))
 
 # Export.
 
-p.image(kind='rgb').png('_export/%s.png' % documentName)
-p.svg('_export/%s.svg' % documentName)
+#p.image(kind='rgb').png('_export/%s.png' % documentName)
+#p.svg('_export/%s.svg' % documentName)
 d.pdf('_export/%s.pdf' % documentName)
