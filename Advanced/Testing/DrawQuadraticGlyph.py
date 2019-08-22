@@ -28,7 +28,7 @@ from pagebot.toolbox.units import point3D
 from pagebot.fonttoolbox.fontpaths import getFontPaths
 from pagebot.fonttoolbox.objects.glyph import *
 from pagebot.fonttoolbox.objects.font import Font
-from pagebot import getContext
+from pagebot import getContexts
 from pagebot.toolbox.color import blueColor, redColor, greenColor, pinkColor, orangeColor, blackColor
 
 R = 12
@@ -40,9 +40,6 @@ QUADRATIC_CONTROLPOINT_COLOR = greenColor
 QUADRATIC_CONTROLPOINT_SIZE = R
 CUBIC_CONTROLPOINT_COLOR = blackColor
 CUBIC_CONTROLPOINT_SIZE = R / 2
-
-context = getContext('Flat')
-print(context)
 
 class Point:
     # FIX: See more generic implentation in PageBotPath
@@ -150,7 +147,7 @@ def cross(x, y, d, r=1, g=0, b=0, a=1):
     line((x0, y0), (x1, y1))
     line((x2, y2), (x3, y3))
 
-def draw():
+def draw(context):
     W, H = 1750, 2250
     X0 = 75
     Y0 = 500
@@ -164,6 +161,7 @@ def draw():
     font = Font(PATH)
     print(font)
     glyph = font[glyphName]
+    print(glyph)
     path = BezierPath()
     contours = []
     contour = None
@@ -279,5 +277,10 @@ def draw():
     context.text('Cubic control point', (x, y))
     y -= 30
     context.text('Quadratic control point', (x, y))
+    path = '_export/DrawQuadGlyph%s.pdf' % context.name
+    context.saveImage(path)
 
-draw()
+contexts = getContexts(['DrawBot', 'Flat'])
+for context in contexts:
+    print(context)
+    draw(context)
