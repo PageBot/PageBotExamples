@@ -41,7 +41,7 @@ QUADRATIC_CONTROLPOINT_SIZE = R
 CUBIC_CONTROLPOINT_COLOR = blackColor
 CUBIC_CONTROLPOINT_SIZE = R / 2
 
-context = getContext()
+context = getContext('Flat')
 print(context)
 
 class Point:
@@ -162,6 +162,7 @@ def draw():
     DBFont('LucidaGrande', 24)
     PATH = getFontPaths()['Roboto-Black']
     font = Font(PATH)
+    print(font)
     glyph = font[glyphName]
     path = BezierPath()
     contours = []
