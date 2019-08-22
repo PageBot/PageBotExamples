@@ -28,7 +28,7 @@ from pagebot.fonttoolbox.fontpaths import getFontPaths
 from pagebot.fonttoolbox.objects.glyph import *
 from pagebot.fonttoolbox.objects.font import Font
 from pagebot import getContext
-from pagebot.toolbox.color import blueColor, redColor, greenColor, pinkColor, orangeColor
+from pagebot.toolbox.color import blueColor, redColor, greenColor, pinkColor, orangeColor, blackColor
 
 R = 12
 ONCURVE_COLOR = orangeColor
@@ -37,10 +37,11 @@ IMPLIED_ONCURVE_COLOR = redColor
 IMPLIED_ONCURVE_SIZE = R
 QUADRATIC_CONTROLPOINT_COLOR = greenColor
 QUADRATIC_CONTROLPOINT_SIZE = R
-CUBIC_CONTROLPOINT_COLOR = pinkColor
+CUBIC_CONTROLPOINT_COLOR = blackColor
 CUBIC_CONTROLPOINT_SIZE = R / 2
 
 context = getContext()
+print(context)
 
 class Point:
     # FIX: See more generic implentation in PageBotPath
