@@ -74,7 +74,7 @@ x += sq + padding
 p.place(whiteStroke.rectangle(x, y, sq, sq))
 
 offset = 10
-commands = (moveto(x, y), lineto(x+r, y+r), curveto(x+r+offset, y+r-offset, x+sq-offset, y+sq+offset, x+sq, y+sq))
+commands = (moveto(x, y), lineto(x+r, y+r), curveto(x+r+offset, y+r-offset, x+sq-offset, y+sq+offset, x+sq, y+sq))#, closepath)
 p.place(lightBlueStroke.path(commands))
 
 # Export.

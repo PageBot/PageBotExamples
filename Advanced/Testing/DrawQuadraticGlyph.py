@@ -168,7 +168,7 @@ def draw(context):
     coordinates = glyph.ttGlyph.coordinates
     context.fill((0, 1, 1, 0.2))
     # Move glyph up so we can see results below descender level.
-    translate(X0, Y0)
+    #translate(X0, Y0)
 
     # Draws the glyph.
     c = glyph.contours
@@ -178,6 +178,7 @@ def draw(context):
     context.stroke(None)
     context.fill(0)
 
+    '''
     # Converts coordinates to PageBot Points and assigns points
     # to contours.
     for i, (x, y) in enumerate(coordinates):
@@ -277,6 +278,7 @@ def draw(context):
     context.text('Cubic control point', (x, y))
     y -= 30
     context.text('Quadratic control point', (x, y))
+    '''
     path = '_export/DrawQuadGlyph%s.pdf' % context.name
     context.saveImage(path)
 
