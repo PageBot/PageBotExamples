@@ -23,14 +23,23 @@ from pagebot.toolbox.units import *
 from pagebot.conditions import *
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.fonttoolbox.fontpaths import *
-from pagebot.fonttoolbox.objects.family import getFamilyPaths
+from pagebot.fonttoolbox.objects.family import getFamilyPaths, findFamily, getFamily
 
 W, H = A3
 MAX_PAGES = 20
 P = pt(48)
 
+def verboseFam(fam):
+    print(fam)
+    stylesDict = fam.getStyles()
+    for key, value in stylesDict.items():    
+        print(' - %s' % key)
+        for v in value:
+            print('   - %s' % v.path)
+
 def showAll():
-    context = getContext('Flat')
+    """Shows all fonts that are shipped with PageBot."""
+    context = getContext()
     doc = Document(w=W, h=H, originTop=False, autoPages=1, context=context)
     page = doc[1]
     page.padding = P
@@ -40,7 +49,23 @@ def showAll():
     c3 = (Right2Right(), Float2Top()) # Speciment condition
 
     families = getFamilyPaths()
-    #print(families['Roboto'])
+    fam = findFamily('Roboto')
+    print(fam)
+    fam = getFamily('Bungee')
+    print(fam)
+    fam = getFamily('Roboto')
+    #verboseFam(fam)
+    fam = getFamily('RobotoCondensed')
+    verboseFam(fam)
+
+    fam = getFamily('PageBot')
+    print(fam)
+
+    for s in fam.getStyles():
+        print(' - %s' % s)
+
+    #print(families)
+    print('Number of families found: %d' % len(families))
     fontPaths = getFontPaths()
     print('Number of fonts found: %d' % len(fontPaths))
     tfp = getTestFontsPath()
@@ -49,7 +74,7 @@ def showAll():
     #print(sorted(pbFonts.keys()))
     font = findFont('Roboto-Black')
     print('The Font object from the pagebot.fonttoolbox.objects module: %s' % font)
-    print('Number of glyphs: %d' % len(font))
+    print('It has %d glyphs.' % len(font))
     i = 0
 
     for pbFont in sorted(pbFonts.keys()):
