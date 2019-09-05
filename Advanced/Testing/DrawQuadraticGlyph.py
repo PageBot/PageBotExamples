@@ -18,7 +18,7 @@
 #    TODO: test with Flat.
 #    TODO: switch to document level.
 
-import weakref
+import weakref, traceback
 from AppKit import NSFont
 from fontTools.ttLib import TTFont, TTLibError
 from drawBot import BezierPath, translate, line, text, stroke, fill, oval, drawPath
@@ -168,7 +168,7 @@ def draw(context):
     coordinates = glyph.ttGlyph.coordinates
     context.fill((0, 1, 1, 0.2))
     # Move glyph up so we can see results below descender level.
-    #translate(X0, Y0)
+    context.translate(X0, Y0)
 
     # Draws the glyph.
     c = glyph.contours
@@ -279,8 +279,24 @@ def draw(context):
     y -= 30
     context.text('Quadratic control point', (x, y))
     '''
-    path = '_export/DrawQuadGlyph%s.pdf' % context.name
-    context.saveImage(path)
+
+    try:
+        path = '_export/DrawQuadGlyph%s.png' % context.name
+        context.saveImage(path)
+    except:
+        print(traceback.format_exc())
+
+    try:
+        path = '_export/DrawQuadGlyph%s.pdf' % context.name
+        context.saveImage(path)
+    except:
+        print(traceback.format_exc())
+
+    try:
+        path = '_export/DrawQuadGlyph%s.svg' % context.name
+        context.saveImage(path)
+    except:
+        print(traceback.format_exc())
 
 contexts = getContexts(['DrawBot', 'Flat'])
 for context in contexts:
