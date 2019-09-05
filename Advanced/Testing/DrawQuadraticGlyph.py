@@ -38,11 +38,12 @@ IMPLIED_ONCURVE_COLOR = redColor
 IMPLIED_ONCURVE_SIZE = R
 QUADRATIC_CONTROLPOINT_COLOR = greenColor
 QUADRATIC_CONTROLPOINT_SIZE = R
-CUBIC_CONTROLPOINT_COLOR = blackColor
+CUBIC_CONTROLPOINT_COLOR = greenColor
 CUBIC_CONTROLPOINT_SIZE = R / 2
 
 class Point:
-    # FIX: See more generic implentation in PageBotPath
+
+    # TODO: Switch to PageBotPoint.
     def __init__(self, x, y, onCurve=True, smooth=False, start=False):
         self.x = x
         self.y = y
@@ -178,7 +179,6 @@ def draw(context):
     context.stroke(None)
     context.fill(0)
 
-    '''
     # Converts coordinates to PageBot Points and assigns points
     # to contours.
     for i, (x, y) in enumerate(coordinates):
@@ -278,7 +278,6 @@ def draw(context):
     context.text('Cubic control point', (x, y))
     y -= 30
     context.text('Quadratic control point', (x, y))
-    '''
 
     try:
         path = '_export/DrawQuadGlyph%s.png' % context.name
