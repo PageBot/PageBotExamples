@@ -22,7 +22,7 @@ import weakref, traceback
 from AppKit import NSFont
 from fontTools.ttLib import TTFont, TTLibError
 from drawBot import BezierPath, translate, line, text, stroke, fill, oval, drawPath
-from drawBot import font as DBFont
+#from drawBot import font as DBFont
 from pagebot.fonttoolbox.objects.fontinfo import FontInfo
 from pagebot.toolbox.units import point3D
 from pagebot.fonttoolbox.fontpaths import getFontPaths
@@ -149,6 +149,7 @@ def cross(x, y, d, r=1, g=0, b=0, a=1):
     line((x2, y2), (x3, y3))
 
 def draw(context):
+
     W, H = 1750, 2250
     X0 = 75
     Y0 = 500
@@ -157,10 +158,12 @@ def draw(context):
     glyphName = 'Q'
     x = 50
     context.newPage(W, H)
-    DBFont('LucidaGrande', 24)
+    #DBFont('LucidaGrande', 24)
     PATH = getFontPaths()['Roboto-Black']
     font = Font(PATH)
     print(font)
+    st = dict(font=font, fontSize=40, textFill=(1, 0, 0))#, leading=1.4)
+
     glyph = font[glyphName]
     print(glyph)
     path = BezierPath()
@@ -201,7 +204,8 @@ def draw(context):
         d = 15
         x += d
         y += d
-        context.text('%d' % i, (x, y))
+        t = context.newString('%d' % i, style=st)
+        context.text(t, (x, y))
 
     segments = []
     implied = []
@@ -271,22 +275,27 @@ def draw(context):
     context.fill(0)
     x += 30
     y = -100
-    context.text('On-curve point', (x, y))
+    t = context.newString('On-curve point', style=st)
+    context.text(t, (x, y))
     y -= 30
-    context.text('Implied on-curve point', (x, y))
+    t = context.newString('Implied on-curve point', style=st)
+    context.text(t, (x, y))
     y -= 30
-    context.text('Cubic control point', (x, y))
+    t = context.newString('Cubic control point', style=st)
+    context.text(t, (x, y))
     y -= 30
-    context.text('Quadratic control point', (x, y))
+    t = context.newString('Quadratic control point', style=st)
+    context.text(t, (x, y))
 
     try:
-        path = '_export/DrawQuadGlyph%s.png' % context.name
+        path = '_export/DrawQuadGlyph%s.pdf' % context.name
         context.saveImage(path)
     except:
         print(traceback.format_exc())
 
+    '''
     try:
-        path = '_export/DrawQuadGlyph%s.pdf' % context.name
+        path = '_export/DrawQuadGlyph%s.png' % context.name
         context.saveImage(path)
     except:
         print(traceback.format_exc())
@@ -296,6 +305,7 @@ def draw(context):
         context.saveImage(path)
     except:
         print(traceback.format_exc())
+    '''
 
 contexts = getContexts(['DrawBot', 'Flat'])
 for context in contexts:
