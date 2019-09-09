@@ -21,16 +21,18 @@
 import weakref, traceback
 from AppKit import NSFont
 from fontTools.ttLib import TTFont, TTLibError
-from drawBot import BezierPath, translate, line, text, stroke, fill, oval, drawPath
-#from drawBot import font as DBFont
+from drawBot import (BezierPath, translate, line, text, stroke, fill, oval,
+        drawPath)
+
+from pagebot import getContexts
+from pagebot.elements.paths.pagebotpath import PageBotPoint as Point
 from pagebot.fonttoolbox.objects.fontinfo import FontInfo
-from pagebot.toolbox.units import point3D
 from pagebot.fonttoolbox.fontpaths import getFontPaths
 from pagebot.fonttoolbox.objects.glyph import *
 from pagebot.fonttoolbox.objects.font import Font
-from pagebot import getContexts
 from pagebot.toolbox.color import (blueColor, redColor, greenColor, pinkColor,
         orangeColor, blackColor)
+from pagebot.toolbox.units import point3D
 
 R = 12
 ONCURVE_COLOR = orangeColor
@@ -42,12 +44,10 @@ QUADRATIC_CONTROLPOINT_SIZE = R
 CUBIC_CONTROLPOINT_COLOR = blueColor
 CUBIC_CONTROLPOINT_SIZE = R / 2
 
-from pagebot.elements.paths.pagebotpath import PageBotPoint as Point
-
 def drawSegment(path, segment, implied, cps, verbose=False):
-    """
-    Draws a quadratic segment as a cubic Bézier curve in drawBot. Each segment
-    starts and ends with an oncurve point with 0 ... n offcurve control points.
+    """Draws a quadratic segment as a cubic Bézier curve in drawBot. Each
+    segment starts and ends with an oncurve point with 0 ... n offcurve control
+    points.
 
     NOTE: PageBot implementation in glyph adds the first oncurve
     as a separate `cp` parameter.
@@ -142,7 +142,6 @@ def cross(x, y, d, r=1, g=0, b=0, a=1):
     line((x2, y2), (x3, y3))
 
 def draw(context):
-
     W, H = 1750, 2250
     X0 = 75
     Y0 = 500
@@ -151,11 +150,14 @@ def draw(context):
     glyphName = 'Q'
     x = 50
     context.newPage(W, H)
-    #DBFont('LucidaGrande', 24)
     PATH = getFontPaths()['Roboto-Black']
     font = Font(PATH)
     print(font)
-    st = dict(font=font, fontSize=40, textFill=(1, 0, 0))#, leading=1.4)
+
+    st = dict(font=font, fontSize=40, textFill=(1, 0, 0))
+    # FIXME: seem to yield wrong value in DrawBot Context,
+    # FIXME: float value errors in Flat now.
+    #, leading=1.4)
 
     glyph = font[glyphName]
     print(glyph)
