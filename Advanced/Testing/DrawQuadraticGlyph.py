@@ -29,7 +29,8 @@ from pagebot.fonttoolbox.fontpaths import getFontPaths
 from pagebot.fonttoolbox.objects.glyph import *
 from pagebot.fonttoolbox.objects.font import Font
 from pagebot import getContexts
-from pagebot.toolbox.color import blueColor, redColor, greenColor, pinkColor, orangeColor, blackColor
+from pagebot.toolbox.color import (blueColor, redColor, greenColor, pinkColor,
+        orangeColor, blackColor)
 
 R = 12
 ONCURVE_COLOR = orangeColor
@@ -38,18 +39,10 @@ IMPLIED_ONCURVE_COLOR = redColor
 IMPLIED_ONCURVE_SIZE = R
 QUADRATIC_CONTROLPOINT_COLOR = greenColor
 QUADRATIC_CONTROLPOINT_SIZE = R
-CUBIC_CONTROLPOINT_COLOR = greenColor
+CUBIC_CONTROLPOINT_COLOR = blueColor
 CUBIC_CONTROLPOINT_SIZE = R / 2
 
-class Point:
-
-    # TODO: Switch to PageBotPoint.
-    def __init__(self, x, y, onCurve=True, smooth=False, start=False):
-        self.x = x
-        self.y = y
-        self.onCurve = onCurve
-        self.smooth = smooth
-        self.start = start
+from pagebot.elements.paths.pagebotpath import PageBotPoint as Point
 
 def drawSegment(path, segment, implied, cps, verbose=False):
     """
@@ -59,9 +52,9 @@ def drawSegment(path, segment, implied, cps, verbose=False):
     NOTE: PageBot implementation in glyph adds the first oncurve
     as a separate `cp` parameter.
 
-    >>> p0 = Point(100, 100, True)
-    >>> p1 = Point(200, 100, False)
-    >>> p2 = Point(200, 200, True)
+    >>> p0 = Point(100, 100, onCurve=True)
+    >>> p1 = Point(200, 100, onCurve=False)
+    >>> p2 = Point(200, 200, onCurve=True)
     >>> segment = [p0, p1, p2]
     >>> path = BezierPath()
     >>> drawSegment(path, segment)
@@ -114,7 +107,7 @@ def drawSegment(path, segment, implied, cps, verbose=False):
         offCurve1 = segment[2]
         x = offCurve0.x + (offCurve1.x - offCurve0.x) * 0.5
         y = offCurve0.y + (offCurve1.y - offCurve0.y) * 0.5
-        newOnCurve = Point(x, y, True)
+        newOnCurve = Point(x, y, onCurve=True)
 
         # Store these so they can be used in the infographic.
         implied.append(newOnCurve)
@@ -186,7 +179,7 @@ def draw(context):
     # to contours.
     for i, (x, y) in enumerate(coordinates):
         start = i - 1 in glyph.endPtsOfContours
-        p = Point(x, y, glyph.flags[i])
+        p = Point(x, y, onCurve=glyph.flags[i])
 
         if i == 0:
             contour = [p]
