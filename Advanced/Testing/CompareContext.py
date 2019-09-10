@@ -22,7 +22,7 @@ from pagebot.strings.babelstring import BabelString
 from pagebot import getContext
 from pagebot.toolbox.units import pt
 from pagebot.document import Document
-
+from pagebot.fonttoolbox.objects.font import findFont
 H, W = A4Rounded
 W = pt(W)
 H = pt(H)
@@ -102,11 +102,18 @@ def testContext(context):
     context.circle(x+0.5*sq, y, 0.5*pt(sq))
     y += sq
 
+    font = findFont('Roboto-Black')
+    glyphName = 'Q'
+    glyph = font[glyphName]
+    context.scale(0.1)
+    context.drawGlyphPath(glyph)
+
 
     # TODO:
     # - test Bézier path; see DrawQuadraticGlyph.py
     # - test glyph path; see DrawQuadraticGlyph.py
     # - test elements
+    # - test shadow, gradient,
     # ...
 
     path = '_export/%s.pdf' % context.name
