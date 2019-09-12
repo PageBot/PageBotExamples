@@ -41,11 +41,6 @@ def testContexts():
             except Exception as e:
                     print('Context errors', traceback.format_exc())
 
-def getRandom():
-    x = (W - 100) * random()
-    y = (H - 100) * random()
-    return x, y
-
 def testContext(context):
     doc = Document(w=W, h=H, context=context, autoPages=1)
     sq = 100
@@ -56,28 +51,13 @@ def testContext(context):
     context.newPage(w=W, h=H)
     context.fill(f)
     context.stroke(s)
-
-    context.translate(3*sq, 2*sq)
-    context.scale(0.1)
-
-    #context.rect(x, y, pt(sq), pt(sq))
-    context.circle(x, y, sq)
-    #context.oval(x, y, sq, sq)
-    #context.oval(x, y, sq, 2*sq)
-    #context.oval(x, y, 2*sq, sq)
-    #p0 = (x, y)
-    #p1 = (x + 2*sq, y + sq)
-    #context.line(p0, p1)
-
-    font = findFont('Roboto-Black')
-    glyphName = 'Q'
-    glyph = font[glyphName]
-    context.drawGlyphPath(glyph)
-
-    context.translate(-3*sq, -sq)
-    context.scale(3)
-    context.rotate(10)
+    context.rotate(45)
+    p0 = (x, y)
+    p1 = (x + 2*sq, y)
+    context.line(p0, p1)
     context.rect(x, y, pt(sq), pt(sq))
+    #print(p1)
+    #print(context.getTransformed(*p1))
 
     path = '_export/Transformations-%s.pdf' % context.name
     context.saveImage(path)
