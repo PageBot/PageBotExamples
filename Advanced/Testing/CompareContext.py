@@ -103,6 +103,7 @@ def testContext(context):
     y += sq
 
     '''
+    FIXME
     font = findFont('Roboto-Black')
     glyphName = 'Q'
     glyph = font[glyphName]

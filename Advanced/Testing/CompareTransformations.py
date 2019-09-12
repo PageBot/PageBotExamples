@@ -47,10 +47,7 @@ def getRandom():
     return x, y
 
 def testContext(context):
-
     doc = Document(w=W, h=H, context=context, autoPages=1)
-
-
     sq = 100
     x = 0
     y = 0 
@@ -59,19 +56,15 @@ def testContext(context):
     context.newPage(w=W, h=H)
     context.fill(f)
     context.stroke(s)
-    context.translate(sq, sq)
-    context.rect(x, y, pt(sq), pt(sq))
-
-    '''
-    y += sq
-
-    context.oval(x, y, pt(sq), 0.5*pt(sq))
-    y += sq
-
-    context.circle(x+0.5*sq, y, 0.5*pt(sq))
-    y += sq
-    '''
-
+    context.translate(2*sq, 2*sq)
+    #context.rect(x, y, pt(sq), pt(sq))
+    #context.circle(x, y, sq)
+    #context.oval(x, y, sq, sq)
+    #context.oval(x, y, sq, 2*sq)
+    #context.oval(x, y, 2*sq, sq)
+    p0 = (x, y)
+    p1 = (x + 2*sq, y + sq)
+    context.line(p0, p1)
     path = '_export/Transformations-%s.pdf' % context.name
     context.saveImage(path)
 
