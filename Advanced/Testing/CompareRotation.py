@@ -51,11 +51,17 @@ def testContext(context):
     context.newPage(w=W, h=H)
     context.fill(f)
     context.stroke(s)
+    context.translate(sq, sq)
     context.rotate(45)
+    context.scale(0.1)
     p0 = (x, y)
-    p1 = (x + 2*sq, y)
+    p1 = (x + 20*sq, y)
     context.line(p0, p1)
-    context.rect(x, y, pt(sq), pt(sq))
+    #context.rect(x, y, pt(sq), pt(sq))
+    font = findFont('Roboto-Black')
+    glyphName = 'Q'
+    glyph = font[glyphName]
+    context.drawGlyphPath(glyph)
     #print(p1)
     #print(context.getTransformed(*p1))
 
