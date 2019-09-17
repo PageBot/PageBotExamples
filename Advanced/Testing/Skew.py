@@ -10,7 +10,7 @@
 #     Supporting DrawBot, www.drawbot.com
 # -----------------------------------------------------------------------------
 #
-#     Offset.py
+#     Skew.py
 #
 
 import traceback
@@ -53,7 +53,8 @@ def testContext(context):
     context.fill(f)
     context.stroke(s)
     context.translate(sq, sq)
-    context.rotate(45, center=(sq, 2*sq))
+    context.skew(45, 30)
+    #context.skew(45, 30, center=(sq, 2*sq))
     context.scale(0.1)
     p0 = (x, y)
     p1 = (x + 20*sq, y)
@@ -64,7 +65,7 @@ def testContext(context):
     glyphName = 'Q'
     glyph = font[glyphName]
     context.drawGlyphPath(glyph)
-    path = '_export/Offset-%s.pdf' % context.name
+    path = '_export/Skew-%s.pdf' % context.name
     context.saveImage(path)
 
 testContexts()
