@@ -10,7 +10,7 @@
 #     Supporting DrawBot, www.drawbot.com
 # -----------------------------------------------------------------------------
 #
-#     CompareContexts.py
+#     GlyphPaths.py
 #
 
 import traceback
@@ -23,16 +23,17 @@ from pagebot import getContext
 from pagebot.toolbox.units import pt
 from pagebot.document import Document
 from pagebot.fonttoolbox.objects.font import findFont
+
 H, W = A4Rounded
 W = pt(W)
 H = pt(H)
 
-f = Color(0, 1, 0)
+#f = Color(0, 0, 0)
+f = Color(0, 0, 0)
 s = Color(1, 0, 0)
 
 def testContexts():
     contexts = getAllContexts()
-    print('All contexts: %s' % contexts)
 
     for i, c in enumerate(contexts):
         if i in (0, 1):
@@ -48,80 +49,25 @@ def getRandom():
     return x, y
 
 def testContext(context):
-    print('Context', context)
-
-    doc = Document(w=W, h=H, context=context, autoPages=1)
-
-
-    '''
-    print('# Context attributes')
-
-    for key, value in context.__dict__.items():
-        print(' * %s: %s' % (key, value))
-
-    print('# Document attributes')
-    for key, value in doc.__dict__.items():
-        print(' * %s: %s' % (key, value))
-    '''
-
     sq = 100
     x = 0
-    y = 0 
+    y =  4*sq
+
+    doc = Document(w=W, h=H, context=context, autoPages=1)
     context.frameDuration(1)
     context.newDrawing()
     context.newPage(w=W, h=H)
-
-    context.text('plain string', pt(x, y))
-    y += sq
-
-    bla = context.newString('BabelString No Style')
-    print('String is BabelString', isinstance(bla, BabelString))
-    context.text(bla, pt(x, y))
-    y += sq
-
-    style = {'font': 'Helvetica', 'textFill': f}
-    bla = context.newString('Babel String with Style', style=style)
-    context.text(bla, pt(x, y))
-
-    x = 2 * sq
-    y = 0 
-
-    path = getResourcesPath() + "/images/cookbot1.jpg"
-    context.image(path, p=pt(x, y), w=pt(100), h=pt(100))
-
-    y += sq
-
     context.fill(f)
     context.stroke(s)
-    context.rect(x, y, pt(sq), pt(sq))
-    y += sq
 
-    context.circle(x+0.5*sq, y+0.5*sq, 0.5*pt(sq))
-    y += sq
-
-    context.oval(x, y, pt(sq), 0.5*pt(sq))
-    y += sq
-
-    '''
-    FIXME
     font = findFont('Roboto-Black')
     glyphName = 'Q'
     glyph = font[glyphName]
     context.translate(2*sq, sq)
     context.scale(0.1)
     context.drawGlyphPath(glyph)
-    '''
-
-
-    # TODO:
-    # - test Bézier path; see DrawQuadraticGlyph.py
-    # - test glyph path; see DrawQuadraticGlyph.py
-    # - test elements
-    # - test shadow, gradient,
-    # ...
-
-    path = '_export/%s-%s.pdf' % ('Compare', context.name)
+    path = '_export/GlyphPaths-%s.pdf' % context.name
     context.saveImage(path)
-    print('Saved context to %s' % path)
+    print('Saved %s' % path)
 
 testContexts()
