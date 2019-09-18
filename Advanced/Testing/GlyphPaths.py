@@ -28,7 +28,6 @@ H, W = A4Rounded
 W = pt(W)
 H = pt(H)
 
-#f = Color(0, 0, 0)
 f = Color(0, 0, 0)
 s = Color(1, 0, 0)
 
