@@ -18,7 +18,7 @@ from random import random
 from pagebot import getAllContexts, getResourcesPath
 from pagebot.toolbox.color import Color
 from pagebot.constants import A4Rounded
-from pagebot.strings.babelstring import BabelString
+from pagebot.contexts.base.babelstring import BabelString
 from pagebot import getContext
 from pagebot.toolbox.units import pt
 from pagebot.document import Document
@@ -73,23 +73,31 @@ def testContext(context):
     context.newDrawing()
     context.newPage(w=W, h=H)
 
-    context.text('plain string', pt(x, y))
+    context.text('default size string without style', pt(x, y))
     y += sq
 
-    bla = context.newString('BabelString No Style')
-    print('String is BabelString', isinstance(bla, BabelString))
-    context.text(bla, pt(x, y))
+    context.fontSize(sq)
+    context.text('%spt size string without style' % sq, pt(x, y))
+    y += sq
+
+    bs = context.newString('BabelString No Style')
+    w0, h0 = context.textSize(bs)
+    context.text(bs, pt(x, y))
+    print('String size is %dx%d' % (w0, h0))
     y += sq
 
     style = {'font': 'Helvetica', 'textFill': f}
-    bla = context.newString('Babel String with Style', style=style)
-    context.text(bla, pt(x, y))
+    bs = context.newString('Babel String with Style', style=style)
+    context.text(bs, pt(x, y))
+    w0, h0 = context.textSize(bs)
+    print('String size is %dx%d' % (w0, h0))
 
     x = 2 * sq
     y = 0 
 
     path = getResourcesPath() + "/images/cookbot1.jpg"
-    context.image(path, p=pt(x, y), w=pt(100), h=pt(100))
+    # Sloooow.
+    #context.image(path, p=pt(x, y), w=pt(100), h=pt(100))
 
     y += sq
 
