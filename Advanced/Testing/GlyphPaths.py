@@ -15,14 +15,13 @@
 
 import traceback
 from random import random
-from pagebot import getAllContexts, getResourcesPath
-from pagebot.toolbox.color import Color
+from pagebot import getContext, getAllContexts, getResourcesPath
 from pagebot.constants import A4Rounded
-from pagebot.strings.babelstring import BabelString
-from pagebot import getContext
-from pagebot.toolbox.units import pt
+from pagebot.contexts.base.babelstring import BabelString
 from pagebot.document import Document
 from pagebot.fonttoolbox.objects.font import findFont
+from pagebot.toolbox.color import Color
+from pagebot.toolbox.units import pt
 
 H, W = A4Rounded
 W = pt(W)
