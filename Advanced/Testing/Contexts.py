@@ -83,8 +83,9 @@ def testContext(context):
     bs = context.newString('BabelString No Style')
 
     print(bs.style)
-    print(bs.style.get('font'))
-    print(bs.style.get('fallbackFont'))
+    #print(bs.style.get('font'))
+    #print(bs.style.get('fontSize'))
+    #print(bs.style.get('fallbackFont'))
 
     w0, h0 = context.textSize(bs)
     context.text(bs, pt(x, y))
@@ -94,9 +95,9 @@ def testContext(context):
     style = {'font': 'Helvetica', 'textFill': f}
     bs = context.newString('Babel String with Style', style=style)
 
-    print(bs.style)
-    print(bs.style.get('font'))
-    print(bs.style.get('fallbackFont'))
+    #print(bs.style)
+    #print(bs.style.get('font'))
+    #print(bs.style.get('fallbackFont'))
     context.text(bs, pt(x, y))
     w0, h0 = context.textSize(bs)
     print('String size is %dx%d' % (w0, h0))
@@ -127,7 +128,6 @@ def testContext(context):
     context.translate(2*sq, sq)
     context.scale(0.1)
     context.drawGlyphPath(glyph)
-
 
     path = '_export/%s-%s.pdf' % ('Contexts', context.name)
     context.saveImage(path)
