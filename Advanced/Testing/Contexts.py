@@ -92,7 +92,8 @@ def testContext(context):
     print('String size is %dx%d' % (w0, h0))
     y += sq
 
-    style = {'font': 'Helvetica', 'textFill': f}
+    font = findFont('Roboto-Black')
+    style = {'font': font.path, 'textFill': f}
     bs = context.newString('Babel String with Style', style=style)
 
     #print(bs.style)
@@ -122,7 +123,6 @@ def testContext(context):
     context.oval(x, y, pt(sq), 0.5*pt(sq))
     y += sq
 
-    font = findFont('Roboto-Black')
     glyphName = 'Q'
     glyph = font[glyphName]
     context.translate(2*sq, sq)
