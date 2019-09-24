@@ -18,7 +18,7 @@ from random import random
 from pagebot import getAllContexts, getResourcesPath
 from pagebot.toolbox.color import Color
 from pagebot.constants import A4Rounded
-from pagebot.strings.babelstring import BabelString
+from pagebot.contexts.base.babelstring import BabelString
 from pagebot import getContext
 from pagebot.toolbox.units import pt
 from pagebot.document import Document

@@ -17,7 +17,7 @@
 from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.strings.babelstring import BabelString
+from pagebot.contexts.base.babelstring import BabelString
 from pagebot.toolbox.units import pt
 from pagebot.toolbox.color import noColor, color
 from pagebot.contributions.filibuster.blurb import Blurb
