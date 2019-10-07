@@ -42,11 +42,6 @@ def testContexts():
             except Exception as e:
                     print('Context errors', traceback.format_exc())
 
-def getRandom():
-    x = (W - 100) * random()
-    y = (H - 100) * random()
-    return x, y
-
 def printAttributes(doc, context):
     print('# Context attributes')
 
@@ -86,17 +81,19 @@ def testContext(context):
     #print(bs.style.get('font'))
     #print(bs.style.get('fontSize'))
     #print(bs.style.get('fallbackFont'))
+    context.strokeWidth(1)
 
     w0, h0 = context.textSize(bs)
     context.text(bs, pt(x, y))
     print('String size is %dx%d' % (w0, h0))
     y += sq
 
-    font = findFont('Roboto-Black')
+    fontName = 'Roboto-Black'
+    font = findFont(fontName)
     style = {'font': font.path, 'textFill': f}
     bs = context.newString('Babel String with Style', style=style)
 
-    #print(bs.style)
+    print(bs.style)
     #print(bs.style.get('font'))
     #print(bs.style.get('fallbackFont'))
     context.text(bs, pt(x, y))

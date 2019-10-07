@@ -1,0 +1,213 @@
+{
+    // This ticket describes page 14 of American Express Platinum 2019/119/EN
+    // AMXP--119s014
+    // For the purpose of the file understadning all keys of this json are fixed and 
+    // comes from the definition of layout rendering features,
+    // except these that begin with `#` character, which are dynamic id, used for internal references
+
+    // Content - What elements do we have to output (can be article, recipie, hotel details, shop item etc..)
+    // Data are agregated from external database and kept in Wolluk.pro database.
+    "content": {
+        // id of content must match the id of translation ? alternatively we can spec it here..
+        "#jam-beach-hotel-001": { 
+            "properties": {
+                "section": "#dubai", // refers to translation
+                "country": "#united-arab-emirates",
+                "stars": 5,
+                "family-program": false
+            },
+            "assets": [
+                // List of assets associated with object
+                {
+                    "src": "AMXP--119s014/jam-01.jpeg",
+                    // Should it go up in the layout hirerachy?
+                    "priority": 100,
+                    // This image has additional cropping parameters 
+                    // We can think of protected area, when image can be autocropped by the composer
+                    // but we want particualr area to always appear in the output.
+                    "crop": {
+                        "top": 20,
+                        "left": 20,
+                        "bottom": 30,
+                        "right": 0
+                    }
+                },
+                {
+                    "src": "AMXP--119s014/jam-02.jpeg",
+                    "priority": 50
+                }
+            ]
+        },
+        "#jam-emirates-towers-002": {
+            "properties": {
+                "section": "#dubai",
+                "country": "#united-arab-emirates",
+                "stars": 5,
+                "family-program": false
+            },
+            "assets": [
+                // Images:
+                {
+                    "src": "AMXP--119s014/em-tow-01.jpeg",
+                    "priority": 100
+                },
+                {
+                    "src": "AMXP--119s014/em-tow-02.jpeg",
+                    "priority": 50
+                }
+
+            ]
+
+        }
+    },
+
+    // Instructions for the engine what and how to genarate page:
+    "rendering": {
+        "layout": {
+            "composer": "amxp-2ob-pg", // Name of the program to render that layout
+            "options": {
+                "page_number": 14,
+                "header-section": "#dubai",
+                "header-country": "#united-arab-emirates",
+                "footnotes": ["#fn1"] // What footnotes to use on the page
+            },
+            // This is vertcial grid layout:
+            // For float layout this must be defined different
+            "grid": [
+                // One in horizontal:
+                [
+                    // Two vertical:
+                    {
+                        "composer": "amxp-2ob-item", // Name of program to render that part
+                        "content": "#jam-beach-hotel-001",
+                    },
+                    {
+                        "composer": "amxp-2ob-item", // Name of program to render that part
+                        "content": "#jam-emirates-towers-002",
+                    },
+                ]
+            ]
+        },
+        // What output do we expect from the composer to produce?
+        "output": [{
+                "type": "pdf",
+                "lang": ["en", "nl"], // Expected languages to be produced
+                // Format specific faetures:
+                "resolution": 300, // DPI
+                "cropmarks": true, // Print crop marks?
+                "pages": 1, // We expect single page to be produced (open minded for multpage composers)
+                "medium": {
+                    "width": 595.27, // pt 
+                    "height": 822.04, // px
+                    "bleed": 14.17,
+                    "unit": "pt"
+                }
+                // Out of this ouptut we expect 1 single page PDF with english translation, and one with dutch
+            },
+            {
+                "type": "jpg", // or any other bitmap format
+                "lang": "en",
+                // Format specific features:
+                "quality": 90,
+                "resolution": 96, // dpi
+                "medium": {
+                    "width": 2100, // px 
+                    "height": 2900, // px
+                    "unit": "px"
+                }
+            }
+        ]
+    },
+
+        // The translation section is about i18n compatiblity for description of the localization file
+    "translations": {
+        // Each language requires own set of translation set:
+        "en": {
+            // Common text translations (extracted from Wolluk common localization)
+            "common": {
+                "rooms": "Rooms",
+                "prices": "Prices From",
+                "added-value": "Added Value",
+                "facialites": "Facilities",
+                // We can also use i18n plurarlisation feature http://i18njs.com/#pluralisation
+                "location": {
+                    "Location": [
+                        [1, 1, "Location"],
+                        [2, null, "Locations"]
+                    ]
+                },
+                "locations": {
+                    // Location specific translation extracted from Wolluk common object translations
+                    // id-s hare are dynamical, and uses object properties to manage them:
+                    "#dubai": "Dubai",
+                    "#united-arab-emirates": "United Arab Emirates",
+                }
+            },
+            // Object specific translations (extracted from Wolluk translation database)
+            "objects": {
+                // Hotels on the page to appear (the order is random)
+                "#jam-beach-hotel-001": {
+                    "name": "Jumeirah Beach Hotel",
+                    // In this example we have 2 paragraphs (see \n\n between word 'Located'), two new lines in markdown are formatted as new paragraph
+                    "desc": "The 25-storey Jumeirah Beach Hotel, with its distinctive design in the shape of a wave, has become one of the most successful hotels in the world.\n\nLocated on Jumeirah Beach, this well-known hotel offers a wonderful holiday experience and a variety of pleasurable activities. The many restaurants, bars and cafés, daily live entertainment and sports facilities will keep you entertained, whilst children will have a great time at the Sinbad’s Kids’ Club or Wild Wadi WaterparkTM which is freely accessible through a private gate. The Jumeirah Beach Hotel is well-loved by guests of all ages.",
+                    "location": "Jumeirah Beach, 25 kilometres from Dubai International Airport.",
+                    "rooms": "599 spacious rooms & suites, as well as 19 ‘Beit Al Bahar’ villas, all sea-facing. The interiors reflect the 4 elements of nature: water, fire, earth & air, and all feature handmade furniture and well-appointed bathrooms. All suites & 130 rooms have balconies.",
+                    "facialities": "Over 19 restaurants, bars & cafés, 6 swimming pools, marina and sports club with saunas, jacuzzi, aerobics and massage, 7 tennis courts, squash court, beach and water sports. Children’s playground and Sinbad’s Kids’ Club (2-12 yrs).",
+                    "prices": "£2,430 per person, 7 nights bed and breakfast based on 2 people sharing an Ocean Deluxe room (6 May -\n12 October).",
+                    // This is example of enumaration that comes with the translation (also using markdown syntax)
+                    "added-values": "* Complimentary room upgrade and early check-in and late check-out if available locally.\n* 20% off spa treatments and food and beverages. [^fn1]\n* Special offers may apply in certain periods."
+                },
+                "#jam-emirates-towers-002": {
+                    "name": "Jumeirah Emirates Towers",
+                    "desc": "Jumeirah Emirates Towers hotel occupies 56 sleek storeys and offers the discerning traveller a choice of 400 rooms and suites from 44 m2 to a decadent 312 m2. And, whatever kind of dining experience you’re looking for – from snacks to fine dining, from Lebanese to Japanese, from tea in the lobby to cocktails on the 51st floor – the hotel’s expansive choice of eateries will deliver it with panache and\npassion. Spa lovers will love the serenity of the Talise Spa, a true sanctuary which seems a world away from Dubai’s hubbub. Whilst, those preferring therapy of the retail kind will enjoy Dubai’s famous shopping malls, including ‘Boulevard’ which is right next door. The young at heart – and of course children – will have the time of their lives at Wild Wadi WaterparkTM which is just a short shuttle ride away.",
+                    "location": "Bustling Sheikh Zayed Road, 15 mins from Dubai International Airport; 5 mins from Dubai Mall & Burj Khalifa.",
+                    "rooms": "400 rooms & suites. The higher Premier Deluxe & Club rooms have great views; Suites have separate sitting areas; 3 types of Presidential Suite with butler service; 3-bed, 2-storey Royal Suite. Guests in Club rooms and higher have access to the Club Executive Lounge and enjoy special privileges.",
+                    "facialities": "16 restaurants & bars, outdoor pool, kids’ pool, spa with floatation pool, gym, aerobics, ‘Boulevard’ mall, unlimited access & shuttle to private beach & Wild Wadi WaterparkTM. Complimentary golf club hire when booking Emirates Majilis course via the concierge.",
+                    "prices": "£905 per person, 7 nights bed and breakfast based on 2 people sharing\na Deluxe room (1 May - 30 September).",
+                    "added-values": "* Complimentary room upgrade and early check-in and late check-out if available locally.\n20% off spa treatments and food and beverages. [^fn1]\n*Special offers may apply in certain periods."
+                }
+            }, // Additional footnotes:
+            "footnotes": {
+                "#fn1": "Minimum stay 2 nights, unless stated otherwise. Terms apply; please see page 179"
+            }
+        },
+        // More translations if needed (for the purpose of regenerating all pages at once)
+        "nl": {
+            "common": {
+                "rooms": "Kamers",
+                "prices": "Prijzen vanaf",
+                "added-value": "Uw extra",
+                "facialites": "Faciliteiten",
+                "location": "Locatie",
+                "locations": {
+                    "#dubai": "Dubai",
+                    "#united-arab-emirates": "Verenigde Arabische Emiraten",
+                }
+            },
+            "objects": {
+                "#jam-beach-hotel-001": {
+                    "name": "Jumeirah Beach Hotel",
+                    "desc": "Het 25 verdiepingen hoge Jumeirah Beach Hotel is gebouwd in de vorm van een brekende golf en is uitgegroeid tot een van de meest succesvolle hotels ter wereld. Gelegen aan een mooi gedeelte van het strand van Jumeirah Beach, vindt u in dit spraakmakende hotel een waar vakantieparadijs vol luxe en tal van faciliteiten: een scala aan restaurants, bars en cafés, dagelijks entertainment en watersporten. Kinderen vermaken zich uitstekend in de Sinbad’s kinderclub of in het naastgelegen Wild Wadi Waterpark&TM;, gratis toegankelijk via een privé-ingang vanuit het resort. Het Jumeirah Beach is een hotel dat werkelijk alles te bieden heeft, ideaal voor jong en oud.",
+                    "location": "Jumeirah Beach, 25 kilometer van de luchthaven van Dubai.",
+                    "rooms": "De 599 ruime kamers en suites en de 19 villa’s in het Beit Al Bahar gedeelte van het resort hebben allemaal zeezicht. Het interieur weerspiegelt de\n4 natuurelementen: water, vuur, aarde en lucht. Het meubilair is handgemaakt en de badkamers zijn zeer compleet. Alle suites en 130 kamers hebben een balkon.",
+                    "facialities": "19 restaurants, bars en cafés, 6 zwembaden, marina- en sportclub met sauna’s, jacuzzi, aerobic en massage, 7 tennisbanen, squashbaan, strand, watersporten zoals zeilen, para- sailing, waterskiën, snorkelen en een PADI-duikcentrum. Kinderspeelplaats en Sinbad’s kinderclub (2-12 jr).",
+                    "prices": "€ 2.745 tot € 4.306 p.p. inclusief\n7 overnachtingen met ontbijt in een superior tweepersoonskamer met zeezicht.",
+                    // This is example of enumaration that comes with the translation (also using markdown syntax)
+                    "added-values": "* Een kamer upgrade en vroege check- in/late check-out indien beschikbaar bij check-in.\n* 20% korting op spabehandelingen en op eten en drinken.[^fn1]\n* Speciale aanbiedingen in bepaalde periodes"
+                },
+                "#jam-emirates-towers-002": {
+                    "name": "Jumeirah Emirates Towers",
+                    "desc": "Jumeirah Emirates Towers heeft 56 verdiepingen en biedt gasten de keuze uit 400 kamers en suites, van 44 m2 tot een decadente 312 m2. Waar u ook trek in heeft, u vindt het in dit hotel – van snacks tot verfijnd dineren, van Libanees tot Japans, van thee in de lobby tot cocktails op de 50e verdieping. De serene Talise Spa lijkt een werelddeel verwijderd van het drukke Dubai, ideaal als u even wilt ontspannen. Maar wie wil shoppen, vindt de mooiste malls van Dubai, inclusief Boulevard, om de hoek. Jong en oud hebben de grootste pret in het vlakbij gelegen (en met een korte rit in de shuttlebus te bereiken) Wild Wadi Waterpark&trade;",
+                    "location": "Aan de levendige Sheikh Zayed Road, 15 minuten van de luchthaven van Dubai, 5 minuten van Dubai Mall en Burj Khalifa.",
+                    "rooms": "400 kamers en suites. Premier deluxe en club kamers met een geweldig uitzicht. Suites met een aparte zitkamer, 3 Presidentieel Suites met butlerservice en 3 slaapkamers, de Royal Suite heeft 2 verdiepingen. Club kamers en hogere categorieën met toegang tot de Club Executive Lounge en speciale privileges.",
+                    "facialities": "16 restaurants en bars, buitenbad, kinderbad, spa met drijfbad, gym, aerobics, Boulevard winkelcentrum, onbeperkte toegang tot (en shuttle naar) privéstrand en Wild Wadi WaterparkTM. Gratis golfclubverhuur bij Emirates Majilis golfbaan bij boeking via de conciërge.",
+                    "prices": "€ 1.023 tot € 1.808 p.p. inclusief\n7 overnachtingen met ontbijt in een deluxe tweepersoonskamer",
+                    "added-values": "* Een kamer upgrade en vroege check- in/late check-out indien beschikbaar bij check-in.\n* 20% korting op spabehandelingen (excl. arrangementen) en op eten en drinken. [^fn1]\n* Speciale aanbiedingen in bepaalde\nperiodes."
+                }
+            },
+            "footnotes": {
+                "#fn1": "Bel The Platinum Card Travel & Lifestyle Service: 020 – 504 8500 voor de meest actuele prijzen en aanbiedingen"
+            }
+        }
+    }
+}

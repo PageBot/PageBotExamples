@@ -1,0 +1,69 @@
+{
+   "composers" : {
+      "#amxp-2ob-item" : {
+         "name" : "Amex Platinium 2-objects vertical - Object",
+         "options" : false,
+         "type" : "layer",
+         "content" : {
+            "translation" : {
+               "items" : {
+                  "facialities" : true,
+                  "added-values" : false,
+                  "name" : [
+                     20,
+                     3000
+                  ],
+                  "desc" : [
+                     0,
+                     14000
+                  ],
+                  "rooms" : [
+                     0,
+                     14000
+                  ],
+                  "prices" : true
+               },
+               "section" : "objects"
+            },
+            "properties" : {
+               "stars" : {
+                  "type" : "number"
+               },
+               "family-program" : {
+                  "type" : "boolean"
+               }
+            },
+            "assets" : {
+               "count" : 2
+            }
+         }
+      },
+      "#amxp-2ob-pg" : {
+         "content" : false,
+         "type" : "page",
+         "name" : "Amex Platinium 2-objects vertical",
+         "grid" : [
+            1,
+            2
+         ],
+         "options" : {
+            "footnotes" : {
+               "optional" : true,
+               "type" : "translation",
+               "section" : "footnotes"
+            },
+            "header-country" : {
+               "type" : "translation",
+               "section" : "common.locations"
+            },
+            "page_number" : {
+               "type" : "number"
+            },
+            "header-section" : {
+               "type" : "translation",
+               "section" : "common.locations"
+            }
+         }
+      }
+   }
+}

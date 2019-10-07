@@ -1,0 +1,49 @@
+{
+  // Suggested discovery service for composers 
+  // Wolluk will query engine for list of acutal composers, connected to the system
+  // Out of this it will make it's own flat plan structures
+  "composers": {
+    "#amxp-2ob-pg": {
+      "type": "page",
+      "name": "Amex Platinium 2-objects vertical",
+      "grid": [ 1, 2 ],
+      "options": {
+        "page_number": {"type": "number" },
+        // This is example of option that value is read from the translation file:
+        // the engine will look for current language, translations, and look for 
+        // particualar id within the section provided
+        "header-section": {"type": "translation", "section": "common.locations"},
+        "header-country": {"type": "translation", "section": "common.locations"},
+        "footnotes": { "type": "translation", "optional": true, "section": "footnotes"}
+      },
+      // What content object data do we expect? - Page layout does not accept any content (as it is grid)
+      "content": false
+    },
+    "#amxp-2ob-item": {
+      "type": "layer",
+      "name": "Amex Platinium 2-objects vertical - Object",
+      "options": false, // does not have any option
+      "content": {// We expect some content to be provided:
+        "properties": {
+          "stars": {"type": "number" },
+          "family-program": {"type": "boolean" }
+        }, 
+        "assets": {
+          "count": 2 // can also be [min, max] entry
+        },
+        "translation": {
+          "section": "objects", // where to look for translations
+          // So it will look for objects.#{objectid}.name
+          "items": {
+            "name": [ 20, 3000 ],  // [min, max char count]
+            "desc": [ 0, 14000 ],
+            "rooms": [ 0, 14000 ],
+            "facialities": true, // this means it is obligatory
+            "prices": true, 
+            "added-values": false // this may not be present
+          }
+        }
+      }
+    }
+  }
+}

@@ -27,7 +27,7 @@ from pagebot.style import getRootStyle
 from pagebot.contexts.flat.flatcontext import FlatContext
 from pagebot.contexts.flat.flatstring import FlatString
 from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
-from pagebotcocoa.contexts.drawbot.string import DrawBotString
+from pagebotcocoa.contexts.drawbot.drawbotstring import DrawBotString
 #from pagebot.contexts.indesigncontext import InDesignContext
 #from pagebot.contexts.htmlcontext import HtmlContext
 #from pagebot.contexts.svgcontext import SvgContext
@@ -43,7 +43,7 @@ M = 36
 roboto = findFont('Roboto-Regular')
 robotoBold = findFont('Roboto-Bold')
 
-bungee = findFont('BungeeHairline-Regular')
+bungee = findFont('Bungee-HairlineRegular')
 bungeeSize = 48
 
 blurb = Blurb()
@@ -76,12 +76,9 @@ def drawLines(page):
 
 def testContext(context, path):
     doc = Document(w=W, h=H, context=context, autoPages=1)
-    #context.newDocument(W, H, 'pt')
-    #context.newPage()
     page = doc[1]
 
     #print('Units: %s' % context.units)
-    #context.newDocument(W, H)
     print('# Testing strings in %s' % context)
     #context.newPage(W, H)
     # Create a new BabelString with the DrawBot FormttedString inside.
