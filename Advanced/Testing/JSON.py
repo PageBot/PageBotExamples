@@ -37,6 +37,9 @@ boldFontName = 'PageBot-Bold'
 boldFont = findFont(boldFontName)
 regularFontName = 'Roboto-Regular'
 regularFont = findFont(regularFontName)
+LINE = 12
+TEXTSIZE = 12
+HEADSIZE = 14
 
 def loadJSON(context):
     p = os.path.abspath(__file__)
@@ -55,6 +58,8 @@ def loadJSON(context):
     location = ''
     prices = ''
     facilities = ''
+    context.fill(None)
+    context.stroke(s)
 
     for lang in jsondict['translations']:
         for _, o in jsondict['translations'][lang]['objects'].items():
@@ -72,8 +77,9 @@ def loadJSON(context):
                 elif k == 'prices':
                     prices = v
 
-        drawTitle(context, title)
-        drawDescription(context, description)
+        dh = drawTitle(context, title, 0)
+        dh = drawDescription(context, description, dh)
+        #dh = drawLocation(context, location, dh)
 
         path = '_export/%s-%s-%s.pdf' % ('JSON', context.name, lang)
         context.saveImage(path)
@@ -82,16 +88,22 @@ def loadJSON(context):
         # Just testing first language.
         break
 
-def drawTitle(context, title):
+def drawTitle(context, title, dh):
     x = 60 
-    y = H - 60
-    style = {'font': boldFont.path, 'fontSize': 14}
+    y = 60
+    dh += y
+    y0 = H - dh
+    style = {'font': boldFont.path, 'fontSize': HEADSIZE}
     babelstring = context.newString(title, style=style)
-    context.text(babelstring, pt(x, y))
+    context.text(babelstring, pt(x, y0))
+    p0 = (x, y0)
+    p1 = (x + 100, y0)
+    context.line(p0, p1)
+    return dh
 
-def drawDescription(context, description):
+def drawDescription(context, description, dh):
     x = 60 
-    y = H - 100
+    y = H - dh - LINE
     w = 200
     h = 300
     box = (x, y, w, h)
@@ -99,15 +111,14 @@ def drawDescription(context, description):
     bs = context.newString(description, style=style)#, w=100) # Scales to size?
     bs2 = context.textOverflow(bs, box)
     tb = context.textBox(bs, box)
-    context.fill(None)
-    context.stroke(s)
     context.rect(x, y, w, -h)
+    return dh + h + LINE
 
 def drawLocation(context, location):
     x = 60 
-    y = H - 400
+    y = H - 500
     w = 200
-    h = 300
+    h = 100
     box = (x, y, w, h)
     style = {'font': regularFont.path, 'fontSize': 12}
     bs = context.newString(location, style=style)#, w=100)
