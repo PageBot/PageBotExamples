@@ -12,7 +12,7 @@
 #
 #     JSON.py
 #
-
+import json
 import traceback
 import os.path
 from pagebot import getAllContexts, getResourcesPath, getContext
@@ -23,6 +23,7 @@ from pagebot.toolbox.units import pt
 from pagebot.toolbox.transformer import json2Dict
 from pagebot.document import Document
 from pagebot.fonttoolbox.objects.font import findFont
+
 #H, W = A4Rounded
 #W = pt(W)
 #H = pt(H)
@@ -35,11 +36,13 @@ def loadJSON():
     d = os.path.dirname(p)
     src = '/jsondata/AMXP--119s014.json'
     p = d + src
-    print(p)
-    jsondict = json2Dict(src)
-    print(jsondict)
+    f = open(p, 'r')
+    jsondata = f.read()
+    jsondict = json.loads(jsondata)
+    print(jsondict.keys())
+    print(jsondict['content'])
 
-def testContexts():
+    '''
     contexts = getAllContexts()
     print('All contexts: %s' % contexts)
 
@@ -50,5 +53,6 @@ def testContexts():
             except Exception as e:
                     print('Context errors', traceback.format_exc())
 
-#testContexts()
+    '''
+
 loadJSON()
