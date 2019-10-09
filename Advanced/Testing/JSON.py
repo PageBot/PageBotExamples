@@ -14,13 +14,13 @@
 #
 
 import traceback
-from random import random
-from pagebot import getAllContexts, getResourcesPath
-from pagebot.toolbox.color import Color
+import os.path
+from pagebot import getAllContexts, getResourcesPath, getContext
 from pagebot.constants import A4Rounded
 from pagebot.contexts.base.babelstring import BabelString
-from pagebot import getContext
+from pagebot.toolbox.color import Color
 from pagebot.toolbox.units import pt
+from pagebot.toolbox.transformer import json2Dict
 from pagebot.document import Document
 from pagebot.fonttoolbox.objects.font import findFont
 #H, W = A4Rounded
@@ -31,7 +31,13 @@ from pagebot.fonttoolbox.objects.font import findFont
 #s = Color(1, 0, 0)
 
 def loadJSON():
-    pass
+    p = os.path.abspath(__file__)
+    d = os.path.dirname(p)
+    src = '/jsondata/AMXP--119s014.json'
+    p = d + src
+    print(p)
+    jsondict = json2Dict(src)
+    print(jsondict)
 
 def testContexts():
     contexts = getAllContexts()
