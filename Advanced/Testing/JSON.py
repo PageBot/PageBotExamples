@@ -77,9 +77,10 @@ def loadJSON(context):
                 elif k == 'prices':
                     prices = v
 
+        # dh is added offset from top page edge.
         dh = drawTitle(context, title, 0)
         dh = drawDescription(context, description, dh)
-        #dh = drawLocation(context, location, dh)
+        dh = drawLocation(context, location, dh)
 
         path = '_export/%s-%s-%s.pdf' % ('JSON', context.name, lang)
         context.saveImage(path)
@@ -109,22 +110,32 @@ def drawDescription(context, description, dh):
     box = (x, y, w, h)
     style = {'font': regularFont.path, 'fontSize': 12}
     bs = context.newString(description, style=style)#, w=100) # Scales to size?
-    bs2 = context.textOverflow(bs, box)
+
+    # TODO: calculate overflow.
     tb = context.textBox(bs, box)
     context.rect(x, y, w, -h)
+    bs2 = context.textOverflow(bs, box)
+    print('Overflow: %s' % bs2)
+    #lines = context.textLines(bs, box)
+
+    y1 = y - LINE
+    p0 = (x, y1)
+    p1 = (x + w, y1)
+    context.line(p0, p1)
     return dh + h + LINE
 
-def drawLocation(context, location):
+def drawLocation(context, location, dh):
     x = 60 
-    y = H - 500
+    y = H - dh - LINE
     w = 200
-    h = 100
+    h = 24
     box = (x, y, w, h)
     style = {'font': regularFont.path, 'fontSize': 12}
     bs = context.newString(location, style=style)#, w=100)
     bs2 = context.textOverflow(bs, box)
     tb = context.textBox(bs, box)
-
+    context.rect(x, y, w, -h)
+    return dh + h + LINE
 
 loadJSON(drawBotContext)
 loadJSON(flatContext)
