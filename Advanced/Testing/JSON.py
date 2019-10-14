@@ -108,7 +108,7 @@ def drawDescription(context, description, dh):
     w = 200
     h = 300
     box = (x, y, w, h)
-    style = {'font': regularFont.path, 'fontSize': 12}
+    style = {'font': regularFont.path, 'fontSize': 12, 'leading': 14}
     bs = context.newString(description, style=style)#, w=100) # Scales to size?
 
     # TODO: calculate overflow.
@@ -130,7 +130,7 @@ def drawLocation(context, location, dh):
     w = 200
     h = 3 * LINE
     box = (x, y, w, h)
-    style = {'font': regularFont.path, 'fontSize': 12}
+    style = {'font': regularFont.path, 'fontSize': 12, 'leading': 12}
     bs = context.newString(location, style=style)#, w=100)
     bs2 = context.textOverflow(bs, box)
     tb = context.textBox(bs, box)
