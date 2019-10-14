@@ -128,14 +128,23 @@ def drawLocation(context, location, dh):
     x = 60 
     y = H - dh - LINE
     w = 200
-    h = 24
+    h = 3 * LINE
     box = (x, y, w, h)
     style = {'font': regularFont.path, 'fontSize': 12}
     bs = context.newString(location, style=style)#, w=100)
     bs2 = context.textOverflow(bs, box)
     tb = context.textBox(bs, box)
     context.rect(x, y, w, -h)
+    drawLines(context, x, y - LINE, w, 2)
     return dh + h + LINE
+
+def drawLines(context, x, y, w, n):
+    for i in range(n):
+        y0 = y - (i * LINE * 1.4)
+        print(y0)
+        p0 = (x, y0)
+        p1 = (x + w, y0)
+        context.line(p0, p1)
 
 loadJSON(drawBotContext)
 loadJSON(flatContext)
