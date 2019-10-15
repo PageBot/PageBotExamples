@@ -42,16 +42,32 @@ TEXTSIZE = 12
 HEADSIZE = 14
 
 def loadJSON(context):
-    p = os.path.abspath(__file__)
-    d = os.path.dirname(p)
+    base = os.path.abspath(__file__)
+    d = os.path.dirname(base)
     src = '/jsondata/AMXP--119s014.json'
     p = d + src
     f = open(p, 'r')
     jsondata = f.read()
     jsondict = json2Dict(jsondata)
+    print(jsondict['rendering']['output'])
+    print(jsondict['rendering']['layout'])
+    content = jsondict['content']
 
     context.newDrawing()
     context.newPage(w=W, h=H)
+    src = ''
+
+    for k, v in content.items():
+        print(k)
+        print(v['assets'][0]['src'])
+        print(v['assets'][1])
+        print(v['properties'])
+        src = 'jsondata/' + v['assets'][0]['src']
+        break
+
+    print(src)
+    context.image(src, p=pt(0, 0), w=pt(200), h=pt(300))
+
     title = ''
     addedvalue = ''
     description = ''
