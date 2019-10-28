@@ -22,7 +22,7 @@
 import os # Import standard libary for accessing the file system.
 from random import choice, shuffle # Used for random selection of sample words
 
-from pagebot.contexts import getContext # Decide if running in DrawBot or Linux-Flat
+from pagebot import getContext # Decide if running in DrawBot or Linux-Flat
 from pagebot.constants import CENTER, INLINE # Import some measure and alignments constants.
 from pagebot.document import Document # Overall container class of any PageBot script
 from pagebot.fonttoolbox.objects.family import getFamily # Access to installed fonts

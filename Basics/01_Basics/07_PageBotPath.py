@@ -15,7 +15,7 @@
 #     Draw a string outline as PageBotPath.
 #
 from pagebot.toolbox.units import pt
-from pagebot.contexts import getContext
+from pagebot import getContext
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.document import Document
 from pagebot.elements import *

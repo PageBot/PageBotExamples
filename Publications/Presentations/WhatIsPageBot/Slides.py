@@ -13,7 +13,7 @@
 # 
 import os
 
-from pagebot.contexts import getContext
+from pagebot import getContext
 context = getContext()
 
 from pagebot.fonttoolbox.objects.font import findFont

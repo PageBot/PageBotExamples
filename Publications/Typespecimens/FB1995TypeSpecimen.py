@@ -22,7 +22,7 @@
 import os # Import standard libary for accessing the file system.
 from random import choice, shuffle, random # Used for random selection of sample words
 
-from pagebot.contexts import getContext # Decide if running in DrawBot or Linux-Flat
+from pagebot import getContext # Decide if running in DrawBot or Linux-Flat
 context = getContext()
 
 from pagebot.toolbox.units import inch, pt, em

@@ -35,7 +35,7 @@
 #     to make insert the content in the template elements.
 #
 import copy
-from pagebot.contexts import getContext
+from pagebot import getContext
 context = getContext()
 
 import pagebot # Import to know the path of non-Python resources.

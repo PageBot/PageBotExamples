@@ -17,7 +17,7 @@
 #     by a series of high-level composition instructions.
 #
 import os
-from pagebot.contexts import getContext
+from pagebot import getContext
 from pagebot.paths import *
 from pagebot.constants import * # Containing page sizes and other contants.
 from pagebot.conditions import *

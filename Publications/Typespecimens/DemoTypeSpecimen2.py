@@ -6,7 +6,7 @@ from pagebot.constants import *
 from pagebot.elements import *
 from pagebot.conditions import *
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.contexts import getContext
+from pagebot import getContext
 from pagebot.contributions.filibuster.blurb import Blurb
 context = getContext()
 
