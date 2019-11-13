@@ -23,12 +23,16 @@ from pagebot.toolbox.units import pt
 from pagebot.toolbox.transformer import json2Dict
 from pagebot.document import Document
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.elements import newTextBox
+from pagebot.elements import newTextBox, newImage
 
 W = 652
 H = 850
 W = pt(W)
 H = pt(H)
+PADDING = pt(83, 42, 19, 33)
+ACC_GUTTER = pt(32) # Distance between accommodations
+IMG_GUTTER = pt(3) # Vertical distance between images
+COL_GUTTER = pt(12) # Distance between columns
 
 #f = Color(0, 0, 0)
 s = Color(1, 0, 0)
@@ -52,11 +56,6 @@ def loadJSON(context):
     view.showOrigin = True
 
     page = doc[1]
-    page.solve()
-
-    path = '_export/doc-%s.pdf' % doc.context.name
-    doc.export(path)
-
 
     base = os.path.abspath(__file__)
     d = os.path.dirname(base)
@@ -72,9 +71,9 @@ def loadJSON(context):
         src = 'jsondata/' + v['assets'][0]['src']
         break
 
-    #context.image(src, p=pt(0, 0), w=pt(200), h=pt(300))
-    #context.fill(None)
-    #context.stroke(s)
+    for k, v in content.items():
+        src = 'jsondata/' + v['assets'][0]['src']
+        break
 
     title = ''
     addedvalue = ''
@@ -99,8 +98,9 @@ def loadJSON(context):
                 elif k == 'prices':
                     prices = v
 
-        tb = addTitle(page, context, title, 0)
-        print(tb)
+        addTitle(page, context, title)
+        addDescription(page, context, description)
+        addImage(page, context, src)
         """
         # dh is added offset from top page edge.
         dh = drawDescription(context, description, dh)
@@ -110,12 +110,32 @@ def loadJSON(context):
         # Just testing first language for now.
         break
 
-def addTitle(page, context, title, dh):
+    page.solve()
+    path = '_export/doc-%s.pdf' % doc.context.name
+    doc.export(path)
+
+def addTitle(page, context, title):
     style = {'font': boldFont.path, 'fontSize': HEADSIZE}
-    babelstring = context.newString(title, style=style)
-    tb = newTextBox(babelstring, parent=page, w=W/2,
-            conditions=[Right2RightSide(), Top2Top()])
-    return tb
+    bs = context.newString(title, style=style)
+    newTextBox(bs, parent=page, w=W/2, conditions=[Right2RightSide(),
+        Top2Top()])
+
+def addDescription(page, context, description):
+    style = {'font': regularFont.path, 'fontSize': 12, 'leading': 14}
+    bs = context.newString(description, style=style)
+    newTextBox(bs, parent=page, w=W/2, conditions=[Right2RightSide(),
+        Top2Top()])
+
+def addImage(page, context, src):
+    newImage(src,
+        parent=page, 
+        w=(W-COL_GUTTER)/2, 
+        h=(H-IMG_GUTTER)/2,
+        conditions=[Left2LeftSide(), Float2TopSide()], 
+        mt=IMG_GUTTER, 
+        scaleImage=False,
+    )
+
 
 loadJSON(drawBotContext)
 loadJSON(flatContext)
