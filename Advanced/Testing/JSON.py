@@ -43,7 +43,20 @@ TEXTSIZE = 12
 HEADSIZE = 14
 
 def loadJSON(context):
-    #doc = Document(w=output.w, h=output.h, originTop=False)
+    doc = Document(w=W, h=H, originTop=False, context=context)
+    view = doc.getView()
+    view.showPadding = True
+    view.showDimensions = True
+    view.showOrigin = True
+
+    page = doc[1]
+    page.solve()
+
+    path = '_export/doc-%s.pdf' % doc.context.name
+    doc.export(path)
+
+
+    '''
     base = os.path.abspath(__file__)
     d = os.path.dirname(base)
     src = '/jsondata/AMXP--119s014.json'
@@ -61,15 +74,16 @@ def loadJSON(context):
         src = 'jsondata/' + v['assets'][0]['src']
         break
 
-    context.image(src, p=pt(0, 0), w=pt(200), h=pt(300))
+    #context.image(src, p=pt(0, 0), w=pt(200), h=pt(300))
+    context.fill(None)
+    context.stroke(s)
+
     title = ''
     addedvalue = ''
     description = ''
     location = ''
     prices = ''
     facilities = ''
-    context.fill(None)
-    context.stroke(s)
 
     for lang in jsondict['translations']:
         for _, o in jsondict['translations'][lang]['objects'].items():
@@ -87,10 +101,12 @@ def loadJSON(context):
                 elif k == 'prices':
                     prices = v
 
+        """
         # dh is added offset from top page edge.
         dh = drawTitle(context, title, 0)
         dh = drawDescription(context, description, dh)
         dh = drawLocation(context, location, dh)
+        """
 
         path = '_export/%s-%s-%s.pdf' % ('JSON', context.name, lang)
         context.saveImage(path)
@@ -98,6 +114,7 @@ def loadJSON(context):
 
         # Just testing first language.
         break
+    '''
 
 def drawTitle(context, title, dh):
     x = 60 
@@ -123,7 +140,7 @@ def drawDescription(context, description, dh):
 
     # TODO: calculate overflow.
     #tb = context.textBox(bs, box)
-    tb = newTextBox(bs, box, context=context)
+    #tb = newTextBox(bs, box, context=context)
     context.rect(x, y, w, -h)
     #bs2 = context.textOverflow(bs, box)
     #print('Overflow: %s' % bs2)
