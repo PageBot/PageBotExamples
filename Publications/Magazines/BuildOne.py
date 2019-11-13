@@ -18,7 +18,7 @@
 #
 import os
 from pagebot import getContext
-from pagebot.paths import *
+from pagebot.filepaths import *
 from pagebot.constants import * # Containing page sizes and other contants.
 from pagebot.conditions import *
 from pagebot.elements import *

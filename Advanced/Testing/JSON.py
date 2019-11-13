@@ -22,6 +22,7 @@ from pagebot.toolbox.units import pt
 from pagebot.toolbox.transformer import json2Dict
 from pagebot.document import Document
 from pagebot.fonttoolbox.objects.font import findFont
+from pagebot.elements import newTextBox
 
 W = 652
 H = 850
@@ -42,6 +43,7 @@ TEXTSIZE = 12
 HEADSIZE = 14
 
 def loadJSON(context):
+    #doc = Document(w=output.w, h=output.h, originTop=False)
     base = os.path.abspath(__file__)
     d = os.path.dirname(base)
     src = '/jsondata/AMXP--119s014.json'
@@ -49,8 +51,6 @@ def loadJSON(context):
     f = open(p, 'r')
     jsondata = f.read()
     jsondict = json2Dict(jsondata)
-    print(jsondict['rendering']['output'])
-    print(jsondict['rendering']['layout'])
     content = jsondict['content']
 
     context.newDrawing()
@@ -58,16 +58,10 @@ def loadJSON(context):
     src = ''
 
     for k, v in content.items():
-        print(k)
-        print(v['assets'][0]['src'])
-        print(v['assets'][1])
-        print(v['properties'])
         src = 'jsondata/' + v['assets'][0]['src']
         break
 
-    print(src)
     context.image(src, p=pt(0, 0), w=pt(200), h=pt(300))
-
     title = ''
     addedvalue = ''
     description = ''
@@ -128,10 +122,11 @@ def drawDescription(context, description, dh):
     bs = context.newString(description, style=style)#, w=100) # Scales to size?
 
     # TODO: calculate overflow.
-    tb = context.textBox(bs, box)
+    #tb = context.textBox(bs, box)
+    tb = newTextBox(bs, box, context=context)
     context.rect(x, y, w, -h)
-    bs2 = context.textOverflow(bs, box)
-    print('Overflow: %s' % bs2)
+    #bs2 = context.textOverflow(bs, box)
+    #print('Overflow: %s' % bs2)
     #lines = context.textLines(bs, box)
 
     y1 = y - LINE
