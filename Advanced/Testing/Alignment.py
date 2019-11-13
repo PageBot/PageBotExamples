@@ -97,8 +97,8 @@ def testCoordinates():
         i = 0
         for r in rects:
             i +=1
-            x = r.getFloatLeftSide()
-            y = r.getFloatTopSide()
+            x = r.getFloatSideLeft()
+            y = r.getFloatSideTop()
             #print('%d %d' % (x, y))
             context.circle(x, y, 2)
             context.text('%d' % i, (x + 5, y - 5))

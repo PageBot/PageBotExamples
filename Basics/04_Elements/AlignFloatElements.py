@@ -80,18 +80,18 @@ def makeDocument(context):
         newRect(w=SQ, h=SQ, stroke=noColor, parent=page, xAlign=CENTER,
                 conditions=condition, fill=color(1, 1, 0))
 
-    sideConditions = [(Center2Center(), Top2TopSide()),
-                      (Center2Center(), Bottom2BottomSide()),
-                      (Left2LeftSide(), Middle2Middle()),
-                      (Right2RightSide(), Middle2Middle())]
+    sideConditions = [(Center2Center(), Top2SideTop()),
+                      (Center2Center(), Bottom2SideBottom()),
+                      (Left2SideLeft(), Middle2Middle()),
+                      (Right2SideRight(), Middle2Middle())]
     for condition in sideConditions:
         newRect(w=SQ, h=SQ, stroke=noColor, parent=page, xAlign=CENTER,
                 conditions=condition, fill=color(0.5, 1, 0))
 
-    cornerConditions = [(Left2LeftSide(), Top2TopSide()),
-                        (Right2RightSide(), Top2TopSide()),
-                        (Left2LeftSide(), Bottom2BottomSide()),
-                        (Right2RightSide(), Bottom2BottomSide())]
+    cornerConditions = [(Left2SideLeft(), Top2SideTop()),
+                        (Right2SideRight(), Top2SideTop()),
+                        (Left2SideLeft(), Bottom2SideBottom()),
+                        (Right2SideRight(), Bottom2SideBottom())]
     for condition in cornerConditions:
         newRect(w=SQ, h=SQ, stroke=noColor, parent=page, xAlign=CENTER,
                 conditions=condition, fill=blueColor)
@@ -103,10 +103,10 @@ def makeDocument(context):
     if score.fails:
         print('Failed to solve %d conditions:' % len(score.fails))
     for condition, e in score.fails:
-        print(e.bottom2BottomSide())
+        print(e.bottom2SideBottom())
         print(condition, e, e.bottom,
-              Bottom2BottomSide().test(e),
-              e.isBottomOnBottomSide(), e.bottom)
+              Bottom2SideBottom().test(e),
+              e.isBottomOnSideBottom(), e.bottom)
 
     # Get the current view of the document. This allows setting of
     # parameters how the document is represented on output.

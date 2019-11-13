@@ -21,7 +21,7 @@ page.showPadding = True
 page.bleed = mm(3)
 
 newRect(parent=page, fill=color('red'),
-w=page.w*0.6+page.bleedLeft, conditions=[Left2LeftBleed(), Top2TopSide()])
+w=page.w*0.6+page.bleedLeft, conditions=[Left2BleedLeft(), Top2SideTop()])
 newRect(parent=page, fill=color('blue'), mt=20, conditions=[Left2Left(), Float2Top()])
 
 print(page.solve())

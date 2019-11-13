@@ -4,7 +4,7 @@ Example scripts, how to do a specific task or explaining a single PageBot functi
 ## Align elements
 
 ![gallery/AlignElements.png](docs/gallery/AlignElements.png)
-The script shows the different alignment conditions. *Left2Left()* goes to the left padding. *Left2LeftSide()* goes to the left side of the document.
+The script shows the different alignment conditions. *Left2Left()* goes to the left padding. *Left2SideLeft()* goes to the left side of the document.
 *page.solve()* tries to solve any condition that does not fit the defined optimal value.
 
 ![gallery/AlignElementsUI.png](docs/gallery/AlignElementsUI.png)

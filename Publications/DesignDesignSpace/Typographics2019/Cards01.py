@@ -69,9 +69,9 @@ for pn in range(1, NUM_PAGES+1):
             conditions=[Fit2HeightBleeds(), Center2Center()])
 
     newRect(parent=page, fill=c, w=PAD+BLEED, 
-        conditions=[Fit2HeightBleeds(), Right2RightBleed()])
+        conditions=[Fit2HeightBleeds(), Right2BleedRight()])
     newRect(parent=page, fill=c, w=PAD+BLEED, 
-        conditions=[Fit2HeightBleeds(), Left2LeftBleed()])
+        conditions=[Fit2HeightBleeds(), Left2BleedLeft()])
 
     page.solve()
 

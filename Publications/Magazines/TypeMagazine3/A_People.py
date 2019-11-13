@@ -77,17 +77,17 @@ def composeBase(magazine, part, doc, page, index):
     dy2 = BASELINE
     if page.isLeft:
         bs = doc.context.newString('FALL 2018', style=styles['typeTitleRight'])
-        newTextBox(bs, w=magazine.cw, h=page.pb-dy1, parent=page, conditions=[Bottom2BottomSide(), Right2Right()], 
+        newTextBox(bs, w=magazine.cw, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Right2Right()], 
             bleed=0)
         bs = doc.context.newString(page.pn[0], style=styles['pnLeft'])
-        newTextBox(bs, w=magazine.cw, h=page.pb-dy2, parent=page, conditions=[Bottom2BottomSide(), Left2Left()], 
+        newTextBox(bs, w=magazine.cw, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Left2Left()], 
             bleed=0)
     else:
         bs = doc.context.newString('TYPE No. 3', style=styles['typeTitleLeft'])
-        newTextBox(bs, w=magazine.cw, h=page.pb-dy1, parent=page, conditions=[Bottom2BottomSide(), Left2Left()], 
+        newTextBox(bs, w=magazine.cw, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Left2Left()], 
             bleed=0)
         bs = doc.context.newString(page.pn[0], style=styles['pnRight'])
-        newTextBox(bs, w=magazine.cw, h=page.pb-dy2, parent=page, conditions=[Bottom2BottomSide(), Right2Right()], 
+        newTextBox(bs, w=magazine.cw, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Right2Right()], 
             bleed=0)
   
 def composePeopleTitleLeft(magazine, part, doc, page, index):

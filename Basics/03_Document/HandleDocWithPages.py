@@ -42,8 +42,8 @@ page.padding = 20
 
 conditions = (Center2Center(), Middle2Middle())
 # Try other positions
-#conditions= (Left2Left(), Top2TopSide())
-#conditions= (Right2Right(), Top2TopSide())
+#conditions= (Left2Left(), Top2SideTop())
+#conditions= (Right2Right(), Top2SideTop())
 
 # Position square in the center of the page area.
 # Notice that their alignment (left) does not matter for the conditions.
