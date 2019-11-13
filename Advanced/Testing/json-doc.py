@@ -16,6 +16,7 @@
 import traceback
 import os.path
 from pagebot import getContext
+from pagebot.conditions import *
 from pagebot.contexts.base.babelstring import BabelString
 from pagebot.toolbox.color import Color
 from pagebot.toolbox.units import pt
@@ -44,6 +45,7 @@ HEADSIZE = 14
 
 def loadJSON(context):
     doc = Document(w=W, h=H, originTop=False, context=context)
+    #doc = Document(w=W, h=H, originTop=True, context=context)
     view = doc.getView()
     view.showPadding = True
     view.showDimensions = True
@@ -56,7 +58,6 @@ def loadJSON(context):
     doc.export(path)
 
 
-    '''
     base = os.path.abspath(__file__)
     d = os.path.dirname(base)
     src = '/jsondata/AMXP--119s014.json'
@@ -65,9 +66,6 @@ def loadJSON(context):
     jsondata = f.read()
     jsondict = json2Dict(jsondata)
     content = jsondict['content']
-
-    context.newDrawing()
-    context.newPage(w=W, h=H)
     src = ''
 
     for k, v in content.items():
@@ -75,8 +73,8 @@ def loadJSON(context):
         break
 
     #context.image(src, p=pt(0, 0), w=pt(200), h=pt(300))
-    context.fill(None)
-    context.stroke(s)
+    #context.fill(None)
+    #context.stroke(s)
 
     title = ''
     addedvalue = ''
@@ -101,78 +99,23 @@ def loadJSON(context):
                 elif k == 'prices':
                     prices = v
 
+        tb = addTitle(page, context, title, 0)
+        print(tb)
         """
         # dh is added offset from top page edge.
-        dh = drawTitle(context, title, 0)
         dh = drawDescription(context, description, dh)
         dh = drawLocation(context, location, dh)
         """
 
-        path = '_export/%s-%s-%s.pdf' % ('JSON', context.name, lang)
-        context.saveImage(path)
-        print('Saved %s' % path)
-
-        # Just testing first language.
+        # Just testing first language for now.
         break
-    '''
 
-def drawTitle(context, title, dh):
-    x = 60 
-    y = 60
-    dh += y
-    y0 = H - dh
+def addTitle(page, context, title, dh):
     style = {'font': boldFont.path, 'fontSize': HEADSIZE}
     babelstring = context.newString(title, style=style)
-    context.text(babelstring, pt(x, y0))
-    p0 = (x, y0)
-    p1 = (x + 100, y0)
-    context.line(p0, p1)
-    return dh
-
-def drawDescription(context, description, dh):
-    x = 60 
-    y = H - dh - LINE
-    w = 200
-    h = 300
-    box = (x, y, w, h)
-    style = {'font': regularFont.path, 'fontSize': 12, 'leading': 14}
-    bs = context.newString(description, style=style)#, w=100) # Scales to size?
-
-    # TODO: calculate overflow.
-    #tb = context.textBox(bs, box)
-    #tb = newTextBox(bs, box, context=context)
-    context.rect(x, y, w, -h)
-    #bs2 = context.textOverflow(bs, box)
-    #print('Overflow: %s' % bs2)
-    #lines = context.textLines(bs, box)
-
-    y1 = y - LINE
-    p0 = (x, y1)
-    p1 = (x + w, y1)
-    context.line(p0, p1)
-    return dh + h + LINE
-
-def drawLocation(context, location, dh):
-    x = 60 
-    y = H - dh - LINE
-    w = 200
-    h = 3 * LINE
-    box = (x, y, w, h)
-    style = {'font': regularFont.path, 'fontSize': 12, 'leading': 12}
-    bs = context.newString(location, style=style)#, w=100)
-    bs2 = context.textOverflow(bs, box)
-    tb = context.textBox(bs, box)
-    context.rect(x, y, w, -h)
-    drawLines(context, x, y - LINE, w, 2)
-    return dh + h + LINE
-
-def drawLines(context, x, y, w, n):
-    for i in range(n):
-        y0 = y - (i * LINE * 1.4)
-        print(y0)
-        p0 = (x, y0)
-        p1 = (x + w, y0)
-        context.line(p0, p1)
+    tb = newTextBox(babelstring, parent=page, w=W/2,
+            conditions=[Right2RightSide(), Top2Top()])
+    return tb
 
 loadJSON(drawBotContext)
 loadJSON(flatContext)
