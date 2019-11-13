@@ -39,14 +39,14 @@ page.showFrame = True
 page.showCropMarks = True
 page.bleed = BLEED
 
-newRect(parent=page, w=w, h=w, fill=color('red'), conditions=[Left2LeftBleed(), Bottom2BottomBleed()])
-newRect(parent=page, w=w, h=w, fill=color('green'), conditions=[Center2Center(), Top2TopBleed()])
-newRect(parent=page, w=w, h=w, fill=color('blue'), conditions=[Right2RightBleed(), Top2TopBleed()])
-newRect(parent=page, w=w, h=w, fill=color('orange'), conditions=[Left2LeftBleed(), Middle2Middle()])
-newRect(parent=page, w=w, h=w, fill=color('yellow'), conditions=[Left2LeftBleed(), Top2TopBleed()])
-newRect(parent=page, w=w, h=w, fill=color('purple'), conditions=[Bottom2BottomBleed(), Right2RightBleed()])
-newRect(parent=page, w=w, h=w, fill=color('violet'), conditions=[Right2RightBleed(), Middle2Middle()])
-newRect(parent=page, w=w, h=w, fill=color('cyan'), conditions=[Center2Center(), Bottom2BottomBleed()])
+newRect(parent=page, w=w, h=w, fill=color('red'), conditions=[Left2BleedLeft(), Bottom2BleedBottom()])
+newRect(parent=page, w=w, h=w, fill=color('green'), conditions=[Center2Center(), Top2BleedTop()])
+newRect(parent=page, w=w, h=w, fill=color('blue'), conditions=[Right2BleedRight(), Top2BleedTop()])
+newRect(parent=page, w=w, h=w, fill=color('orange'), conditions=[Left2BleedLeft(), Middle2Middle()])
+newRect(parent=page, w=w, h=w, fill=color('yellow'), conditions=[Left2BleedLeft(), Top2BleedTop()])
+newRect(parent=page, w=w, h=w, fill=color('purple'), conditions=[Bottom2BleedBottom(), Right2BleedRight()])
+newRect(parent=page, w=w, h=w, fill=color('violet'), conditions=[Right2BleedRight(), Middle2Middle()])
+newRect(parent=page, w=w, h=w, fill=color('cyan'), conditions=[Center2Center(), Bottom2BleedBottom()])
 newRect(parent=page, w=w, h=w, fill=color('black'), conditions=[Center2Center(), Middle2Middle()])
 
 page.solve()

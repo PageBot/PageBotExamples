@@ -11,8 +11,8 @@
 #     Supporting usage of Flat, https://github.com/xxyxyz/flat
 # -----------------------------------------------------------------------------
 #
-#     NEEDS TO BE FIXED
-#
+#     2020_HMCT_Typographer_in_Residence.py
+#     featuring revival of the "Monotype letterpress type specimen 1967" code:
 #     LetterproefVanDeGarde.py
 #
 #     This scripts generates a look-alike revival type specimen with an interpretation
@@ -35,7 +35,7 @@
 #     to make insert the content in the template elements.
 #
 import copy
-from pagebot import getContext
+from pagebot.contexts import getContext
 context = getContext()
 
 import pagebot # Import to know the path of non-Python resources.
@@ -66,17 +66,17 @@ G = pt(12) # Gutter
 #FONT_NAME_PATTERNS = ('Bungee', 'Amstel', 'Deco') # TODO, make this work if fonts don't exist.
 #SYSTEM_FAMILY_NAMES = ('Proforma', 'Productus')
 #MY_FAMILY_NAMES = ('Proforma', 'Productus')
-FONT_NAME_PATTERNS = ('Proforma')
+#FONT_NAME_PATTERNS = ('Proforma')
 #FONT_NAME_PATTERNS = ('Productus')
 #FONT_NAME_PATTERNS = ('Bitcount',)
-#FONT_NAME_PATTERNS = ('Upgrade',)
+FONT_NAME_PATTERNS = ('Upgrade',)
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
-EXPORT_PATH_PNG = '_export/LetterproefVanDeGarde.png' 
-EXPORT_PATH_PDF = '_export/LetterproefVanDeGarde.pdf' 
-COVER_IMAGE_PATH = 'images/VanDeGardeOriginalCover.png'
+EXPORT_PATH_PNG = '_export/2020_HMCT_Typographer_in_Residence.png' 
+EXPORT_PATH_PDF = EXPORT_PATH_PNG.replace('.png', '.pdf') 
+COVER_IMAGE_PATH = 'resources/VanDeGardeOriginalCover.png'
 
-def findTheFont(styleNames, italic=False):
+def findTheFontNames(styleNames, italic=False):
     u"""Find available fonts and guess closest styles for regular, medium and bold."""
     # Any TypeNetwork TYPETR Productus or Proforma installed in the system?
     # Some hard wired foundry name here. This could be improved. Maybe we can add a public
@@ -113,25 +113,30 @@ def makeDocument():
     u"""Create Document instance with a single page. Fill the page with elements
     and perform a conditional layout run, until all conditions are solved."""
     
-    foundryName, bookName = findTheFont((None, 'Book', 'Regular')) # Find these styles in order.
-    _, mediumName = findTheFont(('Medium', 'Book', 'Regular'))
+    foundryName, bookName = findTheFontNames((None, 'Book', 'Regular')) # Find these styles in order.
+    _, mediumName = findTheFontNames(('Medium', 'Book', 'Regular'))
     mediumName = mediumName or bookName # In case medium weight does not exist.
-    _, boldName = findTheFont(('Bold', 'Medium'))
+    _, boldName = findTheFontNames(('Bold', 'Medium'))
+    _, lightName = findTheFontNames(('Light', 'Book'))
 
-    print('Found fonts', bookName, mediumName, boldName)
+    print('Found fonts', lightName, bookName, mediumName, boldName)
     
+    lightItalicName = italicName(lightName)
     bookItalicName = italicName(bookName)
     mediumItalicName = italicName(mediumName)
     boldItalicName = italicName(boldName)
 
     # Get the fonts, so we can dig in the information.
-    bookFont = findTheFont(bookName)
-    mediumFont = findTheFont(mediumName)
-    boldFont = findTheFont(boldName)
-    bookItalicFont = findTheFont(bookItalicName)
-    mediumItalicFont = findTheFont(mediumItalicName)
-    boldItalicFont = findTheFont(boldItalicName)
-       
+    lightFont = findFont(lightName)
+    bookFont = findFont(bookName)
+    mediumFont = findFont(mediumName)
+    boldFont = findFont(boldName)
+    
+    lightItalicFont = findFont(lightItalicName)
+    bookItalicFont = findFont(bookItalicName)
+    mediumItalicFont = findFont(mediumItalicName)
+    boldItalicFont = findFont(boldItalicName)
+
     # Some parameters from the original book
     paperColor = color(rgb='#F4EbC9') # Approximation of paper color of original specimen.
     redColor = color(rgb='#AC1E2B') # Red color used in the original specimen
@@ -205,9 +210,16 @@ def makeDocument():
     # TODO: Just background color could be part of page fill instead of extra element.
     newRect(z=-1, parent=page, conditions=[Fit2Sides()], fill=redColor)
     
-    bs = c.newString('BOEKLETTER', style=dict(font=boldName, xTextAlign=RIGHT, textFill=paperColor, 
-        fontSize=24, rTracking=0.1))#, xTextAlign=RIGHT))
-    newTextBox(bs, parent=page, y=page.h-176*MM, conditions=[Left2Left(), Fit2Right(), Fit2Bottom()])
+    bs = c.newString('2020 HMCT\nTypographer in Residence\n\n', 
+        style=dict(font=bookName, xTextAlign=RIGHT, textFill=paperColor, 
+        fontSize=pt(24), tracking=em(0.05)))#, xTextAlign=RIGHT))
+    bs += c.newString('Digital restauration of\nhistoric type specimens\n\n', 
+        style=dict(font=boldName, xTextAlign=RIGHT, textFill=paperColor, 
+        fontSize=pt(24), tracking=em(0.05)))#, xTextAlign=RIGHT))
+    bs += c.newString('Petr van Blokland', 
+        style=dict(font=lightName, xTextAlign=RIGHT, textFill=paperColor, 
+        fontSize=pt(24), tracking=em(0.05)))#, xTextAlign=RIGHT))
+    newTextBox(bs, parent=page, y=page.h-mm(176), conditions=[Left2Left(), Fit2Right(), Fit2Bottom()])
     page.solve()
         
     # -----------------------------------------------------------------------------------
@@ -232,7 +244,7 @@ def makeDocument():
     newRect(z=-1, parent=page, conditions=[Fit2Sides()], fill=paperColor)
                 
     bs = c.newString(labelFont.info.familyName.upper(), style=dict(font=boldName, textFill=paperColor, 
-        fontSize=fontNameSize, tracking=0, rTracking=0.3))
+        fontSize=fontNameSize, tracking=em(0.3)))
     tw, th = bs.size
     # TODO: h is still bit of a guess with padding and baseline position. Needs to be solved more structured.
     tbName = newTextBox(bs, parent=page, h=capHeight+3*padding[0], w=tw+2*padding[1], 
@@ -241,7 +253,7 @@ def makeDocument():
     tbName.solve() # Make it go to right side of page.
     
     bs = context.newString(foundryName.upper(), style=dict(font=boldName, textFill=0, 
-        fontSize=fontNameSize, tracking=0, rTracking=0.3))
+        fontSize=fontNameSize, tracking=em(0.3)))
     tw, th = bs.size
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
     tbFoundry = newTextBox(bs, parent=page, h=capHeight+3*padding[0], w=tw+2*padding[1],
@@ -252,10 +264,10 @@ def makeDocument():
     # Make blurb text about design and typography.
     aboutText = blurb.getBlurb('article_summary', noTags=True)
     bs = context.newString(aboutText, style=dict(font=bookName, textFill=0, fontSize=aboutSize, 
-        tracking=0, rTracking=rt, rLeading=1.3, hyphenation='en'))
+        tracking=rt, leading=em(1.3), hyphenation='en'))
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
     tbAbout = newTextBox(bs, parent=page, x=columnX, w=columnW, conditions=[Fit2Bottom()])
-    tbAbout.top = tbFoundry.bottom - 8*MM
+    tbAbout.top = tbFoundry.bottom - mm(8)
     
     # -----------------------------------------------------------------------------------
     # Page 2 of a family chapter. Glyph overview and 3 columns.
@@ -279,50 +291,50 @@ def makeDocument():
     punctuations = u',.;:?![]()-–—“”‘’'
     
     bs = context.newString(caps, style=dict(font=bookName, textFill=0, fontSize=glyphSetSize, 
-        leading=glyphSetLeading, tracking=0, rTracking=glyphTracking))
+        leading=glyphSetLeading, tracking=glyphTracking))
     bs += context.newString(lc, style=dict(font=bookName, textFill=0, fontSize=glyphSetSize, 
-        leading=glyphSetLeading, tracking=0, rTracking=glyphTracking))
+        leading=glyphSetLeading, tracking=glyphTracking))
 
     if bookName != bookItalicName:
         bs += context.newString(caps, style=dict(font=bookItalicName, textFill=0, fontSize=glyphSetSize, 
-            leading=glyphSetLeading, tracking=0, rTracking=glyphTracking))
+            leading=glyphSetLeading, tracking=glyphTracking))
         bs += context.newString(lc, style=dict(font=bookItalicName, textFill=0, fontSize=glyphSetSize, 
-            leading=glyphSetLeading, tracking=0, rTracking=glyphTracking))
+            leading=glyphSetLeading, tracking=glyphTracking))
 
     bs += context.newString(figures, style=dict(font=bookName, textFill=0, fontSize=glyphSetSize,     
-        leading=glyphSetLeading, tracking=0, rTracking=glyphTracking))
+        leading=glyphSetLeading, tracking=glyphTracking))
     if bookName != bookItalicName:
         bs += context.newString(figures, style=dict(font=bookItalicName, textFill=0, fontSize=glyphSetSize, 
-            leading=glyphSetLeading, tracking=0, rTracking=glyphTracking))
+            leading=glyphSetLeading, tracking=glyphTracking))
 
     bs += context.newString(capAccents, style=dict(font=bookName, textFill=0, fontSize=glyphSetSize, 
-        leading=glyphSetLeading, tracking=0, rTracking=glyphTracking))
+        leading=glyphSetLeading, tracking=glyphTracking))
     bs += context.newString(lcAccents, style=dict(font=bookName, textFill=0, fontSize=glyphSetSize, 
-        leading=glyphSetLeading, tracking=0, rTracking=glyphTracking))
+        leading=glyphSetLeading, tracking=glyphTracking))
 
     if bookName != bookItalicName:
         bs += context.newString(capAccents, style=dict(font=bookItalicName, textFill=0, fontSize=glyphSetSize, 
-            leading=glyphSetLeading, tracking=0, rTracking=glyphTracking))
+            leading=glyphSetLeading, tracking=glyphTracking))
         bs += context.newString(lcAccents, style=dict(font=bookItalicName, textFill=0, fontSize=glyphSetSize, 
-            leading=glyphSetLeading, tracking=0, rTracking=glyphTracking))
+            leading=glyphSetLeading, tracking=glyphTracking))
 
     bs += context.newString(punctuations, style=dict(font=bookName, textFill=0, fontSize=glyphSetSize, 
-        leading=glyphSetLeading, tracking=0, rTracking=glyphTracking))
+        leading=glyphSetLeading, tracking=glyphTracking))
     if bookName != bookItalicName:
         bs += context.newString(punctuations + '\n', style=dict(font=bookItalicName, textFill=0, 
-            fontSize=glyphSetSize, leading=glyphSetLeading, tracking=0, rTracking=glyphTracking))
+            fontSize=glyphSetSize, leading=glyphSetLeading, tracking=glyphTracking))
     else:
         bs += '\n'
         
     if bookName != boldName:
         bs += context.newString(caps+lc+figures+capAccents+lcAccents+punctuations, 
             style=dict(font=boldName, textFill=0, 
-            fontSize=glyphSetSize, leading=glyphSetLeading, tracking=0, rTracking=glyphTracking))
+            fontSize=glyphSetSize, leading=glyphSetLeading, tracking=glyphTracking))
 
-    tbGlyphSet = newTextBox(bs, parent=page, w=112*MM, x=leftPadding, conditions=[Top2Top()]) 
+    tbGlyphSet = newTextBox(bs, parent=page, w=mm(112), x=leftPadding, conditions=[Top2Top()]) 
 
-    bs = context.newString(labelFont.info.familyName.upper(), style=dict(font=boldName, textFill=paperColor, 
-        fontSize=fontNameSize, tracking=0, rTracking=0.3))
+    bs = context.newString(labelFont.info.familyName.upper(), style=dict(font=boldName, 
+        textFill=paperColor, fontSize=fontNameSize, tracking=mm(0.3)))
     tw, th = bs.size
     # TODO: h is still bit of a guess with padding and baseline position. Needs to be solved more structured.
     tbName = newTextBox(bs, parent=page, h=capHeight+3*padding[0], w=tw+2*padding[1], 
@@ -330,7 +342,8 @@ def makeDocument():
     tbName.top = page.h-RedBoxY
     tbName.solve() # Make it go to right side of page.
 
-    bs = context.newString(foundryName.upper(), style=dict(font=boldName, textFill=0, fontSize=fontNameSize, tracking=0, rTracking=0.3))
+    bs = context.newString(foundryName.upper(), style=dict(font=boldName, textFill=0, 
+        fontSize=fontNameSize, tracking=em(0.3)))
     tw, th = bs.size
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
     tbFoundry = newTextBox(bs, parent=page, h=capHeight+3*padding[0], w=tw+2*padding[1],
@@ -340,64 +353,65 @@ def makeDocument():
 
     # Make blurb text about design and typography.
     specText = blurb.getBlurb('article', noTags=True)
-    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=6.5, tracking=0, rTracking=rt, leading=6.5,
-        hyphenation='en'))
+    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=pt(6.5), 
+        tracking=rt, leading=pt(6.5), hyphenation='en'))
     # TODO: Last line of text blocks in original is bold.
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
-    tbSpec6 = newTextBox(bs, parent=page, x=leftPadding, w=50*MM, h=30*MM)
-    tbSpec6.top = tbFoundry.bottom - 8*MM
+    tbSpec6 = newTextBox(bs, parent=page, x=leftPadding, w=mm(50), h=mm(30))
+    tbSpec6.top = tbFoundry.bottom - mm(8)
 
-    bs = context.newString('6 1/2 set\nop 6 pt gegoten (links)', style=dict(font=bookName, fontSize=captionSize, 
-        textFill=redColor, xTextAlign=RIGHT, rTracking=0.05, leading=8, openTypeFeatures=dict(frac=True)))
+    bs = context.newString('6 1/2 set\nop 6 pt gegoten (links)', style=dict(font=bookName, 
+        fontSize=captionSize, textFill=redColor, xTextAlign=RIGHT, tracking=em(0.05), 
+        leading=pt(8), openTypeFeatures=dict(frac=True)))
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
-    tbCaption6 = newTextBox(bs, parent=page, x=page.pl, w=leftPadding - page.pl - 3*MM, h=30*MM)
+    tbCaption6 = newTextBox(bs, parent=page, x=page.pl, w=leftPadding - page.pl - mm(3), h=mm(30))
     tbCaption6.top = tbSpec6.top
     
     # Make blurb text about design and typography.
     specText = blurb.getBlurb('article', noTags=True)
-    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=6.5, tracking=0, 
-        rTracking=rt, leading=7, hyphenation='en'))
+    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=pt(6.5), 
+        tracking=rt, leading=pt(7), hyphenation='en'))
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
-    tbSpec7 = newTextBox(bs, parent=page, x=leftPadding, w=50*MM, h=35*MM)
-    tbSpec7.top = tbSpec6.bottom - 5*MM
+    tbSpec7 = newTextBox(bs, parent=page, x=leftPadding, w=mm(50), h=mm(35))
+    tbSpec7.top = tbSpec6.bottom - mm(5)
 
     bs = context.newString('op 7 pt gegoten (links)', style=dict(font=bookName, fontSize=captionSize, 
-        textFill=redColor, xTextAlign=RIGHT, rTracking=0.05, leading=8))
+        textFill=redColor, xTextAlign=RIGHT, tracking=em(0.05), leading=pt(8)))
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
-    tbCaption7 = newTextBox(bs, parent=page, x=page.pl, w=leftPadding - page.pl - 3*MM, h=30*MM)
+    tbCaption7 = newTextBox(bs, parent=page, x=page.pl, w=leftPadding - page.pl - mm(3), h=mm(30))
     tbCaption7.top = tbSpec7.top # TODO: Align with first baseline, instead of box top.
     
     # Make blurb text about design and typography.
     specText = blurb.getBlurb('article', noTags=True)
-    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=6.5, tracking=0, 
-        rTracking=rt, leading=8, hyphenation='en'))
+    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=pt(6.5), 
+        tracking=rt, leading=pt(8), hyphenation='en'))
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
     tbSpec8 = newTextBox(bs, parent=page, h=tbSpec6.top - tbSpec7.bottom)
     tbSpec8.top = tbSpec6.top
-    tbSpec8.left = tbSpec6.right + 5*MM
+    tbSpec8.left = tbSpec6.right + mm(5)
     tbSpec8.w = page.w - page.pr - tbSpec8.left
 
     bs = context.newString('op 8 pt gegoten (rechts)', style=dict(font=bookName, fontSize=captionSize, 
-        textFill=redColor, xTextAlign=RIGHT, rTracking=0.05, leading=8))
+        textFill=redColor, xTextAlign=RIGHT, tracking=em(0.05), leading=pt(8)))
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
-    tbCaption8 = newTextBox(bs, parent=page, x=page.pl, w=leftPadding - page.pl - 3*MM)
+    tbCaption8 = newTextBox(bs, parent=page, x=page.pl, w=leftPadding - page.pl - mm(3))
     tbCaption8.bottom = tbSpec8.bottom # TODO: Align with the position of the lowest base line.
     
     # TODO: Calculate the right amount
     bs = context.newString('Corps 6 – per 100 aug.: romein 417, cursief 444, vet 426 letters', 
         style=dict(font=bookName, fontSize=captionSize, 
-        textFill=redColor, xTextAlign=RIGHT, rTracking=rt, leading=8))
+        textFill=redColor, xTextAlign=RIGHT, tracking=rt, leading=pt(8)))
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
     tbCaptionTotal = newTextBox(bs, parent=page, x=page.pl, w=page.w - page.pl - page.pr)
-    tbCaptionTotal.top = tbSpec8.bottom - MM
+    tbCaptionTotal.top = tbSpec8.bottom - mm(1)
     
     # Page number
-    bs = context.newString(str(pn), 
+    bs = context.newString(str(page.pageNumber), 
         style=dict(font=bookName, fontSize=pageNumberSize, 
-        textFill=redColor, xTextAlign=LEFT, rTracking=rt, leading=8))
+        textFill=redColor, xTextAlign=LEFT, tracking=rt, leading=pt(8)))
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
-    tbPageNumber = newTextBox(bs, parent=page, x=leftPadding, w=10*MM)
-    tbPageNumber.bottom = 20*MM
+    tbPageNumber = newTextBox(bs, parent=page, x=leftPadding, w=mm(10))
+    tbPageNumber.bottom = mm(20)
             
     # -----------------------------------------------------------------------------------
     # Page 3, 3 columns.
@@ -413,34 +427,34 @@ def makeDocument():
 
     # Make blurb text about design and typography.
     specText = blurb.getBlurb('article', noTags=True) + ' ' + blurb.getBlurb('article', noTags=True)
-    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=8.5, tracking=0, 
-        rTracking=rt, leading=8, hyphenation='en'))
+    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=pt(8.5), 
+        tracking=rt, leading=pt(8), hyphenation='en'))
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
-    tbText1 = newTextBox(bs, parent=page, h=110*MM, w=50*MM, conditions=[Top2Top(), Left2Left()])
+    tbText1 = newTextBox(bs, parent=page, h=mm(110), w=pt(50), conditions=[Top2Top(), Left2Left()])
     page.solve()
     
     # Make blurb text about design and typography.
     specText = blurb.getBlurb('article', noTags=True) + ' ' + blurb.getBlurb('article', noTags=True)
-    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=8.5, tracking=0, 
-        rTracking=rt, leading=9, hyphenation='en'))
+    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=pt(8.5), 
+        tracking=rt, leading=pt(9), hyphenation='en'))
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
-    x = tbText1.right + 5*MM
+    x = tbText1.right + mm(5)
     tbText2 = newTextBox(bs, parent=page, x=x, y=tbText1.y, h=tbText1.h, w=page.w - x - rightPadding)
     page.solve()
     
     # Make blurb text about design and typography.
     specText = blurb.getBlurb('article', noTags=True) + ' ' + blurb.getBlurb('article', noTags=True)
-    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=8.5, tracking=0, 
-        rTracking=rt, leading=10, hyphenation='en'))
+    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=pt(8.5), 
+        tracking=rt, leading=pt(10), hyphenation='en'))
     x = tbText1.left
-    tbText3 = newTextBox(bs, parent=page, x=x, h=64*MM, w=page.w - x - rightPadding, mt=10*MM, 
+    tbText3 = newTextBox(bs, parent=page, x=x, h=mm(64), w=page.w - x - rightPadding, mt=mm(10), 
         conditions=[Float2TopLeft()])
     
     # TODO: Add red captions here.
 
     # Red label on the left
     bs = context.newString(labelFont.info.styleName.upper(), style=dict(font=boldName, textFill=paperColor, 
-        fontSize=fontNameSize, tracking=0, rTracking=0.3))
+        fontSize=fontNameSize, tracking=em(0.3)))
     tw, th = bs.size
     # TODO: h is still bit of a guess with padding and baseline position. Needs to be solved more structured.
     tbName = newTextBox(bs, parent=page, h=capHeight+3*padding[0], w=tw+2*padding[1], 
@@ -448,11 +462,11 @@ def makeDocument():
     tbName.top = page.h-RedBoxY
     
     # Page number
-    bs = context.newString(str(pn), 
+    bs = context.newString(str(page.pageNumber), 
         style=dict(font=bookName, fontSize=pageNumberSize, 
-        textFill=redColor, xTextAlign=RIGHT, rTracking=rt, leading=8))
-    tbPageNumber = newTextBox(bs, parent=page, x=page.w - rightPadding - 10*MM, w=10*MM)
-    tbPageNumber.bottom = 20*MM
+        textFill=redColor, xTextAlign=RIGHT, tracking=rt, leading=pt(8)))
+    tbPageNumber = newTextBox(bs, parent=page, x=page.w - rightPadding - mm(10), w=mm(10))
+    tbPageNumber.bottom = mm(20)
                 
     # -----------------------------------------------------------------------------------
     # Page 4, 3 columns.
@@ -469,45 +483,44 @@ def makeDocument():
     
     # Make blurb text about design and typography.
     specText = blurb.getBlurb('article', noTags=True) + ' ' + blurb.getBlurb('article', noTags=True)
-    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=10.5, tracking=0, 
-        rTracking=rt, leading=10, hyphenation='en'))
+    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=pt(10.5), 
+        tracking=rt, leading=pt(10), hyphenation='en'))
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
-    tbText1 = newTextBox(bs, parent=page, x=x, h=55*MM, w=page.w - x - page.pl, conditions=[Top2Top()])
+    tbText1 = newTextBox(bs, parent=page, x=x, h=mm(55), w=page.w - x - page.pl, conditions=[Top2Top()])
     page.solve()
     
     # Make blurb text about design and typography.
     specText = blurb.getBlurb('article', noTags=True) + ' ' + blurb.getBlurb('article', noTags=True)
-    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=10.5, tracking=0, 
-        rTracking=rt, leading=11, hyphenation='en'))
+    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=pt(10.5), 
+        tracking=rt, leading=pt(11), hyphenation='en'))
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
-    newTextBox(bs, parent=page, mt=5*MM, x=x, h=60*MM, w=page.w - x - page.pl, conditions=[Float2Top()])
+    newTextBox(bs, parent=page, mt=mm(5), x=x, h=mm(60), w=page.w - x - page.pl, conditions=[Float2Top()])
     page.solve()
         
     # Make blurb text about design and typography.
     specText = blurb.getBlurb('article', noTags=True) + ' ' + blurb.getBlurb('article', noTags=True)
-    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=10.5, tracking=0, 
-        rTracking=rt, leading=12, hyphenation='en'))
+    bs = context.newString(specText, style=dict(font=bookName, textFill=0, fontSize=pt(10.5), 
+        tracking=rt, leading=pt(12), hyphenation='en'))
     # TODO: Something wrong with left padding or right padding. Should be symmetric.
-    newTextBox(bs, parent=page, mt=5*MM, x=x, h=65*MM, w=page.w - x - page.pl, conditions=[Float2Top()])
+    newTextBox(bs, parent=page, mt=mm(5), x=x, h=mm(65), w=page.w - x - page.pl, conditions=[Float2Top()])
     page.solve()
         
     # TODO: Add red captions here.
 
     # Red label on the right
     bs = c.newString('10.5pt', style=dict(font=boldName, textFill=paperColor, 
-        fontSize=fontNameSize, tracking=0, rTracking=0.3))
+        fontSize=fontNameSize, tracking=em(0.3)))
     tw, th = bs.size
     # TODO: h is still bit of a guess with padding and baseline position. Needs to be solved more structured.
-    tbName = newTextBox(bs, parent=page, h=capHeight+3*padding[0], w=tw+2*padding[1], conditions=[Left2SideLeft()], 
-        fill=redColor, padding=padding)
+    tbName = newTextBox(bs, parent=page, h=capHeight+3*padding[0], w=tw+2*padding[1], 
+        conditions=[Left2SideLeft()], fill=redColor, padding=padding)
     tbName.top = page.h-RedBoxY
     
     # Page number, even on left side.
-    bs = c.newString(str(pn), 
-        style=dict(font=bookName, fontSize=pageNumberSize, 
-        textFill=redColor, xTextAlign=LEFT, rTracking=rt, leading=8))
-    tbPageNumber = newTextBox(bs, parent=page, x=leftPadding, w=10*MM)
-    tbPageNumber.bottom = 20*MM
+    bs = c.newString(str(page.pageNumber), style=dict(font=bookName, fontSize=pageNumberSize, 
+        textFill=redColor, xTextAlign=LEFT, tracking=rt, leading=pt(8)))
+    tbPageNumber = newTextBox(bs, parent=page, x=leftPadding, w=mm(10))
+    tbPageNumber.bottom = mm(20)
                 
     # -----------------------------------------------------------------------------------
     # Page 5, 2 columns.
@@ -523,33 +536,35 @@ def makeDocument():
 
     # Make blurb text about design and typography.
     specText = blurb.getBlurb('article', noTags=True) + ' ' + blurb.getBlurb('article', noTags=True)
-    bs = c.newString(specText, style=dict(font=bookName, textFill=0, fontSize=12.5, tracking=0, rTracking=rt, leading=12,
-        hyphenation='en'))
-    newTextBox(bs, parent=page, x=x, h=64*MM, w=page.w - page.pl - rightPadding, mt=10*MM, conditions=[Top2Top(), Left2Left()])
+    bs = c.newString(specText, style=dict(font=bookName, textFill=0, fontSize=pt(12.5), 
+        tracking=rt, leading=pt(12), hyphenation='en'))
+    newTextBox(bs, parent=page, x=x, h=mm(64), w=page.w - page.pl - rightPadding, mt=mm(10), 
+        conditions=[Top2Top(), Left2Left()])
     
     # Make blurb text about design and typography.
     specText = blurb.getBlurb('article', noTags=True) + ' ' + blurb.getBlurb('article', noTags=True)
-    bs = c.newString(specText, style=dict(font=bookName, textFill=0, fontSize=12.5, tracking=0, rTracking=rt, leading=13,
-        hyphenation='en'))
-    newTextBox(bs, parent=page, x=x, h=64*MM, w=page.w - page.pl - rightPadding, mt=10*MM, conditions=[Float2TopLeft()])
+    bs = c.newString(specText, style=dict(font=bookName, textFill=0, fontSize=pt(12.5), 
+        tracking=rt, leading=pt(13), hyphenation='en'))
+    newTextBox(bs, parent=page, x=x, h=mm(64), w=page.w - page.pl - rightPadding, mt=mm(10), 
+        conditions=[Float2TopLeft()])
     
     # TODO: Add red captions here.
 
     # Red label on the left
     bs = c.newString(labelFont.info.styleName.upper(), style=dict(font=boldName, textFill=paperColor, 
-        fontSize=fontNameSize, tracking=0, rTracking=0.3))
+        fontSize=fontNameSize, tracking=em(0.3)))
     tw, th = bs.size
     # TODO: h is still bit of a guess with padding and baseline position. Needs to be solved more structured.
-    tbName = newTextBox(bs, parent=page, h=capHeight+3*padding[0], w=tw+2*padding[1], conditions=[Right2SideRight()], 
-        fill=redColor, padding=padding)
+    tbName = newTextBox(bs, parent=page, h=capHeight+3*padding[0], w=tw+2*padding[1], 
+        conditions=[Right2SideRight()], fill=redColor, padding=padding)
     tbName.top = page.h-RedBoxY
     
     # Page number
-    bs = c.newString(str(pn), 
+    bs = c.newString(str(page.pageNumber), 
         style=dict(font=bookName, fontSize=pageNumberSize, 
-        textFill=redColor, xTextAlign=RIGHT, rTracking=rt, leading=8))
-    tbPageNumber = newTextBox(bs, parent=page, x=page.w - rightPadding - 10*MM, w=10*MM)
-    tbPageNumber.bottom = 20*MM
+        textFill=redColor, xTextAlign=RIGHT, tracking=rt, leading=pt(8)))
+    tbPageNumber = newTextBox(bs, parent=page, x=page.w - rightPadding - mm(10), w=mm(10))
+    tbPageNumber.bottom = mm(20)
 
     # Solve remaining layout and size conditions.
        

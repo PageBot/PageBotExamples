@@ -32,14 +32,14 @@ page.padding = PADDING
 
 page.showPadding = True
 
-newRect(parent=page, w=w, h=w, fill=color('red'), conditions=[Left2LeftSide(), Bottom2BottomSide()])
-newRect(parent=page, w=w, h=w, fill=color('green'), conditions=[Center2Center(), Top2TopSide()])
-newRect(parent=page, w=w, h=w, fill=color('blue'), conditions=[Right2RightSide(), Top2TopSide()])
-newRect(parent=page, w=w, h=w, fill=color('orange'), conditions=[Left2LeftSide(), Middle2Middle()])
-newRect(parent=page, w=w, h=w, fill=color('yellow'), conditions=[Left2LeftSide(), Top2TopSide()])
-newRect(parent=page, w=w, h=w, fill=color('purple'), conditions=[Bottom2BottomSide(), Right2RightSide()])
-newRect(parent=page, w=w, h=w, fill=color('violet'), conditions=[Right2RightSide(), Middle2Middle()])
-newRect(parent=page, w=w, h=w, fill=color('cyan'), conditions=[Center2Center(), Bottom2BottomSide()])
+newRect(parent=page, w=w, h=w, fill=color('red'), conditions=[Left2SideLeft(), Bottom2SideBottom()])
+newRect(parent=page, w=w, h=w, fill=color('green'), conditions=[Center2Center(), Top2SideTop()])
+newRect(parent=page, w=w, h=w, fill=color('blue'), conditions=[Right2SideRight(), Top2SideTop()])
+newRect(parent=page, w=w, h=w, fill=color('orange'), conditions=[Left2SideLeft(), Middle2Middle()])
+newRect(parent=page, w=w, h=w, fill=color('yellow'), conditions=[Left2SideLeft(), Top2SideTop()])
+newRect(parent=page, w=w, h=w, fill=color('purple'), conditions=[Bottom2SideBottom(), Right2SideRight()])
+newRect(parent=page, w=w, h=w, fill=color('violet'), conditions=[Right2SideRight(), Middle2Middle()])
+newRect(parent=page, w=w, h=w, fill=color('cyan'), conditions=[Center2Center(), Bottom2SideBottom()])
 newRect(parent=page, w=w, h=w, fill=color('black'), conditions=[Center2Center(), Middle2Middle()])
 
 page.solve() # Solve conditions of the page child elements

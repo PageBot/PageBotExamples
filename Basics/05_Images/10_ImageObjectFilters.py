@@ -133,7 +133,7 @@ def makeDocument():
         img.addFilter(filters)
         # Give parent on creation, to have the css chain working.
 
-        # Caption falls through the yr2 (with differnt z) and lands on yr1 by Float2BottomSide()
+        # Caption falls through the yr2 (with differnt z) and lands on yr1 by Float2SideBottom()
         captionStyle = dict(font=font.path, fontSize=11, textFill=color(0))
         captionConditions = (Fit2Width(), Float2Top())
         fs = context.newString('Captions float below the image', style=captionStyle)

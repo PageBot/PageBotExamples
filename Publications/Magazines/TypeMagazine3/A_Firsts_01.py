@@ -151,17 +151,17 @@ def setPageStyle(page, index):
     dy2 = BASELINE
     if page.isLeft:
         bs = context.newString('FALL 2018', style=styles['typeTitleRight'])
-        newTextBox(bs, w=CW, h=page.pb-dy1, parent=page, conditions=[Bottom2BottomSide(), Right2Right()],
+        newTextBox(bs, w=CW, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Right2Right()],
             bleed=0)
         bs = context.newString(page.pn[0], style=styles['pnLeft'])
-        newTextBox(bs, w=CW, h=page.pb-dy2, parent=page, conditions=[Bottom2BottomSide(), Left2Left()],
+        newTextBox(bs, w=CW, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Left2Left()],
             bleed=0)
     else:
         bs = context.newString('TYPE No. 3', style=styles['typeTitleLeft'])
-        newTextBox(bs, w=CW, h=page.pb-dy1, parent=page, conditions=[Bottom2BottomSide(), Left2Left()],
+        newTextBox(bs, w=CW, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Left2Left()],
             bleed=0)
         bs = context.newString(page.pn[0], style=styles['pnRight'])
-        newTextBox(bs, w=CW, h=page.pb-dy2, parent=page, conditions=[Bottom2BottomSide(), Right2Right()],
+        newTextBox(bs, w=CW, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Right2Right()],
             bleed=0)
 
     path = '../../../Art_TYPE-3/Firsts_images_TYPE-3/1. page-number-printed-1470.pdf'

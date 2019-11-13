@@ -109,7 +109,7 @@ def makePage1(page, font):
     # Title as 2-letter abbreviation of the family name, as in Berthold original
     style = dict(font=font, fontSize=pt(24))
     bs = context.newString(font.info.familyName[:2].capitalize(), style=style)
-    newTextBox(bs, parent=page, conditions=[Left2Left(), Top2TopSide()], 
+    newTextBox(bs, parent=page, conditions=[Left2Left(), Top2SideTop()], 
         yAlign=BOTTOM)
 
     """

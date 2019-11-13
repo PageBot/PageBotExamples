@@ -91,7 +91,7 @@ def makeDocument():
                    scaleImage=False)
     # Give parent on creation, to have the css chain working.
 
-    # Caption falls through the yr2 (with differnt z) and lands on yr1 by Float2BottomSide()
+    # Caption falls through the yr2 (with differnt z) and lands on yr1 by Float2SideBottom()
     fs = doc.context.newString('Captions float below the image',
                                style=dict(font='Verdana',
                                           fontSize=20,

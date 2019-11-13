@@ -64,12 +64,12 @@ coverImage = m.find(pattern='pepper')[0]
 coverImage.yAlign = BOTTOM
 coverImage.h = 300
 coverImage.clipPath = newRectPath(context, 100, 200)
-#coverImage.conditions = [Top2TopBleed(), Fit2BottomBleed()]
-coverImage.conditions = [Bottom2BottomBleed()]#, Fit2TopBleed()]
+#coverImage.conditions = [Top2BleedTop(), Fit2bleedBottom()]
+coverImage.conditions = [Bottom2BleedBottom()]#, Fit2BleedTop()]
 
 """
 #titleBox = newTextBox('Magazine', style=coverTitleStyle, fill=(1, 1, 0), conditions=[Fit2Width(), Bottom2Bottom()])
-#test = newRect(fill=(1, 1, 0, 0.5), stroke=None, h=p(2), conditions=[Fit2Width(), Bottom2BottomBleed()])
+#test = newRect(fill=(1, 1, 0, 0.5), stroke=None, h=p(2), conditions=[Fit2Width(), Bottom2BleedBottom()])
 
 # Create a coverFront part/element in the Magazine, including a Cover part.
 # coverFront(=part)-->cover(=part)-->coverPage-->coverImage(=Image)

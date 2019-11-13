@@ -62,10 +62,10 @@ def makePage(page, data, xAlign, yAlign):
     page.solve()
     
 # Make data tables more readable by prefabricated conditons.
-t2t = Top2TopSide()
-b2b = Bottom2BottomSide()
-l2l = Left2LeftSide()
-r2r = Right2RightSide()
+t2t = Top2SideTop()
+b2b = Bottom2SideBottom()
+l2l = Left2SideLeft()
+r2r = Right2SideRight()
 m2m = Middle2Middle()
 c2c = Center2Center()
 
@@ -80,10 +80,10 @@ for ax in (LEFT, CENTER, RIGHT):
         makePage(page, data, ax, ay) # Position for element origin at bottom
         page = page.next
 
-c2l = Center2LeftSide()
-m2t = Middle2TopSide()
-m2b = Middle2BottomSide()
-c2r = Center2RightSide()
+c2l = Center2SideLeft()
+m2t = Middle2SideTop()
+m2b = Middle2SideBottom()
+c2r = Center2SideRight()
 
 data = (
     ((c2l, m2t), (c2c, m2t), (c2r, m2t)),

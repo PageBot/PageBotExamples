@@ -75,8 +75,8 @@ def makeDocument():
     context = getContext()
     
     for r in rects:
-        x = r.getFloatLeftSide() + doc.view.pr
-        y = r.getFloatTopSide() + doc.view.pt
+        x = r.getFloatSideLeft() + doc.view.pr
+        y = r.getFloatSideTop() + doc.view.pt
         context.fill((0, 1, 0))
         context.circle(x, y, 2)
 
