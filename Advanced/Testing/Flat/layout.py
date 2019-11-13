@@ -67,7 +67,7 @@ y += 24
 #p.place(whiteFill.rectangle(x, y, w0, h0))
 t0 = intro.text(txt)
 strikeWidth = intro.width(txt)
-print(strikeWidth/ w0)
+print(strikeWidth / w0)
 placedText = p.place(t0).frame(x, y, w0, h0 - y)
 
 of = placedText.overflow()

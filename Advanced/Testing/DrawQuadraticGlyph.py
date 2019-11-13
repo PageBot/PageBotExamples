@@ -18,18 +18,21 @@
 #    TODO: test with Flat.
 #    TODO: switch to document level.
 
-import weakref
+import weakref, traceback
 from AppKit import NSFont
 from fontTools.ttLib import TTFont, TTLibError
-from drawBot import BezierPath, translate, line, text, stroke, fill, oval, drawPath
-from drawBot import font as DBFont
+from drawBot import (BezierPath, translate, line, text, stroke, fill, oval,
+        drawPath)
+
+from pagebot import getContexts
+from pagebot.elements.paths.pagebotpath import PageBotPoint as Point
 from pagebot.fonttoolbox.objects.fontinfo import FontInfo
-from pagebot.toolbox.units import point3D
 from pagebot.fonttoolbox.fontpaths import getFontPaths
 from pagebot.fonttoolbox.objects.glyph import *
 from pagebot.fonttoolbox.objects.font import Font
-from pagebot import getContexts
-from pagebot.toolbox.color import blueColor, redColor, greenColor, pinkColor, orangeColor, blackColor
+from pagebot.toolbox.color import (blueColor, redColor, greenColor, pinkColor,
+        orangeColor, blackColor)
+from pagebot.toolbox.units import point3D
 
 R = 12
 ONCURVE_COLOR = orangeColor
@@ -38,29 +41,20 @@ IMPLIED_ONCURVE_COLOR = redColor
 IMPLIED_ONCURVE_SIZE = R
 QUADRATIC_CONTROLPOINT_COLOR = greenColor
 QUADRATIC_CONTROLPOINT_SIZE = R
-CUBIC_CONTROLPOINT_COLOR = blackColor
+CUBIC_CONTROLPOINT_COLOR = blueColor
 CUBIC_CONTROLPOINT_SIZE = R / 2
 
-class Point:
-    # FIX: See more generic implentation in PageBotPath
-    def __init__(self, x, y, onCurve=True, smooth=False, start=False):
-        self.x = x
-        self.y = y
-        self.onCurve = onCurve
-        self.smooth = smooth
-        self.start = start
-
 def drawSegment(path, segment, implied, cps, verbose=False):
-    """
-    Draws a quadratic segment as a cubic Bézier curve in drawBot. Each segment
-    starts and ends with an oncurve point with 0 ... n offcurve control points.
+    """Draws a quadratic segment as a cubic Bézier curve in drawBot. Each
+    segment starts and ends with an oncurve point with 0 ... n offcurve control
+    points.
 
     NOTE: PageBot implementation in glyph adds the first oncurve
     as a separate `cp` parameter.
 
-    >>> p0 = Point(100, 100, True)
-    >>> p1 = Point(200, 100, False)
-    >>> p2 = Point(200, 200, True)
+    >>> p0 = Point(100, 100, onCurve=True)
+    >>> p1 = Point(200, 100, onCurve=False)
+    >>> p2 = Point(200, 200, onCurve=True)
     >>> segment = [p0, p1, p2]
     >>> path = BezierPath()
     >>> drawSegment(path, segment)
@@ -113,7 +107,7 @@ def drawSegment(path, segment, implied, cps, verbose=False):
         offCurve1 = segment[2]
         x = offCurve0.x + (offCurve1.x - offCurve0.x) * 0.5
         y = offCurve0.y + (offCurve1.y - offCurve0.y) * 0.5
-        newOnCurve = Point(x, y, True)
+        newOnCurve = Point(x, y, onCurve=True)
 
         # Store these so they can be used in the infographic.
         implied.append(newOnCurve)
@@ -156,10 +150,15 @@ def draw(context):
     glyphName = 'Q'
     x = 50
     context.newPage(W, H)
-    DBFont('LucidaGrande', 24)
     PATH = getFontPaths()['Roboto-Black']
     font = Font(PATH)
     print(font)
+
+    st = dict(font=font, fontSize=40, textFill=(1, 0, 0))
+    # FIXME: seem to yield wrong value in DrawBot Context,
+    # FIXME: float value errors in Flat now.
+    #, leading=1.4)
+
     glyph = font[glyphName]
     print(glyph)
     path = BezierPath()
@@ -168,7 +167,7 @@ def draw(context):
     coordinates = glyph.ttGlyph.coordinates
     context.fill((0, 1, 1, 0.2))
     # Move glyph up so we can see results below descender level.
-    #translate(X0, Y0)
+    context.translate(X0, Y0)
 
     # Draws the glyph.
     c = glyph.contours
@@ -178,12 +177,11 @@ def draw(context):
     context.stroke(None)
     context.fill(0)
 
-    '''
     # Converts coordinates to PageBot Points and assigns points
     # to contours.
     for i, (x, y) in enumerate(coordinates):
         start = i - 1 in glyph.endPtsOfContours
-        p = Point(x, y, glyph.flags[i])
+        p = Point(x, y, onCurve=glyph.flags[i])
 
         if i == 0:
             contour = [p]
@@ -201,7 +199,8 @@ def draw(context):
         d = 15
         x += d
         y += d
-        context.text('%d' % i, (x, y))
+        t = context.newString('%d' % i, style=st)
+        context.text(t, (x, y))
 
     segments = []
     implied = []
@@ -271,16 +270,37 @@ def draw(context):
     context.fill(0)
     x += 30
     y = -100
-    context.text('On-curve point', (x, y))
+    t = context.newString('On-curve point', style=st)
+    context.text(t, (x, y))
     y -= 30
-    context.text('Implied on-curve point', (x, y))
+    t = context.newString('Implied on-curve point', style=st)
+    context.text(t, (x, y))
     y -= 30
-    context.text('Cubic control point', (x, y))
+    t = context.newString('Cubic control point', style=st)
+    context.text(t, (x, y))
     y -= 30
-    context.text('Quadratic control point', (x, y))
+    t = context.newString('Quadratic control point', style=st)
+    context.text(t, (x, y))
+
+    try:
+        path = '_export/DrawQuadGlyph%s.pdf' % context.name
+        context.saveImage(path)
+    except:
+        print(traceback.format_exc())
+
     '''
-    path = '_export/DrawQuadGlyph%s.pdf' % context.name
-    context.saveImage(path)
+    try:
+        path = '_export/DrawQuadGlyph%s.png' % context.name
+        context.saveImage(path)
+    except:
+        print(traceback.format_exc())
+
+    try:
+        path = '_export/DrawQuadGlyph%s.svg' % context.name
+        context.saveImage(path)
+    except:
+        print(traceback.format_exc())
+    '''
 
 contexts = getContexts(['DrawBot', 'Flat'])
 for context in contexts:

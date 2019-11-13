@@ -18,7 +18,7 @@ from pagebot.elements.paths.pagebotpath import PageBotPath
 from pagebot import getResourcesPath
 from pagebot.toolbox.units import p
 from pagebot.toolbox.color import color
-from pagebot.contexts import getContext
+from pagebot import getContext
 
 # Get the context (e.g. DrawBot) to call for conversion method
 context = getContext()

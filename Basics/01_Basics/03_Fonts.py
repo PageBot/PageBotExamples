@@ -53,7 +53,12 @@ def showAll():
     print(fam)
     fam = getFamily('Bungee')
     print(fam)
+
+    fam = getFamily('BungeeOutline')
+    print(fam)
+
     fam = getFamily('Roboto')
+
     #verboseFam(fam)
     fam = getFamily('RobotoCondensed')
     verboseFam(fam)

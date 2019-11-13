@@ -1,6 +1,5 @@
 from pagebot import getRootPath
 from pagebot import getContext
-from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.fonttoolbox.variablefontbuilder import getVarFontInstance
 from pagebot.constants import CENTER
 from pagebot.toolbox.units import pt

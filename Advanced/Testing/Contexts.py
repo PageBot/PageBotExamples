@@ -18,16 +18,16 @@ from random import random
 from pagebot import getAllContexts, getResourcesPath
 from pagebot.toolbox.color import Color
 from pagebot.constants import A4Rounded
-from pagebot.strings.babelstring import BabelString
+from pagebot.contexts.base.babelstring import BabelString
 from pagebot import getContext
 from pagebot.toolbox.units import pt
 from pagebot.document import Document
-
+from pagebot.fonttoolbox.objects.font import findFont
 H, W = A4Rounded
 W = pt(W)
 H = pt(H)
 
-f = Color(0, 1, 0)
+f = Color(0, 0, 0)
 s = Color(1, 0, 0)
 
 def testContexts():
@@ -37,20 +37,12 @@ def testContexts():
     for i, c in enumerate(contexts):
         if i in (0, 1):
             #print(c)
-            testContext(c)
+            try:
+                testContext(c)
+            except Exception as e:
+                    print('Context errors', traceback.format_exc())
 
-def getRandom():
-    x = (W - 100) * random()
-    y = (H - 100) * random()
-    return x, y
-
-def testContext(context):
-    print('Context', context)
-
-    doc = Document(w=W, h=H, context=context, autoPages=1)
-
-
-    '''
+def printAttributes(doc, context):
     print('# Context attributes')
 
     for key, value in context.__dict__.items():
@@ -59,80 +51,83 @@ def testContext(context):
     print('# Document attributes')
     for key, value in doc.__dict__.items():
         print(' * %s: %s' % (key, value))
-    '''
 
 
-    try:
-        sq = 100
-        context.frameDuration(1)
-        context.newDrawing()
-        context.newPage(w=W, h=H)
-        context.fill(f)
-        context.stroke(s)
-        x = 0
-        y = sq
-        context.rect(x, y, pt(sq), pt(sq))
-        y += sq
+def testContext(context):
+    # TODO:
+    # - test elements
+    # - test shadow, gradient,
+    # ...
 
-        context.oval(x, y, pt(sq), 0.5*pt(sq))
-        y += sq
+    sq = 100
+    x = 0
+    y = 0 
+    print('Context', context)
+    doc = Document(w=W, h=H, context=context, autoPages=1)
+    context.frameDuration(1)
+    context.newDrawing()
+    context.newPage(w=W, h=H)
 
-        #context.circle(x, y, pt(sq))
-        y += sq
-        '''
+    context.text('default size string without style', pt(x, y))
+    y += sq
 
-        bla = context.newString('BabelString No Style')
-        print('String is BabelString', isinstance(bla, BabelString))
-        context.text(bla, pt(x, y))
-        y += sq
-        context.text('plain string', pt(x, y))
-        y += sq
+    context.fontSize(sq)
+    context.text('%spt size string without style' % sq, pt(x, y))
+    y += sq
 
-        style = {'font': 'Helvetica', 'textFill': f}
-        bla = context.newString('Babel String with Style', style=style)
-        context.text('bla2', pt(x, y))
-        y += sq
+    bs = context.newString('BabelString No Style')
 
-        context.text(bla, pt(x, y))
-        x = sq
-        y = sq
+    print(bs.style)
+    #print(bs.style.get('font'))
+    #print(bs.style.get('fontSize'))
+    #print(bs.style.get('fallbackFont'))
+    context.strokeWidth(1)
 
-        path = getResourcesPath() + "/images/cookbot1.jpg"
-        context.image(path, p=pt(0, 0), w=pt(100), h=pt(100))
+    w0, h0 = context.textSize(bs)
+    context.text(bs, pt(x, y))
+    print('String size is %dx%d' % (w0, h0))
+    y += sq
 
-        '''
+    fontName = 'Roboto-Black'
+    font = findFont(fontName)
+    style = {'font': font.path, 'textFill': f}
+    bs = context.newString('Babel String with Style', style=style)
 
-        # TODO:
-        # - test Bézier path
-        # - test glyph path
-        # - test elements
-        # ...
-        path = '_export/%s.pdf' % context.name
-        context.saveImage(path)
-        print('Saved context to %s' % path)
-    except Exception as e:
-    	    print('Context errors', traceback.format_exc())
+    print(bs.style)
+    #print(bs.style.get('font'))
+    #print(bs.style.get('fallbackFont'))
+    context.text(bs, pt(x, y))
+    w0, h0 = context.textSize(bs)
+    print('String size is %dx%d' % (w0, h0))
 
-def showContexts():
-	context = getContext() # Creates a DrawBot context on Mac, Flat on others
-	print('Context is', context)
+    x = 2 * sq
+    y = 0 
 
-	context = getContext() # Still DrawBot, takes the buffered DEFAULT_CONTEXT.
-	print('DrawBot context?', context)
+    path = getResourcesPath() + "/images/cookbot1.jpg"
+    # Sloooow.
+    #context.image(path, p=pt(x, y), w=pt(100), h=pt(100))
 
-	context = getContext(contextType='Flat') # Force Flat.
-	print('Flat context?', context)
+    y += sq
 
-	context = getContext(contextType='Flat') # Buffered in DEFAULT_CONTEXT this time.
-	print('Flat context?', context)
-	#context = getContext(contextType='HTML')
-	#print('HTML context?', context)
-	#context = getContext(contextType='InDesign')
-	#print('InDesign context?', context)
-	#context = getContext(contextType='IDML')
-	#print('IDML context?', context)
-	#context = getContext(contextType='SVG')
-	#print(context)
+    context.fill(f)
+    context.stroke(s)
+    context.rect(x, y, pt(sq), pt(sq))
+    y += sq
 
-#showContexts()
+    context.circle(x+0.5*sq, y+0.5*sq, 0.5*pt(sq))
+    y += sq
+
+    context.oval(x, y, pt(sq), 0.5*pt(sq))
+    y += sq
+
+    glyphName = 'Q'
+    glyph = font[glyphName]
+    context.translate(2*sq, sq)
+    context.scale(0.1)
+    context.drawGlyphPath(glyph)
+
+    path = '_export/%s-%s.pdf' % ('Contexts', context.name)
+    context.saveImage(path)
+    print('Saved %s' % path)
+
 testContexts()

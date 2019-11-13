@@ -36,7 +36,8 @@ view.showPadding = True
 view.showDimensions = True
 view.showOrigin = True
 
-page = doc[1] # Get the single page from te document.
+# Gets the first page from te document.
+page = doc[1] 
 page.name = 'First page'
 page.padding = 20
 
@@ -45,16 +46,13 @@ conditions = (Center2Center(), Middle2Middle())
 #conditions= (Left2Left(), Top2SideTop())
 #conditions= (Right2Right(), Top2SideTop())
 
-# Position square in the center of the page area.
-# Notice that their alignment (left) does not matter for the conditions.
-# Measures can be any type of units.
-# Their type is show in the measured output.
+# Position square in the center of the page area. Notice that their alignment
+# (left) does not matter for the conditions. Measures can be any type of
+# units. Their type is show in the measured output.
+
 newTextBox(page.name, w=mm(86), h=pt(164), parent=page, pl=3, pt=3,
     showDimensions=True,
     conditions=conditions, fill=color(0.8))
 
 page.solve()
-
-
 doc.export(EXPORT_PATH)
-

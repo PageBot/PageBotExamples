@@ -24,7 +24,7 @@ from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.conditions import *
 from pagebot.fonttoolbox.objects.font import findFont
-#from pagebot.strings.babelstring import BabelString
+#from pagebot.contexts.base.babelstring import BabelString
 #from pagebotcocoa.contexts.drawbot.drawbotstring import DrawBotString
 #from pagebot.contexts.flat.flatstring import FlatString
 from pagebot.toolbox.units import pt

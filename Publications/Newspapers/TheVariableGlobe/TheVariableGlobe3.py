@@ -16,7 +16,7 @@
 #
 from copy import copy
 
-from pagebot.contexts import getContext
+from pagebot import getContext
 # Blob random text for contenxt.
 from pagebot.contributions.filibuster.blurb import Blurb
 # Import the generic Document class. There is also specialized Publication classes 

@@ -30,7 +30,7 @@ from random import choice, random
 # Getting the current context, which is DrawBotContext if running this script
 # from within DrawBot. But it can also run inside a webserver, where it
 # likely will be a FlatContext
-from pagebot.contexts import getContext
+from pagebot import getContext
 # Blob random text for content in case no name records are given
 from pagebot.contributions.filibuster.blurb import Blurb
 # Import the generic Publication class, that ours will inherit from.
