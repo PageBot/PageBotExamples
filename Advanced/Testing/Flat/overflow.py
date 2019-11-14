@@ -25,19 +25,14 @@ bungeeOutline = font.open(f.path)
 f = findFont('PageBot-Book')
 pageBotBook = font.open(f.path)
 
-# Images.
-cotg3src = '../../../docs/stylewars/dondi-white-children-of-the-grave-pt3-martha-cooper.png'
-cotg3image = image.open(cotg3src)
-cotg2src = '../../../docs/stylewars/dondi-white-children-of-the-grave-pt2.jpg'
-cotg2image = image.open(cotg2src)
 
 line = 12
 blurb = Blurb()
 
 h1Outline = strike(bungeeOutline).color(red).size(20, 24)
-h1 = strike(bungee).color(white).size(20, 24)
-intro = strike(bungee).color(white).size(10, 12)
-body = strike(pageBotBook).color(white).size(16, 18)
+h1 = strike(bungee).color(black).size(20, 24)
+intro = strike(bungee).color(black).size(10, 12)
+body = strike(pageBotBook).color(black).size(16, 18)
 
 title = blurb.getBlurb('stylewars_original')
 txt = blurb.getBlurb('stylewars_documentary')
@@ -50,15 +45,12 @@ whiteFill = shape().nostroke().fill(white)
 d = document(w, h, 'pt')
 d.meta(documentName)
 p = d.addpage()
-p.place(redStroke.circle(50, 50, 20))
 padding = 10
 w0 = w - 2 * padding
 h0 = h - 2 * padding
 x = padding
 y = padding
 
-p.place(cotg3image)
-p.place(blackFill.rectangle(padding, padding, w0, 24))
 p.place(h1.text(title)).frame(padding, padding, w0, 24)
 p.place(h1Outline.text(title)).frame(padding, padding, w0, 24)
 y += 24
@@ -71,9 +63,7 @@ print(strikeWidth / w0)
 placedText = p.place(t0).frame(x, y, w0, h0 - y)
 
 of = placedText.overflow()
-print(of)
 lines = len(placedText.lines())
-print(lines)
 textHeight = (lines+1) * 12
 y += textHeight
 
@@ -93,11 +83,10 @@ if placedText.overflow():
         elif s[0]=='+':
             print(u'Add "{}" to position {}'.format(s[-1],i))
 
-    #print(unusedText)
+    print(unusedText)
     p1 = d.addpage()
     x = padding
     y = padding
-    p1.place(cotg2image)
     placedText = p1.place(body.text(unusedText)).frame(x, y, w0, h0 - y)
 
 # Export.
