@@ -55,11 +55,9 @@ p.place(h1.text(title)).frame(padding, padding, w0, 24)
 p.place(h1Outline.text(title)).frame(padding, padding, w0, 24)
 y += 24
 
-#p.place(blackStroke.rectangle(x, y, w0, h0))
-#p.place(whiteFill.rectangle(x, y, w0, h0))
+# Intro text, which should fit.
 t0 = intro.text(txt)
 strikeWidth = intro.width(txt)
-print(strikeWidth / w0)
 placedText = p.place(t0).frame(x, y, w0, h0 - y)
 
 of = placedText.overflow()
@@ -67,11 +65,15 @@ lines = len(placedText.lines())
 textHeight = (lines+1) * 12
 y += textHeight
 
+# Body text, which should be overflowing.
 t2 = blurb.getBlurb('stylewars_bluray')
 placedText = p.place(body.text(t2)).frame(x, y, w0, h0 - y)
+print((x, y, w0, h0 -y))
 import difflib
 
 if placedText.overflow():
+
+    # First gets the overflowing text.
     usedText = ''.join(placedText.lines())
     unusedText = ''
 
@@ -84,6 +86,8 @@ if placedText.overflow():
             print(u'Add "{}" to position {}'.format(s[-1],i))
 
     print(unusedText)
+
+    # Puts the overflowing text on a new page.
     p1 = d.addpage()
     x = padding
     y = padding
