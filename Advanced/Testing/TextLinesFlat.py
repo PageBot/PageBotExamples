@@ -13,11 +13,6 @@
 #     TextLines.py
 #
 
-from CoreText import (CTFramesetterCreateWithAttributedString,
-        CTFramesetterCreateFrame, CTFrameGetLines, CTFrameGetLineOrigins,
-        CTLineGetGlyphRuns, CTRunGetAttributes)
-from Quartz import CGPathAddRect, CGPathCreateMutable, CGRectMake
-
 from pagebot import getContext
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.toolbox.units import pt
@@ -33,7 +28,7 @@ wbox = 300
 hbox = 400
 
 blurb = Blurb()
-context = getContext('DrawBot')
+context = getContext('Flat')
 context.newDrawing()
 context.newPage(W, H)
 b = blurb.getBlurb('stylewars_documentary')[:200]
@@ -41,22 +36,14 @@ font = findFont('Bungee-Regular')
 style = dict(font=font, fontSize=pt(18), textFill=color(0.5, 1, 0))
 bs = context.newString(b, style=style)
 lines = bs.getTextLines(w=wbox, h=hbox)
-attrString = bs.s.getNSObject()
-setter = CTFramesetterCreateWithAttributedString(attrString)
-path = CGPathCreateMutable()
-CGPathAddRect(path, None, CGRectMake(0, 0, wbox, hbox))
-ctBox = CTFramesetterCreateFrame(setter, (0, 0), path, None)
-ctLines = CTFrameGetLines(ctBox)
-origins = CTFrameGetLineOrigins(ctBox, (0, len(ctLines)), None)
-context.fill(None)
-context.stroke(f)
-context.rect(PADDING, H, wbox, -hbox)
-context.fill(f)
 
-for p in origins:
-    context.circle(PADDING + p.x + 2, (p.y + 2), 4)
-    print(p.y)
+print(lines)
+#context.fill(None)
+#context.stroke(f)
+#context.rect(PADDING, H, wbox, -hbox)
+#context.fill(f)
 
+'''
 y = H - LINE
 
 for line in lines:
@@ -70,13 +57,14 @@ for line in lines:
         context.line(p0, p1)
 
     y -= LINE
+'''
 
 context.fill(None)
 context.stroke(f)
 context.textBox(bs, (W/2, H - hbox, wbox, hbox))
 context.rect(W/2, H - hbox, wbox, hbox)
-context.textBox(bs, (PADDING, 0, wbox, hbox))
-context.rect(PADDING, 0, wbox, hbox)
+#context.textBox(bs, (PADDING, 0, wbox, hbox))
+#context.rect(PADDING, 0, wbox, hbox)
 
 path = '_export/TextLines-%s.pdf' % context.name
 context.saveImage(path)
