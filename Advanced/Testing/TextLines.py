@@ -36,6 +36,12 @@ blurb = Blurb()
 context = getContext('DrawBot')
 context.newDrawing()
 context.newPage(W, H)
+x = 0
+y = 0
+context.text('(%s, %s)' % (x, y), (x, y))
+x = W / 2
+y = H - hbox
+context.text('(%s, %s)' % (x, y), (x, y))
 b = blurb.getBlurb('stylewars_documentary')[:200]
 font = findFont('Bungee-Regular')
 style = dict(font=font, fontSize=pt(18), textFill=color(0.5, 1, 0))
@@ -73,10 +79,13 @@ for line in lines:
 
 context.fill(None)
 context.stroke(f)
-context.textBox(bs, (W/2, H - hbox, wbox, hbox))
+x = W / 2
+y = H - hbox
+context.textBox(bs, (x, y, wbox, hbox))
 context.rect(W/2, H - hbox, wbox, hbox)
 context.textBox(bs, (PADDING, 0, wbox, hbox))
+context.fill(None)
+context.stroke(f)
 context.rect(PADDING, 0, wbox, hbox)
-
 path = '_export/TextLines-%s.pdf' % context.name
 context.saveImage(path)

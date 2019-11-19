@@ -31,6 +31,10 @@ blurb = Blurb()
 context = getContext('Flat')
 context.newDrawing()
 context.newPage(W, H)
+x = 0
+y = 0
+context.text('(%s, %s)' % (x, y), (x, y))
+
 b = blurb.getBlurb('stylewars_documentary')[:200]
 font = findFont('Bungee-Regular')
 style = dict(font=font, fontSize=pt(18), textFill=color(0.5, 1, 0))
@@ -38,33 +42,17 @@ bs = context.newString(b, style=style)
 lines = bs.getTextLines(w=wbox, h=hbox)
 
 print(lines)
-#context.fill(None)
-#context.stroke(f)
-#context.rect(PADDING, H, wbox, -hbox)
-#context.fill(f)
-
-'''
-y = H - LINE
-
-for line in lines:
-    for run in line.textRuns:
-        #print(run.attrs)
-        s = context.newString(run.string, style=style)
-        context.text(s, (PADDING, y))
-        context.stroke(f)
-        p0 = (PADDING, y)
-        p1 = (PADDING + wbox, y)
-        context.line(p0, p1)
-
-    y -= LINE
-'''
 
 context.fill(None)
 context.stroke(f)
+x = W / 2
+y = H - hbox
+context.text('(%s, %s)' % (x, y), (x, y))
 context.textBox(bs, (W/2, H - hbox, wbox, hbox))
 context.rect(W/2, H - hbox, wbox, hbox)
+context.textBox(bs, (PADDING, H - hbox, wbox, hbox))
 #context.textBox(bs, (PADDING, 0, wbox, hbox))
-#context.rect(PADDING, 0, wbox, hbox)
+context.rect(PADDING, 0, wbox, hbox)
 
 path = '_export/TextLines-%s.pdf' % context.name
 context.saveImage(path)
