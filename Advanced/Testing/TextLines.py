@@ -13,6 +13,11 @@
 #     TextLines.py
 #
 
+from CoreText import (CTFramesetterCreateWithAttributedString,
+        CTFramesetterCreateFrame, CTFrameGetLines, CTFrameGetLineOrigins,
+        CTLineGetGlyphRuns, CTRunGetAttributes)
+from Quartz import CGPathAddRect, CGPathCreateMutable, CGRectMake
+
 from pagebot import getContext
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.toolbox.units import pt
@@ -21,9 +26,11 @@ from pagebot.fonttoolbox.objects.font import findFont
 
 H = 850
 W = 652
-LINE = 20
+LINE = 25.2
 PADDING = 6
 f = Color(1, 0, 0)
+wbox = 300
+hbox = 1200
 
 blurb = Blurb()
 context = getContext('DrawBot')
@@ -32,20 +39,31 @@ context.newPage(W, H)
 b = blurb.getBlurb('stylewars_documentary')
 font = findFont('Bungee-Regular')
 style = dict(font=font, fontSize=pt(18), textFill=color(0.5, 1, 0))
-s = context.newString(b, style=style)
-lines = s.getTextLines(w=300, h=1200)
-print(lines)
+bs = context.newString(b, style=style)
+lines = bs.getTextLines(w=wbox, h=hbox)
+attrString = bs.s.getNSObject()
+setter = CTFramesetterCreateWithAttributedString(attrString)
+path = CGPathCreateMutable()
+CGPathAddRect(path, None, CGRectMake(0, 0, wbox, hbox))
+ctBox = CTFramesetterCreateFrame(setter, (0, 0), path, None)
+ctLines = CTFrameGetLines(ctBox)
+origins = CTFrameGetLineOrigins(ctBox, (0, len(ctLines)), None)
+context.fill(f)
+
+for p in origins:
+    context.circle(PADDING + p.x + 2, H - (p.y + 2), 4)
 
 y = H - LINE
 
 for line in lines:
     for run in line.textRuns:
+        print(run.attrs)
         #print(run.string)
         s = context.newString(run.string, style=style)
         context.text(s, (PADDING, y))
         context.stroke(f)
         p0 = (PADDING, y)
-        p1 = (PADDING + 300, y)
+        p1 = (PADDING + wbox, y)
         context.line(p0, p1)
 
     y -= LINE
