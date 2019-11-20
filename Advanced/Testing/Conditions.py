@@ -52,8 +52,6 @@ def makeDocument():
     page = doc[1]
     page.padding = 1
     page.showPadding = True
-
-    
     conditions = [Right2Right(), Float2Top(), Float2Left()]
     #conditions = [Right2Right(), Float2Top()]
     #conditions = [Left2Left()]
