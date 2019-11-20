@@ -25,18 +25,21 @@ H = 300
 
 for contextName in ['DrawBot', 'Flat']:
     context = getContext(contextName)
-    doc = Document(w=W, h=H, context=context)
-    #page = doc[1]
+    doc = Document(w=W, h=H, context=context, originTop=True)
+    doc.name = 'Grid-%s'  % contextName
+    print(' * %s' % doc.name)
     doc.view.showGrid = True
     doc.view.showFrame = True
     doc.view.showPadding = True
     doc.view.showNameInfo = True
     doc.view.showOrigin = True
     doc.view.showDimensions = True
+    page = doc[1]
     #context.newDrawing()
     #context.newPage(W, H)
     #path = '_export/Grid-%s.pdf' % context.name
     #context.saveImage(path)
+    print(doc._originTop)
     doc.solve()
     doc.build()
 
