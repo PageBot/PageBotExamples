@@ -19,7 +19,7 @@
 from pagebot import getResourcesPath
 
 #import pagebot # Import to know the path of non-Python resources.
-from pagebot.contributions.filibuster.blurb import Blurb
+from pagebot.contributions.filibuster.blurb import blurb
 
 # Creation of the RootStyle (dictionary) with all available
 # default style parameters filled.
@@ -30,6 +30,8 @@ from pagebot.document import Document
 from pagebot.elements import newImage, newRect, newTextBox
 # Import all layout condition classes
 from pagebot.conditions import *
+from pagebot.toolbox.color import color, noColor, whiteColor, blackColor
+from pagebot.toolbox.units import pt
 
 from pagebot.toolbox.transformer import path2ScriptId
 from pagebot import getGlobals
@@ -78,10 +80,15 @@ def makeDocument():
 
     doc = Document(w=PageSize, h=PageSize, originTop=False, autoPages=1)
 
-    view = doc.getView()
-    view.padding = 10 # Don't show cropmarks and such.
-    view.showCropMarks = True
-    view.showOrigin = ShowOrigin
+    view = doc.view
+    view.padding = pt(40) # Show cropmarks and such.
+    view.showCropMarks = True # Add crop marks
+    view.showRegistrationMarks = True # Add registration marks
+    view.showNameInfo = True # Add file name
+    view.showMargin = True
+    view.showFrame = True
+    #view.showOrigin = True
+    #view.showColorBars = True # Gives error
     view.showDimensions = False
     view.showElementInfo = ShowElementInfo
 
