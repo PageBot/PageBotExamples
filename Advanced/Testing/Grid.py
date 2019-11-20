@@ -37,24 +37,25 @@ for i in range(1, int(H / SQ) + 1):
 
 for contextName in ['DrawBot', 'Flat']:
     context = getContext(contextName)
-    doc = Document(w=W, h=H, padding=30, context=context, originTop=True)
+    doc = Document(w=W, h=H, padding=30, context=context, originTop=False)
     doc.name = 'Grid-%s'  % contextName
     page = doc[1]
-    page.pl = 0
-    page.pr = 0
-    page.pb = 0
-    page.pt = 0
+    page.padding = (SQ, SQ, SQ, SQ)
+    #page.pl = 0
+    #page.pr = 0
+    #page.pb = 0
+    #page.pt = 0
     doc.gridX = GRIDX
     doc.gridY = GRIDY
     print(' * %s' % doc.name)
     doc.view.showGrid = True
+    doc.view.showOrigin = True
+    doc.view.showDimensions = True
+    doc.view.showNameInfo = True
     #doc.view.showColorBars = True
     #doc.view.showFrame = True
     #doc.view.showPadding = True
     #doc.view.showMargin = True
-    #doc.view.showNameInfo = True
-    #doc.view.showOrigin = True
-    #doc.view.showDimensions = True
     #doc.view.showRegistrationMarks = True
     #style = getRootStyle()
     #print(doc.view.padding)
