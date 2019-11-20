@@ -21,40 +21,37 @@ from pagebot.toolbox.color import color, Color
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.style import getRootStyle
 
-W = 300
-H = 300
+W = pt(300)
+H = pt(300)
 
 GRIDX = []
-for i in range(1, 31):
+GRIDY = []
+
+for i in range(1, 24):
     GRIDX.append((pt(10)))
 
-print(GRIDX)
+for i in range(1, 24):
+    GRIDY.append((pt(10)))
 
 for contextName in ['DrawBot', 'Flat']:
     context = getContext(contextName)
     doc = Document(w=W, h=H, context=context, originTop=True)
     doc.name = 'Grid-%s'  % contextName
-    #doc.gridX = (pt(10), pt(20))
     doc.gridX = GRIDX
-    #doc.gridY = ((pt(10), pt(20))
+    doc.gridY = GRIDY
     print(' * %s' % doc.name)
     doc.view.showGrid = True
     #doc.view.showFrame = True
     doc.view.showPadding = True
-    doc.view.showMargin = True
+    #doc.view.showMargin = True
     doc.view.showNameInfo = True
     doc.view.showOrigin = True
     doc.view.showDimensions = True
     doc.view.showRegistrationMarks = True
-    style = getRootStyle()
-    page = doc[1]
-    print(doc.view.padding)
-    print(doc.view.margin)
-    #context.newDrawing()
-    #context.newPage(W, H)
-    #path = '_export/Grid-%s.pdf' % context.name
-    #context.saveImage(path)
-    #print(doc._originTop)
+    #style = getRootStyle()
+    #page = doc[1]
+    #print(doc.view.padding)
+    #print(doc.view.margin)
     doc.solve()
     doc.build()
 
