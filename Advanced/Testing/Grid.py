@@ -41,10 +41,6 @@ for contextName in ['DrawBot', 'Flat']:
     doc.name = 'Grid-%s'  % contextName
     page = doc[1]
     page.padding = (SQ, SQ, SQ, SQ)
-    #page.pl = 0
-    #page.pr = 0
-    #page.pb = 0
-    #page.pt = 0
     doc.gridX = GRIDX
     doc.gridY = GRIDY
     print(' * %s' % doc.name)

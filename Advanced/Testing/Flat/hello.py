@@ -28,7 +28,7 @@ for i in range(5):
     txts.append(blurb.getBlurb(t, noTags=True))
 
 txt = '. '.join(txts)
-print(txt)
+#print(txt)
 headline = strike(bungeeFlat).color(red).size(20, 24)
 body = strike(bungeeFlat).color(black).size(10, 12)
 
@@ -43,6 +43,7 @@ p.place(redStroke.circle(50, 50, 20))
 p.place(blackFill.rectangle(200, 200, 20, 40))
 
 p.place(headline.text('Hello world!')).frame(10, 10, 80, 80)
+print(headline.width('Hello world!'))
 
 w = 200
 h = 100
