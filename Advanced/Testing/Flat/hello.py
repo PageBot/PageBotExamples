@@ -42,8 +42,9 @@ p = d.addpage()
 p.place(redStroke.circle(50, 50, 20))
 p.place(blackFill.rectangle(200, 200, 20, 40))
 
-p.place(headline.text('Hello world!')).frame(10, 10, 80, 80)
-print(headline.width('Hello world!'))
+p.place(headline.text('Hello world!'))#.frame(10, 10, 170, 80)
+w = headline.width('Hello world!')
+p.place(redStroke.line(0, 24, 0+w, 24))
 
 w = 200
 h = 100
