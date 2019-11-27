@@ -48,7 +48,7 @@ for contextName in ['DrawBot', 'Flat']:
     doc.view.showOrigin = True
     doc.view.showDimensions = True
     doc.view.showNameInfo = True
-    #doc.view.showColorBars = True
+    doc.view.showColorBars = True
     #doc.view.showFrame = True
     #doc.view.showPadding = True
     #doc.view.showMargin = True
@@ -57,7 +57,6 @@ for contextName in ['DrawBot', 'Flat']:
     #print(doc.view.padding)
     #print(doc.view.margin)
     #print(page.view.padding)
-    print(doc.view.padding)
     doc.solve()
     doc.build()
 

@@ -45,6 +45,7 @@ p.place(blackFill.rectangle(200, 200, 20, 40))
 p.place(headline.text('Hello world!'))#.frame(10, 10, 170, 80)
 w = headline.width('Hello world!')
 p.place(redStroke.line(0, 24, 0+w, 24))
+print(w)
 
 w = 200
 h = 100
