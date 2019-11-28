@@ -28,9 +28,7 @@ from pagebot.style import getRootStyle
 H, W = A3
 W = pt(W)
 H = pt(H)
-M = 00 
-
-bungeeSize = 48
+M = 50 
 
 roboto = findFont('Roboto-Regular')
 robotoBold = findFont('Roboto-Bold')
@@ -40,13 +38,9 @@ bungeeOutline = findFont('Bungee-OutlineRegular')
 blurb = Blurb()
 txt = blurb.getBlurb('news_headline', noTags=True)
 
-def test():
-    doc = Document(w=W, h=H)
-    page = doc[1]
-    print('# Testing text boxes in %s' % doc)
-
+def getBabelString(page):
     # Create a new BabelString with the DrawBot FormattedString inside.
-    style=dict(font=bungee, fontSize=40, textFill=(1, 0, 0))
+    style=dict(font=bungee, fontSize=36, textFill=(1, 0, 0))
     bs = page.newString('This is a string', style=style)
 
     # Adding or appending strings are added to the internal formatted string.
@@ -62,21 +56,47 @@ def test():
     style['textFill'] = 0.5, 0, 1
     style['font'] = bungeeOutline
     bs += page.newString(' even more!', style=style)
-    tb = newTextBox(bs, x=M, y=M, w=W-2*M, h=2*M, parent=page, stroke=color(0.3, 0.2, 0.1, 0.5), style=dict(hyphenation=True, language='en', leading=200))
+    return bs
 
-    style = dict(font=bungee, fontSize=pt(bungeeSize))
+
+def test():
+    doc = Document(w=W, h=H)
+    print('# Testing text boxes in %s' % doc)
+
+    page = doc[1]
+    bs = getBabelString(page)
+
+    w = W-2*M
+    h = 2 * M
+    x = M
+    y = H - M - h
+
+    tb = newTextBox(bs, x=x, y=y, w=w, h=2*M, parent=page,
+            stroke=color(0.3, 0.2, 0.1, 0.5), style=dict(hyphenation=True,
+                language='en', leading=200))
+
+    style = dict(font=bungee, fontSize=pt(48), stroke=color(1, 0, 0))
     bs = page.newString(txt, style=style)
+    h = 300
+    y = H - 3*M - h
 
-    tb = newTextBox(bs, x=M, y=H-5*M, w=W/2, h=300, parent=page, stroke=color(0.3, 0.2, 0.1, 0.5), style=dict(hyphenation=True, language='en', leading=200))
+    #stroke=color(0.3, 0.2, 0.1, 0.5),
+    tb = newTextBox(bs, x=M, y=y, w=W/2, h=h, parent=page, style=dict(hyphenation=True, language='en',
+            leading=200))
+
+    w, h = tb.getTextSize()
+    print('Size: %s, %s' % (w, h))
+
+    newRect(x=M, y=M, w=100, h=100, parent=page, stoke=color(1, 0, 0), strokeWidth=5)
 
     for baseline in tb.baselines:
-        s = dict(stroke=color(1, 0, 0))
-        newLine(x=M, y=H-5*M-baseline, w=W/2, h=0, style=s, stroke=color(0.5), strokeWidth=0.5, parent=page)
+        y = H - 3*M - baseline
+        newLine(x=x, y=y, w=W/2, h=0, stroke=color(0.5), strokeWidth=0.5,
+                parent=page)
+
 
     #doc.view.drawBaselines()
     #doc.export('_export/Strings.pdf')
-    print(doc.pages)
-    print(len(doc))
     doc.build()
 
 test()
