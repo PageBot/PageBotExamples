@@ -22,9 +22,12 @@ context = getContext()
 context.newDrawing()
 context.newPage()
 e = Element(w=500, h=500, context=context)
+print(' * Testing in %s' % context.name)
 print(e)
 print(e.childClipPath)
 e1 = Element(parent=e, x=0, y=0, w=50, h=80)
+
+# Flat not getting correct results due to missing boolean operators.
 print(len(e.childClipPath)) # 7
 print(len(e1.childClipPath)) # 7
 print(e.childClipPath.points)
