@@ -87,7 +87,10 @@ def test():
 
     w, h = tb.getTextSize()
     print('Size: %s, %s' % (w, h))
-    newRect(x=x, y=y, w=w, h=h, parent=page, stroke=color(1, 0, 0), strokeWidth=1)
+    rect = newRect(x=x, y=y, w=w, h=h, parent=page, stroke=color(1, 0, 0), strokeWidth=1)
+    print(rect)
+    print(isinstance(rect, Element))
+    print(rect.style)
 
     for baseline in tb.baselines:
         y = H - 3*M - baseline

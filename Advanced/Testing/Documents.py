@@ -13,26 +13,21 @@
 #     Documents.py
 #
 #     Pagebot documents tests. Should become unit tests when finished.
+from random import random
+import traceback
 
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
-from pagebot.contexts.flat.flatcontext import FlatContext
-from indesigncontext.context import InDesignContext
-#from pagebot.contexts.htmlcontext import HtmlContext
-#from pagebot.contexts.svgcontext import SvgContext
-#from pagebot.contexts.idmlcontext import IdmlContext
+from pagebot import getContext
 from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.conditions import *
 from pagebot.fonttoolbox.objects.font import findFont
-#from pagebot.contexts.base.babelstring import BabelString
-#from pagebotcocoa.contexts.drawbot.drawbotstring import DrawBotString
-#from pagebot.contexts.flat.flatstring import FlatString
 from pagebot.toolbox.units import pt
 from pagebot.toolbox.color import noColor, color
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.constants import *
-from random import random
-import traceback
+#from pagebot.contexts.base.babelstring import BabelString
+#from pagebotcocoa.contexts.drawbot.drawbotstring import DrawBotString
+#from pagebot.contexts.flat.flatstring import FlatString
 
 W, H = A5
 H = pt(H)
@@ -47,15 +42,6 @@ bungee = findFont('BungeeHairline-Regular')
 
 blurb = Blurb()
 txt = blurb.getBlurb('news_headline', noTags=True)
-
-testContexts = (
-    (FlatContext(), '_export/testFlatString.pdf'),
-    (DrawBotContext(), '_export/testDrawBotString.pdf'),
-    (InDesignContext(), './_export/testInDesignString.pdf'),
-    #(HtmlContext(), '_export/testHtmlString.pdf'),
-    #(InDesignContext(), '_export/testInDesignString.pdf'),
-    #(IdmlContext(), '_export/testIdmlString.pdf')
-)
 
 def testDocument(context):
     doc = Document(w=W, h=H, context=context)
@@ -156,37 +142,41 @@ def export(context):
 
 def test():
     objs = {}
+    testContexts = {}
 
-    for context, path in testContexts:
-        print('* %s' % context.name)
-        objs[context.name] = {}
+    for contextName in ('DrawBot', 'Flat'):
+        testContexts[contextName] = getContext(contextName)
+
+    for contextName, context in testContexts.items():
+        print('* %s' % contextName)
+        objs[contextName] = {}
         print(' - Units: %s' % context.units)
 
         doc = testDocument(context)
-        objs[context.name]['doc'] = doc
+        objs[contextName]['doc'] = doc
 
-    for context, path in testContexts:
-        print(context.name)
-        doc = objs[context.name]['doc']
+    for contextName, context in testContexts.items():
+        doc = objs[contextName]['doc']
         testPages(doc)
 
-    for context, path in testContexts:
-        print(context.name)
-        doc = objs[context.name]['doc']
+    for contextName, context in testContexts.items():
+        print(contextName)
+        doc = objs[contextName]['doc']
 
         # TODO: maybe make this work?
         #page = doc.pages[-1]
         page = doc.pages[1][0]
         print(' - %s' % page)
         print(' - %s' % type(page))
+
         try:
             testElements(context, page)
         except:
             'Error running testElements for context %s' % context
             print(traceback.format_exc())
 
-    for context, path in testContexts:
-        doc = objs[context.name]['doc']
+    for contextName, context in testContexts.items():
+        doc = objs[contextName]['doc']
         try:
             build(doc)
             export(context)
