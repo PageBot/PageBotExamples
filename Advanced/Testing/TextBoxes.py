@@ -61,6 +61,7 @@ def getBabelString(page):
 
 def test():
     doc = Document(w=W, h=H)
+    doc.name = 'TextBoxes-%s' % doc.context.name
     print('# Testing text boxes in %s' % doc)
 
     page = doc[1]
@@ -86,14 +87,12 @@ def test():
 
     w, h = tb.getTextSize()
     print('Size: %s, %s' % (w, h))
-
-    newRect(x=M, y=M, w=100, h=100, parent=page, stoke=color(1, 0, 0), strokeWidth=5)
+    newRect(x=x, y=y, w=w, h=h, parent=page, stroke=color(1, 0, 0), strokeWidth=1)
 
     for baseline in tb.baselines:
         y = H - 3*M - baseline
         newLine(x=x, y=y, w=W/2, h=0, stroke=color(0.5), strokeWidth=0.5,
                 parent=page)
-
 
     #doc.view.drawBaselines()
     #doc.export('_export/Strings.pdf')
