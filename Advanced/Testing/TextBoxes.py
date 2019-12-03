@@ -14,6 +14,7 @@
 #
 #     Tests pagebot text boxes.
 
+from pagebot import getContext
 from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.fonttoolbox.objects.font import findFont
@@ -38,59 +39,58 @@ bungeeOutline = findFont('Bungee-OutlineRegular')
 blurb = Blurb()
 txt = blurb.getBlurb('news_headline', noTags=True)
 
-def getBabelString(page):
+def getString(page):
     # Create a new BabelString with the DrawBot FormattedString inside.
     style=dict(font=bungee, fontSize=36, textFill=(1, 0, 0))
-    bs = page.newString('This is a string', style=style)
+    s = page.newString('This is a string', style=style)
 
     # Adding or appending strings are added to the internal formatted string.
     # Adding plain strings should inherit the existing style.
-    bs += ' and more,'
+    s += ' and more,'
 
     # Reusing the same style with different text fill color.
     style['textFill'] = 0.1, 0.5, 0.9
     style['font'] = bungeeHairline
-    bs += page.newString(' more and', style=style)
+    s += page.newString(' more and', style=style)
 
     # Different color and weight.
     style['textFill'] = 0.5, 0, 1
     style['font'] = bungeeOutline
-    bs += page.newString(' even more!', style=style)
-    return bs
+    s += page.newString(' even more!', style=style)
+    return s
 
-
-def test():
-    doc = Document(w=W, h=H)
+def test(context):
+    doc = Document(w=W, h=H, context=context)
     doc.name = 'TextBoxes-%s' % doc.context.name
     print('# Testing text boxes in %s' % doc)
 
     page = doc[1]
-    bs = getBabelString(page)
+    s = getString(page)
 
     w = W-2*M
     h = 2 * M
     x = M
     y = H - M - h
 
-    tb = newTextBox(bs, x=x, y=y, w=w, h=2*M, parent=page,
+    tb = newTextBox(s, x=x, y=y, w=w, h=2*M, parent=page,
             stroke=color(0.3, 0.2, 0.1, 0.5), style=dict(hyphenation=True,
                 language='en', leading=200))
 
     style = dict(font=bungee, fontSize=pt(48), stroke=color(1, 0, 0))
-    bs = page.newString(txt, style=style)
+    s = page.newString(txt, style=style)
     h = 300
     y = H - 3*M - h
 
     #stroke=color(0.3, 0.2, 0.1, 0.5),
-    tb = newTextBox(bs, x=M, y=y, w=W/2, h=h, parent=page, style=dict(hyphenation=True, language='en',
-            leading=200))
+    tb = newTextBox(s, x=M, y=y, w=W/2, h=h, parent=page,
+            style=dict(hyphenation=True, language='en', leading=200))
 
     w, h = tb.getTextSize()
-    print('Size: %s, %s' % (w, h))
+    #print('Size: %s, %s' % (w, h))
     rect = newRect(x=x, y=y, w=w, h=h, parent=page, stroke=color(1, 0, 0), strokeWidth=1)
-    print(rect)
-    print(isinstance(rect, Element))
-    print(rect.style)
+    #print(rect)
+    #print(isinstance(rect, Element))
+    #print(rect.style)
 
     for baseline in tb.baselines:
         y = H - 3*M - baseline
@@ -101,4 +101,6 @@ def test():
     #doc.export('_export/Strings.pdf')
     doc.build()
 
-test()
+for contextName in ('DrawBot', 'Flat'):
+    context = getContext(contextName)
+    test(context)

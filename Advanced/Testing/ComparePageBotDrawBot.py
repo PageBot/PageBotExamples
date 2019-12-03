@@ -11,7 +11,7 @@
 #     Supporting DrawBot, www.drawbot.com
 # -----------------------------------------------------------------------------
 #
-#     DrawBot.py
+#     ComparePageBotDrawBot.py
 #
 
 import drawBot
