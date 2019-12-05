@@ -14,14 +14,17 @@
 #
 from pagebot import getContext
 
+W = 300
+H = 400
+
 def test(context):
-    context.newPage(200, 200)
+    context.newPage(W, H)
     context.rect(0, 0, 100, 100)
-    context.newPage(300, 300)
-    context.newDrawing()
-    context.newPage(400, 400)
+    context.saveDrawing('_export/NewDrawing1-%s.pdf' % context.name)
+    context.newDrawing(w=W, h=H)
+    context.newPage(W, H)
     context.rect(100, 100, 40, 50)
-    context.saveDrawing('_export/NewDrawing-%s.pdf' % context.name)
+    context.saveDrawing('_export/NewDrawing2-%s.pdf' % context.name)
 
 for contextName in ('DrawBot', 'Flat'):
 #for contextName in ('Flat',):

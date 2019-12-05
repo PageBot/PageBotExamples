@@ -102,8 +102,8 @@ def test(context):
     #doc.export('_export/Strings.pdf')
     doc.build()
 
-#for contextName in ('DrawBot', 'Flat'):
+for contextName in ('DrawBot', 'Flat'):
 #for contextName in ('DrawBot',):
-for contextName in ('Flat',):
+#for contextName in ('Flat',):
     context = getContext(contextName)
     test(context)
