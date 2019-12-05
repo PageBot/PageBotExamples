@@ -60,6 +60,7 @@ def getString(page):
     return s
 
 def test(context):
+    print("creating doc")
     doc = Document(w=W, h=H, context=context)
     doc.name = 'TextBoxes-%s' % doc.context.name
     print('# Testing text boxes in %s' % doc)
@@ -102,6 +103,7 @@ def test(context):
     doc.build()
 
 #for contextName in ('DrawBot', 'Flat'):
+#for contextName in ('DrawBot',):
 for contextName in ('Flat',):
     context = getContext(contextName)
     test(context)

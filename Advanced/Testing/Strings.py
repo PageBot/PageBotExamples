@@ -24,14 +24,9 @@ from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.constants import *
 from pagebot.style import getRootStyle
 
-from pagebot.contexts.flat.flatcontext import FlatContext
-from pagebot.contexts.flat.flatstring import FlatString
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
+from pagebot.contexts.flatcontext.flatstring import FlatString
 from pagebotcocoa.contexts.drawbot.drawbotstring import DrawBotString
-#from pagebot.contexts.indesigncontext import InDesignContext
-#from pagebot.contexts.htmlcontext import HtmlContext
-#from pagebot.contexts.svgcontext import SvgContext
-#from pagebot.contexts.idmlcontext import IdmlContext
 
 # TODO: move to basics when finished.
 
@@ -50,12 +45,8 @@ blurb = Blurb()
 txt = blurb.getBlurb('news_headline', noTags=True)
 
 testContexts = (
-    (DrawBotContext(), '_export/testDrawBotString.pdf'),
-    (FlatContext(), '_export/testFlatString.pdf'),
-    #(InDesignContext(), '_export/testInDesignString.pdf'),
-    #(HtmlContext(), '_export/testHtmlString.pdf'),
-    #(InDesignContext(), '_export/testInDesignString.pdf'),
-    #(IdmlContext(), '_export/testIdmlString.pdf')
+    (getContext('DrawBot'), '_export/testDrawBotString.pdf'),
+    (getContext('Flat'), '_export/testFlatString.pdf'),
 )
 
 def drawLines(page):

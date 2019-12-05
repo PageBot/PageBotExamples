@@ -37,10 +37,16 @@ blackFill = shape().nostroke().fill(black)
 blackStroke = shape().stroke(black).width(0.2)
 
 d = document(w, h, 'pt')
+print(id(d))
 d.meta('hello')
 p = d.addpage()
 p.place(redStroke.circle(50, 50, 20))
 p.place(blackFill.rectangle(200, 200, 20, 40))
+
+d = document(w, h, 'pt')
+print(id(d))
+print(d.pages)
+p = d.addpage()
 
 p.place(headline.text('Hello world!'))#.frame(10, 10, 170, 80)
 w = headline.width('Hello world!')
