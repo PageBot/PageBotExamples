@@ -34,8 +34,7 @@ with open(pdfPath, "rb") as binary_file:
     newFile.write(data)
 
     # Shows byte values for first 100 blocks.
-    context.newDocument(1100, 1100)
-    context.newPage(1100, 1100)
+    context.newDrawing(1100, 1100)
     
     print(len(data))
     x = 100
@@ -49,4 +48,4 @@ with open(pdfPath, "rb") as binary_file:
             x = 100
             y -= 100
 
-    context.saveDocument("_export/bytes.pdf")
+    context.saveDrawing("_export/bytes.pdf")

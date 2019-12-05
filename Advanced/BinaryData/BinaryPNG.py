@@ -35,8 +35,7 @@ with open(imagePath, "rb") as binary_file:
     newFile = open("_export/test.png", "wb")
     newFile.write(data)
 
-    context.newDocument(1100, 1100)
-    context.newPage(1100, 1100)
+    context.newDrawing(1100, 1100)
     
     print(len(data))
     x = 100

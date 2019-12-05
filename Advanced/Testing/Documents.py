@@ -138,7 +138,7 @@ def build(doc):
     doc.build() # Export?
 
 def export(context):
-    context.saveDocument('_export/Test-Documents-%s.pdf' % context.name)
+    context.saveDrawing('_export/Test-Documents-%s.pdf' % context.name)
 
 def test():
     objs = {}

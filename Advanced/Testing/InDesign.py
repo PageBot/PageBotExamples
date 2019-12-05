@@ -29,9 +29,7 @@ H, W = A4Rounded
 f = Color(c=0, m=0, y=1, k=0)
 s = Color(c=0, m=1, y=0, k=0)
 
-# FIXME: synchronize newDocument() and newDrawing() across contexts.
-context.newDocument(W, H)
-#context.newPage(w=W, h=H)
+context.newDrawing(W, H)
 print(context.fill)
 context.fill(f)
 context.stroke(s)
@@ -42,4 +40,4 @@ context.text('bla', (pt(100), pt(100)))
 context.oval(pt(100), pt(100), pt(200), pt(200))
 context.rect(pt(100), pt(200), pt(110), pt(120))
 print(context.b)
-context.saveDocument(path)
+context.saveDrawing(path)

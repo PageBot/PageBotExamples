@@ -41,7 +41,7 @@ RECTS = 150
 R = 20 # Diameter of circle or square
 M = 20 # Page margin
 
-context.newDocument(w=W, h=H, title=TITLE, pageCount=3)
+context.newDrawing(w=W, h=H, title=TITLE, pageCount=3)
 
 for p in range(PAGES):
     context.newPage(W, H)
@@ -67,10 +67,10 @@ for p in range(PAGES):
 
 #context.saveImage('_export/HelloCircleSquare.gif')
 # PDF does not support alpha colors.
-#context.saveDocument('_export/HelloCircleSquare.pdf')
+#context.saveDrawing('_export/HelloCircleSquare.pdf')
 # Does not support alpha colors
-#context.saveDocument('_export/HelloCircleSquare.jpg')
-context.saveDocument(EXPORT_PATH)
+#context.saveDrawing('_export/HelloCircleSquare.jpg')
+context.saveDrawing(EXPORT_PATH)
 
 os.system(u'open "%s"' % EXPORT_PATH)
 print('Done')

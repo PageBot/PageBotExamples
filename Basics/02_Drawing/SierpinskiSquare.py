@@ -60,5 +60,5 @@ if __name__ == '__main__':
         drawSierpinskiSquare(0, 0, w, canvasSize, i)
 
     #DrawBotContext can save as animated gif
-    context.saveDocument("_export/SierpinskiSquare.gif")
+    context.saveDrawing("_export/SierpinskiSquare.gif")
     print('Done')

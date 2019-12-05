@@ -42,7 +42,7 @@ def drawSierpinskiSquare(px, py, w, maxW):
                 drawSierpinskiSquare(px+x*w, py+y*w, w/3.0, maxW)
 
 
-context.newDocument(w=W, h=H)
+context.newDrawing(w=W, h=H)
 context.newPage(W, H)
 context.fill((1, 1, 1))
 context.rect(0, 0, W, H)
@@ -56,7 +56,7 @@ for extension in ('pdf', 'jpg'):
     if not os.path.exists('_export'):
         os.mkdir('_export')
     exportPath = "_export/SierpinskiSquare." + extension
-    context.saveDocument(exportPath)
+    context.saveDrawing(exportPath)
     os.system(u'open "%s"' % exportPath)
 
 print(('Done'))

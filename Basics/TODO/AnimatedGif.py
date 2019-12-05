@@ -26,7 +26,7 @@ print('Context class is %s' % type(context).__name__)
 W = 400
 H = 400
 
-context.newDocument(w=W, h=H)
+context.newDrawing(w=W, h=H)
 
 for n in range(1,50):
     context.newPage(W, H)

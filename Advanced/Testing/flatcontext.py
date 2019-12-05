@@ -54,7 +54,7 @@ def testFlatContext():
     flatPage = flatDoc.addpage()
 
     # Pagebot equivalent.
-    context.newDocument(WIDTH, HEIGHT)
+    context.newDrawing(WIDTH, HEIGHT)
     pbPage = context.newPage()
     print(pbPage)
 
@@ -136,10 +136,10 @@ def testFlatContext():
     #p.svg('_export/native-flat.svg')
     #print(context.doc)
 
-    context.saveDocument('_export/pagebot-flat.pdf')
+    context.saveDrawing('_export/pagebot-flat.pdf')
     #print('Exporting pagebot')
-    #context.saveDocument('_export/pagebot-flat.png')
-    #context.saveDocument('_export/pagebot-flat.jpg')
-    #context.saveDocument('_export/pagebot-flat.svg')
+    #context.saveDrawing('_export/pagebot-flat.png')
+    #context.saveDrawing('_export/pagebot-flat.jpg')
+    #context.saveDrawing('_export/pagebot-flat.svg')
 
 testFlatContext()
