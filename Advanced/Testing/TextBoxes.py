@@ -68,38 +68,34 @@ def test(context):
     page = doc[1]
     s = getString(page)
 
-    w = W-2*M
-    h = 2 * M
+    w = W/2-2*M
+    h = 9 * M
     x = M
     y = H - M - h
 
-    tb = newTextBox(s, x=x, y=y, w=w, h=2*M, parent=page,
-            stroke=color(0.3, 0.2, 0.1, 0.5), style=dict(hyphenation=True,
-                language='en', leading=200))
+    tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page,
+            stroke=color(0.3, 0.2, 0.1, 0.5))
 
+    '''
     style = dict(font=bungee, fontSize=pt(48), stroke=color(1, 0, 0))
     s = page.newString(txt, style=style)
-    h = 300
-    y = H - 3*M - h
+    h1 = 300
+    y = H - 3*M - h1
 
-    #stroke=color(0.3, 0.2, 0.1, 0.5),
-    tb = newTextBox(s, x=M, y=y, w=W/2, h=h, parent=page,
+    tb = newTextBox(s, x=M, y=y, w=W/2, h=h1, parent=page,
             style=dict(hyphenation=True, language='en', leading=200))
 
     w, h = tb.getTextSize()
-    #print('Size: %s, %s' % (w, h))
-    rect = newRect(x=x, y=y, w=w, h=h, parent=page, stroke=color(1, 0, 0), strokeWidth=1)
-    #print(rect)
-    #print(isinstance(rect, Element))
-    #print(rect.style)
+    rect = newRect(x=x, y=y, w=w, h=h, parent=page, stroke=color(1, 0, 0),
+            strokeWidth=1)
 
     for baseline in tb.baselines:
         y = H - 3*M - baseline
         newLine(x=x, y=y, w=W/2, h=0, stroke=color(0.5), strokeWidth=0.5,
                 parent=page)
+    '''
 
     #doc.view.drawBaselines()
-    #doc.export('_export/Strings.pdf')
     doc.build()
 
 for contextName in ('DrawBot', 'Flat'):
