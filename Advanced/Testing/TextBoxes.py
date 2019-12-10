@@ -46,7 +46,7 @@ def getString(page):
 
     # Adding or appending strings are added to the internal formatted string.
     # Adding plain strings should inherit the existing style.
-    s += ' and more,'
+    s += ' and more, more, more, more, more, more, more, more, more, more, more, more, more, more, more, more, more, more, more, more,'
 
     # Reusing the same style with different text fill color.
     style['textFill'] = 0.1, 0.5, 0.9
@@ -68,13 +68,29 @@ def test(context):
     page = doc[1]
     s = getString(page)
 
-    w = W/2-2*M
-    h = 9 * M
+    w = W/2 - 2*M
+    h = H - 2*M
     x = M
     y = H - M - h
 
     tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page,
             stroke=color(0.3, 0.2, 0.1, 0.5))
+
+    print(s.style['lineHeight'])
+    print(tb.baselines)
+    print(tb.textLines)
+
+    #print(s.style)
+
+    baseH0 = 0
+
+    for baseline in tb.baselines:
+        y = H - M - baseline
+        baseH = baseline - baseH0
+        print(baseH)
+        baseH0 = baseline
+        newLine(x=x, y=y, w=w, h=0, stroke=color(0.5), strokeWidth=0.5,
+                parent=page)
 
     '''
     style = dict(font=bungee, fontSize=pt(48), stroke=color(1, 0, 0))
