@@ -36,8 +36,6 @@ robotoBold = findFont('Roboto-Bold')
 bungee = findFont('Bungee-Regular')
 bungeeHairline = findFont('Bungee-HairlineRegular')
 bungeeOutline = findFont('Bungee-OutlineRegular')
-blurb = Blurb()
-txt = blurb.getBlurb('news_headline', noTags=True)
 
 def getString(page):
     # Create a new BabelString with the DrawBot FormattedString inside.
@@ -66,28 +64,27 @@ def test(context):
     print('# Testing text boxes in %s' % doc)
 
     page = doc[1]
-    s = getString(page)
+    #s = getString(page)
+    blurb = Blurb()
+    txt = blurb.getBlurb('stylewars_bluray')
+    style = {'font': bungee, 'fontSize': 24, 'lineHeight': 24}
+    s = page.newString(txt, style=style)
+    print(s.style)
 
     w = W/2 - 2*M
-    h = H - 2*M
+    h = 200 #H - 2*M
     x = M
     y = H - M - h
 
-    tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page,
-            stroke=color(0.3, 0.2, 0.1, 0.5))
-
-    print(s.style['lineHeight'])
-    print(tb.baselines)
-    print(tb.textLines)
-
-    #print(s.style)
-
+    sc = color(0.3, 0.2, 0.1, 0.5)
+    tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
+    #print(s.getTextLines(w=w, h=h))
+    print(tb.getOverflow())
     baseH0 = 0
 
     for baseline in tb.baselines:
         y = H - M - baseline
         baseH = baseline - baseH0
-        print(baseH)
         baseH0 = baseline
         newLine(x=x, y=y, w=w, h=0, stroke=color(0.5), strokeWidth=0.5,
                 parent=page)
@@ -112,6 +109,7 @@ def test(context):
     '''
 
     #doc.view.drawBaselines()
+    print('Starting doc build')
     doc.build()
 
 for contextName in ('DrawBot', 'Flat'):
