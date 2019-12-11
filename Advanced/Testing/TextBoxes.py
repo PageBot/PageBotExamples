@@ -32,6 +32,8 @@ H = pt(H)
 M = 50 
 
 roboto = findFont('Roboto-Regular')
+pageBotBold = findFont('PageBot-Bold')
+pageBotRegular = findFont('PageBot-Regular')
 robotoBold = findFont('Roboto-Bold')
 bungee = findFont('Bungee-Regular')
 bungeeHairline = findFont('Bungee-HairlineRegular')
@@ -67,9 +69,14 @@ def test(context):
     #s = getString(page)
     blurb = Blurb()
     txt = blurb.getBlurb('stylewars_bluray')
-    style = {'font': bungee, 'fontSize': 24, 'lineHeight': 24}
-    s = page.newString(txt, style=style)
-    print(s.style)
+
+    i = len(txt.split('. ')[0]) + 1
+
+    style = {'font': pageBotBold, 'fontSize': 24, 'lineHeight': 24}
+    print(style)
+    s = page.newString(txt[0:i], style=style)
+    style = {'font': pageBotRegular, 'fontSize': 24, 'lineHeight': 24}
+    s += page.newString(txt[i:], style=style)
 
     w = W/2 - 2*M
     h = 200 #H - 2*M
@@ -78,8 +85,6 @@ def test(context):
 
     sc = color(0.3, 0.2, 0.1, 0.5)
     tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
-    #print(s.getTextLines(w=w, h=h))
-    print(tb.getOverflow())
     baseH0 = 0
 
     for baseline in tb.baselines:
