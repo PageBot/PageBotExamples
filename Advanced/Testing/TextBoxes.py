@@ -17,12 +17,13 @@
 from pagebot import getContext
 from pagebot.document import Document
 from pagebot.elements import *
-from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.toolbox.units import pt
+from pagebot.fonttoolbox.objects.font import findFont, Font
+from pagebot.toolbox.units import pt, upt
 from pagebot.toolbox.color import noColor, color
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.constants import *
 from pagebot.style import getRootStyle
+from pagebot.contexts.base.babelstring import getFontPath
 
 # TODO: move to basics when finished.
 
@@ -73,10 +74,20 @@ def test(context):
     i = len(txt.split('. ')[0]) + 1
 
     style = {'font': pageBotBold, 'fontSize': 24, 'lineHeight': 24}
-    print(style)
     s = page.newString(txt[0:i], style=style)
     style = {'font': pageBotRegular, 'fontSize': 24, 'lineHeight': 24}
     s += page.newString(txt[i:], style=style)
+
+    fontPath = getFontPath(style)
+    font = Font(fontPath)
+    upem = font.getUpem()
+    fontSize = style.get('fontSize')
+    ascender = font.getAscender()
+    descender = font.getDescender()
+    descender = ((fontSize / float(upem)) * descender)
+    #leading = upt(style.get('leading'), base=fontSize)
+    lineHeight = style.get('lineHeight')
+    print(lineHeight)
 
     w = W/2 - 2*M
     h = 200 #H - 2*M
@@ -87,12 +98,17 @@ def test(context):
     tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
     baseH0 = 0
 
-    for baseline in tb.baselines:
+    for i, baseline in enumerate(tb.baselines):
         y = H - M - baseline
         baseH = baseline - baseH0
         baseH0 = baseline
         newLine(x=x, y=y, w=w, h=0, stroke=color(0.5), strokeWidth=0.5,
                 parent=page)
+        if i == 0:
+            newRect(x=x, y=y, w=20, h=lineHeight, fill=color(1, 0, 0, 0.5),
+                    parent=page)
+            newRect(x=x, y=y, w=20, h=descender, fill=color(0, 1, 0, 0.5),
+                    parent=page)
 
     '''
     style = dict(font=bungee, fontSize=pt(48), stroke=color(1, 0, 0))
