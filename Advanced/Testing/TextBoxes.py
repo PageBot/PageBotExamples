@@ -89,20 +89,23 @@ def test(context):
 
     i = len(txt.split('. ')[0]) + 1
 
-    style = {'font': pageBotBold, 'fontSize': 24, 'lineHeight': 24}
-    s = page.newString(txt[0:i], style=style)
+    style1 = {'font': pageBotBold, 'fontSize': 24, 'lineHeight': 24}
+    s = page.newString(txt[0:i], style=style1)
+
+    #style = {'font': pageBotRegular, 'fontSize': 24, 'lineHeight': 24}
     style = {'font': pageBotRegular, 'fontSize': 24, 'lineHeight': 24}
+    print(' 2 - %s' % style)
     s += page.newString(txt[i:], style=style)
 
-    fontPath = getFontPath(style)
+    fontPath = getFontPath(style1)
     font = Font(fontPath)
     upem = font.getUpem()
-    fontSize = style.get('fontSize')
+    fontSize = style1.get('fontSize')
     ascender = font.getAscender()
     descender = font.getDescender()
     descender = ((fontSize / float(upem)) * descender)
-    #leading = upt(style.get('leading'), base=fontSize)
-    lineHeight = style.get('lineHeight')
+    #leading = upt(style1.get('leading'), base=fontSize)
+    lineHeight = style1.get('lineHeight')
 
     w = W/2 - 2*M
     h = 200 #H - 2*M
@@ -115,18 +118,22 @@ def test(context):
     drawBaselines(x, y0, w, tb.baselines, lineHeight, descender, page)
 
     txt = tb.getOverflow()
-    style = {'font': bungee, 'fontSize': 24, 'lineHeight': 24}
-    s = page.newString(txt, style=style)
 
-    fontPath = getFontPath(style)
+    style2 = {'font': bungeeHairline, 'fontSize': 24, 'lineHeight': 24}
+    #print(' 3 - %s' % style2)
+    print(style2['font'].path)
+    s = page.newString(txt, style=style2)
+    print(s.style['font'])
+
+    fontPath = getFontPath(style2)
     font = Font(fontPath)
     upem = font.getUpem()
-    fontSize = style.get('fontSize')
+    fontSize = style2.get('fontSize')
     ascender = font.getAscender()
     descender = font.getDescender()
     descender = ((fontSize / float(upem)) * descender)
-    #leading = upt(style.get('leading'), base=fontSize)
-    lineHeight = style.get('lineHeight')
+    #leading = upt(style2.get('leading'), base=fontSize)
+    lineHeight = style2.get('lineHeight')
 
     h = 300 #H - 2*M
     x = W / 2
