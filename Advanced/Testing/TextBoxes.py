@@ -60,6 +60,22 @@ def getString(page):
     s += page.newString(' even more!', style=style)
     return s
 
+def drawBaselines(x0, y0, w, baselines, lineHeight, descender, page):
+    baseH0 = 0
+
+    for i, baseline in enumerate(baselines):
+        y = y0 - baseline
+        baseH = baseline - baseH0
+        baseH0 = baseline
+        newLine(x=x0, y=y, w=w, h=0, stroke=color(0.5), strokeWidth=0.5,
+                parent=page)
+
+        if i == 0:
+            newRect(x=x0, y=y, w=20, h=lineHeight, fill=color(1, 0, 0, 0.5),
+                    parent=page)
+            newRect(x=x0, y=y, w=20, h=descender, fill=color(0, 1, 0, 0.5),
+                    parent=page)
+
 def test(context):
     print("creating doc")
     doc = Document(w=W, h=H, context=context)
@@ -87,7 +103,6 @@ def test(context):
     descender = ((fontSize / float(upem)) * descender)
     #leading = upt(style.get('leading'), base=fontSize)
     lineHeight = style.get('lineHeight')
-    print(lineHeight)
 
     w = W/2 - 2*M
     h = 200 #H - 2*M
@@ -96,19 +111,31 @@ def test(context):
 
     sc = color(0.3, 0.2, 0.1, 0.5)
     tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
-    baseH0 = 0
+    y0 = H - M
+    drawBaselines(x, y0, w, tb.baselines, lineHeight, descender, page)
 
-    for i, baseline in enumerate(tb.baselines):
-        y = H - M - baseline
-        baseH = baseline - baseH0
-        baseH0 = baseline
-        newLine(x=x, y=y, w=w, h=0, stroke=color(0.5), strokeWidth=0.5,
-                parent=page)
-        if i == 0:
-            newRect(x=x, y=y, w=20, h=lineHeight, fill=color(1, 0, 0, 0.5),
-                    parent=page)
-            newRect(x=x, y=y, w=20, h=descender, fill=color(0, 1, 0, 0.5),
-                    parent=page)
+    txt = tb.getOverflow()
+    style = {'font': bungee, 'fontSize': 24, 'lineHeight': 24}
+    s = page.newString(txt, style=style)
+
+    fontPath = getFontPath(style)
+    font = Font(fontPath)
+    upem = font.getUpem()
+    fontSize = style.get('fontSize')
+    ascender = font.getAscender()
+    descender = font.getDescender()
+    descender = ((fontSize / float(upem)) * descender)
+    #leading = upt(style.get('leading'), base=fontSize)
+    lineHeight = style.get('lineHeight')
+
+    h = 300 #H - 2*M
+    x = W / 2
+    y = H / 2 - M - h
+    w = W/2 - 2*M
+    sc = color(0.3, 0.2, 0.1, 0.5)
+    tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
+    y0 =  H / 2 - M 
+    drawBaselines(x, y0, w, tb.baselines, lineHeight, descender, page)
 
     '''
     style = dict(font=bungee, fontSize=pt(48), stroke=color(1, 0, 0))
