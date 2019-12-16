@@ -40,27 +40,28 @@ bungeeRegular = findFont('Bungee-Regular')
 bungeeHairline = findFont('Bungee-HairlineRegular')
 bungeeOutline = findFont('Bungee-OutlineRegular')
 
-def drawBaselines(x0, y0, w, baselines, style, page):
-    fontPath = getFontPath(style)
+def drawBaselines(x0, y0, w, baselines, s, page):
+    fontPath = getFontPath(s.style)
     font = Font(fontPath)
     infoLine = 1
     baseH0 = 0
     upem = font.getUpem()
-    fontSize = style.get('fontSize')
+    fontSize = s.style.get('fontSize')
     ascender = font.getAscender()
     ascender = ((fontSize / float(upem)) * ascender)
     descender = font.getDescender()
     descender = ((fontSize / float(upem)) * descender)
-    lineHeight = style['lineHeight']
-    print('style %s' % style['font'])
-    print('ascdesc  %s' % (ascender - descender))
-    print('diff  %s' % (fontSize - (ascender - descender)))
+    lineHeight = s.lineHeight
+    print(lineHeight)
+    #print('style %s' % s.style['font'])
+    #print('ascdesc  %s' % (ascender - descender))
+    #print('diff  %s' % (fontSize - (ascender - descender)))
 
     for i, baseline in enumerate(baselines):
         y = y0 - baseline
         # Calculates baseline offsets between each line.
         baseH = baseline - baseH0
-        print(baseH)
+        #print(baseH)
         baseH0 = baseline
         newLine(x=x0, y=y, w=w, h=0, stroke=color(0.5), strokeWidth=0.5,
                 parent=page)
@@ -93,10 +94,10 @@ def test(context):
 
     i = len(txt.split('. ')[0]) + 1
 
-    style = {'font': bungeeRegular, 'fontSize': 24, 'lineHeight': 36}
+    style = {'font': bungeeRegular, 'fontSize': 24, 'leading': 1.5}
     s = page.newString(txt[0:i], style=style)
 
-    style = {'font': bungeeOutline, 'fontSize': 24, 'lineHeight': 36}
+    style = {'font': bungeeOutline, 'fontSize': 24, 'leading': 1.5}
     s += page.newString(txt[i:], style=style)
 
     w = W/2 - 2*M
@@ -107,11 +108,11 @@ def test(context):
     sc = color(0.3, 0.2, 0.1, 0.5)
     tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
     y0 = H - M
-    drawBaselines(x, y0, w, tb.baselines, s.style, page)
+    drawBaselines(x, y0, w, tb.baselines, s, page)
 
     # Get the rest of the text.
     txt = tb.getOverflow()
-    style = {'font': pageBotBold, 'fontSize': 24, 'lineHeight': 36}
+    style = {'font': pageBotBold, 'fontSize': 24, 'leading': 1.5}
     s = page.newString(txt, style=style)
 
     w = W/2 - 2*M
@@ -121,11 +122,11 @@ def test(context):
 
     tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
     y0 = M + h
-    drawBaselines(x, y0, w, tb.baselines, s.style, page)
+    drawBaselines(x, y0, w, tb.baselines, s, page)
 
     # Get the rest of the text.
     txt = tb.getOverflow()
-    style = {'font': robotoRegular, 'fontSize': 24, 'lineHeight': 36}
+    style = {'font': robotoRegular, 'fontSize': 24, 'leading': 1.5}
     s = page.newString(txt, style=style)
 
     h = 500 
@@ -134,7 +135,7 @@ def test(context):
     w = W / 2 - M
     tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
     y0 =  M + h
-    drawBaselines(x, y0, w, tb.baselines, s.style, page)
+    drawBaselines(x, y0, w, tb.baselines, s, page)
 
     print('Starting doc build')
     doc.build()
