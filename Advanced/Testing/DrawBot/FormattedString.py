@@ -1,30 +1,41 @@
 fontSize(20)
 font('Helvetica')
-print(fontLeading())
-print(fontLineHeight())
+print('global leading %s' % fontLeading())
+print('global line height %s' % fontLineHeight())
+
+'''
 print(fontXHeight())
 print(fontCapHeight())
 print(fontAscender())
 print(fontDescender())
 print(fontFilePath())
+'''
 
-s = FormattedString('bla', font='Helvetica', fontSize=100, fill=(0.4,0.5,0.2))
+leading = 1
+fontSize = 100
+lineHeight = leading * fontSize
+s = FormattedString('bla', font='Helvetica', fontSize=fontSize, lineHeight=lineHeight, fill=(0.4,0.5,0.2))
 
-print(s.fontLeading())
-print(s.fontLineHeight())
-print(s.fontAscender())
-print(s.fontDescender())
-
-s.fontSize(300)
+'''
+fontSize = 300
+lineHeight = fontSize * leading
+s.fontSize(fontSize)
+s.lineHeight(lineHeight)
 s.font('Helvetica-Bold')
 s.fill(0.3, 0.2, 0.9)
 s += 'bla2'
+'''
 
 text(s, (0,0))
 
-print(s.fontLeading())
-print(s.fontLineHeight())
+print('formatted string leading %s' % s.fontLeading())
+print('formatted string size %s' % s.size())
+print('formatted string line height %s' % s. fontLineHeight())
+'''
 print(s.fontAscender())
 print(s.fontDescender())
-
-
+'''
+w, h = s.size()
+fill(None)
+stroke(0)
+rect(0, 0, w, h)

@@ -61,7 +61,7 @@ def drawBaselines(x0, y0, w, baselines, s, page):
         y = y0 - baseline
         # Calculates baseline offsets between each line.
         baseH = baseline - baseH0
-        #print(baseH)
+        print(baseH)
         baseH0 = baseline
         newLine(x=x0, y=y, w=w, h=0, stroke=color(0.5), strokeWidth=0.5,
                 parent=page)
@@ -140,8 +140,8 @@ def test(context):
     print('Starting doc build')
     doc.build()
 
-for contextName in ('DrawBot', 'Flat'):
+#for contextName in ('DrawBot', 'Flat'):
 #for contextName in ('DrawBot',):
-#for contextName in ('Flat',):
+for contextName in ('Flat',):
     context = getContext(contextName)
     test(context)
