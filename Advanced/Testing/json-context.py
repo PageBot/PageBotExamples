@@ -116,7 +116,7 @@ def loadJSON(context):
     '''
 
 def drawTitle(context, title, dh):
-    x = 60 
+    x = 60
     y = 60
     dh += y
     y0 = H - dh
@@ -129,7 +129,7 @@ def drawTitle(context, title, dh):
     return dh
 
 def drawDescription(context, description, dh):
-    x = 60 
+    x = 60
     y = H - dh - LINE
     w = 200
     h = 300
@@ -152,7 +152,7 @@ def drawDescription(context, description, dh):
     return dh + h + LINE
 
 def drawLocation(context, location, dh):
-    x = 60 
+    x = 60
     y = H - dh - LINE
     w = 200
     h = 3 * LINE
