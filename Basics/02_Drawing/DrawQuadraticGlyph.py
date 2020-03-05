@@ -39,9 +39,8 @@ QUADRATIC_CONTROLPOINT_SIZE = R
 CUBIC_CONTROLPOINT_COLOR = blackColor
 CUBIC_CONTROLPOINT_SIZE = R / 2
 
-context = getContext()
-
 class Point:
+
     # FIX: See more generic implentation in PageBotPath
     def __init__(self, x, y, onCurve=True, smooth=False, start=False):
         self.x = x
@@ -50,7 +49,7 @@ class Point:
         self.smooth = smooth
         self.start = start
 
-def drawSegment(path, segment, implied, cps, verbose=False):
+def drawSegment(context, path, segment, implied, cps, verbose=False):
     """
     Draws a quadratic segment as a cubic Bézier curve in drawBot. Each segment
     starts and ends with an oncurve point with 0 ... n offcurve control points.
@@ -63,7 +62,8 @@ def drawSegment(path, segment, implied, cps, verbose=False):
     >>> p2 = Point(200, 200, True)
     >>> segment = [p0, p1, p2]
     >>> path = BezierPath()
-    >>> drawSegment(path, segment)
+    >>> context = getContext()
+    >>> drawSegment(context, path, segment)
     """
     assert len(segment) > 1
 
@@ -128,12 +128,13 @@ def drawSegment(path, segment, implied, cps, verbose=False):
         # Recurse.
         # NOTE: PageBot implementation in glyph uses a loop instead of
         # recursion.
-        drawSegment(path, curve0, implied, cps)
-        drawSegment(path, curve1, implied, cps)
+        drawSegment(context, path, curve0, implied, cps)
+        drawSegment(context, path, curve1, implied, cps)
 
-def cross(x, y, d, r=1, g=0, b=0, a=1):
+def cross(context, x, y, d, r=1, g=0, b=0, a=1):
     """
-    >>> cross(100, 100, 5, r=0.5, g=0.3, b=0.2, a=0.4)
+    >>> context = getContext()
+    >>> cross(context, 100, 100, 5, r=0.5, g=0.3, b=0.2, a=0.4)
     """
     x0 = x - d
     y0 = y - d
@@ -147,7 +148,7 @@ def cross(x, y, d, r=1, g=0, b=0, a=1):
     context.line((x0, y0), (x1, y1))
     context.line((x2, y2), (x3, y3))
 
-def draw():
+def draw(context):
     W, H = 1750, 2250
     X0 = 75
     Y0 = 500
@@ -220,7 +221,7 @@ def draw():
             # Lets this script calculate and draw implied points and derived cubic
             # control points. Optionally draw path itself later by calling
             # drawPath(path) (see below.)
-            drawSegment(path, segment, implied, cps)
+            drawSegment(context, path, segment, implied, cps)
 
     # Draws oncurve points and offcurve control points.
     for contour in contours:
@@ -276,4 +277,8 @@ def draw():
     context.text('Quadratic control point', (x, y))
     context.saveImage("_export/QuadraticGlyph-%s.pdf" % context.name)
 
-draw()
+
+for contextName in ('DrawBot', 'Flat'):
+    context = getContext(contextName)
+    context.fontSize(24)
+    draw(context)
