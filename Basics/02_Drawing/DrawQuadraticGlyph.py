@@ -21,8 +21,7 @@
 import weakref
 from AppKit import NSFont
 from fontTools.ttLib import TTFont, TTLibError
-from drawBot import BezierPath, translate, line, text, stroke, fill, oval, drawPath
-from drawBot import font as DBFont
+from drawBot import BezierPath
 from pagebot.fonttoolbox.objects.fontinfo import FontInfo
 from pagebot.toolbox.units import point3D
 from pagebot.fonttoolbox.fontpaths import getFontPaths
@@ -147,8 +146,8 @@ def cross(x, y, d, r=1, g=0, b=0, a=1):
     x3 = x - d
     y3 = y + d
     context.stroke(r, g, b)
-    line((x0, y0), (x1, y1))
-    line((x2, y2), (x3, y3))
+    context.line((x0, y0), (x1, y1))
+    context.line((x2, y2), (x3, y3))
 
 def draw():
     W, H = 1750, 2250
@@ -159,7 +158,6 @@ def draw():
     glyphName = 'Q'
     x = 50
     context.newPage(W, H)
-    DBFont('LucidaGrande', 24)
     PATH = getFontPaths()['Roboto-Black']
     font = Font(PATH)
     glyph = font[glyphName]
@@ -169,7 +167,7 @@ def draw():
     coordinates = glyph.ttGlyph.coordinates
     context.fill((0, 1, 1, 0.2))
     # Move glyph up so we can see results below descender level.
-    translate(X0, Y0)
+    context.translate(X0, Y0)
 
     # Draws the glyph.
     c = glyph.contours
@@ -278,5 +276,6 @@ def draw():
     context.text('Cubic control point', (x, y))
     y -= 30
     context.text('Quadratic control point', (x, y))
+    context.saveImage("_export/QuadraticGlyph.pdf")
 
 draw()
