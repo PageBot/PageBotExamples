@@ -113,7 +113,6 @@ def loadJSON(context):
 
         # Just testing first language.
         break
-    '''
 
 def drawTitle(context, title, dh):
     x = 60

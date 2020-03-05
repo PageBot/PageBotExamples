@@ -19,9 +19,8 @@
 #    TODO: switch to document level.
 
 import weakref
-from AppKit import NSFont
 from fontTools.ttLib import TTFont, TTLibError
-from drawBot import BezierPath
+from drawBot import BezierPath # FIXME: use PageBot Bezier path
 from pagebot.fonttoolbox.objects.fontinfo import FontInfo
 from pagebot.toolbox.units import point3D
 from pagebot.fonttoolbox.fontpaths import getFontPaths
