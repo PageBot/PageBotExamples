@@ -42,4 +42,3 @@ import sass
 import markdown
 import svgwrite
 import tornado
-from simple_idml import idml

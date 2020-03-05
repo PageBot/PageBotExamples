@@ -34,6 +34,8 @@ M = 20
 w = W - 2*M
 h = H - 2*H
 
+'''
+FIXME: only works in DrawBot.
 #dict(name='ElementOrigin', ui='CheckBox', args=dict(value=False)),
 c.Variable(
   [dict(name='X', ui='Slider',
@@ -51,6 +53,7 @@ c.Variable(
    dict(name='D', ui='Slider',
         args=dict(minValue=0.1, value=0.5, maxValue=5))
   ], globals())
+'''
 
 def drawSpiral():
     mx = W/2+X
@@ -89,4 +92,4 @@ def drawSpiral():
 
 c.newPage(pt(W), pt(H))
 drawSpiral()
-c.saveImage("_export/Spiral.pdf")
+c.saveImage("_export/Spiral-%s.pdf" % c.name)

@@ -40,7 +40,6 @@ CUBIC_CONTROLPOINT_COLOR = blackColor
 CUBIC_CONTROLPOINT_SIZE = R / 2
 
 context = getContext()
-print(context)
 
 class Point:
     # FIX: See more generic implentation in PageBotPath
@@ -275,6 +274,6 @@ def draw():
     context.text('Cubic control point', (x, y))
     y -= 30
     context.text('Quadratic control point', (x, y))
-    context.saveImage("_export/QuadraticGlyph.pdf")
+    context.saveImage("_export/QuadraticGlyph-%s.pdf" % context.name)
 
 draw()
