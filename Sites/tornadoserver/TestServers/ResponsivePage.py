@@ -22,17 +22,21 @@ import tornado.web
 ioloop = None
 counter = 0
 
+MAX_QUERIES = 10
+
 PORT = 7778
-HTML = '<html><head><title>Responsive Page</title></head><body>Hello World</body></html>'
+HTML = '<html><head><title>Responsive Page #%d</title></head><body>Hello World</body></html>'
 
 class MainHandler(tornado.web.RequestHandler):
     """Run the web server, answer on url http://localhost:7778 
     for MAX_QUERIES, then the server stops.
     """
     def get(self):
-        global ioloop
-        self.write(HTML)
-        #ioloop.stop()
+        global ioloop, counter
+        self.write(HTML % counter)
+        if counter > MAX_QUERIES:
+            ioloop.stop()
+        counter += 1
 
 def make_app():
     return tornado.web.Application([
@@ -42,6 +46,7 @@ def make_app():
 if __name__ == "__main__":
     global loop
     app = make_app()
+    print('Starting ResponsivePage web application on port %s' % PORT)
     app.listen(PORT)
     ioloop = tornado.ioloop.IOLoop.current()
     ioloop.start()

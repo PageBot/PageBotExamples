@@ -14,15 +14,22 @@
 #     Only10PagesQuit.py
 #
 #     https://www.tornadoweb.org
-#
+#     
+#     Running this example script, creates a local tornado web server.
+#     This example "Hello world" is not using PageBot, for simplicity of the code.
+#     Open with a browser on http://localhost:8880
+#     Each request shows the "counter" variable, as the number of page hits.
+#     Stop the server with cntr-C, before running the script again.
+#     After 10 requests, the server stops.
+
 import tornado.ioloop
 import tornado.web
 
 ioloop = None
 counter = 0
 
-PORT = 7777
-MAX_PAGES = 10
+PORT = 8880
+MAX_QUERIES = 10
 
 class MainHandler(tornado.web.RequestHandler):
     """For the sake of example testing, run the web server, 
