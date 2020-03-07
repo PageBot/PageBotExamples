@@ -33,6 +33,7 @@ class RequestHandler(BasicRequestHandler):
         self.write('<h2>uri: %s</h2>' % requestData.uri)
         self.write('<h2>filePath: %s</h2>' % requestData.filePath)
         self.write('<h2>args: %s</h2>' % requestData.args)
+        self.write('<h3>requestHandler id: %s</h3>' % id(self))
         for imagePath in ('IMG_1734.jpg', 'IMG_1764.jpg', 'IMG_3740.jpg'):
         	self.write('<h1><a href="/%s/par1-123/par2-xyz">' % imagePath.split('.')[0])
 	        self.write('<img src="/images/%s" width="500"></a>' % imagePath)
