@@ -23,6 +23,7 @@
 #
 from tornado.web import StaticFileHandler
 from pagebot.server.tornadoserver.baseserver import BasicRequestHandler, RequestData, BaseServer 
+#from pagebot.publications.websites.nanosite.nanosite import NanoSite
 
 class RequestHandler(BasicRequestHandler):
     def get(self, *args):
@@ -35,17 +36,19 @@ class RequestHandler(BasicRequestHandler):
         self.write('<h2>args: %s</h2>' % requestData.args)
         self.write('<h3>requestHandler id: %s</h3>' % id(self))
         for imagePath in ('IMG_1734.jpg', 'IMG_1764.jpg', 'IMG_3740.jpg'):
-        	self.write('<h1><a href="/%s/par1-123/par2-xyz">' % imagePath.split('.')[0])
-	        self.write('<img src="/images/%s" width="500"></a>' % imagePath)
+            self.write('<h1><a href="/%s/par1-123/par2-xyz">' % imagePath.split('.')[0])
+            self.write('<img src="/images/%s" width="500"></a>' % imagePath)
 
 class AdServer(BaseServer):
-	IMAGE_PATH = {'path': './images'}
-	REQUEST_HANDLERS = [
-    	('/(.*.ico)', StaticFileHandler, IMAGE_PATH),
-    	('/images/(.*)', StaticFileHandler, IMAGE_PATH),
-    	('/(.*)', RequestHandler),
-    ] # http://localhost:8889/<args>
+
+    def getRequestHandlers(self):
+        handlerData = {'path': './images'}
+        return [
+           ('/(.*.ico)', StaticFileHandler, handlerData),
+           ('/images/(.*)', StaticFileHandler, handlerData),
+           ('/(.*)', RequestHandler),
+        ] # http://localhost:8889/<args>
 
 
-server = AdServer()
+server = AdServer(port=8993)
 server.run()
