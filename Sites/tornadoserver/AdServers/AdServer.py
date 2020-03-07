@@ -40,7 +40,8 @@ class RequestHandler(BasicRequestHandler):
         self.write('<h2>args: %s</h2>' % requestData.args)
         self.write('<h2>fileExists: %s</h2>' % requestData.fileExists)
         for imagePath in ('IMG_1734.jpg', 'IMG_1764.jpg', 'IMG_3740.jpg'):
-	        self.write('<img src="images/%s" width="500">' % imagePath)
+        	self.write('<h1><a href="%s">' % imagePath.split('.')[0])
+	        self.write('<img src="images/%s" width="500"></a>' % imagePath)
 
 class AdServer(BaseServer):
 	IMAGE_PATH = {'path': './images'}
