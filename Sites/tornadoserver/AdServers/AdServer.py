@@ -26,4 +26,30 @@
 #     http://localhost:8889/resource/1234
 #     http://localhost:8889/resource/abcd-200/xyz-100
 #
-from pagebot.server.baseserver import 
+from tornado.web import StaticFileHandler
+from pagebot.server.tornadoserver.baseserver import BasicRequestHandler, RequestData, BaseServer 
+
+class RequestHandler(BasicRequestHandler):
+    def get(self, *args):
+        """Figure out how or handle the request and where to get content from.
+        """
+        requestData = RequestData(self.request.uri) # Split path parts and arguments
+        self.write('<h1>path: %s</h1>' % requestData.path)
+        self.write('<h2>uri: %s</h2>' % requestData.uri)
+        self.write('<h2>filePath: %s</h2>' % requestData.filePath)
+        self.write('<h2>args: %s</h2>' % requestData.args)
+        self.write('<h2>fileExists: %s</h2>' % requestData.fileExists)
+        for imagePath in ('IMG_1734.jpg', 'IMG_1764.jpg', 'IMG_3740.jpg'):
+	        self.write('<img src="images/%s" width="500">' % imagePath)
+
+class AdServer(BaseServer):
+	IMAGE_PATH = {'path': './images'}
+	REQUEST_HANDLERS = [
+    	('/(.*.ico)', StaticFileHandler, IMAGE_PATH),
+    	('/images/(.*)', StaticFileHandler, IMAGE_PATH),
+    	('/(.*)', RequestHandler),
+    ] # http://localhost:8889/<args>
+
+
+server = AdServer()
+server.run()

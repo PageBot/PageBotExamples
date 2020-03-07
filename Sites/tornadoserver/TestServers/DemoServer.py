@@ -39,6 +39,7 @@ class BasicRequestHandler(RequestHandler):
     def get(self):
         self.write('Hello, world')
 
+"""
 class StaticRequestHandler(RequestHandler):
     def get(self):
         self.render('templates_html/index.html')
@@ -56,15 +57,15 @@ class PathRequestHandler(RequestHandler):
     def get(self, *args):
         for arg in args:
             self.write('<h2>Querying path item "%s"</h2>' % arg)
-
+"""
 if __name__ == '__main__':
     requestHandler = [
         ('/', BasicRequestHandler), # http://localhost:8889
-        ('/blog', StaticRequestHandler), # http://localhost:8889/blog
-        ('/query', QueryRequestHandler), # http://localhost:8889/query?n=100
-        ('/query/aaa', QueryRequestHandler), # http://localhost:8889/query/aaa?n=100
-        ('/resource/([0-9]+)', ResourceRequestHandler), # http://localhost:8889/resource/1234
-        ('/path/([A-Za-z0-9-]+)/([A-Z,a-z,0-9-]+)', PathRequestHandler), # http://localhost:8889/path/aaa/bbb
+        #('/blog', StaticRequestHandler), # http://localhost:8889/blog
+        #('/query', QueryRequestHandler), # http://localhost:8889/query?n=100
+        #('/query/aaa', QueryRequestHandler), # http://localhost:8889/query/aaa?n=100
+        #('/resource/([0-9]+)', ResourceRequestHandler), # http://localhost:8889/resource/1234
+        #('/path/([A-Za-z0-9-]+)/([A-Z,a-z,0-9-]+)', PathRequestHandler), # http://localhost:8889/path/aaa/bbb
     ]
     app = Application(requestHandler)
     app.listen(PORT)

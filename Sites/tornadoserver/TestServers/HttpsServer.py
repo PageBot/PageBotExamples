@@ -17,6 +17,7 @@
 #     Showing certified https:// request.
 #
 #     http://localhost:8882/blog
+#     https://localhost/blog
 
 import sys
 import tornado.httpserver
