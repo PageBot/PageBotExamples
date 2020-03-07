@@ -19,12 +19,7 @@
 #     Using the PageBot Server to host a advertizement (Publication) generator.
 #     URL parameters direct the type and content of the ad.
 #
-#     http://localhost:8889
-#     http://localhost:8889/blog
-#     http://localhost:8889/query?n=100
-#     http://localhost:8889/query/aaa?n=100
-#     http://localhost:8889/resource/1234
-#     http://localhost:8889/resource/abcd-200/xyz-100
+#     http://localhost:8888
 #
 from tornado.web import StaticFileHandler
 from pagebot.server.tornadoserver.baseserver import BasicRequestHandler, RequestData, BaseServer 
@@ -38,10 +33,9 @@ class RequestHandler(BasicRequestHandler):
         self.write('<h2>uri: %s</h2>' % requestData.uri)
         self.write('<h2>filePath: %s</h2>' % requestData.filePath)
         self.write('<h2>args: %s</h2>' % requestData.args)
-        self.write('<h2>fileExists: %s</h2>' % requestData.fileExists)
         for imagePath in ('IMG_1734.jpg', 'IMG_1764.jpg', 'IMG_3740.jpg'):
-        	self.write('<h1><a href="%s">' % imagePath.split('.')[0])
-	        self.write('<img src="images/%s" width="500"></a>' % imagePath)
+        	self.write('<h1><a href="/%s/par1-123/par2-xyz">' % imagePath.split('.')[0])
+	        self.write('<img src="/images/%s" width="500"></a>' % imagePath)
 
 class AdServer(BaseServer):
 	IMAGE_PATH = {'path': './images'}
