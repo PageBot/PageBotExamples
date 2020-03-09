@@ -17,8 +17,9 @@
 #     Interactive Variable() only works in DrawBot context.
 #
 # Creation of the RootStyle (dictionary) with all available default style parameters filled.
-#TODO from pagebot.contexts.flat.flatcontext import FlatContext
+
 from pagebot.constants import CENTER
+
 # Document is the main instance holding all information about
 # the document togethers (pages, styles, etc.)
 from pagebot.document import Document
@@ -127,23 +128,13 @@ def makeDocument(context):
     view.showDimensions = ShowDimensions
     view.showElementInfo = ShowElementInfo # Show boxes with element info
 
-    EXPORT_PATH = '_export/AlignElements-%s.png' % context.name
+    #EXPORT_PATH = '_export/AlignElements-%s.png' % context.name
+    EXPORT_PATH = '_export/AlignElements-%s.pdf' % context.name
     doc.export(EXPORT_PATH)
-    #return doc # Answer the doc.
 
 if __name__ == '__main__':
     from pagebot import getContext
 
     for contextName in ('DrawBot', 'Flat'):
-        # May contain NoneDrawBotBuilder if not running on a DrawBot platform
         context = getContext(contextName)
-        d = makeDocument(context)
-        # Make interactive global controls. Only works in DrawBot context. Otherwise
-        # Export in _export folder that does not commit in Git. Force to export PDF.
-
-        # FIX: F L A T
-        #context = FlatContext()
-        #d = makeDocument(context)
-        # Export in _export folder that does not commit in Git. Force to export PDF.
-        #EXPORT_PATH = '_export/AlignElements_F.pdf'
-        #d.export(EXPORT_PATH)
+        makeDocument(context)

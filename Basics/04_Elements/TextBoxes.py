@@ -30,7 +30,7 @@ from pagebot.contexts.base.babelstring import getFontPath
 H, W = A3
 W = pt(W)
 H = pt(H)
-M = 50 
+M = 50
 
 robotoRegular = findFont('Roboto-Regular')
 pageBotBold = findFont('PageBot-Bold')
@@ -129,9 +129,9 @@ def test(context):
     style = {'font': robotoRegular, 'fontSize': 24, 'leading': 1.5}
     s = page.newString(txt, style=style)
 
-    h = 500 
+    h = 500
     x = W / 2
-    y = M 
+    y = M
     w = W / 2 - M
     tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
     y0 =  M + h
@@ -141,7 +141,5 @@ def test(context):
     doc.build()
 
 for contextName in ('DrawBot', 'Flat'):
-#for contextName in ('DrawBot',):
-#for contextName in ('Flat',):
     context = getContext(contextName)
     test(context)
