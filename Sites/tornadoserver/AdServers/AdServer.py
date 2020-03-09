@@ -23,11 +23,10 @@
 #
 from tornado.web import StaticFileHandler
 from pagebot.server.tornadoserver.baseserver import BasicRequestHandler, RequestData, BaseServer 
-#from pagebot.publications.websites.nanosite.nanosite import NanoSite
+from pagebot.publications.websites.nanosite.nanosite import NanoSite
 
 class RequestHandler(BasicRequestHandler):
     def initialize(self, path, publication):
-        print('###', path, publication)
         self.path = path
         self.publication = publication
 
@@ -35,27 +34,33 @@ class RequestHandler(BasicRequestHandler):
         """Figure out how or handle the request and where to get content from.
         """
         requestData = RequestData(self.request.uri) # Split path parts and arguments
-        self.write('<h1>path: %s</h1>' % requestData.path)
-        self.write('<h2>uri: %s</h2>' % requestData.uri)
-        self.write('<h2>filePath: %s</h2>' % requestData.filePath)
-        self.write('<h2>args: %s</h2>' % requestData.args)
-        self.write('<h3>requestHandler id: %s</h3>' % id(self))
-        self.write('<h3>publication: %s %d</h3>' % (self.publication, id(self.publication)))
+        self.write('<html><head>\n')
+        self.write('<link media="all" rel="stylesheet" href="/css/nanostyle_py.css"/>\n')
+        self.write('</head><body>\n')
+        self.write('<h1>path: %s</h1>\n' % requestData.path)
+        self.write('<h2>uri: %s</h2>\n' % requestData.uri)
+        self.write('<h2>filePath: %s</h2>\n' % requestData.filePath)
+        self.write('<h2>args: %s</h2>\n' % requestData.args)
+        self.write('<h3>requestHandler id: %s</h3>\n' % id(self))
+        self.write('<h3>publication: %s %d</h3>\n' % (self.publication.__class__.__name__, id(self.publication)))
         for imagePath in ('IMG_1734.jpg', 'IMG_1764.jpg', 'IMG_3740.jpg'):
-            self.write('<h1><a href="/%s/par1-123/par2-xyz">' % imagePath.split('.')[0])
-            self.write('<img src="/images/%s" width="500"></a>' % imagePath)
+            self.write('<h1><a href="/%s/par1-123/par2-xyz">\n' % imagePath.split('.')[0])
+            self.write('<img src="/images/%s" width="500"></a>\n' % imagePath)
+        self.write('</body></html>\n')
 
 class AdServer(BaseServer):
 
     def getRequestHandlers(self):
-        handlerData = {'path': './images'}
-        ss = 'Persistent Publication Instance here'
+        imagesHandlerData = {'path': './images'}
+        cssHandlerData = {'path': './css'}
+        site = NanoSite()
         return [
-           ('/(.*.ico)', StaticFileHandler, handlerData),
-           ('/images/(.*)', StaticFileHandler, handlerData),
-           ('/(.*)', RequestHandler, dict(path='./', publication=ss)),
+           ('/css/(.*.css)', StaticFileHandler, cssHandlerData),
+           ('/(.*.ico)', StaticFileHandler, imagesHandlerData),
+           ('/images/(.*)', StaticFileHandler, imagesHandlerData),
+           ('/(.*)', RequestHandler, dict(path='./', publication=site)),
         ] # http://localhost:8889/<args>
 
 
-server = AdServer(port=8994)
+server = AdServer(port=8996)
 server.run()
