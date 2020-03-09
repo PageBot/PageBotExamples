@@ -132,8 +132,6 @@ def makeDocument(context):
     #return doc # Answer the doc.
 
 if __name__ == '__main__':
-
-
     from pagebot import getContext
 
     for contextName in ('DrawBot', 'Flat'):
