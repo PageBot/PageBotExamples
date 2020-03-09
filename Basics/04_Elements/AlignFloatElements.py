@@ -127,11 +127,11 @@ def makeDocument(context):
     view.showDimensions = ShowDimensions
     view.showElementInfo = ShowElementInfo # Show boxes with element info
 
-    return doc # Answer the doc.
+    EXPORT_PATH = '_export/AlignElements-%s.png' % context.name
+    doc.export(EXPORT_PATH)
+    #return doc # Answer the doc.
 
 if __name__ == '__main__':
-
-
     from pagebot import getContext
 
     for contextName in ('DrawBot', 'Flat'):
@@ -140,8 +140,6 @@ if __name__ == '__main__':
         d = makeDocument(context)
         # Make interactive global controls. Only works in DrawBot context. Otherwise
         # Export in _export folder that does not commit in Git. Force to export PDF.
-        EXPORT_PATH = '_export/AlignElements.png'
-        d.export(EXPORT_PATH)
 
         # FIX: F L A T
         #context = FlatContext()
