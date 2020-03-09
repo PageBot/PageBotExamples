@@ -42,7 +42,7 @@ def testSass():
         print(example_css)
 
     # Export with HtmlBuilder.
-    from pagebot.contexts.builders.htmlbuilder import HtmlBuilder
+    from pagebot.contexts.markup.htmlbuilder import HtmlBuilder
     hb = HtmlBuilder()
     print(hb)
     hb.compileScss(path, cssPath = '_export/css/testHtmlBuilder.css')

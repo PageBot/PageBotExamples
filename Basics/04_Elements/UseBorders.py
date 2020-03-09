@@ -13,6 +13,8 @@
 #     UseBorders.py
 #
 from random import random
+
+# FIXME: shouldn't import DrawBot.
 from drawBot import Variable
 from drawBot.misc import DrawBotError
 

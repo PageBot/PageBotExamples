@@ -19,10 +19,8 @@
 #    TODO: switch to document level.
 
 import weakref
-from AppKit import NSFont
 from fontTools.ttLib import TTFont, TTLibError
-from drawBot import BezierPath, translate, line, text, stroke, fill, oval, drawPath
-from drawBot import font as DBFont
+from drawBot import BezierPath # FIXME: use PageBot Bezier path
 from pagebot.fonttoolbox.objects.fontinfo import FontInfo
 from pagebot.toolbox.units import point3D
 from pagebot.fonttoolbox.fontpaths import getFontPaths
@@ -41,10 +39,8 @@ QUADRATIC_CONTROLPOINT_SIZE = R
 CUBIC_CONTROLPOINT_COLOR = blackColor
 CUBIC_CONTROLPOINT_SIZE = R / 2
 
-context = getContext()
-print(context)
-
 class Point:
+
     # FIX: See more generic implentation in PageBotPath
     def __init__(self, x, y, onCurve=True, smooth=False, start=False):
         self.x = x
@@ -53,7 +49,7 @@ class Point:
         self.smooth = smooth
         self.start = start
 
-def drawSegment(path, segment, implied, cps, verbose=False):
+def drawSegment(context, path, segment, implied, cps, verbose=False):
     """
     Draws a quadratic segment as a cubic Bézier curve in drawBot. Each segment
     starts and ends with an oncurve point with 0 ... n offcurve control points.
@@ -66,7 +62,8 @@ def drawSegment(path, segment, implied, cps, verbose=False):
     >>> p2 = Point(200, 200, True)
     >>> segment = [p0, p1, p2]
     >>> path = BezierPath()
-    >>> drawSegment(path, segment)
+    >>> context = getContext()
+    >>> drawSegment(context, path, segment)
     """
     assert len(segment) > 1
 
@@ -131,12 +128,13 @@ def drawSegment(path, segment, implied, cps, verbose=False):
         # Recurse.
         # NOTE: PageBot implementation in glyph uses a loop instead of
         # recursion.
-        drawSegment(path, curve0, implied, cps)
-        drawSegment(path, curve1, implied, cps)
+        drawSegment(context, path, curve0, implied, cps)
+        drawSegment(context, path, curve1, implied, cps)
 
-def cross(x, y, d, r=1, g=0, b=0, a=1):
+def cross(context, x, y, d, r=1, g=0, b=0, a=1):
     """
-    >>> cross(100, 100, 5, r=0.5, g=0.3, b=0.2, a=0.4)
+    >>> context = getContext()
+    >>> cross(context, 100, 100, 5, r=0.5, g=0.3, b=0.2, a=0.4)
     """
     x0 = x - d
     y0 = y - d
@@ -147,10 +145,10 @@ def cross(x, y, d, r=1, g=0, b=0, a=1):
     x3 = x - d
     y3 = y + d
     context.stroke(r, g, b)
-    line((x0, y0), (x1, y1))
-    line((x2, y2), (x3, y3))
+    context.line((x0, y0), (x1, y1))
+    context.line((x2, y2), (x3, y3))
 
-def draw():
+def draw(context):
     W, H = 1750, 2250
     X0 = 75
     Y0 = 500
@@ -159,7 +157,6 @@ def draw():
     glyphName = 'Q'
     x = 50
     context.newPage(W, H)
-    DBFont('LucidaGrande', 24)
     PATH = getFontPaths()['Roboto-Black']
     font = Font(PATH)
     glyph = font[glyphName]
@@ -169,7 +166,7 @@ def draw():
     coordinates = glyph.ttGlyph.coordinates
     context.fill((0, 1, 1, 0.2))
     # Move glyph up so we can see results below descender level.
-    translate(X0, Y0)
+    context.translate(X0, Y0)
 
     # Draws the glyph.
     c = glyph.contours
@@ -224,7 +221,7 @@ def draw():
             # Lets this script calculate and draw implied points and derived cubic
             # control points. Optionally draw path itself later by calling
             # drawPath(path) (see below.)
-            drawSegment(path, segment, implied, cps)
+            drawSegment(context, path, segment, implied, cps)
 
     # Draws oncurve points and offcurve control points.
     for contour in contours:
@@ -278,6 +275,10 @@ def draw():
     context.text('Cubic control point', (x, y))
     y -= 30
     context.text('Quadratic control point', (x, y))
-    #context.save()
+    context.saveImage("_export/QuadraticGlyph-%s.pdf" % context.name)
 
-draw()
+
+for contextName in ('DrawBot', 'Flat'):
+    context = getContext(contextName)
+    context.fontSize(24)
+    draw(context)

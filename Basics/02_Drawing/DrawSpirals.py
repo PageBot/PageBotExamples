@@ -17,7 +17,6 @@
 from pagebot.toolbox.units import pt
 from pagebot.toolbox.color import noColor, blackColor
 from pagebot import getContext
-c = getContext()
 #import pagebot # Import to know the path of non-Python resources.
 
 X = 0
@@ -34,8 +33,10 @@ M = 20
 w = W - 2*M
 h = H - 2*H
 
+'''
+FIXME: only works in DrawBot.
 #dict(name='ElementOrigin', ui='CheckBox', args=dict(value=False)),
-c.Variable(
+context.Variable(
   [dict(name='X', ui='Slider',
         args=dict(minValue=-W/2, value=0, maxValue=W/2)),
    dict(name='Y', ui='Slider',
@@ -51,13 +52,14 @@ c.Variable(
    dict(name='D', ui='Slider',
         args=dict(minValue=0.1, value=0.5, maxValue=5))
   ], globals())
+'''
 
 def drawSpiral():
     mx = W/2+X
     my = H/2+Y
     runs = False
-    c.newPath()
-    c.moveTo((pt(mx), pt(my)))
+    context.newPath()
+    context.moveTo((pt(mx), pt(my)))
 
     for n in range(0, int(N), 4):
         dx1 = n*Sx*D
@@ -71,22 +73,25 @@ def drawSpiral():
         #dx5 = (n+4)*Sx*D
         #dy5 = (n+4)*Sy*D
         if not runs:
-            c.moveTo((pt(mx), pt(my)))
+            context.moveTo((pt(mx), pt(my)))
         else:
-            c.curveTo((pt(mx-dx1*Exy), pt(my-dy1)),
+            context.curveTo((pt(mx-dx1*Exy), pt(my-dy1)),
                 (pt(mx-dx1), pt(my-dy1*Exy)), (pt(mx-dx1), pt(my)))
-            c.curveTo((pt(mx-dx2), pt(my+dy2*Exy)),
+            context.curveTo((pt(mx-dx2), pt(my+dy2*Exy)),
             (pt(mx-dx2*Exy), pt(my+dy2)), (pt(mx), pt(my+dy2)))
-            c.curveTo((pt(mx+dx3*Exy), pt(my+dy3)),
+            context.curveTo((pt(mx+dx3*Exy), pt(my+dy3)),
                 (pt(mx+dx3), pt(my+dy3*Exy)), (pt(mx+dx3), pt(my)))
-            c.curveTo((pt(mx+dx4), pt(my-dy4*Exy)), (pt(mx+dx4*Exy), pt(my-dy4)),
+            context.curveTo((pt(mx+dx4), pt(my-dy4*Exy)), (pt(mx+dx4*Exy), pt(my-dy4)),
                 (pt(mx), pt(my-dy4)))
         runs = True
 
-    c.fill(noColor)
-    c.stroke(blackColor)
-    c.drawPath()
+    context.fill(noColor)
+    context.stroke(blackColor)
+    context.drawPath()
 
-c.newPage(pt(W), pt(H))
-drawSpiral()
-c.saveImage("_export/Spiral.pdf")
+for contextName in ('DrawBot', 'Flat'):
+    # FIXME: Flat context curves are drawn upside down.
+    context = getContext(contextName)
+    context.newPage(pt(W), pt(H))
+    drawSpiral()
+    context.saveImage("_export/Spiral-%s.pdf" % context.name)

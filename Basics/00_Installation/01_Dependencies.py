@@ -38,12 +38,13 @@ except:
 # TODO: add svgwrite, flat, markdown etc?
 # TODO automate, eval()?
 
+required = ['flat', 'pagebot', 'booleanOperations', 'fontTools', 'markdown', 'sass', 'svgwrite', 'tornado']
+
+
 if sys.platform == 'darwin':
-    required = ['pagebot', 'fontTools', 'objc', 'AppKit', 'vanilla', 'drawBot', 'sass']
-    optional = ['flat', 'simple_idml']
+    optional = ['pagebotosx', 'drawBot', 'objc']
 else:
-    required = ['pagebot', 'fontTools', 'sass', 'flat']
-    optional = ['simple_idml']
+    optional = ['']
 
 missing = []
 

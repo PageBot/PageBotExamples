@@ -3,6 +3,10 @@
 #    Currently only works in DrawBotContext
 #
 
+# FIXME: don't use DrawBot functions.
+from drawBot import BezierPath, width, height, translate, scale, drawPath, \
+        font, fontSize, fill, textBox, saveImage
+
 path = BezierPath()
 # draw some text
 # the text will be converted to curves
@@ -36,3 +40,4 @@ fontSize(5)
 fill(1)
 # draw some text in the path
 textBox("abcdefghijklmnopqrstuvwxyz"*30000, path)
+saveImage('_export/TextInPath.pdf')

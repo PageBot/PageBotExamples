@@ -117,22 +117,22 @@ def loadJSON(context):
 def addTitle(page, context, title):
     style = {'font': boldFont.path, 'fontSize': HEADSIZE}
     bs = context.newString(title, style=style)
-    newTextBox(bs, parent=page, w=W/2, conditions=[Right2RightSide(),
+    newTextBox(bs, parent=page, w=W/2, conditions=[Right2SideRight(),
         Top2Top()])
 
 def addDescription(page, context, description):
     style = {'font': regularFont.path, 'fontSize': 12, 'leading': 14}
     bs = context.newString(description, style=style)
-    newTextBox(bs, parent=page, w=W/2, conditions=[Right2RightSide(),
+    newTextBox(bs, parent=page, w=W/2, conditions=[Right2SideRight(),
         Top2Top()])
 
 def addImage(page, context, src):
     newImage(src,
-        parent=page, 
-        w=(W-COL_GUTTER)/2, 
+        parent=page,
+        w=(W-COL_GUTTER)/2,
         h=(H-IMG_GUTTER)/2,
-        conditions=[Left2LeftSide(), Float2TopSide()], 
-        mt=IMG_GUTTER, 
+        conditions=[Left2SideLeft(), Float2SideTop()],
+        mt=IMG_GUTTER,
         scaleImage=False,
     )
 
