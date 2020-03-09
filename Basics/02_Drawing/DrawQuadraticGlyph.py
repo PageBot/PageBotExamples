@@ -278,5 +278,6 @@ def draw():
     context.text('Cubic control point', (x, y))
     y -= 30
     context.text('Quadratic control point', (x, y))
+    #context.save()
 
 draw()
