@@ -29,7 +29,7 @@ PADDING = p(4)
 def makeDocument(context):
     w = p(8)
 
-    doc = Document(w=W, h=H, originTop=False, context=context)
+    doc = Document(w=W, h=H, context=context)
     page = doc[1] # Get the single page from te document.
     page.padding = PADDING
 

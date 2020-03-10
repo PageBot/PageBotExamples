@@ -33,14 +33,14 @@ def getText(doc, font, s):
         textFill=whiteColor, xTextAlign=CENTER)
     style2 = dict(font=font, fontSize=10, leading=pt(12),
         textFill=blackColor, xTextAlign=CENTER)
-    t = doc.context.newString('TEXT', style=style1)
-    t += doc.context.newString('\n'+s, style=style2)
+    #t = doc.context.newString('TEXT', style=style1)
+    t = doc.context.newString('\n'+s, style=style2)
     return t
 
 def makeDocument(context):
     font = findFont('PageBot Regular')
     w = pt(8*12)
-    doc = Document(w=W, h=H, originTop=False, context=context)
+    doc = Document(w=W, h=H, context=context)
 
     page = doc[1] # Get the single page from te document.
     page.padding = PADDING
@@ -49,6 +49,20 @@ def makeDocument(context):
     page.showBaselineGrid = True
     page.showPadding = True
     page.showOrigin = True
+
+    e1 = newTextBox(getText(doc, font, 'Middle y on grid'), parent=page,
+        fill=color('red'), yAlign=MIDDLE, showOrigin=True,
+        conditions=[Left2Left(), Bottom2Bottom(), Baseline2Grid()])
+
+    e2 = newTextBox(getText(doc, font, 'Middle y on grid'), parent=page,
+        fill=color('orange'), yAlign=MIDDLE, showOrigin=True,
+        conditions=[Left2Left(), Middle2Middle(), Baseline2Grid()])
+
+    e3 = newTextBox(getText(doc, font, 'Middle y on grid'), parent=page,
+        fill=color('yellow').darker(0.8), yAlign=MIDDLE, showOrigin=True,
+        conditions=[Left2Left(), Top2Top(), Baseline2Grid()])
+
+    page.solve()
 
     '''
 
@@ -95,24 +109,6 @@ def makeDocument(context):
     page = page.next
     '''
 
-    page.padding = PADDING
-    page.baselineGrid = pt(24)
-    page.baselineGridStart = PADDING * 1.5
-    page.showBaselineGrid = True
-    page.showPadding = True
-    page.showOrigin = True
-
-    e1 = newTextBox(getText(doc, font, 'Middle y on grid'), parent=page,
-        fill=color('red'), yAlign=MIDDLE, showOrigin=True,
-        conditions=[Left2Left(), Bottom2Bottom(), Baseline2Grid()])
-    e2 = newTextBox(getText(doc, font, 'Middle y on grid'), parent=page,
-        fill=color('orange'), yAlign=MIDDLE, showOrigin=True,
-        conditions=[Left2Left(), Middle2Middle(), Baseline2Grid()])
-    e3 = newTextBox(getText(doc, font, 'Middle y on grid'), parent=page,
-        fill=color('yellow').darker(0.8), yAlign=MIDDLE, showOrigin=True,
-        conditions=[Left2Left(), Top2Top(), Baseline2Grid()])
-
-    page.solve()
     '''
 
     e1.y += e1.distance2Grid

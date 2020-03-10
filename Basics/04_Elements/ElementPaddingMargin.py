@@ -25,7 +25,7 @@ W = H = 500
 PADDING = p(2)
 MARGIN = p(1)
 
-doc = Document(w=W, h=H, originTop=False)
+doc = Document(w=W, h=H)
 view = doc.view
 view.padding = p(4)
 view.showCropMarks = True

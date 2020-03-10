@@ -28,7 +28,7 @@ from pagebot.fonttoolbox.objects.font import findFont
 W = H = pt(500)
 font = findFont('PageBot Regular')
 
-doc = Document(w=W, h=H, originTop=False)
+doc = Document(w=W, h=H)
 t = doc.context.newString('TEXT', style=dict(font=font, fontSize=36, textFill=whiteColor, xTextAlign=CENTER))
 PADDING = t.size[0]
 

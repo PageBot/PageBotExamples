@@ -31,7 +31,7 @@ PADDING = PAD, PAD, PAD, PAD
 NUM_LINES = 20
 W = H = NUM_LINES * BASELINE_GRID + 2*PAD
 
-doc = Document(w=W, h=H, originTop=False, baselineGrid=BASELINE_GRID, 
+doc = Document(w=W, h=H, baselineGrid=BASELINE_GRID,
     padding=PADDING, baselineGridStart=PAD/2)
 view = doc.view
 view.showBaselineGrid = True
@@ -55,12 +55,12 @@ def makePage(page, data, xAlign, yAlign):
             name = 'Hkpx%d%d' % (ix, iy)
             c = [Shrink2TextBounds()] + list(row)
             bgColor = color(ix/3, 0, iy/3, 0.8)
-            newTextBox(getText(name), conditions=c, 
+            newTextBox(getText(name), conditions=c,
                 xAlign=xAlign, yAlign=yAlign,
                 parent=page, fill=bgColor,
                 showOrigin=True)
     page.solve()
-    
+
 # Make data tables more readable by prefabricated conditons.
 t2t = Top2SideTop()
 b2b = Bottom2SideBottom()
@@ -73,7 +73,7 @@ data = (
     ((l2l, t2t), (c2c, t2t), (r2r, t2t)),
     ((l2l, m2m), (c2c, m2m), (r2r, m2m)),
     ((l2l, b2b), (c2c, b2b), (r2r, b2b)),
-) 
+)
 
 for ax in (LEFT, CENTER, RIGHT):
     for ay in (TOP, MIDDLE, BOTTOM):
@@ -89,7 +89,7 @@ data = (
     ((c2l, m2t), (c2c, m2t), (c2r, m2t)),
     ((c2l, m2m), (c2c, m2m), (c2r, m2m)),
     ((c2l, m2b), (c2c, m2b), (c2r, m2b)),
-) 
+)
 
 for ax in (LEFT, CENTER, RIGHT):
     for ay in (TOP, MIDDLE, BOTTOM):

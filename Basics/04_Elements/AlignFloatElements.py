@@ -41,7 +41,7 @@ SQ = 8 * G # Size of the squares
 def makeDocument(context):
     """Make a new document."""
 
-    doc = Document(w=W, h=H, originTop=False, autoPages=1, context=context)
+    doc = Document(w=W, h=H, autoPages=1, context=context)
     page = doc[1] # Get the single page from te document.
 
     # Hard coded padding, just for simple demo,

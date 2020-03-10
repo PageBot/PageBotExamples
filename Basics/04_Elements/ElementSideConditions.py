@@ -26,7 +26,7 @@ from pagebot.conditions import *
 W = H = pt(500)
 PADDING = w = p(10) # Make square will the page padding
 
-doc = Document(w=W, h=H, originTop=False)
+doc = Document(w=W, h=H)
 page = doc[1] # Get the single page from te document.
 page.padding = PADDING
 

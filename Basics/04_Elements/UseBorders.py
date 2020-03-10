@@ -59,7 +59,7 @@ def makeDocument():
     my = (H - sqy*(SQUARE + GUTTER) + GUTTER)/2
 
 
-    doc = Document(title='Color Squares', w=W, h=H, originTop=False, autoPages=1)
+    doc = Document(title='Color Squares', w=W, h=H, autoPages=1)
 
     doc.view.padding = 0 # Don't show cropmarks in this example.
 

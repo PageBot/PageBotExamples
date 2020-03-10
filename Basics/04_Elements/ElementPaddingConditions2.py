@@ -27,7 +27,7 @@ W = H = pt(500)
 PADDING = p(8)
 w = p(8)
 
-doc = Document(w=W, h=H, originTop=False)
+doc = Document(w=W, h=H)
 page = doc[1] # Get the single page from te document.
 page.padding = PADDING
 

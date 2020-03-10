@@ -78,7 +78,7 @@ EXPORT_PATH = '_export/FloatElements.pdf'
 def makeDocument():
     """Make a new document."""
 
-    doc = Document(w=PageSize, h=PageSize, originTop=False, autoPages=1)
+    doc = Document(w=PageSize, h=PageSize, autoPages=1)
 
     view = doc.view
     view.padding = pt(40) # Show cropmarks and such.

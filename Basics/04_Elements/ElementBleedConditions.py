@@ -31,7 +31,7 @@ BLEED = p(1)
 def makeDocument(context):
     w = PADDING + BLEED # Square fills bleed and padding
 
-    doc = Document(w=W, h=H, originTop=False, context=context)
+    doc = Document(w=W, h=H, context=context)
     doc.view.padding = p(6) # View padding around the page.
 
     page = doc[1] # Get the single page from te document.
