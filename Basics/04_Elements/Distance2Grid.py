@@ -50,6 +50,7 @@ def makeDocument(context):
     page.showPadding = True
     page.showOrigin = True
 
+    '''
 
     e1 = newTextBox(getText(doc, font, 'e1 Bottom2Bottom'),
         parent=page, fill=color('red'),
@@ -92,6 +93,7 @@ def makeDocument(context):
     e9.y += e9.distance2Grid
 
     page = page.next
+    '''
 
     page.padding = PADDING
     page.baselineGrid = pt(24)
@@ -111,6 +113,7 @@ def makeDocument(context):
         conditions=[Left2Left(), Top2Top(), Baseline2Grid()])
 
     page.solve()
+    '''
 
     e1.y += e1.distance2Grid
     e2.y += e2.distance2Grid
@@ -157,6 +160,7 @@ def makeDocument(context):
 
 
     page.solve()
+    '''
 
     EXPORT_PATH = '_export/Distance2Grid-%s.pdf' % context.name
     doc.export(EXPORT_PATH)
@@ -166,5 +170,6 @@ if __name__ == '__main__':
     from pagebot import getContext
 
     for contextName in ('DrawBot', 'Flat'):
+    #for contextName in ('Flat',):
         context = getContext(contextName)
         makeDocument(context)
