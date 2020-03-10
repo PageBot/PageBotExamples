@@ -15,10 +15,10 @@
 #     This example script shows the sequence how to get from a MarkDown
 #     file with embedded code blocks, using Typesetter and Composer
 #     to create a PDF document, and then fill the  page with the MarkDown text.
-#     
-#     Also it illustrates how MarkDown code blocks and this calling 
+#
+#     Also it illustrates how MarkDown code blocks and this calling
 #     applicatin communicate with each other through a shared "targets"
-#     dictionary. 
+#     dictionary.
 #
 from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
 from pagebot.document import Document
@@ -42,18 +42,18 @@ context = DrawBotContext()
 # Define the styles for the Typesetter, matching the tags that are using in the
 # MarkDown file.
 styles = dict(
-    h1=dict(textFill=color('red'), fontSize=pt(24), leading=em(1.4), 
+    h1=dict(textFill=color('red'), fontSize=pt(24), leading=em(1.4),
         paragraphBottomSpacing=pt(12)),
     h2=dict(textFill=color(0.3), fontSize=pt(18), leading=em(1.4),
         paragraphTopSpacing=pt(12), paragraphBottomSpacing=pt(12)),
     p=dict(textFill=blackColor, fontSize=pt(12), leading=em(1.4)),
-    li=dict(textFill=color('green'), tabs=pt(8, 16, 24, 36, 48), 
-        fontSize=pt(12), leading=em(1.4), 
+    li=dict(textFill=color('green'), tabs=pt(8, 16, 24, 36, 48),
+        fontSize=pt(12), leading=em(1.4),
         indent=16, firstLineIndent=0)
 )
 
 # Create the overall document with the defined size.
-doc = Document(originTop=False, name='Demo MarkDown', w=W, h=H, context=context)
+doc = Document(name='Demo MarkDown', w=W, h=H, context=context)
 
 # Set the view parameters for the required output.
 view = doc.view
@@ -84,7 +84,7 @@ composer = Composer(doc)
 
 # Create the global targets dictionary with objects that can be used during
 # interpretation of the markdown elements on the galley. The composer instance
-# will run sequentially through the elements, executing the code blocks. 
+# will run sequentially through the elements, executing the code blocks.
 # This may cause the shifting of target for the text elements to another block
 # or another page.
 targets = dict(doc=doc, page=page, box=page.select('Box'), composer=composer)

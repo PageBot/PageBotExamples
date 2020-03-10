@@ -31,7 +31,7 @@ ShadowTextBlur = 10
 
 def makeDocument():
 
-    doc = Document(originTop=False, w=W, h=H, autoPages=1)
+    doc = Document(w=W, h=H, autoPages=1)
 
     # Set the view parameters for the required output.
     view = doc.view

@@ -64,7 +64,7 @@ def makeDocument():
     #padX = (W - sqx*(SQUARE + GUTTER) + GUTTER)/2
     my = (H - sqy*(SQUARE + GUTTER) + GUTTER)/2
 
-    doc = Document(w=W, h=H, originTop=False, title='Color Squares', autoPages=1)
+    doc = Document(w=W, h=H, title='Color Squares', autoPages=1)
 
     view = doc.view # Get the current view of the document.
     view.padding = 40 # Aboid showing of crop marks, etc.

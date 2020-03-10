@@ -52,7 +52,7 @@ style = dict(font=font, fontSize=24, leading=em(1.4), textFill=0.3, hyphenation=
 # Make long text to force box overflow
 t = context.newString(text, style=style)
 # Create a new document with 1 page. Set overall size and padding.
-doc = Document(w=W, h=H, padding=PADDING, gridX=GRIDX, gridY=GRIDY, context=context, originTop=True)
+doc = Document(w=W, h=H, padding=PADDING, gridX=GRIDX, gridY=GRIDY, context=context)
 # Get the default page view of the document and set viewing parameters
 view = doc.view
 # Set types of grid lines to show on foreground/background
@@ -61,15 +61,16 @@ view.showBaselineGrid = False # Show default setting of baseline grid of the col
 
 # Get the page
 page = doc[1]
+page.originTop = True
 # Make text box as child element of the page and set its layout conditions
 # to fit the padding of the page and the condition that checks on text overflow.
-c1 = newTextBox(t, w=CW, name='c1', parent=page, 
+c1 = newTextBox(t, w=CW, name='c1', parent=page,
     showOrigin=True, nextElement='c2',
     conditions=[Left2Left(), Top2Top(), Fit2Height(), Overflow2Next()])
 # Text without initial content, will be filled by overflow of c1.
 # Not showing the [+] marker, as the overflow text fits in the second column.
-c2 = newTextBox(w=CW, name='c2', parent=page, 
-    showOrigin=True, 
+c2 = newTextBox(w=CW, name='c2', parent=page,
+    showOrigin=True,
     showBaselineGrid=(BASE_LINE, BASE_INDEX_LEFT, BASE_Y_RIGHT), # Overwrited view setting.
     conditions=[Right2Right(), Top2Top(), Fit2Height()])
 

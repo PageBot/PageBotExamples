@@ -44,7 +44,7 @@ if __name__ == '__main__':
 	# Define the path where to find the example image.
 	path = getResourcesPath() + "/images/cookbot1.jpg"
 	# Use the standard DrawBot function to get the width/height of the image from the file.
-	doc = Document(w=W, h=1.35*H, originTop=False, context=context) # New simple document with default padding.
+	doc = Document(w=W, h=1.35*H, context=context) # New simple document with default padding.
 
 	page = doc[1] # Get first (and only) automatic page.
 	factor = 1 # Incremental scale division factor of the image width.

@@ -43,9 +43,8 @@ f = findFont('PageBot-Regular')
 # Make the style dictionary for the body text.
 style = dict(font=f, fontSize=24, leading=em(1.4), textFill=0.3, hyphenation=LANGUAGE_EN)
 # Create a new document with 1 page. Set overall size and padding.
-# TODO: View grid drawing, etc. does not work properly for originTop=True
-doc = Document(w=W, h=H, padding=PADDING, gridX=GRIDX, gridY=GRIDY, context=context, 
-    autoPages=NUM_PAGES, originTop=False, baselineGrid=BASELINE)
+doc = Document(w=W, h=H, padding=PADDING, gridX=GRIDX, gridY=GRIDY, context=context,
+    autoPages=NUM_PAGES, baselineGrid=BASELINE)
 # Get the default page view of the document and set viewing parameters
 view = doc.view
 view.showTextOverflowMarker = True # Shows as [+] marker on bottom-right of page.
@@ -58,7 +57,7 @@ view.showBaselineGrid = True # Show default baseline grid of the column lines.
 page = doc[1]
 
 bs = context.newString('Headline Kphx', style=dict(font=f, fontSize=150, textFill=(1, 0, 0)))
-e = newTextBox(bs, x=100, y=300, parent=page, 
+e = newTextBox(bs, x=100, y=300, parent=page,
 	conditions=[Fit2Width(), Shrink2TextHeight(), CapHeight2Top()])
 print(sorted(e.baselines), e.parent.top, e.top, e.bottom, e.bs.size, context.b.textSize(e.bs.s))
 page.solve()

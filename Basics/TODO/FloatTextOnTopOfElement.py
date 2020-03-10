@@ -53,7 +53,7 @@ def makeDocument():
 
     W = H = PageSize
 
-    doc = Document(w=W, h=H, originTop=False, title='Color Squares', autoPages=1)
+    doc = Document(w=W, h=H, title='Color Squares', autoPages=1)
 
     view = doc.getView()
     view.padding = pt(0) # Aboid showing of crop marks, etc.

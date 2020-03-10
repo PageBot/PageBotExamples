@@ -58,7 +58,7 @@ class ThemeSpecimen(Element):
                 break
         # Theme palette
         
-doc = Document(w=W, h=H, context=context, originTop=False)
+doc = Document(w=W, h=H, context=context)
 
 view = doc.view
 view.showPadding = True

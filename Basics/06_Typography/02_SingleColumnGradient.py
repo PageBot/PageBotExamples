@@ -56,7 +56,7 @@ style = dict(font=font, fontSize=24, leading=BASELINE, textFill=0.15, hyphenatio
 t = context.newString('Head hkpx\n', style=headStyle) # Start with headline
 t += context.newString(text * 5, style=style) # Body text
 # Create a new document with 1 page. Set overall size and padding.
-doc = Document(w=W, h=H, padding=PADDING, context=context, baselineGrid=BASELINE, originTop=False)
+doc = Document(w=W, h=H, padding=PADDING, context=context, baselineGrid=BASELINE)
 # Get the default page view of the document and set viewing parameters
 view = doc.view
 view.showTextOverflowMarker = True # Shows as [+] marker on bottom-right of page.

@@ -32,8 +32,7 @@ BASELINE = pt(15)
 BASELINE_START = 3.5 * BASELINE
 PADDING = 5 * BASELINE # Page padding related to baseline in this example.
 
-# TODO: View grid drawing does not work with originTop=True
-doc = Document(size=B5, padding=PADDING, originTop=False,
+doc = Document(size=B5, padding=PADDING,
     baselineGrid=BASELINE, baselineGridStart=BASELINE_START)
 
 view = doc.view # Get the current view of this document. Default is PageView.
@@ -42,5 +41,5 @@ view.showBaselineGrid = [BASE_LINE_BG, BASE_INDEX_LEFT] # Set to True to show ba
 view.showPadding = True # Show the padding of the page. The size is then (page.pw, page.ph)
 # The page has no child elements, just showing the metrics of the padding and baseline.
 
-# Export the document showing the baselines of the page as horizontal lines and the padding.  
+# Export the document showing the baselines of the page as horizontal lines and the padding.
 doc.export('_export/PageBaselines.pdf')

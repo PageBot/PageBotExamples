@@ -21,7 +21,7 @@ from pagebot.toolbox.units import pt
 from pagebot.toolbox.color import color
 
 W, H = pt(300, 200) # Get size units
-doc = Document(w=W, h=H, originTop=False)
+doc = Document(w=W, h=H)
 page = doc[1]
 newRect(parent=page, fill=color('red'), size=pt(240, 140), showDimensions=True, conditions=[Center2Center(), Middle2Middle()])
 page.solve()

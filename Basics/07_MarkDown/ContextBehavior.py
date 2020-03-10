@@ -14,7 +14,7 @@
 #
 #     This example script does focus on the difference between exporting
 #     for DrawBotContext documents and HtmlContext documents, both
-#     using the same MarkDown file as source. 
+#     using the same MarkDown file as source.
 #
 from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
 from pagebot.contexts.htmlcontext import HtmlContext
@@ -40,19 +40,19 @@ htmlContext = HtmlContext()
 styles = dict(
     h1=dict(textFill=color('red'), fontSize=pt(24), leading=em(1.4), firstTagIndent=pt(0),
         firstLineIndent=0, paragraphBottomSpacing=pt(12)),
-    h2=dict(textFill=color(0.3), fontSize=pt(18), leading=em(1.4), firstTagIndent=pt(0), 
+    h2=dict(textFill=color(0.3), fontSize=pt(18), leading=em(1.4), firstTagIndent=pt(0),
         firstLineIndent=0, paragraphTopSpacing=pt(12), paragraphBottomSpacing=pt(12)),
-    p=dict(textFill=blackColor, fontSize=pt(10), leading=em(1.4), firstLineIndent=pt(24), 
+    p=dict(textFill=blackColor, fontSize=pt(10), leading=em(1.4), firstLineIndent=pt(24),
         firstTagIndent=0, firstColumnIndent=0),
-    li=dict(textFill=color('green'), tabs=pt(8, 16, 24, 36, 48), fontSize=pt(12), leading=em(1.4), 
+    li=dict(textFill=color('green'), tabs=pt(8, 16, 24, 36, 48), fontSize=pt(12), leading=em(1.4),
         indent=16, firstLineIndent=0),
     strong=dict(textFill=color('red'), firstLineIndent=pt(24), firstTagIndent=0),
     em=dict(textFill=color('blue'), firstLineIndent=pt(24), firstTagIndent=0),
 )
 
 # Create the overall documents, side by side for the two contexts.
-pdfDoc = Document(originTop=False, name='Demo PDF MarkDown', w=W, h=H, context=pdfContext)
-htmlDoc = Document(originTop=False, name='Demo HTML MarkDown', context=htmlContext, viewId='Site')
+pdfDoc = Document(name='Demo PDF MarkDown', w=W, h=H, context=pdfContext)
+htmlDoc = Document(name='Demo HTML MarkDown', context=htmlContext, viewId='Site')
 
 for doc in (pdfDoc, htmlDoc):
     # Set the view parameters for the required output.
@@ -76,13 +76,13 @@ for doc in (pdfDoc, htmlDoc):
     # Make a text box, fitting the page padding on all sides.
     newTextBox(parent=page1, name='Box', conditions=[Fit()])
     page1.solve() # Solve the fitting condition.
-    
+
     # Create a new page after the current one
     page2 = page1.next
     page2.padding = PADDING # Set the padding of this page.
     # Make a text box, fitting the page padding on all sides.
     newTextBox(parent=page2, name='Box', w=(page2.pw-G)/2, fill=0.9,
-        conditions=[Left2Left(), Top2Top(), Fit2Bottom(), Overflow2Next()], 
+        conditions=[Left2Left(), Top2Top(), Fit2Bottom(), Overflow2Next()],
         nextElement='Box2')
     newTextBox(parent=page2, name='Box2', w=(page2.pw-G)/2, fill=0.9, firstColumnIndent=30,
         conditions=[Right2Right(), Top2Top(), Fit2Bottom()])
@@ -92,10 +92,10 @@ for doc in (pdfDoc, htmlDoc):
 
     # Create the global targets dictionary with objects that can be used during
     # interpretation of the markdown elements on the galley. The composer instance
-    # will run sequentially through the elements, executing the code blocks. 
+    # will run sequentially through the elements, executing the code blocks.
     # This may cause the shifting of target for the text elements to another block
     # or another page.
-    targets = dict(doc=doc, page=page1, box=page1.select('Box'), 
+    targets = dict(doc=doc, page=page1, box=page1.select('Box'),
         composer=composer, styles=styles, context=doc.context)
     composer.compose(galley, targets=targets)
 

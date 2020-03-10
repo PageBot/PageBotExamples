@@ -17,7 +17,7 @@ from pagebot.toolbox.color import color
 
 W, H = pt(300, 200) # Get size units
 # Create document with default 1 page.
-doc = Document(w=W, h=H, originTop=False) 
+doc = Document(w=W, h=H) 
 # First page in the list is uneven (right side)
 page = doc[1] 
 # Create a new rectangle element with position conditions

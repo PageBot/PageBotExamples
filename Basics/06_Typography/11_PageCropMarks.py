@@ -32,7 +32,7 @@ BASELINE = pt(15)
 BASELINE_START = 3.5 * BASELINE
 PADDING = 5 * BASELINE # Page padding related to baseline in this example.
 
-doc = Document(size=B5, padding=PADDING, originTop=True, 
+doc = Document(size=B5, padding=PADDING,
     autoPages=3, # Create multiple pages, to show the page number/total pages.
     baselineGrid=BASELINE, baselineGridStart=BASELINE_START)
 
@@ -48,5 +48,5 @@ view.showFrame = True # Show frame of the page size.
 
 # The page has no child elements, just showing the metrics of the padding and baseline.
 
-# Export the document showing the baselines of the page as horizontal lines and the padding.  
+# Export the document showing the baselines of the page as horizontal lines and the padding.
 doc.export('_export/PageBaselines.pdf')
