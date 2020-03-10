@@ -34,9 +34,8 @@ def wordAlignment(context):
     f = findFont('PageBot-Regular')
 
     # Create a new document with 1 page. Set overall size and padding.
-    # TODO: View grid drawing, etc. does not work properly for originTop=True
     doc = Document(w=W, h=H, padding=PADDING, context=context,
-        autoPages=NUM_PAGES, originTop=False)
+        autoPages=NUM_PAGES)
     view = doc.view
     view.showPadding = True
 

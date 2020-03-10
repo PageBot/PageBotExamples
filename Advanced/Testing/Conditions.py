@@ -39,7 +39,7 @@ W, H = 500, 400
 
 def makeDocument():
     # Creates the publication/document that holds the pages.
-    doc = Document(w=W, h=H, originTop=False, autoPages=1)
+    doc = Document(w=W, h=H, autoPages=1)
     print(doc.view)
     print(doc.pages)
     

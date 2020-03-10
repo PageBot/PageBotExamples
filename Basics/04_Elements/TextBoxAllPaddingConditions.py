@@ -31,7 +31,7 @@ PADDING = PAD, PAD, PAD, PAD
 NUM_LINES = 20
 W = H = NUM_LINES * BASELINE_GRID + 2*PAD
 
-doc = Document(w=W, h=H, originTop=False, baselineGrid=BASELINE_GRID, 
+doc = Document(w=W, h=H, baselineGrid=BASELINE_GRID, 
     padding=PADDING, baselineGridStart=PAD/2)
 view = doc.view
 view.showBaselineGrid = True

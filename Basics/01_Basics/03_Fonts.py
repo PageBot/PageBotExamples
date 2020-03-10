@@ -40,7 +40,7 @@ def verboseFam(fam):
 def showAll():
     """Shows all fonts that are shipped with PageBot."""
     context = getContext()
-    doc = Document(w=W, h=H, originTop=False, autoPages=1, context=context)
+    doc = Document(w=W, h=H, autoPages=1, context=context)
     page = doc[1]
     page.padding = P
     

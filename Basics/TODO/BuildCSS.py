@@ -42,7 +42,7 @@ def makeDocument():
     W = H = PageSize
 
     # Create a new document, default to the defined page size.
-    doc = Document(w=W, h=H, originTop=False, title='Text Flow', autoPages=2)
+    doc = Document(w=W, h=H, title='Text Flow', autoPages=2)
 
     view = doc.getView()
     view.padding = 0 # Aboid showing of crop marks, etc.

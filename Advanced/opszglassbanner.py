@@ -79,7 +79,7 @@ fontSizeFactor = 3 # Enlarge the [opsz] font size by this factor.
 magnifySizeFactor = 8 # Enlarge magnified word by this factor, compared to the max value of [opsz]
 
 # Create a new doc, with the right amount of frames/pages.
-doc = Document(w=W, h=H, originTop=False, frameDuration=1.0/framesPerSecond, 
+doc = Document(w=W, h=H, frameDuration=1.0/framesPerSecond, 
     autoPages=frameCnt, context=c)
 # Sample text to show in the animation
 sample = 'Optical size' #font.info.familyName #'Decovar'

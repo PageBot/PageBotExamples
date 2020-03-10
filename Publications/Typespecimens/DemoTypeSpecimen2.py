@@ -26,7 +26,7 @@ CW = (W-2*PADDING-(COLS-1)*G)/COLS
 GRID_X = [(CW, G)]*4
 
 # ---------------------------------------
-doc = Document(w=W, h=H, gridX=GRID_X, originTop=False, autoPages=1, context=context)
+doc = Document(w=W, h=H, gridX=GRID_X, autoPages=1, context=context)
 view = doc.view
 view.padding = inch(1)
 view.showFrame = True

@@ -38,7 +38,7 @@ def makeDocument():
     """Make a new document."""
 
     # Create a new document, default to the defined page size.
-    doc = Document(w=W, h=H, originTop=False, title='Text Flow', autoPages=2)
+    doc = Document(w=W, h=H, title='Text Flow', autoPages=2)
     c = doc.context
 
     view = doc.getView()

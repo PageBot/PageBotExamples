@@ -37,7 +37,7 @@ IH = PADDING
 G = pt(12)
 
 # Create a new document with 1 page. Set overall size and padding.
-doc = Document(w=W, h=H, padding=PADDING, context=context, originTop=False)
+doc = Document(w=W, h=H, padding=PADDING, context=context)
 # Get the default page view of the document and set viewing parameters
 view = doc.view
 view.showPadding = True

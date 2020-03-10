@@ -37,7 +37,7 @@ for i in range(1, int(H / SQ) + 1):
 
 for contextName in ['DrawBot', 'Flat']:
     context = getContext(contextName)
-    doc = Document(w=W, h=H, padding=30, context=context, originTop=False)
+    doc = Document(w=W, h=H, padding=30, context=context)
     doc.name = 'Grid-%s'  % contextName
     page = doc[1]
     page.padding = (SQ, SQ, SQ, SQ)

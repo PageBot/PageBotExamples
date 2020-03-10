@@ -29,7 +29,7 @@ W, H = inch(8, 10.875)
 sketchPath = 'TestImage.sketch'
 textPath = 'TestText.md'
 
-doc = context.readDocument(sketchPath, w=W, h=H, originTop=True, context=drawBotContext)
+doc = context.readDocument(sketchPath, w=W, h=H, context=drawBotContext)
 
 view = doc.view
 view.padding = 30
@@ -46,6 +46,7 @@ view.showFrame = True
 if 0:
     for pn, pages in doc.pages.items():
         page = pages[0]
+        page.originTop = True
         for artboard in page.elements:
             page.gridX = artboard.gridX
             page.gridY = artboard.gridY
@@ -64,6 +65,7 @@ if 0:
 
     # Anchor the text in the first text column
     page = doc[1]
+    page.originTop = True
     #print(page.deepFind('Article1'))
     targets = dict(doc=doc, page=page)
     composer = Composer(doc)

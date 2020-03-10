@@ -34,7 +34,7 @@ def fit():
     PADDING = 56
     COL = 40
     
-    doc = Document(w=W, h=H, originTop=False)
+    doc = Document(w=W, h=H)
     view = doc.view
     context = view.context
 

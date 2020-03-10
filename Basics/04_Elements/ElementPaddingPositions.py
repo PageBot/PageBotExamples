@@ -26,7 +26,7 @@ from pagebot.conditions import *
 W = H = 500
 PADDING = p(5)
 
-doc = Document(w=W, h=H, originTop=False)
+doc = Document(w=W, h=H)
 page = doc[1] # Get the single page from te document.
 page.padding = PADDING
 

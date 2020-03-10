@@ -39,7 +39,7 @@ BASELINE = pt(15)
 BASELINE_START = 1.5 * BASELINE
 PADDING = 3 * BASELINE # Page padding related to baseline in this example.
 
-doc = Document(w=W, h=H, padding=PADDING, originTop=True,
+doc = Document(w=W, h=H, padding=PADDING,
     baselineGrid=BASELINE, baselineGridStart=BASELINE_START)
 
 view = doc.view # Get the current view of this document. Defaulse it PageView.
@@ -48,6 +48,7 @@ view.showPadding = True # Show the padding of the page. The size is then (page.p
 view.showOrigin = False # No origin showing
 
 page = doc[1] # Get the first (and only) page of the document
+page.originTop = True
 
 # Define the style dictionary fir the main text.
 style = dict(name='body', font='Verdana', fontSize=pt(12), leading=em(1.4))
@@ -55,15 +56,15 @@ conditions = [Fit()] # Fitting conditions for the text box on (page.pw, page.ph)
 
 # Create a new text box and set the view-parameres, so they angue for today.
 tb = newTextBox(text * 5, parent=page, stroke=0.5, strokeWidth=0.5,
-    style=style, conditions=conditions, 
+    style=style, conditions=conditions,
     baselineColor=color(1, 0, 0), # Show baselines and indices in red.
     showBaselineGrid=[BASE_LINE_BG, BASE_INDEX_RIGHT]) # Define type of baseline view.
-   
+
 # Make the text box fit to the page padding, solving position and size.
 doc.solve()
 
-# Adjust vertical position of the fitting textbox, so that textLines[4] 
-# locks on page baseline. 
+# Adjust vertical position of the fitting textbox, so that textLines[4]
+# locks on page baseline.
 lineIndex = 4
 print(tb.x, tb.y, tb.baselineOffset(lineIndex))
 tb.y += tb.baselineOffset(lineIndex)
@@ -72,8 +73,8 @@ tb.y += tb.baselineOffset(lineIndex)
 #print(-tb.textLines[0].y)
 #print(tb.textLines[lineIndex].y)
 newLine(x=0, y=tb.y,
-    #tb.textLines[lineIndex].y, 
-    w=page.w, h=0, parent=page, 
+    #tb.textLines[lineIndex].y,
+    w=page.w, h=0, parent=page,
     stroke=color(0, 0, 1), strokeWidth=pt(0.5))
 
 # Export to the given file name. The "_export" folder content does snot commit to git.

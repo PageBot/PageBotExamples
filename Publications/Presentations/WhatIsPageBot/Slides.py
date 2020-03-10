@@ -97,7 +97,7 @@ logoStyle = dict(textFill=1, font=fontPath, fontSize=32, rTracking=0.11)
 titleStyle = dict(textFill=1, font=fontPath, fontSize=32, rTracking=0.04)
 slideNumberStyle = dict(textFill=1, font=fontPath, fontSize=32, rTracking=0.04, xTextAlign=RIGHT)
 
-doc = Document(w=W, h=H, autoPages=len(CONTENT), originTop=False, context=context)
+doc = Document(w=W, h=H, autoPages=len(CONTENT), context=context)
 for pn, slide in enumerate(CONTENT):
     doc.frameDuration = 2
     page = doc[pn+1]

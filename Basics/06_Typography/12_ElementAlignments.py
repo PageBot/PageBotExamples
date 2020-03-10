@@ -38,27 +38,26 @@ view.showPadding = True
 
 page = doc[1]
 page.padding = pt(30) # Make page area to fit the circles
-page.originTop = False # Origin on top of bottom should make not difference
 page.showOrigin = True
 # Fitting by condition on page sides
-newCircle(parent=page, fill=noColor, stroke=color(rgb='violet'), 
-    strokeWidth=pt(4), conditions=[Fit2Sides()]) 
+newCircle(parent=page, fill=noColor, stroke=color(rgb='violet'),
+    strokeWidth=pt(4), conditions=[Fit2Sides()])
 # Fitting by condition on the page padding
-newCircle(parent=page, fill=noColor, stroke=color(rgb='blue'), 
-    strokeWidth=pt(4), conditions=[Fit()]) 
+newCircle(parent=page, fill=noColor, stroke=color(rgb='blue'),
+    strokeWidth=pt(4), conditions=[Fit()])
 # Fit (x, y) on middle of page.
-newCircle(parent=page, r=page.pw/2-30, fill=noColor, 
-    stroke=color(rgb='red'), strokeWidth=pt(4), 
-    conditions=[Center2Center(), Middle2Middle()]) 
+newCircle(parent=page, r=page.pw/2-30, fill=noColor,
+    stroke=color(rgb='red'), strokeWidth=pt(4),
+    conditions=[Center2Center(), Middle2Middle()])
 # Direct position with origin on bottom left
-c = newCircle(parent=page, r=page.pw/2-60, fill=noColor, 
-    stroke=color(rgb='orange'), strokeWidth=pt(4)) 
+c = newCircle(parent=page, r=page.pw/2-60, fill=noColor,
+    stroke=color(rgb='orange'), strokeWidth=pt(4))
 c.left = page.pl+60
 c.bottom = page.pb+60
 # Direct position with origin on (center, middle)
 newCircle(parent=page, xAlign=CENTER, yAlign=MIDDLE,
     r=page.pw/2-90, stroke=noColor, x=page.w/2, y=page.h/2,
-    fill=color(rgb='yellow'), strokeWidth=pt(4)) 
+    fill=color(rgb='yellow'), strokeWidth=pt(4))
 
 page.solve()
 

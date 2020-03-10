@@ -37,7 +37,7 @@ W = H = pt(1000) # Document size
 PADDING = pt(100) # Page padding on all sides
 
 # Create a new document with 1 page. Set overall size and padding.
-doc = Document(w=W, h=H, padding=PADDING, context=context, originTop=True)
+doc = Document(w=W, h=H, padding=PADDING, context=context)
 # Get the default page view of the document and set viewing parameters
 view = doc.view
 view.padding = inch(1)
@@ -50,15 +50,15 @@ view.showRegistrationMarks = True
 # Get the page
 page = doc[1]
 # Make image box as child element of the page and set its layout conditions.
-im = Image(imagePath, parent=page, conditions=[Fit()], 
+im = Image(imagePath, parent=page, conditions=[Fit()],
     showPadding=True, padding=100, stroke=(1, 0, 0))
 
 # Rotate the whole by selecting the value and then cmd-drag to alter the value
-# The elements rotate independently. Note that the image is rotating in the 
+# The elements rotate independently. Note that the image is rotating in the
 # reversed direction, so it stays upright in the clipping rectangle.
 a = degrees(100)
 
-im.angle =a 
+im.angle =a
 im.fill = (0, 0, 0.7+random()*0.3)
 imd = im.imageData
 imd.x = 366

@@ -326,7 +326,7 @@ class PageBotApp(BaseApp):
         gridX, gridY = self.getGrid(w, h, padding)
         theme = self.getTheme()
         # Make a new Document instance for export, based on current publication class
-        return publicationClass(w=w, h=h, name=name, autoPages=1, padding=padding, originTop=False,
+        return publicationClass(w=w, h=h, name=name, autoPages=1, padding=padding,
             gridX=gridX, gridY=gridY, theme=theme, context=context)
 
     def setViewFlags(self, doc):

@@ -55,8 +55,7 @@ captionStyle['leading'] = em(1)
 # Make BabelString from multiple cascading styles
 t = context.newString('Hkpx', style=style) # Start with headline
 # Create a new document with 1 page. Set overall size and padding.
-# FIX: Float conditions only seem to work for originTop=False
-doc = Document(w=W, h=H, originTop=False, padding=PADDING,  gridX=GRIDX, gridY=GRIDY, context=context, baselineGrid=BASELINE)
+doc = Document(w=W, h=H, padding=PADDING,  gridX=GRIDX, gridY=GRIDY, context=context, baselineGrid=BASELINE)
 # Get the default page view of the document and set viewing parameters
 view = doc.view
 view.showTextOverflowMarker = True # Shows as [+] marker on bottom-right of page.
@@ -69,36 +68,36 @@ page = doc[1]
 # to fit the padding of the page.
 # Red frame to show position and dimensions of the text box element.
 # Default behavior of the textbox is to align the text at "top of the em-square".
-t = context.newString('Hkpx0\n', style=style) 
+t = context.newString('Hkpx0\n', style=style)
 t += context.newString('Move baseline to top', style=captionStyle)
-c0 = newTextBox(t, parent=page, w=CW, stroke=(1, 0, 0), 
+c0 = newTextBox(t, parent=page, w=CW, stroke=(1, 0, 0),
     conditions=[Left2Left(), Baseline2Top()])
 
-t = context.newString('Hkpx1\n', style=style) 
+t = context.newString('Hkpx1\n', style=style)
 t += context.newString('Move to top and then round baseline down to grid', style=captionStyle)
-c1 = newTextBox(t, parent=page, w=CW, stroke=(1, 0, 0), 
+c1 = newTextBox(t, parent=page, w=CW, stroke=(1, 0, 0),
     conditions=[Right2Right(), Top2Top(), BaselineDown2Grid()])
 
-t = context.newString('Hkpx2\n', style=style) 
+t = context.newString('Hkpx2\n', style=style)
 t += context.newString('Move to half page and round baseline up to grid', style=captionStyle)
 y = page.ph/2 + page.pb
-c2 = newTextBox(t, y=y, parent=page, w=CW, stroke=(1, 0, 0), 
+c2 = newTextBox(t, y=y, parent=page, w=CW, stroke=(1, 0, 0),
     conditions=[Left2Left(), BaselineDown2Grid()])
 
-t = context.newString('Hkpx3\n', style=style) 
+t = context.newString('Hkpx3\n', style=style)
 t += context.newString('Move half of page and round baseline down to grid', style=captionStyle)
 y = page.ph/2 + page.pb
-c3 = newTextBox(t, y=y, parent=page, w=CW, stroke=(1, 0, 0), 
+c3 = newTextBox(t, y=y, parent=page, w=CW, stroke=(1, 0, 0),
     conditions=[Right2Right(), BaselineDown2Grid()])
 
-t = context.newString('Hkpx4\n', style=style) 
+t = context.newString('Hkpx4\n', style=style)
 t += context.newString('Move to bottom of page and round baseline up to grid', style=captionStyle)
-c4 = newTextBox(t, parent=page, w=CW, stroke=(1, 0, 0), 
+c4 = newTextBox(t, parent=page, w=CW, stroke=(1, 0, 0),
     conditions=[Left2Left(), Bottom2Bottom(), BaselineDown2Grid()])
 
-t = context.newString('Hkpx5\n', style=style) 
+t = context.newString('Hkpx5\n', style=style)
 t += context.newString('Move last baseline to bottom', style=captionStyle)
-c5 = newTextBox(t, parent=page, w=CW, stroke=(1, 0, 0), 
+c5 = newTextBox(t, parent=page, w=CW, stroke=(1, 0, 0),
     conditions=[Right2Right(), Baseline2Bottom(index=-1)])
 
 # Solve the page/element conditions, so the text box as it's position and size.

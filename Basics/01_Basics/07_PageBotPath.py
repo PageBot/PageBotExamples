@@ -24,7 +24,7 @@ from pagebot.constants import A3
 
 H, W = A3
 context = getContext()
-doc = Document(w=W, h=H, originTop=False, autoPages=1, context=context)
+doc = Document(w=W, h=H, autoPages=1, context=context)
 page = doc[1]
 c = (Right2Right(), Top2Top(), Float2Left())
 

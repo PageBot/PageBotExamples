@@ -73,7 +73,7 @@ fontPath = getTestFontsPath() + '/djr/bungee/Bungee-Regular.ttf'
 font = getFont(fontPath)
 glyphName = 'e'#'cid05405.1'
 
-doc = Document(w=W, h=H, originTop=False, autoPages=1)
+doc = Document(w=W, h=H, autoPages=1)
 
 view = doc.getView()
 view.padding = 40 # Aboid showing of crop marks, etc.

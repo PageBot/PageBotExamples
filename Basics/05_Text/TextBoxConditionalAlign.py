@@ -36,7 +36,7 @@ EXPORT_PATH = '_export/useTextBoxConditionalAlign.pdf'
 font = findFont('Roboto-Regular')
 
 # Create a new document, default to the defined page size.
-doc = Document(w=W, h=H, autoPages=2, originTop=False, context=c)
+doc = Document(w=W, h=H, autoPages=2, context=c)
 
 style = dict(font=font, fontSize=pt(8), xTextAlign=CENTER)
 

@@ -29,7 +29,7 @@ BASELINE_GRID = pt(48)
 
 font = findFont('PageBot-Regular')
 
-doc = Document(w=W, h=H, originTop=False,
+doc = Document(w=W, h=H,
     baselineGrid=BASELINE_GRID)
 view = doc.view
 view.showPadding = True # Show padding and margin on page

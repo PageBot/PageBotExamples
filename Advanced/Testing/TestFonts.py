@@ -29,7 +29,7 @@ W, H = A3
 
 def showAll():
     context = getContext()
-    doc = Document(w=W, h=H, originTop=False, autoPages=1, context=context)
+    doc = Document(w=W, h=H, autoPages=1, context=context)
     page = doc[1]
     c1 = (Fit2Right(), Left2Left(), Float2Top())
     c2 = (Left2Left(), Top2Top())

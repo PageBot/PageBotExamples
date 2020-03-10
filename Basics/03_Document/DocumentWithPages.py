@@ -27,7 +27,7 @@ W, H = pt(400, 300)
 
 
 def makeDocument(context):
-    doc = Document(w=W, h=H, originTop=False, autoPages=1, context=context)
+    doc = Document(w=W, h=H, autoPages=1, context=context)
     print('One page in the document', doc.pages)
 
     view = doc.getView()

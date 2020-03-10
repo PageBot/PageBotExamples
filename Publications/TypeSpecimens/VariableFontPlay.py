@@ -28,7 +28,7 @@ class VariableFontPlay(Element):
     and weight."""
 
 from pagebot.document import Document 
-document = Document(w=W, h=H, originTop=False)
+document = Document(w=W, h=H)
 view = document.view 
 view.padding = 30
 view.showCropMarks = True

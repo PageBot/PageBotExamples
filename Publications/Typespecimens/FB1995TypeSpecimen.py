@@ -256,7 +256,7 @@ def makeDocument(families):
     # Calculate the amount of pages to create
     numPages = len(families)+1 # One family per spread.
         
-    doc = Document(w=W, h=H, title='Variable Font Sample Page', originTop=False, startPage=0, 
+    doc = Document(w=W, h=H, title='Variable Font Sample Page', startPage=0, 
         autoPages=numPages, context=context, gridX=GRID_X, gridY=GRID_Y)
 
     # Get default view from the document and set the viewing parameters.

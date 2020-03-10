@@ -112,7 +112,7 @@ framesPerSecond = 10
 frames = duration * framesPerSecond # Total number of frames
 axisFrames = sequenceLength * framesPerSecond
 
-doc = Document(w=w, h=h, originTop=False, frameDuration=1/framesPerSecond, 
+doc = Document(w=w, h=h, frameDuration=1/framesPerSecond, 
     autoPages=frames, context=c)
 sample = font.info.familyName #'Decovar'
 

@@ -185,7 +185,7 @@ def makeDocument():
     # One page, just the cover.
     doc = Document(w=W, h=H, title='Type Magazine #3', autoPages=endPage - startPage + 1,
         baselineGrid=BASELINE, baselineStart=BASELINE_START, style=styles,
-        startPage=startPage, originTop=False, context=context)
+        startPage=startPage, context=context)
 
     # Get the current view of the document. This allows setting of
     # parameters how the document is represented on output.

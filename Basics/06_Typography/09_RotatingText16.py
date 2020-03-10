@@ -47,7 +47,7 @@ style = dict(font=font, fontSize=12, leading=em(1.4), textFill=0.3, hyphenation=
 # Make long text to force box overflow
 t = context.newString(text * 30, style=style)
 # Create a new document with 1 page. Set overall size and padding.
-doc = Document(w=W, h=H, padding=PADDING, gridX=GRIDX, gridY=GRIDY, context=context, originTop=True)
+doc = Document(w=W, h=H, padding=PADDING, gridX=GRIDX, gridY=GRIDY, context=context)
 # Get the default page view of the document and set viewing parameters
 view = doc.view
 view.showTextOverflowMarker = True # Shows as [+] marker on bottom-right of page.
@@ -61,12 +61,13 @@ view.showBaselineGrid = False # Show default setting of baseline grid of the col
 
 # Get the page
 page = doc[1]
+page.originTop = True
 # Make text box as child element of the page and set its layout conditions
 # to fit the padding of the page and the condition that checks on text overflow.
 n = 0
 for ix in range(4): # Horizontal index for x-position
     for iy in range(4): # Vertical index for y-position
-        newTextBox(t, x=page.pl+ix*(CW+G), y=page.pt+iy*(CH+G), w=CW, h=CH, 
+        newTextBox(t, x=page.pl+ix*(CW+G), y=page.pt+iy*(CH+G), w=CW, h=CH,
             rx=CW/2, ry=CH/2, angle=90*n/15, # Local rotation center and contructed angle.
             conditions=[Overflow2Next()], # Just overflow conditions, position is hard-coded.
             name='c%d' % n, parent=page, nextElement='c%d' % (n+1),

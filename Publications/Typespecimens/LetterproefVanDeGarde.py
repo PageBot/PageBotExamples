@@ -143,7 +143,7 @@ def makeDocument():
     
     blurb = Blurb() # Blurb text generator
     
-    doc = Document(w=PageWidth, h=PageHeight, originTop=False, startPage=1, autoPages=10)
+    doc = Document(w=PageWidth, h=PageHeight, startPage=1, autoPages=10)
     # Get default view from the document and set the viewing parameters.
     view = doc.view
     c = view.context

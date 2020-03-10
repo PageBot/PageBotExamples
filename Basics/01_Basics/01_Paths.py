@@ -38,7 +38,7 @@ def showFilePaths():
     context = getContext('Flat')
     
     # Make a Document instance for this size and context, intializing one page.
-    doc = Document(w=W, h=H, originTop=False, autoPages=1, context=context)
+    doc = Document(w=W, h=H, autoPages=1, context=context)
     
     # Get the page.
     page = doc[1]

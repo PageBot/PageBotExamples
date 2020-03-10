@@ -45,9 +45,8 @@ NUM_PAGES = 2*6 # Spreads
 f = findFont('Upgrade-Regular')
 
 # Create a new document with 1 page. Set overall size and padding.
-# TODO: View grid drawing, etc. does not work properly for originTop=True
-doc = Document(w=W, h=H, padding=PADDING, context=context, 
-    autoPages=NUM_PAGES, originTop=False, gridX=GRIDX, gridY=GRIDY)
+doc = Document(w=W, h=H, padding=PADDING, context=context,
+    autoPages=NUM_PAGES, gridX=GRIDX, gridY=GRIDY)
 
 view = doc.view
 view.showPadding = True
@@ -65,12 +64,12 @@ for pn in range(1, NUM_PAGES+1):
     if pn in (1, 2):
         page.w = W_COVER
         page.gridX = GRIDX_COVER
-        newRect(parent=page, fill=c, w=BACK, 
+        newRect(parent=page, fill=c, w=BACK,
             conditions=[Fit2HeightBleeds(), Center2Center()])
 
-    newRect(parent=page, fill=c, w=PAD+BLEED, 
+    newRect(parent=page, fill=c, w=PAD+BLEED,
         conditions=[Fit2HeightBleeds(), Right2BleedRight()])
-    newRect(parent=page, fill=c, w=PAD+BLEED, 
+    newRect(parent=page, fill=c, w=PAD+BLEED,
         conditions=[Fit2HeightBleeds(), Left2BleedLeft()])
 
     page.solve()

@@ -270,7 +270,7 @@ class Website(Publication):
     with the following optional attributes:
 
     rootStyle=None, styles=None, views=None, name=None, cssClass=None, title=None,
-    autoPages=1, defaultTemplate=None, templates=None, originTop=True, startPage=0,
+    autoPages=1, defaultTemplate=None, templates=None, startPage=0,
     w=None, h=None, exportPaths=None, context=None, **kwargs)
 
     >>> website = Website(name='Home Site', pl=30, pr=30, autoPages=5)

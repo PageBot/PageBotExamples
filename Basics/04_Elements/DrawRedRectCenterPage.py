@@ -34,15 +34,17 @@ RedRect = True # Show red or gray
 RectSize = 300
 
 def makeDocument():
-    # Create new document with (w,h) size and fixed amount of pages.
-    # Note that most of the rootStyle is cascading through the e.css('name') call,
-    # except that values of x, y, z, w, h, d
+    """
+    Create new document with (w,h) size and fixed amount of pages.  Note that
+    most of the rootStyle is cascading through the e.css('name') call, except
+    that values of x, y, z, w, h, d.
+    """
 
     # Just to show here how to get the root style. If not altered, it can be omitted.
     # as Document( ) will create a RootStyle by default.
     rootStyle = getRootStyle()
 
-    doc = Document(rootStyle, originTop=False, w=W, h=H, autoPages=1)
+    doc = Document(rootStyle, w=W, h=H, autoPages=1)
     page = doc[1] # Get the first/single page of the document.
     page.padding = 40 # TODO: order if 4 values?
 
@@ -75,13 +77,19 @@ def makeDocument():
     return doc
 
 if __name__ == '__main__':
-    d = makeDocument()
-    d.context.Variable([
-        #dict(name='ElementOrigin', ui='CheckBox', args=dict(value=False)),
-        dict(name='ShowOrigins', ui='CheckBox', args=dict(value=True)),
-        dict(name='ShowElementInfo', ui='CheckBox', args=dict(value=False)),
-        dict(name='RedRect', ui='CheckBox', args=dict(value=True)),
-        dict(name='RectSize', ui='Slider', args=dict(minValue=10, value=W/2, maxValue=W)),
-    ], globals())
-    d.export('_export/DrawRedRectCenterPage.pdf')
+    from pagebot import getContext
+
+    for contextName in ('DrawBot', 'Flat'):
+        context = getContext(contextName)
+        d = makeDocument()
+        '''
+        d.context.Variable([
+            #dict(name='ElementOrigin', ui='CheckBox', args=dict(value=False)),
+            dict(name='ShowOrigins', ui='CheckBox', args=dict(value=True)),
+            dict(name='ShowElementInfo', ui='CheckBox', args=dict(value=False)),
+            dict(name='RedRect', ui='CheckBox', args=dict(value=True)),
+            dict(name='RectSize', ui='Slider', args=dict(minValue=10, value=W/2, maxValue=W)),
+        ], globals())
+        '''
+        d.export('_export/DrawRedRectCenterPage-%s.pdf' % contextName)
 

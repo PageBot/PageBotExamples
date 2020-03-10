@@ -232,7 +232,7 @@ def makeDocument(families):
         numPages += len(family) # Length of the family is the amount of fonts.
     numPages = min(numPages, MAX_PAGES-1)
         
-    doc = Document(w=W, h=H, title='Variable Font Sample Page', originTop=False, 
+    doc = Document(w=W, h=H, title='Variable Font Sample Page', 
         autoPages=numPages, context=context, gridX=GRID_X, gridY=GRID_Y)
 
     pn = 1

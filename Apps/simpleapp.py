@@ -318,7 +318,7 @@ class PageBotApp(BaseApp):
         padding = self.getPadding()
         gridX, gridY = self.getGrid(w, h, padding)
         # Make a new Document instance for export
-        doc = Document(w=w, h=h, autoPages=1, padding=padding, originTop=False,
+        doc = Document(w=w, h=h, autoPages=1, padding=padding,
             gridX=gridX, gridY=gridY, context=context)
         view = doc.view
         view.showCropMarks = showMarks = bool(self.uiDesign.showCropMarks.get())

@@ -57,7 +57,7 @@ style = dict(font=font, fontSize=24, leading=em(1.4), textFill=0.3, hyphenation=
 t = context.newString(text, style=style)
 # Create a new document with 1 page. Set overall size and padding.
 # TODO: View drawing for OriginTop=True does not work properly 
-doc = Document(w=W, h=H, padding=PADDING, gridX=GRIDX, gridY=GRIDY, context=context, originTop=False)
+doc = Document(w=W, h=H, padding=PADDING, gridX=GRIDX, gridY=GRIDY, context=context)
 # Get the default page view of the document and set viewing parameters
 view = doc.view
 view.showTextOverflowMarker = True # Shows as [+] marker on bottom-right of page.

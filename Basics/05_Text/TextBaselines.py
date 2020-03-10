@@ -75,7 +75,7 @@ styles = dict(root=pStyle,
     bullet=liStyle, brStyle=pStyle, a=aStyle)
 
 # Create a document with these attributes, single page.
-doc = Document(w=W, h=H, padding=PADDING, gridX=GRIDX, gridY=GRIDY, originTop=False, styles=styles,
+doc = Document(w=W, h=H, padding=PADDING, gridX=GRIDX, gridY=GRIDY, styles=styles,
     baselineGrid=LEADING, language=LANGUAGE_EN)
 
 view = doc.view

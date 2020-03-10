@@ -29,7 +29,7 @@ context = getContext()
 f = findFont('Amstelvar-Roman-VF') # Get PageBot Font instance of Variable font.
 EXPORT_PATH = '_export/FontSpecimen.pdf'
 
-doc = Document(size=A4, originTop=False, context=context)
+doc = Document(size=A4, context=context)
 view = doc.view
 
 page = doc[1]

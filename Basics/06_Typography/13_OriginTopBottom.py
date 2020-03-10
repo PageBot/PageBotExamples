@@ -20,8 +20,7 @@
 #     Test on variations of origin alignments and top/bottom of element origin.
 #
 #     TODO: Seems to be a problem when using picas p( ) as measurements for page size
-#     TODO: color circles have wrong offset for originTop=False
-#     TODO: ducplicate drawing (shifted) of element origin
+#     TODO: duplicate drawing (shifted) of element origin
 #
 
 from pagebot.document import Document # Get the main Document class
@@ -60,7 +59,7 @@ if DO_SOLVE:
 else:
     CONDS = []
 
-doc = Document(w=W, h=H, padding=PADDING, 
+doc = Document(w=W, h=H, padding=PADDING,
     autoPages=2*3, # Create multiple pages, to show page origin top/bottom and element alignments.
 )
 
@@ -72,7 +71,7 @@ page.originTop = True # Origin on top of bottom should make not differenc
 page.padding = PADDING
 r1 = newRect(conditions=CONDS, fill=E_FILL, parent=page)
 r1.showOrigin = True
-# 'Origin Top, box alignment top-left', 
+# 'Origin Top, box alignment top-left',
 r1.xAlign = LEFT
 r1.yAlign = TOP
 if DO_SOLVE:
@@ -84,7 +83,7 @@ else:
 
 newCircle(x=r1.x+r1.w/2-R, y=r1.y, r=R, fill=GREEN, parent=page) # x,y position
 newCircle(x=r1.center+R, y=r1.top, r=R, fill=RED, parent=page) # sides location
- 
+
 newCircle(x=r1.x+r1.w-R, y=r1.y+r1.h/2, r=R, fill=GREEN, parent=page)
 newCircle(x=r1.right+R, y=r1.middle, r=R, fill=RED, parent=page)
 
@@ -100,7 +99,7 @@ page.originTop = True # Origin on top of bottom should make not differenc
 page.padding = PADDING
 r1 = newRect(conditions=CONDS, fill=E_FILL, parent=page)
 r1.showOrigin = True
-# 'Origin Top, box alignment middle-center', 
+# 'Origin Top, box alignment middle-center',
 r1.xAlign = CENTER
 r1.yAlign = MIDDLE
 if DO_SOLVE:
@@ -112,7 +111,7 @@ else:
 
 newCircle(x=r1.x-R, y=r1.y-r1.h/2, r=R, fill=GREEN, parent=page)
 newCircle(x=r1.center+R, y=r1.top, r=R, fill=RED, parent=page)
- 
+
 newCircle(x=r1.x+r1.w/2-R, y=r1.y, r=R, fill=GREEN, parent=page)
 newCircle(x=r1.right+R, y=r1.middle, r=R, fill=RED, parent=page)
 
@@ -128,7 +127,7 @@ page.originTop = True # Origin on top of bottom should make not differenc
 page.padding = PADDING
 r1 = newRect(conditions=CONDS, fill=E_FILL, parent=page)
 r1.showOrigin = True
-# 'Origin Top, box alignment bottom-right', 
+# 'Origin Top, box alignment bottom-right',
 r1.xAlign = RIGHT
 r1.yAlign = BOTTOM
 if DO_SOLVE:
@@ -140,7 +139,7 @@ else:
 
 newCircle(x=r1.x-r1.w/2-R, y=r1.y-r1.h, r=R, fill=GREEN, parent=page)
 newCircle(x=r1.center+R, y=r1.top, r=R, fill=RED, parent=page)
- 
+
 newCircle(x=r1.x-R, y=r1.y-r1.h/2, r=R, fill=GREEN, parent=page)
 newCircle(x=r1.right+R, y=r1.middle, r=R, fill=RED, parent=page)
 
@@ -156,17 +155,17 @@ page.originTop = False # Origin on top of bottom should make not differenc
 page.padding = PADDING
 r1 = newRect(conditions=CONDS, fill=E_FILL, parent=page)
 r1.showOrigin = True
-# 'Origin Bottom, box alignment top-left', 
+# 'Origin Bottom, box alignment top-left',
 r1.xAlign = LEFT
 r1.yAlign = TOP
 #page.solve() # Make the r1 fit the page padding
-r1.x = LP 
+r1.x = LP
 r1.y = BP + EH
 r1.size = EW, EH
 
 newCircle(x=r1.x+r1.w/2-R, y=r1.y, r=R, fill=GREEN, parent=page)
 newCircle(x=r1.center+R, y=r1.top, r=R, fill=RED, parent=page)
- 
+
 newCircle(x=r1.x+r1.w-R, y=r1.y-r1.h/2, r=R, fill=GREEN, parent=page)
 newCircle(x=r1.right+R, y=r1.middle, r=R, fill=RED, parent=page)
 
@@ -182,7 +181,7 @@ page.originTop = False # Origin on top of bottom should make not differenc
 page.padding = PADDING
 r1 = newRect(conditions=CONDS, fill=E_FILL, parent=page)
 r1.showOrigin = True
-# 'Origin Bottom, box alignment middle-center', 
+# 'Origin Bottom, box alignment middle-center',
 r1.xAlign = CENTER
 r1.yAlign = MIDDLE
 #page.solve() # Make the r1 fit the page padding
@@ -192,7 +191,7 @@ r1.size = EW, EH
 
 newCircle(x=r1.x-R, y=r1.y+r1.h/2, r=R, fill=GREEN, parent=page)
 newCircle(x=r1.center+R, y=r1.top, r=R, fill=RED, parent=page)
- 
+
 newCircle(x=r1.x+r1.w/2-R, y=r1.y, r=R, fill=GREEN, parent=page)
 newCircle(x=r1.right+R, y=r1.middle, r=R, fill=RED, parent=page)
 
@@ -208,7 +207,7 @@ page.originTop = False # Origin on top of bottom should make not differenc
 page.padding = PADDING
 r1 = newRect(conditions=CONDS, fill=E_FILL, parent=page)
 r1.showOrigin = True
-# 'Origin Bottom, box alignment bottom-right', 
+# 'Origin Bottom, box alignment bottom-right',
 r1.xAlign = RIGHT
 r1.yAlign = BOTTOM
 #page.solve() # Make the r1 fit the page padding
@@ -229,5 +228,5 @@ newCircle(x=r1.x-r1.w-R, y=r1.y+r1.h/2, r=R, fill=GREEN, parent=page)
 newCircle(x=r1.left+R, y=r1.middle, r=R, fill=RED, parent=page)
 
 
-# Export the document showing the baselines of the page as horizontal lines and the padding.  
+# Export the document showing the baselines of the page as horizontal lines and the padding.
 doc.export('_export/OriginTopBottom.pdf')

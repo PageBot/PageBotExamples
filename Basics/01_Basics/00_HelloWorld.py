@@ -17,7 +17,7 @@ from pagebot.fonttoolbox.objects.font import findFont
 # Find the Roboto font that exist in PageBot resources.
 f = findFont('Roboto-Bold')
 # Create document with default 1 page.
-doc = Document(w=pt(800), h=pt(190), originTop=False) 
+doc = Document(w=pt(800), h=pt(190)) 
 # First page in the list is uneven (right side)
 page = doc[1] 
 # Create a new rectangle element with (x, y) conditions

@@ -37,7 +37,7 @@ P  = 50
 bungee = findFont('BungeeInline-Regular')
 
 # Create a new document for the current context. Create one automatic page.
-doc = Document(w=W, h=H, originTop=False, autoPages=1, context=context)
+doc = Document(w=W, h=H, autoPages=1, context=context)
 page = doc[1] # Get the one and single page of the document.
 page.padding = P # Set the page padding.
 

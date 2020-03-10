@@ -50,7 +50,7 @@ EXPORT_PATH = '_export/UseImageObjectFilters.pdf'
 def makeDocument():
 
     gridX = ((CW, GUTTER), (CW, GUTTER), (CW, 0))
-    doc = Document(w=W, h=H, originTop=False, title='Color Squares', autoPages=1, gridX=gridX)
+    doc = Document(w=W, h=H, title='Color Squares', autoPages=1, gridX=gridX)
 
     view = doc.getView()
     view.padding = 0 # Avoid showing of crop marks, etc.
