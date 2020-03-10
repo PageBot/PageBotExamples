@@ -41,7 +41,7 @@ inDelftStyle = dict(font=fontBold.path, textFill=0, rLeading=1.1, fontSize=90*S,
 EXPORT_PATH = '_export/DDSWelcomesRobothon2018.pdf'
 IMAGE_PATH = 'images/Robothon2018MonsterpliersScaled.png'
 
-doc = Document(w=W, h=H, padding=M, autoPages=1, context=context, originTop=False)
+doc = Document(w=W, h=H, padding=M, autoPages=1, context=context)
 
 doc.view.showTextOverflowMarker = False
 

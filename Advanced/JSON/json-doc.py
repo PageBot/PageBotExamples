@@ -48,7 +48,7 @@ TEXTSIZE = 12
 HEADSIZE = 14
 
 def loadJSON(context):
-    doc = Document(w=W, h=H, originTop=False, context=context)
+    doc = Document(w=W, h=H, context=context)
     view = doc.getView()
     view.showPadding = True
     view.showDimensions = True

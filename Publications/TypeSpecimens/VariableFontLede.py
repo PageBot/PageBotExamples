@@ -108,7 +108,7 @@ framesPerSecond = 12
 frameCnt = duration * framesPerSecond # Total number of frames in the animation
 
 # Create a new doc, with the right amount of frames/pages.
-doc = Document(w=w, h=h, originTop=False, frameDuration=1.0/framesPerSecond, 
+doc = Document(w=w, h=h, frameDuration=1.0/framesPerSecond, 
     autoPages=frameCnt, context=c)
 
 for frameIndex in range(frameCnt):

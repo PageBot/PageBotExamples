@@ -46,10 +46,7 @@ def makeDocument():
 
     title = 'Position Text Box Example' # Using plain string, style values
 
-    doc = Document(originTop=False, title=title,
-                   w=W, h=H,
-                   autoPages=1,
-                   context=context)
+    doc = Document(title=title, w=W, h=H, autoPages=1, context=context)
 
     page = doc[1] # Get the first/single page of the document.
     page.size = W, H

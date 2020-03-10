@@ -54,7 +54,7 @@ fontBold = findFont('Upgrade-Bold')
 coverTitleStyle = dict(font=fontBold, textFill=color(1, 0, 0), fontSize=pt(100))
 
 # Let the Magazine create a Finder instance, where to find resources, such as images.
-m = Magazine(RESOURCES_PATH, size=(W, H), padding=PADDING, originTop=False, 
+m = Magazine(RESOURCES_PATH, size=(W, H), padding=PADDING, 
         gridX=GRID_X, gridY=GRID_X, context=context)
 
 doc = m.newDocument(autoPages=1)

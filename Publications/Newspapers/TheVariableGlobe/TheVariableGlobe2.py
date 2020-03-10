@@ -161,7 +161,7 @@ urlStyle = dict(font=boldFont, fontSize=pt(9), leading=BASELINE, textFill=0)
 #=============================================================================
 #    Create the document and define the viewing parameters
 # .............................................................................
-doc = Document(w=W, h=H, originTop=False, gridX=gridX, gridY=gridY, 
+doc = Document(w=W, h=H, gridX=gridX, gridY=gridY, 
     baselineGrid=BASELINE, autoPages=PAGE_COUNT)
 # Set the viewing parameters
 view = doc.view

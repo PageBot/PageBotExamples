@@ -26,13 +26,11 @@ from pagebot.conditions import *
 
 W, H = 500, 500 #A5
 
-OriginTop = False
-
 def makeDocument():
     # Create new document with (w,h) and fixed amount of pages.
     # Make number of pages with default document size.
     # Initially make all pages default with template
-    doc = Document(originTop=OriginTop, w=W, h=H, autoPages=1)
+    doc = Document(w=W, h=H, autoPages=1)
 
     page = doc[1] # Get the first/single page of the document.
     page.size = W, H

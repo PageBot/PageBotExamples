@@ -53,7 +53,7 @@ frameCnt = duration * framesPerSecond # Total number of frames
 axisFrames = sequenceLength * framesPerSecond # Number of frames per axis sequence.
 
 # Create a new doc, with the right amount of frames/pages.
-doc = Document(w=W, h=H, originTop=False, frameDuration=1.0/framesPerSecond, 
+doc = Document(w=W, h=H, frameDuration=1.0/framesPerSecond, 
     autoPages=frameCnt, context=c)
 # Sample text to show in the animation
 sample = 'Fitting' 

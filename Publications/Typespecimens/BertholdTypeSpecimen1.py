@@ -144,7 +144,7 @@ def makeDocument(font):
     u"""Create the main document in the defined size with a couple of automatic empty pages."""
 
     # Build 4 pages, two for the original scan, the two for the generated version.
-    doc = Document(w=W, h=H, title='Variable Font Sample Page', originTop=False, 
+    doc = Document(w=W, h=H, title='Variable Font Sample Page', 
         context=context, gridX=GRID_X, fontSize=24)
     
     # Get default view from the document and set the viewing parameters.

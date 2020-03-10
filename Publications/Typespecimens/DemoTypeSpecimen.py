@@ -7,7 +7,7 @@ from pagebot.elements import *
 from pagebot.conditions import *
 
 H, W = A4
-doc = Document(w=W, h=H, originTop=False, autoPages=1)
+doc = Document(w=W, h=H, autoPages=1)
 view = doc.view
 view.padding = inch(1)
 view.showFrame = True

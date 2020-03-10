@@ -175,7 +175,7 @@ def makePages(doc, font):
         )
 # Actual building of the proof pages. 
 # Create a new doc, with the right amount of frames/pages.
-doc = Document(w=W, h=H, originTop=False, context=context)
+doc = Document(w=W, h=H, context=context)
 # Get the current default view (maker of PDF page documents) and set 
 # the flag to show padding.
 view = doc.view

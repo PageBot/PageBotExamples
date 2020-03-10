@@ -143,7 +143,7 @@ dateStyle = dict(font=boldFontName, fontSize=pt(24), leading=BASELINE, textFill=
 # =============================================================================
 #    Create the document and define the viewing parameters
 # .............................................................................
-doc = Document(w=W, h=H, originTop=False, gridX=gridX, gridY=gridY, 
+doc = Document(w=W, h=H, gridX=gridX, gridY=gridY, 
     baselineGrid=BASELINE, autoPages=1)
 # Set the viewing parameters
 view = doc.view
