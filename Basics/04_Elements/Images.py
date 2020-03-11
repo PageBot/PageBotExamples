@@ -43,16 +43,18 @@ bungeeOutline = findFont('Bungee-OutlineRegular')
 def test(context):
     print("creating doc")
     doc = Document(w=W, h=H, context=context)
-    doc.name = 'TextBoxes-%s' % doc.context.name
+    doc.name = 'Images-%s' % doc.context.name
     page = doc[1]
     print('# Testing images in %s' % doc)
 
-    path = getResourcesPath() + 'cookbot10.jpg'
-    newImage(path, z=0, w=100, parent=page, fill=0.7, padding=8,
-            conditions=(Right2Right(), Float2Top()))
+    path = '%s/images/%s' % (getResourcesPath(), 'cookbot10.jpg')
+    newImage(path, x=0, y=50, z=0, w=500, h=500, parent=page, fill=0.7, padding=8, scaleImage=False)
+            #conditions=[Left2SideLeft(), Float2SideTop()])
 
     print('Starting doc build')
     doc.build()
+    EXPORT_PATH = '_export/Images-%s.pdf' % context.name
+    doc.export(EXPORT_PATH)
 
 for contextName in ('DrawBot', 'Flat'):
     context = getContext(contextName)
