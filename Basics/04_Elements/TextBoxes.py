@@ -86,6 +86,7 @@ def drawBaselines(x0, y0, w, baselines, s, page):
 def test(context):
     print("creating doc")
     doc = Document(w=W, h=H, context=context)
+
     doc.name = 'TextBoxes-%s' % doc.context.name
     print('# Testing text boxes in %s' % doc)
 

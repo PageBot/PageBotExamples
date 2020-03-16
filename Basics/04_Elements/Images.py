@@ -48,14 +48,16 @@ def test(context):
     print('# Testing images in %s' % doc)
 
     path = '%s/images/%s' % (getResourcesPath(), 'cookbot10.jpg')
-    newImage(path, x=0, y=50, z=0, w=500, h=500, parent=page, fill=0.7, padding=8, scaleImage=False)
-            #conditions=[Left2SideLeft(), Float2SideTop()])
+    newImage(path, x=0, y=50, z=0, w=300, h=300, parent=page, padding=8, scaleImage=False)
+    #newRect(x=0, y=50, z=0, w=500, h=500)
+    #conditions=[Left2SideLeft(), Float2SideTop()])
 
     print('Starting doc build')
     doc.build()
     EXPORT_PATH = '_export/Images-%s.pdf' % context.name
     doc.export(EXPORT_PATH)
 
-for contextName in ('DrawBot', 'Flat'):
+for contextName in ('Flat',):
+#for contextName in ('DrawBot', 'Flat'):
     context = getContext(contextName)
     test(context)
