@@ -26,7 +26,7 @@ from pagebot.style import getRootStyle
 
 from pagebot import getContext
 from pagebot.contexts.flatcontext.flatstring import FlatString
-from pagebotcocoa.contexts.drawbot.drawbotstring import DrawBotString
+from pagebotosx.contexts.drawbot.drawbotstring import DrawBotString
 
 # TODO: move to basics when finished.
 

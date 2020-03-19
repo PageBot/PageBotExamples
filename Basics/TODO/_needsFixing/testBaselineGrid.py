@@ -13,8 +13,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
-from pagebot.contexts.flat.flatcontext import FlatContext
+from pagebot import getContext
 
 
 def appendS(fs1, fs2, w, baselineGrid):
@@ -28,10 +27,13 @@ def appendS(fs1, fs2, w, baselineGrid):
         print(1000-baselines[0][1], 1000-baselines[-1][1])
     return fs1
 
+drawBotContext = getContext('DrawBot')
+flatContext = getContext('Flat')
+
 testContexts = (
-    (DrawBotContext(), '_export/testFlatString.pdf'),
+    (drawBotContext, '_export/testDrawBotString.pdf'),
     # TODO: Get this to work with Flat
-    #(FlatContext(), '_export/testDrawBotString.pdf'),
+    #(flatContext, '_export/testFlatString.pdf'),
 )
 for context, path in testContexts:
 
@@ -39,11 +41,11 @@ for context, path in testContexts:
 
     leading = 24
     for n in range(0, 1000, leading):
-        context.stroke(1, 0, 0)
+        context.stroke((1, 0, 0))
         context.fill(None)
         context.line((0, n),(1000,n))
-   
-    fs1 = context.newString('')   
+
+    fs1 = context.newString('')
     fs2 = context.newString('aaa vvv bbbbbb\nss' * 5,
                       style=dict(fontSize=14,
                                  lineHeight=24))
@@ -58,7 +60,7 @@ for context, path in testContexts:
     bx, by, bw, bh = box = (100, Y, 400, 500)
     baselines = context.textBoxBaseLines(fs, box)
     for x, y in baselines:
-        context.stroke(0, 1, 0)
+        context.stroke((0, 1, 0))
         context.fill(None)
         context.line((x-10, y), (400+10, y))
     dy = round(baselines[0][1]/leading)*leading - baselines[0][1]

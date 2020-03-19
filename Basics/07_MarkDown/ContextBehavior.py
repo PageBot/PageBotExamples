@@ -16,7 +16,7 @@
 #     for DrawBotContext documents and HtmlContext documents, both
 #     using the same MarkDown file as source.
 #
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 from pagebot.contexts.htmlcontext import HtmlContext
 from pagebot.document import Document
 from pagebot.elements import *
@@ -34,8 +34,8 @@ G = pt(12)
 # Path to the MarkDown source file
 MARKDOWN_PATH = 'EmbeddedPython.md'
 
-pdfContext = DrawBotContext()
-htmlContext = HtmlContext()
+pdfContext = getContext('DrawBot')
+htmlContext = getContext('HTML')
 
 styles = dict(
     h1=dict(textFill=color('red'), fontSize=pt(24), leading=em(1.4), firstTagIndent=pt(0),

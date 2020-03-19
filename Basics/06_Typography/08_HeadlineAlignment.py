@@ -13,7 +13,7 @@
 #
 #     08-HeadlineAlignment.py
 #
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.units import em, p, pt
 from pagebot.constants import *
@@ -21,7 +21,7 @@ from pagebot.elements import *
 from pagebot.conditions import *
 from pagebot.document import Document
 
-context = DrawBotContext()
+context = getContext('DrawBot')
 
 W, H = pt(1500, 1000) # Document size
 PADDING = pt(100) # Page padding on all sides
