@@ -12,17 +12,18 @@
 #
 #     ReadWrite.py
 #
+
+# FIXME: sketch not supported at the moment.
 from pagebot import getResourcesPath
 from pagebot.toolbox.finder import Finder
 from pagebot.document import Document
 from pagebot.contexts.sketchcontext import SketchContext
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 from pagebot.constants import *
 from pagebot.typesetter import Typesetter
 from pagebot.composer import Composer
 
-context = SketchContext()
-drawBotContext = DrawBotContext()
+context = getContext('DrawBot')
 
 W, H = inch(8, 10.875)
 

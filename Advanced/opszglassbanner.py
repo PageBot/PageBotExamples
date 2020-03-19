@@ -20,7 +20,7 @@ from pagebot.constants import RIGHT
 from pagebot.conditions import *
 from pagebot.toolbox.color import color, blackColor
 from pagebot.toolbox.units import em
-from pagebotosx.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 
 class AnimatedBannerFrame(AnimationFrame):
     """
@@ -62,7 +62,7 @@ class AnimatedBannerFrame(AnimationFrame):
             x2, y2 = self.w/2-tw2, self.h/2-th2/5
             c.text(bs, (x2, y2)) # Make tekst right aligned
 
-c = DrawBotContext()
+c = getContext('DrawBot')
 W, H = 2040, 1020 # Type Network banners
 font = findFont('AmstelvarAlpha-VF')
 # Amstelvar axes to select from: here we are showing the optical size.

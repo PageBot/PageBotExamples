@@ -5,7 +5,7 @@
 #     P A G E B O T
 #
 #     Licensed under MIT conditions
-#     
+#
 #     Supporting DrawBot, www.drawbot.com
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
@@ -18,7 +18,7 @@ from pagebot.elements import *
 from pagebot.elements.variablefonts.animationframe import AnimationFrame
 from pagebot.document import Document
 from pagebot.constants import Letter, RIGHT
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 from pagebot.toolbox.units import em
 from pagebot.toolbox.color import blackColor, whiteColor
 
@@ -32,12 +32,12 @@ class AnimatedBannerFrame(AnimationFrame):
             """
             ox, oy, _ = origin
             c = self.context
-            # Now make fitting text instance 
+            # Now make fitting text instance
             bs = c.fitString(self.sampleText, style=self.style, w=self.w, h=self.h)
             tx, ty, _, _ = bs.bounds()
             c.text(bs, (ox-tx, oy-ty))
-     
-c = DrawBotContext()
+
+c = getContext('DrawBot')
 W, H = 2040, 1020 # Type Network banners
 M = 30
 # Claire: for now, add your Fit-Variable_1.ttf to your /Library/Fonts and it can be found.
@@ -53,20 +53,20 @@ frameCnt = duration * framesPerSecond # Total number of frames
 axisFrames = sequenceLength * framesPerSecond # Number of frames per axis sequence.
 
 # Create a new doc, with the right amount of frames/pages.
-doc = Document(w=W, h=H, frameDuration=1.0/framesPerSecond, 
+doc = Document(w=W, h=H, frameDuration=1.0/framesPerSecond,
     autoPages=frameCnt, context=c)
 # Sample text to show in the animation
-sample = 'Fitting' 
+sample = 'Fitting'
 
 frameIndex = 1 # Same as page index in the document
 for sequenceIndex in range(sequences):
-    
+
     for axisFrameIndex in range(axisFrames):
         page = doc[frameIndex] # Get the current frame-page
         newRect(x=0, y=0, w=page.w, h=page.h, fill=blackColor, parent=page)
-        
+
         page.padding = M
-        
+
         phicos = cos(radians(axisFrameIndex/axisFrames * 360))*0.5+0.5
         # Overall style for the frame
         pw = page.pw # Usable page/frame area, without paddind
@@ -89,11 +89,11 @@ for sequenceIndex in range(sequences):
             y = 0
             ww = pw - x
             hh = ph
-            
-        style = dict(leading=em(1.4), font=font, xTextAlign=RIGHT, textFill=whiteColor, 
+
+        style = dict(leading=em(1.4), font=font, xTextAlign=RIGHT, textFill=whiteColor,
             fill=blackColor, roundVariableFitLocation=False)
 
-        af = AnimatedBannerFrame(sample, font, frameCnt, frameIndex, parent=page, style=style, 
+        af = AnimatedBannerFrame(sample, font, frameCnt, frameIndex, parent=page, style=style,
             x=x+M, y=y+M, w=ww, h=hh, context=c)
         frameIndex += 1 # Prepare for the next frame
 

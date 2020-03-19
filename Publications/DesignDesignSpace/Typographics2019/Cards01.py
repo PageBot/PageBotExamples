@@ -13,7 +13,7 @@
 #
 #     Cards.py
 #
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.units import em, p, pt
 from pagebot.constants import *
@@ -22,7 +22,7 @@ from pagebot.conditions import *
 from pagebot.document import Document
 from pagebot.toolbox.color import color
 
-context = DrawBotContext()
+context = getContext('DrawBot')
 
 H = pt(284) # Rounded mm(100)
 W = 2*H

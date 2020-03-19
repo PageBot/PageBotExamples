@@ -5,7 +5,7 @@
 #     P A G E B O T
 #
 #     Licensed under MIT conditions
-#     
+#
 #     Supporting DrawBot, www.drawbot.com
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
@@ -15,7 +15,7 @@ from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.elements.variablefonts.animationframe import AnimationFrame
 from pagebot.document import Document
 from pagebot.constants import Letter, RIGHT
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 from pagebot.conditions import *
 from pagebot.toolbox.units import em
 
@@ -44,7 +44,7 @@ class AnimatedBannerFrame(AnimationFrame):
                 bs = c.newString(self.sampleText, style=style)
                 tw, th = bs.size
                 c.text(bs, (self.w/2 - tw/2, self.h/2))
-                            
+
                 wghtMin, wghtDefault, wghtMax = self.f.axes['wght']
 
                 """
@@ -53,7 +53,7 @@ class AnimatedBannerFrame(AnimationFrame):
             phisin = sin(radians(self.frameIndex/self.frames * 360))
             phicos = cos(radians(self.frameIndex/self.frames * 360))
 
-            style['textFill'] = 1-phicos*0.3+0.5 
+            style['textFill'] = 1-phicos*0.3+0.5
             # TODO: Not the right instance-weight is shown in export.
             wdthRange = wdthMax - wdthMin
             wghtRange = wghtMax - wghtMin
@@ -71,14 +71,14 @@ class AnimatedBannerFrame(AnimationFrame):
             glyph = instance['H']
             c.save()
             c.stroke(0, 0.25)
-            gray = phisin*0.3+0.5 
+            gray = phisin*0.3+0.5
             c.fill((gray, gray, 1-gray, 0.6))
             s = 0.45
             c.scale(s)
             c.drawPath(glyph.path, ((ox+self.pl)/s, (oy+self.ph/4)/s))
             c.restore()
             """
-            
+
             """
             path = "/Users/petr/Desktop/TYPETR-git/TYPETR-Bitcount-Var/variable_ttf/BitcountTest_DoubleCircleSquare4-VF.ttf"
             f = Font(path)
@@ -91,7 +91,7 @@ class AnimatedBannerFrame(AnimationFrame):
             glyph = instance['px']
             c.save()
             c.stroke(0, 0.25)
-            gray = phisin*0.3+0.5 
+            gray = phisin*0.3+0.5
             c.fill((1-gray, gray, gray, 0.6))
             s = 5
             c.scale(s)
@@ -99,8 +99,8 @@ class AnimatedBannerFrame(AnimationFrame):
             c.restore()
 
             """
-   
-c = DrawBotContext()
+
+c = Context('DrawBot')
 w, h = 2040, 1020 # Type Network banners
 font = findFont('DecovarAlpha-VF')
 
@@ -112,23 +112,23 @@ framesPerSecond = 10
 frames = duration * framesPerSecond # Total number of frames
 axisFrames = sequenceLength * framesPerSecond
 
-doc = Document(w=w, h=h, frameDuration=1/framesPerSecond, 
+doc = Document(w=w, h=h, frameDuration=1/framesPerSecond,
     autoPages=frames, context=c)
 sample = font.info.familyName #'Decovar'
 
 pn = 1
 for axisTag in font.axes.keys():
-    axisFrames = 
+    axisFrames =
     minValue, defaultValue, maxValue = font.axes[axisTag]
     for frameIndex in range(1, len(font.axes)):
         page = doc[pn]
         axisRange = maxValue - minValue
         phisin = sin(radians(frameIndex/self.frames * 360))
         phicos = cos(radians(self.frameIndex/self.frames * 360))
-        
+
         location = {phisin*wdthRange/2+wdthRange/2+wdthMin, wght=phisin*wghtRange/2+wghtRange/2+wghtMin)
         style = dict(leading=em(1.4), fontSize=400, xTextAlign=RIGHT, fill=blackColor)
-        af = AnimatedBannerFrame(font, frames, pn, parent=page, padding=20, style=style, 
+        af = AnimatedBannerFrame(font, frames, pn, parent=page, padding=20, style=style,
             sampleText=sample, w=page.pw, h=page.ph, context=c)
         pn += 1
 

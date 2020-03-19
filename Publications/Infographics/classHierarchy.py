@@ -22,7 +22,7 @@ from pagebot.constants import A3
 from pagebot.toolbox.units import *
 from pagebot.toolbox.color import Color, blackColor, blueColor, greenColor
 
-context = getContext()
+context = getContext('DrawBot')
 
 
 X0 = 100
@@ -185,7 +185,7 @@ def title(name):
     context.fontSize(42)
     context.text(name, (100, HEIGHT - 100))
 
-import pagebotcocoa.contexts.drawbot.drawbotcontext
+from pagebot import getContext
 import pagebot.contexts.flat.flatcontext
 
 context.newPage(WIDTH, HEIGHT)
@@ -195,7 +195,7 @@ connections = []
 drawnclasses = {}
 positions = []
 classes = []
-classes.extend(inspect.getmembers(sys.modules['pagebotcocoa.contexts.drawbot.drawbotcontext']))
+classes.extend(inspect.getmembers(sys.modules['pagebotosx.contexts.drawbotcontext.drawbotcontext']))
 classes.extend(inspect.getmembers(sys.modules['pagebot.contexts.flat.flatcontext']))
 drawClasses(classes)
 

@@ -19,8 +19,8 @@
 import os
 from random import random # Used for random color palet.
 
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
-context = DrawBotContext()
+from pagebot import getContext
+context = getContext('DrawBot')
 
 # Create random title and names
 from pagebot.contributions.filibuster.blurb import Blurb

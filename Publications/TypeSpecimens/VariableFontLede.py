@@ -5,7 +5,7 @@
 #     P A G E B O T
 #
 #     Licensed under MIT conditions
-#     
+#
 #     Supporting DrawBot, www.drawbot.com
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
@@ -20,7 +20,7 @@ from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.elements.variablefonts.animationframe import AnimationFrame
 from pagebot.document import Document
 from pagebot.constants import Letter, RIGHT
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 from pagebot.conditions import *
 from pagebot.elements import *
 from pagebot.toolbox.units import em
@@ -40,7 +40,7 @@ class AnimatedBannerFrame(AnimationFrame):
             instance = self.f.getInstance({}) # Get neutral instance
             style = self.style.copy()
 
-            x = 30 
+            x = 30
             y = self.h/3+20
             xHeight = instance.info.xHeight*style['fontSize']/instance.info.unitsPerEm
             capHeight = instance.info.capHeight*style['fontSize']/instance.info.unitsPerEm
@@ -54,10 +54,10 @@ class AnimatedBannerFrame(AnimationFrame):
             bs = c.newString(self.sampleText, style=style)
             tw, th = bs.size
             c.text(bs, (self.w/2 - tw/2, self.h/3+20))
-            
-            # Now make instance and draw over regular and add 
+
+            # Now make instance and draw over regular and add
             # to new copy of the style
-            
+
             style = self.style.copy()
             instance = self.f.getInstance(self.style['location'])
             style['font'] = instance.path
@@ -66,8 +66,8 @@ class AnimatedBannerFrame(AnimationFrame):
             bs = c.newString(self.sampleText, style=style)
             tw, th = bs.size
             c.text(bs, (self.w/2 - tw/2, self.h/3+20))
-       
-c = DrawBotContext()
+
+c = Context('DrawBot')
 w, h = 2040, 1020 # Type Network banners
 font = findFont('RobotoDelta-VF')
 print(font.axes)
@@ -94,12 +94,12 @@ print(font.axes)
 # Sample text to show in the animation
 sample = 'Variety'
 # Define tag list for axes to be part of the animation as sequence
-axisPhases = { 
+axisPhases = {
     # Fraction of the length of the animation (0..1..2) where t2-t1 < 1
     (0.4, 1.4): ('YTUC',),
     (0.5, 1.25): ('YTLC',),
     (0.6, 1.6): ('YTAS', 'YTDE'),
-    (0.2, 1.1): ('wght',), 
+    (0.2, 1.1): ('wght',),
     (0.5, 1.4): ('XTRA',),
     #(0.4, 1.3): ('opsz',)
 }
@@ -108,19 +108,19 @@ framesPerSecond = 12
 frameCnt = duration * framesPerSecond # Total number of frames in the animation
 
 # Create a new doc, with the right amount of frames/pages.
-doc = Document(w=w, h=h, frameDuration=1.0/framesPerSecond, 
+doc = Document(w=w, h=h, frameDuration=1.0/framesPerSecond,
     autoPages=frameCnt, context=c)
 
 for frameIndex in range(frameCnt):
     page = doc[frameIndex+1] # Get the current frame-page
     location = {}
     for (a1, a2), axes in axisPhases.items():
-        # Calculate the frames where this axis is working 
+        # Calculate the frames where this axis is working
         da1 = int(round(frameCnt * a1))
         da2 = int(round(frameCnt * a2))
         if frameIndex < da1:
             da1 -= frameCnt
-            da2 -= frameCnt # Correct for overlapping phase 
+            da2 -= frameCnt # Correct for overlapping phase
         if da2 < frameIndex:
             continue
         phasedFrameIndex = frameIndex - da1
@@ -138,12 +138,12 @@ for frameIndex in range(frameCnt):
                     location[axisTag] = phicos*r1+defaultValue
             elif r0:
                 location[axisTag] = phicos*r0+minValue
-            
+
     # Overall style for the frame
-    style = dict(leading=em(1.4), fontSize=500, xTextAlign=RIGHT, textFill=whiteColor, 
+    style = dict(leading=em(1.4), fontSize=500, xTextAlign=RIGHT, textFill=whiteColor,
         fill=blackColor, location=location)
-    
-    AnimatedBannerFrame(sample, font, frameCnt, frameIndex, parent=page, style=style, 
+
+    AnimatedBannerFrame(sample, font, frameCnt, frameIndex, parent=page, style=style,
         w=page.w, h=page.h, context=c)
     #newTextBox('%s %s %s %s' % (da1,da2,frameIndex,location), style=dict(font='Verdana', fontSize=50, textFill=whiteColor), x=10, y=10, w=page.w, parent=page)
 doc.export('_export/%s_%s.gif' % (font.info.familyName, sample))
