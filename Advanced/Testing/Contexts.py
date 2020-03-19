@@ -18,7 +18,7 @@ from random import random
 from pagebot import getAllContexts, getResourcesPath
 from pagebot.toolbox.color import Color
 from pagebot.constants import A4Rounded
-from pagebot.contexts.base.babelstring import BabelString
+from pagebot.contexts.basecontext.babelstring import BabelString
 from pagebot import getContext
 from pagebot.toolbox.units import pt
 from pagebot.document import Document
@@ -61,7 +61,7 @@ def testContext(context):
 
     sq = 100
     x = 0
-    y = 0 
+    y = 0
     print('Context', context)
     doc = Document(w=W, h=H, context=context, autoPages=1)
     context.frameDuration(1)
@@ -101,7 +101,7 @@ def testContext(context):
     print('String size is %dx%d' % (w0, h0))
 
     x = 2 * sq
-    y = 0 
+    y = 0
 
     path = getResourcesPath() + "/images/cookbot1.jpg"
     # Sloooow.

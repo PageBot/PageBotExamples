@@ -23,7 +23,7 @@ from pagebot.toolbox.color import noColor, color
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.constants import *
 from pagebot.style import getRootStyle
-from pagebot.contexts.base.babelstring import getFontPath
+from pagebot.contexts.basecontext.babelstring import getFontPath
 
 # TODO: move to basics when finished.
 

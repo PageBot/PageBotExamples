@@ -25,7 +25,7 @@ from pagebot.toolbox.units import pt
 from pagebot.toolbox.color import noColor, color
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.constants import *
-#from pagebot.contexts.base.babelstring import BabelString
+#from pagebot.contexts.basecontext.babelstring import BabelString
 #from pagebotcocoa.contexts.drawbot.drawbotstring import DrawBotString
 #from pagebot.contexts.flat.flatstring import FlatString
 
