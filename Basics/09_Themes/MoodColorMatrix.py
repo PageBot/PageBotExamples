@@ -66,6 +66,7 @@ def makeThemeMoodPage(themeClass):
         x = 0
 
         prevMoodKeyParts = None
+
         for moodKey, moodColor in sorted(theme.mood.attributes.items()):
             clr = color(moodColor)
             drawColor(moodKey, PADDING + x*(CW+G), H - 2*PADDING - y*(CH+G)-CH, clr)
