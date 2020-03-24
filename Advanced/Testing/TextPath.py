@@ -1,17 +1,33 @@
-from pagebot.fonttoolbox.objects.font import findFont
+#!/usr/bin/env python3
+# -----------------------------------------------------------------------------
+#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
+#     www.pagebot.io
+#
+#     P A G E B O T
+#
+#     Licensed under MIT conditions
+#
+#     Supporting DrawBot, www.drawbot.com
+#     Supporting Flat, xxyxyz.org/flat
+# -----------------------------------------------------------------------------
+#
+#     TextPath.py
+#
+
+#from pagebot.fonttoolbox.objects.font import findFont
+from pagebot.fonttoolbox.objects.font import findFonts
+from pagebot.contexts.basecontext.basepath import BasePath
+from pagebot.document import Document
 
 # TODO: find out how to remove overlap on text.
 # Maybe avoid using text but load font in path?
 
 def test(context):
 
-    #size('A3Landscape')
-    f = findFont('Roboto-Black')
-    #fontName = installFont(f.path)
+    doc = Document(w=800, h=600, autoPages=1, context=context)
+    font = findFonts(('Robo', 'Con', 'Bol', 'Ita'))[0]
+    page = doc[1] # Get the single page from te document.
 
-    context.fontSize(200)
-    #§context.font(fontName)
-    context.stroke((0, 1, 0))
 
     '''
     path = BezierPath()
@@ -23,6 +39,13 @@ def test(context):
 
     drawPath(path)
     '''
+
+    style = dict(font=font, fontSize=100)
+    p = BasePath(context, style=style)
+    print(p)
+    p.text('H')
+    context.drawPath(p)
+
 
 if __name__ == '__main__':
     from pagebot import getContext
