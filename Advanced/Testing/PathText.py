@@ -1,3 +1,5 @@
+# NOTE: this is the DrawBot script, see TextPath for a PageBot version.
+
 from pagebot.fonttoolbox.objects.font import findFont
 
 # TODO: find out how to remove overlap on text.
