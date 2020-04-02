@@ -25,14 +25,58 @@ W = pt(W)
 H = pt(H)
 
 
+def testBezierPath(path):
+    path.moveTo((0, 0))
+    path.lineTo((0, 100))
+    path.curveTo((50, 75), (60, 50), (50, 25))
+    #path.curveTo((50, 75), (60, 50), (50, 25), (0, 0))
+    path.closePath()
+
+def printBezierPath(path):
+
+    for contour in path.contours:
+        for i, segment in enumerate(contour):
+            print("#%s: %s" % (i, segment))
+
+    print(path.points)
+
+
 def testBezierPaths():
+    path = DrawBotBezierPath()
+    testBezierPath(path)
+    nsPath = path._path
+
+    print("NSPath")
+    print(nsPath)
+    count = nsPath.elementCount()
+    points = []
+
+    for index in range(nsPath.elementCount()):
+        instruction, pts = nsPath.elementAtIndex_associatedPoints_(index)
+        points.extend([(p.x, p.y) for p in pts])
+
+    points = tuple(points)
+    print(points)
+
+    print("DrawBot: <BezierPath>")
+    printBezierPath(path)
+
+
+    '''
+    # testing the "no on-curve point" scenario
+    pen.qCurveTo((0, 0), (0, 100), (100, 100), (100, 0), None)
+    pen.closePath()
+    '''
+    print("PageBot:")
+
     contexts = getAllContexts()
-    print('All contexts: %s' % contexts)
 
     for i, c in enumerate(contexts):
         if i in (0, 1):
             path = c.newPath()
             print(path)
+            testBezierPath(path)
+            printBezierPath(path)
 
 
 testBezierPaths()
