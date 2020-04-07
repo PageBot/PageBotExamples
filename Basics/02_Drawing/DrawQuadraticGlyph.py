@@ -164,7 +164,7 @@ def draw(context):
     PATH = getFontPaths()['Roboto-Black']
     font = Font(PATH)
     glyph = font[glyphName]
-    path = BezierPath()
+    path = context.newPath()
     contours = []
     contour = None
     coordinates = glyph.ttGlyph.coordinates
