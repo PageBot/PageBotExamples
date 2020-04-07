@@ -10,7 +10,7 @@
 #     Supporting DrawBot, www.drawbot.com
 # -----------------------------------------------------------------------------
 #
-#     BezierPaths.py
+#     Arcs.py
 #
 
 from pagebot.constants import A4Rounded
@@ -24,17 +24,12 @@ H, W = A4Rounded
 W = pt(W)
 H = pt(H)
 
-def testBezierPath(path):
-    # Testing basic Bézier path behavior. Replicates FontTools BasePen tests,
-    # except > 2 control points (TODO).
-
-    path.moveTo((0, 0))
-    path.lineTo((0, 100))
-    path.curveTo((50, 75), (60, 50), (50, 25))
-    #path.curveTo((50, 75), (60, 50), (50, 25), (0, 0))
+def testArc(path):
+    # path.arc(...)
+    # path.arcTo(...)
     path.closePath()
 
-def printBezierPath(path):
+def printArc(path):
 
     for contour in path.contours:
         for i, segment in enumerate(contour):
@@ -42,9 +37,9 @@ def printBezierPath(path):
 
     print(path.points)
 
-def testBezierPaths():
+def testArcs():
     path = DrawBotBezierPath()
-    testBezierPath(path)
+    testArc(path)
     nsPath = path._path
 
     print("NSPath")
@@ -60,7 +55,7 @@ def testBezierPaths():
     print(points)
 
     print("DrawBot: <BezierPath>")
-    printBezierPath(path)
+    printArc(path)
 
     '''
     # TODO:
@@ -76,7 +71,7 @@ def testBezierPaths():
         if i in (0, 1):
             path = c.newPath()
             print(path)
-            testBezierPath(path)
-            printBezierPath(path)
+            testArc(path)
+            printArc(path)
 
-testBezierPaths()
+testArcs()

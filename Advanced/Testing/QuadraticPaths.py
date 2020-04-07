@@ -10,7 +10,7 @@
 #     Supporting DrawBot, www.drawbot.com
 # -----------------------------------------------------------------------------
 #
-#     BezierPaths.py
+#     QuadraticPaths.py
 #
 
 from pagebot.constants import A4Rounded
@@ -24,16 +24,15 @@ H, W = A4Rounded
 W = pt(W)
 H = pt(H)
 
-def testBezierPath(path):
+def testQuadraticPath(path):
     # Replicates FontTools BasePen test.
 
     path.moveTo((0, 0))
-    path.lineTo((0, 100))
-    path.curveTo((50, 75), (60, 50), (50, 25))
-    #path.curveTo((50, 75), (60, 50), (50, 25), (0, 0))
+    # path.quadTo(...)
+    # path.curveTo((50, 75), (60, 50), (50, 25), (0, 0))
     path.closePath()
 
-def printBezierPath(path):
+def printQuadraticPath(path):
 
     for contour in path.contours:
         for i, segment in enumerate(contour):
@@ -41,9 +40,9 @@ def printBezierPath(path):
 
     print(path.points)
 
-def testBezierPaths():
+def testQuadraticPaths():
     path = DrawBotBezierPath()
-    testBezierPath(path)
+    testQuadraticPath(path)
     nsPath = path._path
 
     print("NSPath")
@@ -59,7 +58,7 @@ def testBezierPaths():
     print(points)
 
     print("DrawBot: <BezierPath>")
-    printBezierPath(path)
+    printQuadraticPath(path)
 
     '''
     # TODO:
@@ -75,7 +74,7 @@ def testBezierPaths():
         if i in (0, 1):
             path = c.newPath()
             print(path)
-            testBezierPath(path)
-            printBezierPath(path)
+            testQuadraticPath(path)
+            printQuadraticPath(path)
 
-testBezierPaths()
+testQuadraticPaths()
