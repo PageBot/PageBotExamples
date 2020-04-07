@@ -14,20 +14,19 @@
 #     drawSpirals.py
 #
 
+from pagebot import getContext
 from pagebot.toolbox.units import pt
 from pagebot.toolbox.color import noColor, blackColor
-from pagebot import getContext
-#import pagebot # Import to know the path of non-Python resources.
 
 X = 0
-Y = 0
+Y = 100
 N = 8*8
 Sx = 10
 Sy = 10
 Exy = 0.58
 D = 0.5
 
-# hardcoded constants:
+# Hardcoded constants.
 W = H = 1000
 M = 20
 w = W - 2*M
@@ -57,9 +56,13 @@ context.Variable(
 def drawSpiral():
     mx = W/2+X
     my = H/2+Y
+
     runs = False
     context.newPath()
-    context.moveTo((pt(mx), pt(my)))
+    coords = (pt(mx), pt(my))
+    context.moveTo(coords)
+    s = '%s, %s' % coords
+    context.text(s, coords)
 
     for n in range(0, int(N), 4):
         dx1 = n*Sx*D
@@ -72,17 +75,19 @@ def drawSpiral():
         dy4 = (n+3)*Sy*D
         #dx5 = (n+4)*Sx*D
         #dy5 = (n+4)*Sy*D
+
         if not runs:
             context.moveTo((pt(mx), pt(my)))
         else:
             context.curveTo((pt(mx-dx1*Exy), pt(my-dy1)),
                 (pt(mx-dx1), pt(my-dy1*Exy)), (pt(mx-dx1), pt(my)))
             context.curveTo((pt(mx-dx2), pt(my+dy2*Exy)),
-            (pt(mx-dx2*Exy), pt(my+dy2)), (pt(mx), pt(my+dy2)))
+                (pt(mx-dx2*Exy), pt(my+dy2)), (pt(mx), pt(my+dy2)))
             context.curveTo((pt(mx+dx3*Exy), pt(my+dy3)),
                 (pt(mx+dx3), pt(my+dy3*Exy)), (pt(mx+dx3), pt(my)))
             context.curveTo((pt(mx+dx4), pt(my-dy4*Exy)), (pt(mx+dx4*Exy), pt(my-dy4)),
                 (pt(mx), pt(my-dy4)))
+
         runs = True
 
     context.fill(noColor)
