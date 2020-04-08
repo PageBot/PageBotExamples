@@ -13,8 +13,9 @@
 #     QuadraticPaths.py
 #
 
-from pagebot.constants import A4Rounded
+from fontTools.pens.basePen import BasePen
 from drawBot import BezierPath as DrawBotBezierPath
+from pagebot.constants import A4Rounded
 from pagebot.contexts.basecontext.basebezierpath import BaseBezierPath
 from pagebot.contexts.basecontext.bezierpath import BezierPath
 from pagebot import getAllContexts
@@ -27,7 +28,6 @@ H = pt(H)
 def testQuadraticPath(path):
     # Replicates FontTools BasePen test.
 
-    #path.moveTo((0, 0))
     path.qCurveTo((0, 0), (0, 100), (100, 100), (100, 0), None)
     path.closePath()
 
@@ -38,6 +38,8 @@ def printQuadraticPath(path):
             print("#%s: %s" % (i, segment))
 
     print(path.points)
+    print(isinstance(path, BasePen))
+    print(path.__dict__)
 
 def testQuadraticPaths():
     path = DrawBotBezierPath()
@@ -54,21 +56,11 @@ def testQuadraticPaths():
 
     contexts = getAllContexts()
 
-    c = contexts[1]
-    print(c)
-    path = c.newPath()
-    path.qCurveTo((0, 0), (0, 100), (100, 100), (100, 0), None)
-    path.closePath()
-    #printQuadraticPath(path)
-
-    '''
-
     for i, c in enumerate(contexts):
         if i in (0, 1):
             path = c.newPath()
             print(path)
             testQuadraticPath(path)
             printQuadraticPath(path)
-    '''
 
 testQuadraticPaths()

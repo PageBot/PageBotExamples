@@ -14,8 +14,8 @@
 #
 
 from fontTools.pens.basePen import BasePen
-from pagebot.constants import A4Rounded
 from drawBot import BezierPath as DrawBotBezierPath
+from pagebot.constants import A4Rounded
 from pagebot.contexts.basecontext.basebezierpath import BaseBezierPath
 from pagebot.contexts.basecontext.bezierpath import BezierPath
 from pagebot import getAllContexts
