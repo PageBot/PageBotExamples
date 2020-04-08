@@ -26,7 +26,8 @@ W = pt(W)
 H = pt(H)
 
 def testQuadraticPath(path):
-    # Replicates FontTools BasePen test.
+    # Testing quadratic Bézier path behavior. Replicates FontTools BasePen
+    # tests. Replicates FontTools BasePen test.
 
     path.qCurveTo((0, 0), (0, 100), (100, 100), (100, 0), None)
     path.closePath()

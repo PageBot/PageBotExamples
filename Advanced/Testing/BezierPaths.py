@@ -26,13 +26,10 @@ W = pt(W)
 H = pt(H)
 
 def testBezierPath(path):
-    # Testing basic Bézier path behavior. Replicates FontTools BasePen tests,
-    # except > 2 control points (TODO).
-
+    # Testing basic Bézier path behavior. Replicates FontTools BasePen tests.
     path.moveTo((0, 0))
     path.lineTo((0, 100))
-    path.curveTo((50, 75), (60, 50), (50, 25))
-    #path.curveTo((50, 75), (60, 50), (50, 25), (0, 0))
+    path.curveTo((50, 75), (60, 50), (50, 25), (0, 0))
     path.closePath()
 
 def printBezierPath(path):
@@ -65,12 +62,6 @@ def testBezierPaths():
     print("DrawBot: <BezierPath>")
     printBezierPath(path)
 
-    '''
-    # TODO:
-    # testing the "no on-curve point" scenario
-    pen.qCurveTo((0, 0), (0, 100), (100, 100), (100, 0), None)
-    pen.closePath()
-    '''
     print("PageBot:")
 
     contexts = getAllContexts()
