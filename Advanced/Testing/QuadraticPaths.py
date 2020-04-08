@@ -27,9 +27,8 @@ H = pt(H)
 def testQuadraticPath(path):
     # Replicates FontTools BasePen test.
 
-    path.moveTo((0, 0))
-    # path.quadTo(...)
-    # path.curveTo((50, 75), (60, 50), (50, 25), (0, 0))
+    #path.moveTo((0, 0))
+    path.qCurveTo((0, 0), (0, 100), (100, 100), (100, 0), None)
     path.closePath()
 
 def printQuadraticPath(path):
@@ -46,28 +45,14 @@ def testQuadraticPaths():
     nsPath = path._path
 
     print("NSPath")
-    print(nsPath)
     count = nsPath.elementCount()
     points = []
 
-    for index in range(nsPath.elementCount()):
-        instruction, pts = nsPath.elementAtIndex_associatedPoints_(index)
-        points.extend([(p.x, p.y) for p in pts])
-
-    points = tuple(points)
-    print(points)
 
     print("DrawBot: <BezierPath>")
     printQuadraticPath(path)
 
     '''
-    # TODO:
-    # testing the "no on-curve point" scenario
-    pen.qCurveTo((0, 0), (0, 100), (100, 100), (100, 0), None)
-    pen.closePath()
-    '''
-    print("PageBot:")
-
     contexts = getAllContexts()
 
     for i, c in enumerate(contexts):
@@ -76,5 +61,6 @@ def testQuadraticPaths():
             print(path)
             testQuadraticPath(path)
             printQuadraticPath(path)
+    '''
 
 testQuadraticPaths()
