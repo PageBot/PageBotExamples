@@ -52,8 +52,16 @@ def testQuadraticPaths():
     print("DrawBot: <BezierPath>")
     printQuadraticPath(path)
 
-    '''
     contexts = getAllContexts()
+
+    c = contexts[1]
+    print(c)
+    path = c.newPath()
+    path.qCurveTo((0, 0), (0, 100), (100, 100), (100, 0), None)
+    path.closePath()
+    #printQuadraticPath(path)
+
+    '''
 
     for i, c in enumerate(contexts):
         if i in (0, 1):

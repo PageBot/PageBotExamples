@@ -13,6 +13,7 @@
 #     BezierPaths.py
 #
 
+from fontTools.pens.basePen import BasePen
 from pagebot.constants import A4Rounded
 from drawBot import BezierPath as DrawBotBezierPath
 from pagebot.contexts.basecontext.basebezierpath import BaseBezierPath
@@ -41,6 +42,8 @@ def printBezierPath(path):
             print("#%s: %s" % (i, segment))
 
     print(path.points)
+    print(isinstance(path, BasePen))
+    print(path.__dict__)
 
 def testBezierPaths():
     path = DrawBotBezierPath()
