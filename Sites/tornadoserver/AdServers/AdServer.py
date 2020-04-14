@@ -37,18 +37,36 @@ class RequestHandler(BasicRequestHandler):
         self.write('<html><head>\n')
         self.write('<link media="all" rel="stylesheet" href="/css/nanostyle_py.css"/>\n')
         self.write('</head><body>\n')
-        self.write('<h1>path: %s</h1>\n' % requestData.path)
-        self.write('<h2>uri: %s</h2>\n' % requestData.uri)
-        self.write('<h2>filePath: %s</h2>\n' % requestData.filePath)
-        self.write('<h2>args: %s</h2>\n' % requestData.args)
-        self.write('<h3>requestHandler id: %s</h3>\n' % id(self))
-        self.write('<h3>publication: %s %d</h3>\n' % (self.publication.__class__.__name__, id(self.publication)))
+        self.write('<h1>Path: %s</h1>\n' % requestData.path)
+        self.write('<h2>Uri: %s</h2>\n' % requestData.uri)
+        self.write('<h2>FilePath: %s</h2>\n' % requestData.filePath)
+        self.write('<h2>Args: %s</h2>\n' % requestData.args)
+        self.write('<h3>Page-specific RequestHandler id: %s</h3>\n' % id(self))
+        self.write('<h3>Static publication instance: %s %d</h3>\n' % (self.publication.__class__.__name__, id(self.publication)))
         for imagePath in ('IMG_1734.jpg', 'IMG_1764.jpg', 'IMG_3740.jpg'):
             self.write('<h1><a href="/%s/par1-123/par2-xyz">\n' % imagePath.split('.')[0])
             self.write('<img src="/images/%s" width="500"></a>\n' % imagePath)
         self.write('</body></html>\n')
 
 class AdServer(BaseServer):
+    """Server online/Linux usage, generating parametric advertizements from PageBot
+    Publication instances.
+    
+    >>> import urllib
+    >>> port = 9999
+    >>> server = AdServer(port=port)
+    >>> 'Server running'
+    'Server running'
+    >>> server.run()
+    >>> # Doesn't work here, due to single thread of the server.
+    >>> #link = "localhost:%d" % port
+    >>> #content = urllib.urlopen(link)
+    >>> #myfile = content.read()
+    >>> #myFile
+    >>> 'Server stopping'
+    'Server stopping'
+    >>> server.stop()
+    """
 
     def getRequestHandlers(self):
         imagesHandlerData = {'path': './images'}
@@ -61,6 +79,10 @@ class AdServer(BaseServer):
            ('/(.*)', RequestHandler, dict(path='./', publication=site)),
         ] # http://localhost:8889/<args>
 
-
-server = AdServer(port=8996)
-server.run()
+if 0 and __name__ == '__main__':
+    import doctest
+    import sys
+    sys.exit(doctest.testmod()[0])
+else:
+    server = AdServer(port=8997)
+    server.run()
