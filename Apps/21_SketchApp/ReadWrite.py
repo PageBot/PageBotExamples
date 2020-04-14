@@ -12,65 +12,53 @@
 #
 #     ReadWrite.py
 #
-from pagebot import getResourcesPath
-from pagebot.toolbox.finder import Finder
+#     Read/write the raw Sketch instance from a Sketch drawing.
+#     Convert the data into a PageBot Document instance, through SketchContext
+#     translation into Elements.
+#
+#     Equivalent classes on PageBot <--> SketchApp2Py
+#     Publication       SketchApi/Sketch file
+#     Document          SketchPage
+#     Document.pages    SketchArtBoard[]
+#     Page.elements     SketchArtBoard.layers
+
+from pagebot.toolbox.units import pt
 from pagebot.document import Document
-from pagebot.contexts.sketchcontext import SketchContext
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebotosx.contexts.drawbotcontext.drawbotcontext import DrawBotContext
 from pagebot.constants import *
-from pagebot.typesetter import Typesetter
-from pagebot.composer import Composer
 
-context = SketchContext()
-drawBotContext = DrawBotContext()
-
-W, H = inch(8, 10.875)
+try:
+    import sketchapp2py
+    from sketchcontext.context import SketchContext
+except:
+    print("""Needs installing of SketchContext and SketchApp2Py""")
+    # https://github.com/PageBot/SketchContext
+    # https://github.com/PageBot/SketchApp2Py
 
 sketchPath = 'TestImage.sketch'
-textPath = 'TestText.md'
 
-doc = context.readDocument(sketchPath, w=W, h=H, context=drawBotContext)
+#context = SketchContext()
+#sketchApi = context.read(sketchPath)
+context = SketchContext(sketchPath) # Same as context.b.api
+
+drawBotContext = DrawBotContext() # Used for exporting the document to PDF
+
+# Create a Document instance from the current selected Sketch file.
+doc = Document()
+context.readDocument(doc)
+
+page = doc[1]
 
 view = doc.view
-view.padding = 30
+view.padding = pt(30)
 view.showCropMarks = True
-#view.showPadding = True
-view.showOrigin = False
-view.showNameInfo = True
 view.showRegistrationMarks = True
-view.showGrid = [GRID_COL, GRID_ROW]
-view.showCropMarks = True
+view.showPadding = True
 view.showFrame = True
-#view.showDimensions = True
+view.showNameInfo = True
+#view.showColorBars = True
 
-if 0:
-    for pn, pages in doc.pages.items():
-        page = pages[0]
-        page.originTop = True
-        for artboard in page.elements:
-            page.gridX = artboard.gridX
-            page.gridY = artboard.gridY
-            print(artboard.xy, artboard.size)
-            for e in artboard.elements:
-                print(e)
-                for e1 in e.elements:
-                    print('\t', e)
-            #print('=====', artboard.gridX, artboard.gridY)
+doc.export('_export/TestImage.jpg')
+doc.export('_export/TestImage.pdf')
+doc.export('_export/TestImage.png')
 
-
- # Compile text content
-if 0:
-    t = Typesetter(doc.context)
-    galley = t.typesetFile(textPath)
-
-    # Anchor the text in the first text column
-    page = doc[1]
-    page.originTop = True
-    #print(page.deepFind('Article1'))
-    targets = dict(doc=doc, page=page)
-    composer = Composer(doc)
-    composer.compose(galley, targets=targets)
-
-
-EXPORT_PATH = '_export/TestImage.pdf'
-doc.export(EXPORT_PATH)
