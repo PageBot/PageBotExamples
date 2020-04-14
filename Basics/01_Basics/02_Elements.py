@@ -37,7 +37,7 @@ P  = 50
 bungee = findFont('BungeeInline-Regular')
 
 # Create a new document for the current context. Create one automatic page.
-doc = Document(w=W, h=H, autoPages=1, context=context)
+doc = Document(w=W, h=H, context=context)
 page = doc[1] # Get the one and single page of the document.
 page.padding = P # Set the page padding.
 
@@ -56,7 +56,7 @@ o = newOval(w=SQ, h=SQ, parent=page, conditions=c, fill=(1, 0, 0), stroke=0)
 # floating to that position relative to what is already there.
 l = newLine(parent=page, x=0, y=0, w=100, h=100, conditions=c, stroke=0, strokeWidth=10)
 points=[(0,0), (100, 0), (150, 50), (150, 100), (100, 200)]
-# A quire is a drawboard 
+# A quire is a drawboard
 q = newQuire(parent=page, conditions=c, fill=1, strokeWidth=5, stroke=0.5)
 # Make a rect with  more height, so it will push down any floating from below.
 r = newRect(w=SQ, h=2*SQ, parent=page, conditions=c, fill=noColor, stroke=0, strokeWidth=1)

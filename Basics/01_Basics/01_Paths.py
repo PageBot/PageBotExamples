@@ -37,7 +37,7 @@ def showFilePaths(context):
     # Get the context that this script runs in, e.g. DrawBotApp.
 
     # Make a Document instance for this size and context, intializing one page.
-    doc = Document(w=W, h=H, autoPages=1, context=context)
+    doc = Document(w=W, h=H, context=context)
 
     # Get the page.
     page = doc[1]

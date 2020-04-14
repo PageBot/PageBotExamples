@@ -43,9 +43,9 @@ W, H = pt(500, 400)
 RW = RH = pt(40)
 PADDING = pt(28)
 
-def makeDocument():
+def makeDocument(context):
     # Creates the publication/document that holds the pages.
-    doc = Document(w=W, h=H, autoPages=1)
+    doc = Document(w=W, h=H, context=context)
 
     # Gets page by pageNumber, first in row (at this point there is only one in
     # this row).
@@ -77,4 +77,9 @@ def makeDocument():
     for exportPath in EXPORT_PATHS:
         doc.export(exportPath)
 
-makeDocument()
+if __name__ == '__main__':
+    from pagebot import getContext
+
+    for contextName in ('DrawBot', 'Flat'):
+        context = getContext(contextName)
+        makeDocument(context)
