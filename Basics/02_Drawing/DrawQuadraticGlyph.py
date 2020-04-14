@@ -20,13 +20,15 @@
 
 import weakref
 from fontTools.ttLib import TTFont, TTLibError
-from drawBot import BezierPath # FIXME: use PageBot Bezier path
+from pagebot import getContext
+from pagebot.contexts.basecontext.basebezierpoint import BaseBezierPoint as BezierPoint
+#from drawBot import BezierPath # FIXME: use PageBot Bezier path
+from pagebot.contexts.basecontext.bezierpath import BezierPath
 from pagebot.fonttoolbox.objects.fontinfo import FontInfo
-from pagebot.toolbox.units import point3D
 from pagebot.fonttoolbox.fontpaths import getFontPaths
 from pagebot.fonttoolbox.objects.glyph import *
 from pagebot.fonttoolbox.objects.font import Font
-from pagebot import getContext
+from pagebot.toolbox.units import point3D
 from pagebot.toolbox.color import blueColor, redColor, greenColor, pinkColor, orangeColor, blackColor
 
 R = 12
@@ -39,6 +41,7 @@ QUADRATIC_CONTROLPOINT_SIZE = R
 CUBIC_CONTROLPOINT_COLOR = blackColor
 CUBIC_CONTROLPOINT_SIZE = R / 2
 
+'''
 class Point:
 
     # FIX: See more generic implentation in PageBotPath
@@ -48,6 +51,7 @@ class Point:
         self.onCurve = onCurve
         self.smooth = smooth
         self.start = start
+'''
 
 def drawSegment(context, path, segment, implied, cps, verbose=False):
     """
@@ -57,9 +61,9 @@ def drawSegment(context, path, segment, implied, cps, verbose=False):
     NOTE: PageBot implementation in glyph adds the first oncurve
     as a separate `cp` parameter.
 
-    >>> p0 = Point(100, 100, True)
-    >>> p1 = Point(200, 100, False)
-    >>> p2 = Point(200, 200, True)
+    >>> p0 = BezierPoint(100, 100, True)
+    >>> p1 = BezierPoint(200, 100, False)
+    >>> p2 = BezierPoint(200, 200, True)
     >>> segment = [p0, p1, p2]
     >>> path = BezierPath()
     >>> context = getContext()
@@ -113,7 +117,7 @@ def drawSegment(context, path, segment, implied, cps, verbose=False):
         offCurve1 = segment[2]
         x = offCurve0.x + (offCurve1.x - offCurve0.x) * 0.5
         y = offCurve0.y + (offCurve1.y - offCurve0.y) * 0.5
-        newOnCurve = Point(x, y, True)
+        newOnCurve = BezierPoint(x, y, True)
 
         # Store these so they can be used in the infographic.
         implied.append(newOnCurve)
@@ -160,7 +164,7 @@ def draw(context):
     PATH = getFontPaths()['Roboto-Black']
     font = Font(PATH)
     glyph = font[glyphName]
-    path = BezierPath()
+    path = context.newPath()
     contours = []
     contour = None
     coordinates = glyph.ttGlyph.coordinates
@@ -176,11 +180,11 @@ def draw(context):
     context.stroke(None)
     context.fill(0)
 
-    # Converts coordinates to PageBot Points and assigns points
+    # Converts coordinates to PageBot BezierPoints and assigns points
     # to contours.
     for i, (x, y) in enumerate(coordinates):
         start = i - 1 in glyph.endPtsOfContours
-        p = Point(x, y, glyph.flags[i])
+        p = BezierPoint(x, y, glyph.flags[i])
 
         if i == 0:
             contour = [p]

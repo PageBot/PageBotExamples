@@ -17,15 +17,19 @@
 import drawBot
 import math, os, random
 import inspect
-from pagebotosx.contexts.drawbotcontext.drawbotcontext import DrawBotContext
+from pagebot import getContext
+
+flatContext = getContext('Flat')
 
 attrs = []
 
-for k in drawBot.__dict__.keys():
+for k in flatContext.__dict__.keys():
     if not (k in math.__dict__ or k in os.__dict__ or k in random.__dict__):
-        #print(k)
         attrs.append(k)
 
+print(attrs)
+
+'''
 print('Not in PageBot')
 
 base = DrawBotContext.__mro__[1]
@@ -41,3 +45,4 @@ print('Not in DrawBot')
 for k in DrawBotContext.__dict__.keys():
     if k not in attrs:
         print('* %s' % k)
+'''

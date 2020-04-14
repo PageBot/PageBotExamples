@@ -44,23 +44,29 @@ def makeDocument(context):
 
     page = doc[1] # Get the single page from te document.
     page.padding = PADDING
-    page.baselineGrid = pt(24)
+    #page.baselineGrid = pt(24)
     #page.baselineGridStart = PADDING * 1.5
-    page.showBaselineGrid = True
-    page.showPadding = True
-    page.showOrigin = True
+    #page.showBaselineGrid = True
+    #page.showPadding = True
+    #page.showOrigin = True
 
+    '''
     e1 = newTextBox(getText(doc, font, 'Middle y on grid'), parent=page,
-        fill=color('red'), yAlign=MIDDLE, showOrigin=True,
+        fill=color('red'), yAlign=MIDDLE, showOrigin=True, h=50, w=100,
         conditions=[Left2Left(), Bottom2Bottom(), Baseline2Grid()])
+    '''
 
-    e2 = newTextBox(getText(doc, font, 'Middle y on grid'), parent=page,
-        fill=color('orange'), yAlign=MIDDLE, showOrigin=True,
-        conditions=[Left2Left(), Middle2Middle(), Baseline2Grid()])
+    t = getText(doc, font, 'Middle y on grid')
+    e2 = newTextBox(t, parent=page, h=100,
+        fill=color('orange'),)
+        #yAlign=MIDDLE, showOrigin=True, h=50, w=100,
+        #conditions=[Left2Left(), Middle2Middle(), Baseline2Grid()])
 
+    '''
     e3 = newTextBox(getText(doc, font, 'Middle y on grid'), parent=page,
-        fill=color('yellow').darker(0.8), yAlign=MIDDLE, showOrigin=True,
+        fill=color('yellow').darker(0.8), yAlign=MIDDLE, showOrigin=True, h=50, w=100,
         conditions=[Left2Left(), Top2Top(), Baseline2Grid()])
+    '''
 
     page.solve()
 

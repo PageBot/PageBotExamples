@@ -15,12 +15,12 @@
 #     Calculate the overflowing text and add it to another column.
 #
 #     This example shows the most basic version, using only DrawBot functions.
-#     The overflow text takes the same parameters for the Formatted String as the 
+#     The overflow text takes the same parameters for the Formatted String as the
 #     original text had.
 #
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 
-context = DrawBotContext()
+context = getContext('DrawBot')
 
 W = H = 500
 PADDING = 30

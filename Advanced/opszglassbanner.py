@@ -5,7 +5,7 @@
 #     P A G E B O T
 #
 #     Licensed under MIT conditions
-#     
+#
 #     Supporting DrawBot, www.drawbot.com
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
@@ -20,7 +20,7 @@ from pagebot.constants import RIGHT
 from pagebot.conditions import *
 from pagebot.toolbox.color import color, blackColor
 from pagebot.toolbox.units import em
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 
 class AnimatedBannerFrame(AnimationFrame):
     """
@@ -44,8 +44,8 @@ class AnimatedBannerFrame(AnimationFrame):
             tw1, th1 = bs.size
             x1, y1 = self.w*2/3, self.h/2-th1/4
             c.text(bs, (x1, y1))
-                  
-            # Magnifying glass 
+
+            # Magnifying glass
             R = 320
             L = 40
             c.stroke((0.6, 0.8, 1, 0.9), L)
@@ -54,15 +54,15 @@ class AnimatedBannerFrame(AnimationFrame):
             y = self.h/2-R/2
             c.oval(x, y, R, R)
             c.line((x-L/2+2, y+R/2), (x-R+2*L, y+R/2))
-       
+
             # Large "Opt" on the left
             style['fontSize'] = self.vfFont.axes['opsz'][2]*magnifySizeFactor
             bs = c.newString(self.sampleText[:3], style=style)
             tw2, th2 = bs.size
             x2, y2 = self.w/2-tw2, self.h/2-th2/5
             c.text(bs, (x2, y2)) # Make tekst right aligned
-    
-c = DrawBotContext()
+
+c = getContext('DrawBot')
 W, H = 2040, 1020 # Type Network banners
 font = findFont('AmstelvarAlpha-VF')
 # Amstelvar axes to select from: here we are showing the optical size.
@@ -79,7 +79,7 @@ fontSizeFactor = 3 # Enlarge the [opsz] font size by this factor.
 magnifySizeFactor = 8 # Enlarge magnified word by this factor, compared to the max value of [opsz]
 
 # Create a new doc, with the right amount of frames/pages.
-doc = Document(w=W, h=H, frameDuration=1.0/framesPerSecond, 
+doc = Document(w=W, h=H, frameDuration=1.0/framesPerSecond,
     autoPages=frameCnt, context=c)
 # Sample text to show in the animation
 sample = 'Optical size' #font.info.familyName #'Decovar'
@@ -99,12 +99,12 @@ for axisTag in sequenceAxes:
         variableLocation = {axisTag: fontSize}
         # Overall style for the frame
         style = dict(leading=em(1.4), fontSize=fontSize*fontSizeFactor,
-            xTextAlign=RIGHT, textFill=color(1), 
+            xTextAlign=RIGHT, textFill=color(1),
             stroke=None,
-            fill=blackColor, 
+            fill=blackColor,
             variableLocation=variableLocation)
-        
-        af = AnimatedBannerFrame(sample, font, frameCnt, frameIndex, parent=page, style=style, 
+
+        af = AnimatedBannerFrame(sample, font, frameCnt, frameIndex, parent=page, style=style,
             w=page.pw, h=page.ph, context=c)
         frameIndex += 1 # Prepare for the next frame
 

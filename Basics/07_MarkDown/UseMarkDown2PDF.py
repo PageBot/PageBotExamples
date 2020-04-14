@@ -20,7 +20,7 @@
 #     applicatin communicate with each other through a shared "targets"
 #     dictionary.
 #
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.conditions import *
@@ -37,7 +37,7 @@ PADDING = pt(40) # Simple page padding
 MARKDOWN_PATH = 'EmbeddedPython.md'
 
 # In this example we'll be using DrawBotContext to write a PDF file of the document.
-context = DrawBotContext()
+context = getContext('DrawBot')
 
 # Define the styles for the Typesetter, matching the tags that are using in the
 # MarkDown file.

@@ -17,7 +17,7 @@
 from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.contexts.base.babelstring import BabelString
+from pagebot.contexts.basecontext.babelstring import BabelString
 from pagebot.toolbox.units import pt
 from pagebot.toolbox.color import noColor, color
 from pagebot.contributions.filibuster.blurb import Blurb
@@ -26,7 +26,7 @@ from pagebot.style import getRootStyle
 
 from pagebot import getContext
 from pagebot.contexts.flatcontext.flatstring import FlatString
-from pagebotcocoa.contexts.drawbot.drawbotstring import DrawBotString
+from pagebotosx.contexts.drawbot.drawbotstring import DrawBotString
 
 # TODO: move to basics when finished.
 

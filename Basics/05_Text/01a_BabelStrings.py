@@ -19,19 +19,20 @@
 #     implemented.
 #
 
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 from pagebot.contexts.flat.flatcontext import FlatContext
 from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.color import color
 
 def useBabelStrings():
-    
+
     for contextId, context in (
-            ('DrawBot', DrawBotContext()),
-            ('Flat', FlatContext())):
+            ('DrawBot', getContext('DrawBot')),
+            ('Flat', getContext('Flat'))):
+
         W, H = pt(1000, 300)
         M = pt(100)
-        
+
 
         EXPORT_PATH = '_export/UseBabelStrings-%s.pdf' % contextId
         # Create a page and set y on top margin.

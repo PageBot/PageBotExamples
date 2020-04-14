@@ -22,7 +22,7 @@ from pagebot.constants import *
 from pagebot.composer import Composer
 from pagebot.typesetter import Typesetter
 from pagebot.themes import ThemeClasses, BaseTheme, DEFAULT_THEME_CLASS
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.conditions import *
 from pagebot.document import Document
@@ -32,7 +32,7 @@ from drawBot.ui.drawView import DrawView
 
 ADD_MENU = True
 
-context = DrawBotContext()
+context = getContext('DrawBot')
 
 fontRegular = findFont('PageBot-Regular')
 fontBold = findFont('PageBot-Bold')
@@ -86,7 +86,7 @@ class PageBotApp(BaseApp):
         BaseApp.__init__(self)
         self.APPS[0] = self
         # Key is publication type, values are UI settings
-        self.preferenceUI = {} 
+        self.preferenceUI = {}
         self.menuCallbacks = {}
         if not publication.name:
             publication.name = (UNTITLED_PUBLICATION % len(self.APPS))
@@ -114,10 +114,10 @@ class PageBotApp(BaseApp):
                 for menuItemTitle, menuItemCallback in menuAttributes:
                     self.menuCallbacks[menuItemTitle] = getattr(self, menuItemCallback)
                     menuItems.append(menuItemTitle)
-                setattr(self.window.menu, menuTitle, 
-                    PopUpButton((menuX, pad, menuW, menuHeight - 2*pad), 
+                setattr(self.window.menu, menuTitle,
+                    PopUpButton((menuX, pad, menuW, menuHeight - 2*pad),
                     menuItems, callback=getattr(self, menuCallbackName), sizeStyle='small'))
-                menuX += menuW + pad 
+                menuX += menuW + pad
         else:
             menuHeight = 0
 
@@ -131,11 +131,11 @@ class PageBotApp(BaseApp):
         tab.documentName = TextEditor((pad, y, -pad, uiLS), self.publication.name)
 
         y += uiL-2
-        tab.publicationLabel = TextBox((pad, y-8, (uiWidth-pad)/2, uiLS), 
+        tab.publicationLabel = TextBox((pad, y-8, (uiWidth-pad)/2, uiLS),
             'Publication category', sizeStyle='mini')
-        tab.templateLabel = TextBox(((uiWidth-pad)/2+pad, y-8, -pad, uiLS), 
+        tab.templateLabel = TextBox(((uiWidth-pad)/2+pad, y-8, -pad, uiLS),
             'Publication type', sizeStyle='mini')
-            
+
         publicationCategories = sorted(PublicationCategories.keys())
         tab.publication = PopUpButton((pad, y, (uiWidth-pad)/2-pad, uiH),
             publicationCategories, callback=self.selectCategory, sizeStyle='small')
@@ -143,7 +143,7 @@ class PageBotApp(BaseApp):
 
 
         templateTypes = sorted(PublicationCategories[tab.publication.getItem()])
-        tab.templateType = PopUpButton(((uiWidth-pad)/2+pad, y, -pad, uiH), templateTypes, 
+        tab.templateType = PopUpButton(((uiWidth-pad)/2+pad, y, -pad, uiH), templateTypes,
             callback=self.makeSample, sizeStyle='small')
         tab.templateType.set(0)
 
@@ -249,12 +249,12 @@ class PageBotApp(BaseApp):
         tab.showCropMarks.set(True)
 
         tab.errors = EditText((pad, -50, -pad, -pad))
-        
+
         # C O N T E N T  U I
         y = pad + dy
         tab = self.uiContent = self.window.uiGroup.tabs[1]
 
-        tab.contentSelectionLabel = TextBox((pad, y-8, -pad, uiLS), 
+        tab.contentSelectionLabel = TextBox((pad, y-8, -pad, uiLS),
             'Content selection', sizeStyle='mini')
         options = sorted(('Random content', 'Open...'))
         tab.contentSelection = PopUpButton((pad, y, -pad, uiH), options, callback=self.makeSample,
@@ -389,7 +389,7 @@ class PageBotApp(BaseApp):
         self.templateType.setItems(templateTypes)
         self.templateType.set(0)
         self.makeSample(sender) # Create a new sample for this selection.
-        
+
     def makeSample(self, sender):
         """Make a fast sample page as PDF as example of the current UI settings."""
         doc = self.getDocument()
@@ -401,21 +401,21 @@ class PageBotApp(BaseApp):
 
     def makePublication(self, sender):
         self.make()
-        
+
     def make(self):
         doc = self.getDocument()
         path = '_export/%s.pdf' % name
         doc.export(path)
         pdfDocument = doc.context.getDocument()
         self.window.canvas.setPDFDocument(pdfDocument)
-        
+
         pdfView = self.window.canvas.getNSView()
         pdfView.selectAll_('')
         print(pdfView.currentSelection())
         pdfView.clearSelection()
 
     # Menu callbacks
-    
+
     def fileMenu(self, info):
         self.menuCallbacks[info.getItem()](self)
         info.set(0)
@@ -431,30 +431,30 @@ class PageBotApp(BaseApp):
     def windowMenu(self, info):
         self.menuCallbacks[info.getItem()](self)
         info.set(0)
-    
+
     # File menu
-     
+
     def newPublication(self, info):
         newApp()
-        
+
     def newPage(self, info):
         print(info)
-        
+
     def openPublication(self, info):
         print(info)
-        
+
     def closePublication(self, info):
         print(info)
-        
+
     def savePublication(self, info):
         print(info)
 
     def saveAsPublication(self, info):
         print(info)
-        
+
     def printPublication(self, info):
         print(info)
-        
+
     def exportPublication(self, info):
         print(info)
 
@@ -462,7 +462,7 @@ class PageBotApp(BaseApp):
         print(info)
 
     # Edit menu
-          
+
     def undoEdit(self, info):
         print(info)
 
@@ -485,21 +485,21 @@ class PageBotApp(BaseApp):
         print(info)
 
     # Style menu
-        
+
     def stylePublication(self, info):
         print(info)
-        
+
     def styleMetrics(self, info):
         print(info)
-        
+
     def styleTemplates(self, info):
         print(info)
-        
+
     def styleTheme(self, info):
         print(info)
 
     # Window menu
-         
+
     def selectWindow(self, info):
         print(info)
 
@@ -511,6 +511,6 @@ def newApp():
     app = PageBotApp(publication, title='Magazine App', padding=12, context=context)
     app.build()
     app.make()
-newApp()   
+newApp()
 
 

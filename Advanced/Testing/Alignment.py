@@ -39,9 +39,9 @@ def makeDocument():
     doc = Document(w=W, h=H, autoPages=1)
     print(doc.view)
     print(doc.pages)
-    
+
     doc.view.padding = 0 # Don't show cropmarks in this example.
-    #doc.margin = 
+    #doc.margin =
     doc.view.showPadding = True
 
     c1 = [Right2Right(), Float2Top(), Float2Left()]
@@ -50,24 +50,24 @@ def makeDocument():
     c4 = [Left2Left(), Float2TopLeft()]
     c5 = [Right2Right(), Float2TopLeft()]
     c6 = [Left2Left(), Float2TopRight()]
-    
+
     conditions = [c1]#, c2]#, c3, c4, c5, c6]
     page = doc[1]
-    
+
     for c in conditions:
         makePage(doc, page, c)
         #page = page.next
-    
+
     testCoordinates()
-        
+
 
 rectSets = []
-    
+
 def makePage(doc, page, conditions):
 
     # Gets page by pageNumber, first in row (at this point there is only one in
     # this row).
-    
+
     page.padding = 1
     page.showPadding = True
     numberOfSquares = 8
@@ -83,12 +83,12 @@ def makePage(doc, page, conditions):
 
     score = doc.solve()
     doc.build()
-    
+
 def testCoordinates():
     context = getContext()
     context.fill((0, 1, 0))
     context.stroke(None)
-    
+
     for rects in rectSets:
         i = 0
         for r in rects:

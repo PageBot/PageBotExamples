@@ -30,8 +30,8 @@ from pagebot.constants import DEFAULT_TRACKING
 print(pagebot)
 
 # Uncomment on Mac.
-#import pagebotcocoa
-#print(pagebotcocoa)
+#import pagebotosx
+#print(pagebotosx)
 
 import flat
 print(flat)

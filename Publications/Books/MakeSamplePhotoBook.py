@@ -13,10 +13,10 @@
 #
 #     MakeSamplePhotoBook.py
 #
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 from pagebot.publications.books import PhotoBook
 
-context = DrawBotContext()
+context = getContext('DrawBot')
 bk = PhotoBook()
 doc = bk.makeSample(context)
 doc.export('_export/PhotoBookSample.pdf')

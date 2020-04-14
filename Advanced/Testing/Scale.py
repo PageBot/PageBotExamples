@@ -18,7 +18,7 @@ from random import random
 from pagebot import getAllContexts, getResourcesPath
 from pagebot.toolbox.color import Color
 from pagebot.constants import A4Rounded
-from pagebot.contexts.base.babelstring import BabelString
+from pagebot.contexts.basecontext.babelstring import BabelString
 from pagebot import getContext
 from pagebot.toolbox.units import pt
 from pagebot.document import Document
@@ -46,7 +46,7 @@ def testContext(context):
     doc = Document(w=W, h=H, context=context, autoPages=1)
     sq = 100
     x = 0
-    y = 0 
+    y = 0
     context.frameDuration(1)
     context.newDrawing()
     context.newPage(w=W, h=H)

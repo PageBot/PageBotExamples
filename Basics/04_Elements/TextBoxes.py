@@ -23,7 +23,7 @@ from pagebot.toolbox.color import noColor, color
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.constants import *
 from pagebot.style import getRootStyle
-from pagebot.contexts.base.babelstring import getFontPath
+from pagebot.contexts.basecontext.babelstring import getFontPath
 
 # TODO: move to basics when finished.
 
@@ -61,6 +61,8 @@ def drawBaselines(x0, y0, w, baselines, s, page):
         y = y0 - baseline
         # Calculates baseline offsets between each line.
         baseH = baseline - baseH0
+
+        # Prints distances from top between lines.
         #print(baseH)
         baseH0 = baseline
         newLine(x=x0, y=y, w=w, h=0, stroke=color(0.5), strokeWidth=0.5,
@@ -84,21 +86,30 @@ def drawBaselines(x0, y0, w, baselines, s, page):
 def test(context):
     print("creating doc")
     doc = Document(w=W, h=H, context=context)
+
     doc.name = 'TextBoxes-%s' % doc.context.name
     print('# Testing text boxes in %s' % doc)
 
     page = doc[1]
+    page.showOrigin = True
+    page.showDimensions = True
     #s = getString(page)
     blurb = Blurb()
     txt = blurb.getBlurb('stylewars_bluray')
 
-    i = len(txt.split('. ')[0]) + 1
+    # First sentence.
+    sentences = txt.split('. ')
 
+    # Adds a string with a style.
     style = {'font': bungeeRegular, 'fontSize': 24, 'leading': 1.5}
-    s = page.newString(txt[0:i], style=style)
+    t0 = sentences[0] + '. '
 
+    s = page.newString(t0, style=style)
+
+    # Adds another string with a different style.
+    t1 = '. '.join(sentences[1:])
     style = {'font': bungeeOutline, 'fontSize': 24, 'leading': 1.5}
-    s += page.newString(txt[i:], style=style)
+    s += page.newString(t1, style=style)
 
     w = W/2 - 2*M
     h = 460 #H - 2*M
@@ -106,10 +117,12 @@ def test(context):
     y = H - M - h
 
     sc = color(0.3, 0.2, 0.1, 0.5)
-    tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
+    tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page)
+    #tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
     y0 = H - M
     drawBaselines(x, y0, w, tb.baselines, s, page)
 
+    '''
     # Get the rest of the text.
     txt = tb.getOverflow()
     style = {'font': pageBotBold, 'fontSize': 24, 'leading': 1.5}
@@ -136,6 +149,7 @@ def test(context):
     tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
     y0 =  M + h
     drawBaselines(x, y0, w, tb.baselines, s, page)
+    '''
 
     print('Starting doc build')
     doc.build()

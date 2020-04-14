@@ -92,13 +92,11 @@ def makeDocument():
     view.showDimensions = False
     view.showElementInfo = ShowElementInfo
 
-    page = doc[1] # Get the single page from te document.
-
-    # Hard coded padding, just for simple demo, instead of
-    # filling padding an columns in the root style.
+    # Get the single page from te document. Hard coded padding, just for
+    # simple demo, instead of filling padding an columns in the root style.
+    page = doc[1]
     page.margin = 0
     page.padding = SQ
-
     pageArea = PageSize-2*SQ
     print(PageSize, pageArea, SQ)
 

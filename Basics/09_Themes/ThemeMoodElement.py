@@ -18,7 +18,7 @@ from pagebot.themes import ThemeClasses
 from pagebot.themes import BaseTheme, FreshAndShiny
 from pagebot.conditions import *
 from pagebot.elements import *
-from pagebotcocoa.contexts.drawbot.drawbotcontext import DrawBotContext
+from pagebot import getContext
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import point2D
@@ -27,13 +27,13 @@ from pagebot.constants import *
 
 W, H = A4
 
-context = DrawBotContext()
+context = getContext('DrawBot')
 
 class ThemeSpecimen(Element):
-    """Draw an element, showing best of an info-graphic with the 
+    """Draw an element, showing best of an info-graphic with the
     content (color palette and mood) of the selected Theme.
     """
-    
+
     def buildElement(self, view, p, drawElements, **kwargs):
         context = self.context
         # Mood: body=dict(color='dark0', bgcolor='lightest0'),
@@ -53,11 +53,11 @@ class ThemeSpecimen(Element):
             themeName = context.newString(themeMoodName, style=styleHead)
             tw, th = themeName.size
             if tw < self.pw:
-                context.textBox(themeName, 
+                context.textBox(themeName,
                     (x+self.pl, y+self.h-th-self.pt, self.pw, th))
                 break
         # Theme palette
-        
+
 doc = Document(w=W, h=H, context=context)
 
 view = doc.view
@@ -65,13 +65,13 @@ view.showPadding = True
 
 page = doc[1]
 page.padding = 60
-ThemeSpecimen(parent=page, theme=FreshAndShiny('normal'), fill=0.9, 
+ThemeSpecimen(parent=page, theme=FreshAndShiny('normal'), fill=0.9,
     padding=12, conditions=[Fit()])
 page.solve()
 
 page = page.next
 page.padding = 60
-ThemeSpecimen(parent=page, theme=FreshAndShiny('dark'), fill=0.9, 
+ThemeSpecimen(parent=page, theme=FreshAndShiny('dark'), fill=0.9,
     padding=12, conditions=[Fit()])
 page.solve()
 
@@ -89,7 +89,7 @@ labelSize = pt(16)
 labelLeading = pt(18)
 
 # Calculate the page size, based on size of matrix, cells and gutter.
-W, H = PADDING*2 + CW*DX + G*(DX-1), PADDING*3 + CH*DY + G*(DY-1) 
+W, H = PADDING*2 + CW*DX + G*(DX-1), PADDING*3 + CH*DY + G*(DY-1)
 
 def drawColor(colorName, x, y, clr):
     # Draw the color cell as square with a value label.
@@ -101,8 +101,8 @@ def drawColor(colorName, x, y, clr):
     context.fill(None)
     context.rect(x, y, CW, CH)
     textFill = 0
-    labelString = context.newString('%s\n#%s' % (colorName, clr.hex), 
-        style=dict(font=labelFont, fontSize=labelSize, leading=labelLeading, 
+    labelString = context.newString('%s\n#%s' % (colorName, clr.hex),
+        style=dict(font=labelFont, fontSize=labelSize, leading=labelLeading,
         textFill=textFill))
     tw, th = labelString.size # Get the size of the label to center it
     context.text(labelString, (x+CW/2-tw/2, y+30)) # Position text in cell
@@ -113,10 +113,10 @@ def makeThemePage(themeClass):
     colorNames = sorted(theme.palette.colorNames)
     cIndex = 0
     context.fill(0)
-    titleString = context.newString('PageBot Theme “%s”' % theme.name, 
+    titleString = context.newString('PageBot Theme “%s”' % theme.name,
         style=dict(font=labelFont, fontSize=32))
     context.text(titleString, (PADDING, H-2*PADDING*2/3))
-    
+
     y = 0
     for colorGroup in colorMatrix:
         x = 0
@@ -147,7 +147,7 @@ for themeName, themeClass in ThemeClasses.items():
 # Add pages for the custom themes that we made.
 makeThemePage(FantasyTheme)
 makeThemePage(DDSTheme)
-      
+
 # Save the first of the pages in different formats.
 # Only the PDF will contain all pages create.
 context.saveImage('_export/dds453-theme-color-matrix.pdf')

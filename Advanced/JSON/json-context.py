@@ -16,7 +16,7 @@
 import traceback
 import os.path
 from pagebot import getContext
-from pagebot.contexts.base.babelstring import BabelString
+from pagebot.contexts.basecontext.babelstring import BabelString
 from pagebot.toolbox.color import Color
 from pagebot.toolbox.units import pt
 from pagebot.toolbox.transformer import json2Dict
