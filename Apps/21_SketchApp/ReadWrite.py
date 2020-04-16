@@ -26,11 +26,12 @@ from pagebot.toolbox.units import pt
 from pagebot.document import Document
 from pagebotosx.contexts.drawbotcontext.drawbotcontext import DrawBotContext
 from pagebot.constants import *
+from pagebot.elements import *
 
 try:
     import sketchapp2py
     from sketchcontext.context import SketchContext
-except:
+except ImportError:
     print("""Needs installing of SketchContext and SketchApp2Py""")
     # https://github.com/PageBot/SketchContext
     # https://github.com/PageBot/SketchApp2Py
@@ -44,10 +45,20 @@ context = SketchContext(sketchPath) # Same as context.b.api
 drawBotContext = DrawBotContext() # Used for exporting the document to PDF
 
 # Create a Document instance from the current selected Sketch file.
+# The copy create all elements, interpreting the Sketch file.
+# Take over the Document measures from the various Sketchboards found.
+
 doc = Document()
 context.readDocument(doc)
 
+isLayers = context.b.idLayers
+
 page = doc[1]
+for e in page.elements:
+    layer = isLayers[e.sId]
+    print(layer.frame)
+    layer.frame.x += 140
+    print(e.sId, e.name, layer.frame)
 
 view = doc.view
 view.padding = pt(30)
@@ -58,7 +69,7 @@ view.showFrame = True
 view.showNameInfo = True
 #view.showColorBars = True
 
-doc.export('_export/TestImage.jpg')
 doc.export('_export/TestImage.pdf')
-doc.export('_export/TestImage.png')
+
+context.save('_export/TestImageWrite.sketch')
 
