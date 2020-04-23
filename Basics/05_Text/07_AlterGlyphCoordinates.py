@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
-#     P A G E B O T
+#     P A G E B O T  E X A M P L E S
 #
 #     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
@@ -10,10 +12,9 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     AlterGlyphCoordinates.py
+#     07_AlterGlyphCoordinates.py
 #
-#     This script is using getContext(), so it should be able to run it with flatContext.
-#
+#     	  	
 
 import pagebot
 from pagebot import getContext
@@ -21,8 +22,8 @@ from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.units import pt
 from pprint import pprint
 
-context = getContext()
-EXPORT_PATH = '_export/AlteredGlyphWithPoints.pdf'
+context = getContext('DrawBot')
+EXPORT_PATH = '_export/07_AlteredGlyphWithPoints.pdf'
 f = findFont('Amstelvar-Roman-VF') # Get PageBot Font instance of Variable font.
 
 W = H = 1000

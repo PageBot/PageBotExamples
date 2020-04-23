@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #
-#     P A G E B O T
+#     P A G E B O T  E X A M P L E S
 #
 #     Licensed under MIT conditions
 #

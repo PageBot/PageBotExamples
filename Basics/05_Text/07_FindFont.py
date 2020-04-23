@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
 #
-#     P A G E B O T
+#     P A G E B O T  E X A M P L E S
 #
 #     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
@@ -12,15 +12,13 @@
 #
 #     FindFont.py
 #
-#     = Under development =
-#
 #     Some examples how to find Font instances, for the given installed fonts.
 #
 from pagebot import getContext
 from pagebot.fonttoolbox.objects.family import findFamily, getFamily
 from pagebot.fonttoolbox.objects.font import getFont, findFont
 
-context = getContext()
+context = getContext('DrawBot')
 #
 #    Installed fonts created a list of font names that are already installed.
 #    This will miss out the fonts supported inside the PageBot library.

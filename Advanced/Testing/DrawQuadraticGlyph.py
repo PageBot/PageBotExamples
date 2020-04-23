@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
-#     P A G E B O T
+#     P A G E B O T  E X A M P L E S
 #
 #     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
@@ -18,7 +19,7 @@
 #    TODO: test with Flat.
 #    TODO: switch to document level.
 
-import weakref, traceback
+import traceback
 from AppKit import NSFont
 from fontTools.ttLib import TTFont, TTLibError
 from drawBot import (BezierPath, translate, line, text, stroke, fill, oval,

@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
-#     P A G E B O T
+#     P A G E B O T  E X A M P L E S
 #
 #     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io
@@ -20,9 +22,7 @@ from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt
 from pagebot.fonttoolbox.objects.font import findFont
 
-#from pagebot.contexts.flat.flatcontext import FlatContext
-#context = FlatContext()
-context = getContext()
+context = getContext('DrawBot')
 bungee = findFont('Bungee-Regular')
 txt = Blurb().getBlurb('article_ankeiler', noTags=True)
 
@@ -31,7 +31,7 @@ h = 400
 
 W = 1200
 H = 1500
-doc = Document(w=W, h=H, autoPages=1)
+doc = Document(w=W, h=H, autoPages=1, context=context)
 page = doc[1]
 
 # hyphenationHead=4, hyphenationTail=3 currently not supported

@@ -1,36 +1,37 @@
 # -----------------------------------------------------------------------------
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
+#
+#     P A G E B O T  E X A M P L E S
+#
+#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io
-#
-#     P A G E B O T
-#
 #     Licensed under MIT conditions
 #
 #     Supporting DrawBot, www.drawbot.com
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     DrawVariableFont2AxisAnimation.py
+#     DrawVariableFont3AxisAnimation.py
 #
 #     Note: the type of animation used in this example is self-contained:
 #     all code for for FontIcon class and KeyFrame class is here.
 #     In the future these classes will be part of the main PageBot library,
 #     which may make them incompatible with this particular example.
 #
-import pagebot
+#     TODO: Instance location does not seem to work right.
+#
 from pagebot import getContext
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.fonttoolbox.fontpaths import TEST_FONTS_PATH
 from pagebot.fonttoolbox.variablefontbuilder import getVarFontInstance
-from pagebot.toolbox.units import pt, em, upt
-from pagebot.toolbox.color import color, blackColor, whiteColor
 from pagebot.constants import CENTER
+from pagebot.toolbox.color import blackColor
+from pagebot.toolbox.units import pt, em, upt
 
-c = getContext()
+context = getContext()
 
 W = H = pt(500)
 
 f = findFont('Amstelvar-Roman-VF') # Get PageBot Font instance of Variable font.
+
 LIGHT72 = getVarFontInstance(f, dict(wght=0.5, wdth=0.6, opsz=72), styleName='Light72')
 BOOK_LIGHT = getVarFontInstance(f, dict(wght=0.5, wdth=0.7), styleName='Book Light')
 BOOK_CONDENSED = getVarFontInstance(f, dict(wght=0.6, wdth=0.7), styleName='Book Condensed')
@@ -101,59 +102,62 @@ class FontIcon:
         x = self.x + orgX
         y = self.y + orgY
 
-        c.newPath()
-        c.moveTo((pt(0), pt(0)))
-        c.lineTo((pt(0), pt(h)))
-        c.lineTo((pt(w-e), pt(h)))
-        c.lineTo((pt(w), pt(h-e)))
-        c.lineTo((pt(w), pt(0)))
-        c.lineTo((pt(0), pt(0)))
-        c.closePath()
-        c.moveTo((pt(w-e), pt(h)))
-        c.lineTo((pt(w-e), pt(h-e)))
-        c.lineTo((pt(w), pt(h-e)))
+        context.newPath()
+        context.moveTo((0, 0))
+        context.lineTo((0, h))
+        context.lineTo((w-e, h))
+        context.lineTo((w, h-e))
+        context.lineTo((w, 0))
+        context.lineTo((0, 0))
+        context.closePath()
+        context.moveTo((w-e, h))
+        context.lineTo((w-e, h-e))
+        context.lineTo((w, h-e))
 
-        c.save()
-        c.fill(whiteColor)
-        c.stroke(blackColor, pt(self.line))
-        c.translate(pt(x), pt(y))
-        c.drawPath()
+        context.save()
+        context.fill(1)
+        context.stroke(0)
+        context.strokeWidth(self.line)
+        context.translate(x, y)
+        context.drawPath()
+
         labelSize = e
-        bs = c.newString(self.c,
+        bs = context.newString(self.c,
                                style=dict(font=self.f.path,
                                           textFill=blackColor,
                                           fontSize=h*2/3))
         tw, th = bs.size
-        c.text(bs, (w/2-tw/2, h/2-th/3.2))
+        context.text(bs, (w/2-tw/2, h/2-th/3.2))
 
         if self.title:
-            bs = c.newString(self.title,
+            bs = context.newString(self.title,
                                    style=dict(font=self.labelFont.path,
                                               textFill=blackColor,
                                               tracking=self.LABEL_RTRACKING,
                                               fontSize=labelSize))
             tw, th = bs.size
-            c.text(bs, (w/2-tw/2, self.ih+th/2))
+            context.text(bs, (w/2-tw/2, self.ih+th/2))
 
         y -= upt(self.LABEL_RLEADING, base=labelSize)
         if self.name:
-            bs = c.newString(self.name,
+            bs = context.newString(self.name,
                                    style=dict(font=self.labelFont.path,
                                               textFill=blackColor,
                                               tracking=self.LABEL_RTRACKING,
                                               fontSize=labelSize))
             tw, th = bs.size
-            c.text(bs, (w/2-tw/2, y))
+            context.text(bs, (w/2-tw/2, y))
             y -= upt(self.LABEL_RLEADING, base=labelSize)
+
         if self.label:
-            bs = c.newString(self.label,
+            bs = context.newString(self.label,
                                    style=dict(font=self.labelFont.path,
                                               textFill=blackColor,
                                               tracking=self.LABEL_RTRACKING,
                                               fontSize=labelSize))
             tw, th = bs.size
-            c.text(bs, (w/2-tw/2, y))
-        c.restore()
+            context.text(bs, (w/2-tw/2, y))
+        context.restore()
 
 class KeyFrame:
     def __init__(self, objects, positions, steps=None, drawBackground=None):
@@ -164,12 +168,12 @@ class KeyFrame:
             self.drawBacktround = drawBackground
 
     def drawBackground(self):
-        c.fill(whiteColor)
-        c.rect(pt(0), pt(0), pt(W), pt(H))
+        context.fill(1)
+        context.rect(0, 0, W, H)
 
     def draw(self):
         for n in range(self.steps):
-            c.newPage(pt(W), pt(H))
+            context.newPage(W, H)
             self.drawBackground()
             for o in self.objects:
                 offsetX = 0
@@ -211,8 +215,8 @@ def positionFontIcons():
     varFontIcon.y = H/2-varFontIcon.ih/2
 
 def drawBackground(keyFrame, frame):
-    fill(1)
-    rect(0, 0, W, H)
+    context.fill(1)
+    context.rect(0, 0, W, H)
 
 def drawAnimation():
     positionFontIcons()
@@ -244,8 +248,6 @@ def drawAnimation():
         drawBackground=drawBackground
     ).draw()
 
-    c.saveImage('_export/varFont2Axes.gif')
+    context.saveImage('_export/VarFont3Axes.gif')
 
 drawAnimation()
-
-

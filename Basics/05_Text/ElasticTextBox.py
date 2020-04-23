@@ -1,10 +1,11 @@
-#!/usr/bin/evn python
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
+#
+#     P A G E B O T  E X A M P L E S
+#
+#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io
-#
-#     P A G E B O T
-#
 #     Licensed under MIT conditions
 #
 #     Supporting DrawBot, www.drawbot.com
@@ -15,7 +16,7 @@
 #
 
 from pagebot import getContext
-c = getContext()
+context = getContext('DrawBot')
 
 from pagebot.constants import A4, LEFT, TOP, BOTTOM
 from pagebot.conditions import *
@@ -25,11 +26,11 @@ from pagebot.toolbox.color import color, noColor
 from pagebot.toolbox.units import pt, em
 
 DoTextFlow = False
-BoxWidth = 500
-PagePadding = 30
-PageSize = 1000
+BoxWidth = pt(500)
+PagePadding = pt(30)
+PageSize = pt(1000)
 
-GUTTER = 8 # Distance between the squares.
+GUTTER = pt(8) # Distance between the squares.
 SQUARE = 10 * GUTTER # Size of the squares
 
 # The standard PageBot function getRootStyle() answers a standard Python
@@ -43,7 +44,6 @@ SQUARE = 10 * GUTTER # Size of the squares
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 EXPORT_PATH = '_export/UseElasticTextBox.pdf'
-
 
 def makeDocument():
     """Make a new document."""
@@ -64,7 +64,7 @@ def makeDocument():
     #padX = (W - sqx*(SQUARE + GUTTER) + GUTTER)/2
     my = (H - sqy*(SQUARE + GUTTER) + GUTTER)/2
 
-    doc = Document(w=W, h=H, title='Color Squares', autoPages=1)
+    doc = Document(w=W, h=H, title='Color Squares', autoPages=1, context=context)
 
     view = doc.view # Get the current view of the document.
     view.padding = 40 # Aboid showing of crop marks, etc.
@@ -115,15 +115,5 @@ def makeDocument():
 
     return doc # Answer the doc for further doing.
 
-if __name__ == '__main__':
-
-    c.Variable([
-        #dict(name='ElementOrigin', ui='CheckBox', args=dict(value=False)),
-         dict(name='DoTextFlow', ui='CheckBox', args=dict(value=False)),
-         dict(name='BoxWidth', ui='Slider', args=dict(minValue=200, value=500, maxValue=PageSize)),
-        dict(name='PagePadding', ui='Slider', args=dict(minValue=0, value=30, maxValue=100)),
-        dict(name='PageSize', ui='Slider', args=dict(minValue=200, value=500, maxValue=PageSize)),
-    ], globals())
-
-    d = makeDocument()
-    d.export(EXPORT_PATH)
+d = makeDocument()
+d.export(EXPORT_PATH)
