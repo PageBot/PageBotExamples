@@ -1,10 +1,11 @@
   #!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
+#
+#     P A G E B O T  E X A M P L E S
+#
+#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io
-#
-#     P A G E B O T
-#
 #     Licensed under MIT conditions
 #
 #     Supporting DrawBot, www.drawbot.com
