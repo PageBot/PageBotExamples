@@ -26,7 +26,7 @@ context = getContext('DrawBot')
 #context = getContext('Flat')
 
 from pagebot.constants import A4, CENTER, LEFT, RIGHT
-from pagebot.elements import newTextBox, newLine, newText
+from pagebot.elements import newLine, newText
 from pagebot.document import Document
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
@@ -70,27 +70,27 @@ style = dict(font='PageBot-Regular', tracking=em(0.02), fontSize=fontSize,
 	hyphenation=True, language='en', leading=em(1.4))
 
 # Create a BabelString with this style.
-bs = context.newString(article, style)
+bs = context.newString(article, style, w=page.pw)
 
 # Let the context construct the textLines dictionary
-textLines = context.textLines(bs, w=page.pw, h=page.ph)
+lines = bs.lines
 
 # Make styles for the side labels;
 labelStyle = dict(font='PageBot-Regular', fontSize=pt(8), tracking=em(0.02), textFill=0.7)
 
 # Now we have a dictionary of wrapped BabelLines with their relative coordinates.
-for lineIndex, ((x, y), bs) in enumerate(sorted(textLines.items())):
-	newText(bs, parent=page, x=padding+x, y=padding+y, w=page.pw, h=page.ph)
+for lineIndex, line in enumerate(lines):
+	newText(bs, parent=page, x=padding+line.x, y=page.ph-padding-line.y, w=page.pw, h=page.ph)
 	
 	# Labels with line index on left side
-	label = context.newString(str(len(textLines)-lineIndex-1), labelStyle)
-	newText(label, x=padding+x-M, y=padding+y+2, parent=page)
-	newLine(x=padding+x-M, y=padding+y, w=M, h=0, parent=page, stroke=0.5, fill=None, strokeWidth=0.5)
+	label = context.newString(str(len(lines)-lineIndex-1), labelStyle)
+	newText(label, x=padding+line.x-M, y=padding+line.y+2, parent=page)
+	newLine(x=padding+line.x-M, y=padding+line.y, w=M, h=0, parent=page, stroke=0.5, fill=None, strokeWidth=0.5)
 	
 	# Labels with line index on right side
-	label = context.newString(str(len(textLines)-lineIndex-1), labelStyle)
-	newText(label, x=padding+x+page.pw, y=padding+y+2, parent=page)
-	newLine(x=padding+x+page.pw, y=padding+y, w=M, h=0, parent=page, stroke=0.5, fill=None, strokeWidth=0.5)
+	label = context.newString(str(len(lines)-lineIndex-1), labelStyle)
+	newText(label, x=padding+line.x+page.pw, y=padding+line.y+2, parent=page)
+	newLine(x=padding+line.x+page.pw, y=padding+line.y, w=M, h=0, parent=page, stroke=0.5, fill=None, strokeWidth=0.5)
 
 # Export the page to PDF
 doc.export(EXPORT_PATH)

@@ -27,7 +27,7 @@ context = getContext('DrawBot')
 #context = getContext('Flat')
 
 from pagebot.constants import *
-from pagebot.elements import newText, newRect
+from pagebot.elements import newText, newRect, newLine
 from pagebot.document import Document
 from pagebot.conditions import *
 from pagebot.toolbox.color import color, blackColor
@@ -60,7 +60,7 @@ else:
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
-EXPORT_PATH = '_export/00_TextA3Box.pdf'
+EXPORT_PATH = '_export/00_TextA3BoxGrid.pdf'
 print('Generating:', EXPORT_PATH)
 
 # Make a new document with one text box.
@@ -92,5 +92,11 @@ t = newText(bs, parent=page, x=padding, y=page.ph + padding, w=page.pw, h=page.p
 	fill=bgColor, # Show background to mark the real position of the box.
 	xAlign=LEFT, yAlign=BASE_TOP, # Vertical align on largest capheight of top line.
 	showOrigin=True)
+
+for line in bs.lines:
+	if page.ph+padding-line.y <= padding:
+		break
+	newLine(x=padding+line.x, y=page.ph+padding-line.y+bs.lines[0].y, w=page.pw, 
+		h=0, parent=page, stroke=(0, 0, 0.5), strokeWidth=pt(0.5))
 
 doc.export(EXPORT_PATH)

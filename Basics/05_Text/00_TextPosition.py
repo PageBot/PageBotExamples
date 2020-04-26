@@ -61,7 +61,7 @@ page.padding = padding
 
 style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=-em(0.02), leading=em(1), textFill=textColor, xAlign=CENTER)
 bs = context.newString('Hkpx', style)
-print(bs.textLines())
+print(bs.lines)
 print('A4 text size:', bs.textSize)
 t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, yAlign=MIDDLE_X)
 print('Text in box size:', t.w, t.h)

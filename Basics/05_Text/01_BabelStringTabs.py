@@ -71,8 +71,9 @@ label = context.newString('Tab start 0', labelStyle)
 newText(label, x=x+M, y=M, parent=page)
 newLine(x=x, y=0, w=0, h=H, parent=page, stroke=lineColor, strokeWidth=pt(0.5))
 for value, alignment in TABS:
+	# Add a vertical line element, with a label showing the alignment and tab distance.
 	newLine(x=x+value, y=0, w=0, h=H, parent=page, stroke=lineColor, strokeWidth=pt(0.5))
-	label = context.newString('Tab %s %d' % (alignment, value), labelStyle)
+	label = context.newString('Tab %s %s' % (alignment, value), labelStyle)
 	newText(label, x=x+M+value, y=M, parent=page)
 
 doc.export(EXPORT_PATH)
