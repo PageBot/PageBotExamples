@@ -10,7 +10,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     01_Basics/02_Elements.py
+#     02_Contexts.py
 #
 #     Make a page with a variety of elements that float into position,
 #     each taking its own space.
@@ -26,7 +26,7 @@ from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.elements.paths.pagebotpath import PageBotPath
 from pagebot.constants import A3
 
-context = getContext()
+context = getContext('DrawBot')
 
 # Landscape A3.
 H, W = A3
@@ -83,6 +83,6 @@ view = doc.view
 view.showPadding = True # Show the padding of the page, where conditions align.
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
-doc.export('_export/showElements.png')
+doc.export('_export/02_Contexts.pdf')
 
 

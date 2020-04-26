@@ -17,7 +17,7 @@
 #     This script generates a page with aligned square,
 #     showing how conditional placement works.
 #
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 
 #import pagebot # Import to know the path of non-Python resources.
 from pagebot.contributions.filibuster.blurb import blurb
@@ -28,7 +28,7 @@ from pagebot.constants import CENTER, TOP, MIDDLE
 # Document is the main instance holding all information about
 # the document togethers (pages, styles, etc.)
 from pagebot.document import Document
-from pagebot.elements import newImage, newRect, newTextBox
+from pagebot.elements import newImage, newRect, newText
 # Import all layout condition classes
 from pagebot.conditions import *
 from pagebot.toolbox.color import color, noColor, whiteColor, blackColor
@@ -76,104 +76,78 @@ PageSize = 400
 EXPORT_PATH = '_export/FloatElements.pdf'
 # Export in _export folder that does not commit in Git. Force to export PDF.
 
-def makeDocument():
-    """Make a new document."""
+"""Make a new document."""
 
-    doc = Document(w=PageSize, h=PageSize, autoPages=1)
+doc = Document(w=PageSize, h=PageSize, autoPages=1)
 
-    view = doc.view
-    view.padding = pt(40) # Show cropmarks and such.
-    view.showCropMarks = True # Add crop marks
-    view.showRegistrationMarks = True # Add registration marks
-    view.showNameInfo = True # Add file name
-    view.showMargin = True
-    view.showFrame = True
-    #view.showOrigin = True
-    #view.showColorBars = True # Gives error
-    view.showDimensions = False
-    view.showElementInfo = ShowElementInfo
+view = doc.view
+view.padding = pt(40) # Show cropmarks and such.
+view.showCropMarks = True # Add crop marks
+view.showRegistrationMarks = True # Add registration marks
+view.showNameInfo = True # Add file name
+view.showMargin = True
+view.showFrame = True
+#view.showOrigin = True
+#view.showColorBars = True # Gives error
+view.showDimensions = False
+view.showElementInfo = ShowElementInfo
 
-    # Get the single page from te document. Hard coded padding, just for
-    # simple demo, instead of filling padding an columns in the root style.
-    page = doc[1]
-    page.margin = 0
-    page.padding = SQ
-    pageArea = PageSize-2*SQ
-    print(PageSize, pageArea, SQ)
+# Get the single page from te document. Hard coded padding, just for
+# simple demo, instead of filling padding an columns in the root style.
+page = doc[1]
+page.margin = 0
+page.padding = SQ
+pageArea = PageSize-2*SQ
+print(PageSize, pageArea, SQ)
 
-    # Make new container for adding elements inside with alignment.
-    newRect(z=10, w=pageArea, h=pageArea, fill=color(0.8, 0.8, 0.8, 0.4),
-            parent=page, margin=0, padding=0, yAlign=MIDDLE,
-            xAlign=CENTER, stroke=noColor, conditions=(Center2Center(),
-                                                    Middle2Middle()))
+# Make new container for adding elements inside with alignment.
+newRect(z=10, w=pageArea, h=pageArea, fill=color(0.8, 0.8, 0.8, 0.4),
+        parent=page, margin=0, padding=0, yAlign=MIDDLE,
+        xAlign=CENTER, stroke=noColor, conditions=(Center2Center(),
+                                                Middle2Middle()))
 
-    fontSize = RedHeight/3
-    fs = doc.context.newString('Headline in red box.',
-                               style=dict(textFill=whiteColor,
-                                          fontSize=fontSize,
-                                          leading=fontSize,
-                                          font='LucidaGrande'))
-    newTextBox(fs, z=0, w=RedWidth, h=RedHeight, name='RedRect',
-               parent=page, fill=color(1, 0.1, 0.1),
-               yAlign=TOP, padding=4, conditions=(Center2Center(),
-                                      Top2Top()))
+fontSize = RedHeight/3
+fs = context.newString('Headline in red box.',
+                           style=dict(textFill=whiteColor,
+                                      fontSize=fontSize,
+                                      leading=fontSize,
+                                      font='LucidaGrande'))
+newTextBox(fs, z=0, w=RedWidth, h=RedHeight, name='RedRect',
+           parent=page, fill=color(1, 0.1, 0.1),
+           yAlign=TOP, padding=4, conditions=(Center2Center(),
+                                  Top2Top()))
 
-    if not hasattr(scriptGlobals, 'blurbText'):
-        scriptGlobals.blurbText = blurb.getBlurb('article_summary',
-                                                 noTags=True)
-    fs = doc.context.newString('Headline of formatted text.\n',
-                               style=dict(font='LucidaGrande-Bold',
-                                          fontSize=12,
-                                          leading=14,
-                                          textFill=blackColor))
-    fs += doc.context.newString(scriptGlobals.blurbText,
-                                style=dict(font='LucidaGrande',
-                                           fontSize=10,
-                                           leading=12,
-                                           textFill=blackColor))
-    newTextBox(fs, z=0, w=YellowWidth, h=YellowHeight, parent=page,
-               padding=4, fill=0.7, conditions=(Left2Left(),
-                                                         Float2Top()))
+if not hasattr(scriptGlobals, 'blurbText'):
+    scriptGlobals.blurbText = blurb.getBlurb('article_summary',
+                                             noTags=True)
+fs = doc.context.newString('Headline of formatted text.\n',
+                           style=dict(font='LucidaGrande-Bold',
+                                      fontSize=12,
+                                      leading=14,
+                                      textFill=blackColor))
+fs += doc.context.newString(scriptGlobals.blurbText,
+                            style=dict(font='LucidaGrande',
+                                       fontSize=10,
+                                       leading=12,
+                                       textFill=blackColor))
+newTextBox(fs, z=0, w=YellowWidth, h=YellowHeight, parent=page,
+           padding=4, fill=0.7, conditions=(Left2Left(),
+                                                     Float2Top()))
 
-    path = getResourcesPath() + 'cookbot10.jpg'
+path = getResourcesPath() + 'cookbot10.jpg'
 
-    newImage(path, z=0, w=BlueWidth,
-             parent=page, fill=0.7, padding=8, conditions=(Right2Right(),
-                                                       Float2Top()))
+newImage(path, z=0, w=BlueWidth,
+         parent=page, fill=0.7, padding=8, conditions=(Right2Right(),
+                                                   Float2Top()))
 
-    newRect(z=0, w=BlueWidth, h=20,
-            parent=page, fill=0.2, conditions=(Fit2Width(),
-                                               Float2Top()))
+newRect(z=0, w=BlueWidth, h=20,
+        parent=page, fill=0.2, conditions=(Fit2Width(),
+                                           Float2Top()))
 
-    score = page.solve()
-    if score.fails:
-        print('Condition fails', score.fails)
+score = page.solve()
+if score.fails:
+    print('Condition fails', score.fails)
 
-    return doc # Answer the doc for further doing.
 
-if __name__ == '__main__':
-
-    d = makeDocument()
-    #dict(name='ElementOrigin', ui='CheckBox', args=dict(value=False)),
-    d.context.Variable(
-        [dict(name='RedWidth', ui='Slider',
-              args=dict(minValue=30, value=100, maxValue=MaxPage)),
-         dict(name='RedHeight', ui='Slider',
-              args=dict(minValue=30, value=100, maxValue=MaxPage)),
-         dict(name='YellowWidth', ui='Slider',
-              args=dict(minValue=60, value=100, maxValue=MaxPage)),
-         dict(name='YellowHeight', ui='Slider',
-              args=dict(minValue=30, value=100, maxValue=MaxPage)),
-         dict(name='BlueWidth', ui='Slider',
-              args=dict(minValue=30, value=100, maxValue=MaxPage)),
-         dict(name='BlueHeight', ui='Slider',
-              args=dict(minValue=30, value=100, maxValue=MaxPage)),
-         dict(name='ShowOrigin', ui='CheckBox',
-              args=dict(value=True)),
-         dict(name='ShowElementInfo', ui='CheckBox',
-              args=dict(value=False)),
-         dict(name='PageSize', ui='Slider',
-              args=dict(minValue=200, value=400, maxValue=MaxPage))
-        ], globals())
-    d.export(EXPORT_PATH)
+doc.export(EXPORT_PATH)
 

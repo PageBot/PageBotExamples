@@ -18,7 +18,7 @@
 #     This script is using the style parameters "originTop", making the coordinate system run downwards.
 #
 
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 from pagebot.constants import TOP, BOTTOM
 from pagebot.conditions import *
 from pagebot.elements import *

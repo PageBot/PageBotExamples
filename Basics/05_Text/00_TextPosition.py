@@ -12,14 +12,15 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     00_Text.py
+#     00_TextPosition.py
 #
 #	  Create a page in A4 landscape
 #	  Setup the document view to show registration marks and cropmarks
 #     Show the page frame and padding frame in blue
 #     Show the generated PDF file name on top of the page.
 #	  Show red “Hkpx” centered on the page as Text element, 
-#     with its baseline on the middle of page height
+#     with its x-height on the middle of page height
+#     Show the box of the element as blue guidelines with labels.
 #
 from pagebot import getContext
 context = getContext('DrawBot')
@@ -41,7 +42,7 @@ bgColor = color(0.9) # Background color of the text box
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
-EXPORT_PATH = '_export/00_Text.pdf'
+EXPORT_PATH = '_export/00_TextPosition.pdf'
 
 # Make a new document with one text box.
 
@@ -58,14 +59,21 @@ view.showNameInfo = True # Showing page info and title on top of the page.
 page = doc[1] # Get page on pageNumber, first in row (this is only one now).
 page.padding = padding
 
-style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=-em(0.02), 
-	leading=em(1), textFill=textColor, xAlign=CENTER)
-bs = context.newString('A4\n', style)
-print('Rendered text size:', bs.tw, bs.th)
-print('Lines:', bs.lines)
-t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, yAlign=BASE_TOP)
-print('Box size:', t.w, t.h)
-print('Text in box size:', t.bs.tw, t.bs.th)
+style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=-em(0.02), leading=em(1), textFill=textColor, xAlign=CENTER)
+bs = context.newString('Hkpx', style)
+print(bs.textLines())
+print('A4 text size:', bs.textSize)
+t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, yAlign=MIDDLE_X)
+print('Text in box size:', t.w, t.h)
 
-print(bs.lines)
+# Horizontal guides
+newLine(x=0, y=t.y, w=page.w, h=0, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
+newLine(x=0, y=t.bottom, w=page.w, h=0, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
+newLine(x=0, y=t.top, w=page.w, h=0, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
+
+# Vertical guides
+newLine(x=t.left, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
+newLine(x=t.center, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
+newLine(x=t.right, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
+
 doc.export(EXPORT_PATH)

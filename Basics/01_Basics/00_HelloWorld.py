@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -6,36 +8,45 @@
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
+#     Find the font with a given name
+#
 # -----------------------------------------------------------------------------
 #
-
 from pagebot.document import Document
 from pagebot.elements import newText
 from pagebot.toolbox.units import pt
 from pagebot.fonttoolbox.objects.font import findFont
+from pagebot.contexts import getContext
+from pagebot.constants import CENTER, LEFT
 
-def helloWorld(context):
+W = pt(800) # Size of the document/page
+H = pt(150)
+
+for contextName in ('DrawBot',):# 'Flat'):
+    context = getContext(contextName)
+
     # Find the Roboto font that exist in PageBot resources.
-    f = findFont('Roboto-Bold')
+    font = findFont('PageBot-Regular') # PageBot version of TYPETR Upgrade
+    fontSize = pt(140)
+
     # Create document with default 1 page.
-    doc = Document(w=pt(800), h=pt(190), context=context)
     # The context is not stored in the document, but passed on to the doc.view
-    # Get the view from the document, that contains the export view.context.
-    view = doc.view 
-    print(view.context)
-    # First page in the list is uneven (right side)
-    # This is different from “normal” Python list, where the index starts at 0.
-    page = doc[1]
-    # Create a new Text element with (x, y) conditions
-    e = newText('Hello World', x=30, y=0, font=f, fontSize=140, textFill=0.2, parent=page)
-    print(e)
+    doc = Document(w=W, h=H, context=context)
     
-    # Export the document page as png, so it shows as web image.
-    doc.export('_export/HelloWorld-%s.png' % view.name)
+    # Get the view from the document, that contains the export view.context.
+    print('Current context:', doc.view.context)
+    
+    # The first page in the list is uneven (right side)
+    # This is different from “normal” Python lists, where the index starts at 0.
+    page = doc[1]
+    
+    # Create a new Text element with (x, y) centered position.
+    # In order to get it on the page, we define the parent.
+    e = newText('Hello World', x=W/2, y=H/2, font=font, fontSize=fontSize, 
+        textFill=0.2, xAlign=CENTER, showOrigin=True, parent=page)
+    print('Element:', e)
 
-if __name__ == '__main__':
-    from pagebot import getContext
+    # Export the document page as PNG, so it shows as web image.
+    exportPath = '_export/00_HelloWorld-%s.png' % contextName
+    doc.export(exportPath)
 
-    for contextName in ('DrawBot', 'Flat'):
-        context = getContext(contextName)
-        helloWorld(context)

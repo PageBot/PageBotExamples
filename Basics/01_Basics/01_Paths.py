@@ -18,10 +18,10 @@
 #     Not to be confused with BezierPaths and PageBotPath,
 #     which are a different things: paths of polyons to draw.
 #
-import glob
 
 # Import all top-level values, such as the getContext() function.
 from pagebot import *
+from pagebot.filepaths import getResourcesPath
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.units import pt
 from pagebot.conditions import *
@@ -36,6 +36,7 @@ GUTTER = pt(12)
 
 def showFilePaths(context):
     # Get the context that this script runs in, e.g. DrawBotApp.
+    print('Context:', context)
 
     # Make a Document instance for this size and context, intializing one page.
     doc = Document(w=W, h=H, context=context)
@@ -53,19 +54,19 @@ def showFilePaths(context):
     rootPath = getRootPath() # Location of this PageBot library
     style = dict(fontSize=14, font=f)
     msg = 'Root path is %s' % rootPath
-    bs = page.newString(msg, style=style)
+    bs = context.newString(msg, style)
     makeText(bs, page, f, c)
 
     resourcesPath = getResourcesPath()
     msg = 'Resources path is %s' % resourcesPath
-    bs = page.newString(msg, style=style)
+    bs = context.newString(msg, style)
     makeText(bs, page, f, c)
     #print(glob.glob('%s/*' % resourcesPath))
 
-    defaultFontPath = getDefaultFontPath()
-    msg = 'Default font path is %s' % defaultFontPath
+    font = findFont('PageBot-Regular')
+    msg = 'Default font path is %s' % font.path
     msg = '\n\t'.join(msg.split('/'))
-    bs = page.newString(msg, style=style)
+    bs = context.newString(msg, style)
     c = (Right2Right(), Float2Top())
     e = makeText(bs, page, f, c)
     e.w = page.pw/2 - 2*GUTTER
@@ -73,25 +74,22 @@ def showFilePaths(context):
 
     msg = 'PageBot font path is %s' % f.path
     msg = '\n\t'.join(msg.split('/'))
-    bs = page.newString(msg, style=style)
+    bs = context.newString(msg, style)
     c = (Left2Left(), Float2Top())
     e = makeText(bs, page, f, c)
     e.w = page.pw/2 - 2*GUTTER
 
     # Let the page solve all of its child element layout conditions.
     page.solve()
-    doc.export('_export/ShowFilePaths-%s.pdf' % context.name)
+    doc.export('_export/01_Paths-%s.pdf' % context.name)
 
 def makeText(t, page, f, c):
     """Create a new text box with e give layout conditions
     and with page as parent."""
-    return newTextBox(t, font=f, parent=page, conditions=c, fill=0.9,
+    return newText(t, font=f, parent=page, conditions=c, fill=0.9,
         margin=GUTTER)
 
 
-if __name__ == '__main__':
-    from pagebot import getContext
-
-    for contextName in ('DrawBot', 'Flat'):
-        context = getContext(contextName)
-        showFilePaths(context)
+for contextName in ('DrawBot',): #, 'Flat'):
+    context = getContext(contextName)
+    showFilePaths(context)

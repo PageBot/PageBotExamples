@@ -26,12 +26,11 @@ context = getContext('DrawBot')
 #context = getContext('Flat')
 
 from pagebot.constants import A4, CENTER, LEFT, RIGHT
-from pagebot.elements import newTextBox, newLine, newText
+from pagebot.elements import newText, newLine, newText
 from pagebot.document import Document
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 from pagebot.contributions.filibuster.blurb import Blurb
-from pagebot.contributions.filibuster import blurbwriter, content
 
 fontSize = pt(12)
 W, H = 400, 600 
@@ -70,12 +69,12 @@ colW = (page.pw - G)/2
 # Style, BabelString and left text box
 style = dict(font='PageBot-Regular', tracking=em(0.02), fontSize=fontSize, leading=em(1.4))
 bs = context.newString(article, style)
-newTextBox(bs, parent=page, x=padding, y=padding, w=(page.pw - G)/2, h=page.ph)
+newText(bs, parent=page, x=padding, y=padding, w=(page.pw - G)/2, h=page.ph)
 
 # Style with hyphenation and right text box
 style = dict(font='PageBot-Regular', tracking=em(0.02), hyphenation=True, fontSize=fontSize, leading=em(1.4))
 bs = context.newString(article, style)
-newTextBox(bs, parent=page, x=padding+colW+G, y=padding, w=colW, h=page.ph)
+newText(bs, parent=page, x=padding+colW+G, y=padding, w=colW, h=page.ph)
 
 # Labels under the columns
 labelStyle = dict(font='PageBot-Regular', fontSize=pt(12), tracking=em(0.02), textFill=0.5)

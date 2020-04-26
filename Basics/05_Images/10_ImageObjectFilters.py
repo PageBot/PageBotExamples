@@ -18,7 +18,7 @@
 #     ImageObject filters.
 #
 
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 from pagebot.fonttoolbox.objects.family import getFamily
 from pagebot.constants import TOP, BOTTOM, A4
 from pagebot.conditions import *

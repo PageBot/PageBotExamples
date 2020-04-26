@@ -27,7 +27,8 @@
 #     Page and Element layout usage.
 #
 
-from pagebot import getContext, getResourcesPath
+from pagebot.contexts import getContext
+from pagebot.filepaths import getResourcesPath
 from pagebot.elements.paths import PageBotPath
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.color import color, noColor

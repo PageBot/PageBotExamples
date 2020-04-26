@@ -16,7 +16,8 @@
 
 import traceback
 from random import random
-from pagebot import getAllContexts, getResourcesPath
+from pagebot import getAllContexts
+from pagebot.filepaths import getResourcesPath
 from pagebot.toolbox.color import Color
 from pagebot.constants import A4Rounded
 from pagebot.contexts.basecontext.babelstring import BabelString

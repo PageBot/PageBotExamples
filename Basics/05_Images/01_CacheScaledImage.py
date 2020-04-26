@@ -25,7 +25,7 @@ import os # Import module that communicates with the file system.
 import sys
 
 from pagebot.document import Document
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 from pagebot.toolbox.units import pt
 from pagebot import getContext
 from pagebot.constants import A4

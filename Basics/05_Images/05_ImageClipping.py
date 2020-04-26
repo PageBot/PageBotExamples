@@ -18,7 +18,7 @@ from random import random
 #from pagebot.contexts.flat.flatcontext import FlatContext
 from pagebot import getContext
 
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 from pagebot.document import Document
 from pagebot.toolbox.color import color, noColor
 from pagebot.toolbox.units import em, p, pt, inch, degrees

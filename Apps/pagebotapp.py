@@ -14,7 +14,7 @@
 #     pagebotapp.py
 #
 from vanilla import *
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 from pagebot.apps.baseapp import BaseApp
 from pagebot.publications import PublicationCategories
 from pagebot.elements import newGroup, newTextBox, newRect

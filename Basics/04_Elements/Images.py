@@ -25,8 +25,7 @@ from pagebot.toolbox.color import noColor, color
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.constants import *
 from pagebot.style import getRootStyle
-from pagebot.contexts.basecontext.babelstring import getFontPath
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 
 H, W = A3
 W = pt(W)

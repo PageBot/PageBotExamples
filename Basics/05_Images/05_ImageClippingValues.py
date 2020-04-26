@@ -16,17 +16,17 @@
 #
 from pagebot import getContext
 
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 from pagebot.document import Document
 from pagebot.toolbox.color import color, noColor
 from pagebot.toolbox.units import em, p, pt, inch, degrees
 from pagebot.conditions import * # Import all conditions for convenience.
 from pagebot.constants import *
-from pagebot.elements import newTextBox
+from pagebot.elements import newText
 from pagebot.elements.pbimage2 import Image
 
 #context = FlatContext()
-context = getContext()
+context = getContext('DrawBot')
 
 # Example image that has nice areas to put text as example.
 imagePath = getResourcesPath() + '/images/peppertom_lowres_398x530.png'

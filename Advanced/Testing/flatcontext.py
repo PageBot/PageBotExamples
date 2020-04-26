@@ -20,10 +20,10 @@ from flat import rgb, font, shape, strike, document
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot import getContext
 from pagebot.toolbox.color import blackColor, color
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 from pagebot.toolbox.units import pt
 from pagebot.conditions import *
-from pagebot.elements import newTextBox
+from pagebot.elements import newText
 import os, os.path
 
 WIDTH = 400

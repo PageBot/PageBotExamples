@@ -1,4 +1,4 @@
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 from pagebot.toolbox.transform3d import Transform3D
 
 def circle(cpt, r):
@@ -11,8 +11,8 @@ translate(width()/2, height()/2)
 
 t = Transform3D()  # identity transform
 
-print(t.transformPoint((100, 200, 300))  # transform one point)
-print(t.transformPoints([(100, 200, 300)])  # transform a seq. of points)
+print(t.transformPoint((100, 200, 300)))  # transform one point)
+print(t.transformPoints((100, 200, 300)))  # transform a seq. of points)
 
 print(t)
 

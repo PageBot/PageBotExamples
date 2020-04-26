@@ -19,7 +19,7 @@
 #
 
 from pagebot import getContext
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.document import Document
 from pagebot.elements import * # Import all types of page-child elements for convenience

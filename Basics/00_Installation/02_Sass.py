@@ -17,7 +17,7 @@
 #    Test working on exteral scss/sass application to compile into css.
 #
 import shutil
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 
 def testSass():
     import sass

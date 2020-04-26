@@ -15,7 +15,7 @@
 #     Trace a halftone image to vectors.
 #
 from pagebot.elements.paths.pagebotpath import PageBotPath
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 from pagebot.toolbox.units import p
 from pagebot.toolbox.color import color
 from pagebot import getContext
