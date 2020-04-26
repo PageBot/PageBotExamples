@@ -57,6 +57,7 @@ else:
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
 EXPORT_PATH = '_export/00_TextA3Box.pdf'
+print('Generating:', EXPORT_PATH)
 
 # Make a new document with one text box.
 
@@ -75,13 +76,13 @@ page.padding = padding
 
 style = dict(font='PageBot-Bold', fontSize=fontSize*2.5, leading=em(1), 
 	textFill=textColor, xAlign=LEFT)
-bs = context.newString(headline+'\n', style)
+bs = context.newString(article+'\n', style, w=600)
 style = dict(font='PageBot-Regular', fontSize=fontSize, leading=em(1), 
 	textFill=textColor, xAlign=LEFT, hyphenation=True)
-bs += context.newString(article, style)
+#bs += context.newString(article, style)
+t = newText(bs, parent=page, x=padding, y=padding, w=page.pw, conditions=[Fit()], fill=bgColor, 
+	xAlign=LEFT, showOrigin=True)
 
-t = newText(bs, parent=page, conditions=[Fit()], fill=bgColor, xAlign=LEFT, showOrigin=True)
-
-doc.solve()
+#doc.solve()
 
 doc.export(EXPORT_PATH)

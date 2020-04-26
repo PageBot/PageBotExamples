@@ -42,6 +42,7 @@ bgColor = color(0.9) # Background color of the text box
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
 EXPORT_PATH = '_export/00_TextA1.pdf'
+print('Generating:', EXPORT_PATH)
 
 # Make a new document with one text box.
 
@@ -60,7 +61,6 @@ page.padding = padding
 
 style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=-em(0.02), leading=em(1), textFill=textColor, xAlign=CENTER)
 bs = context.newString('A1', style)
-print(bs.lines)
 print('A1 text size:', bs.textSize)
 t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, yAlign=BASE_TOP)
 print('Text in box size:', t.w, t.h)
