@@ -14,11 +14,11 @@
 #
 #     00_TextA1.py
 #
-#	  Create a page in A1 landscape
+#	  Create a page in A1 portrait (as it coul be a poster)
 #	  Setup the document view to show registration marks and cropmarks
 #     Show the page frame and padding frame in blue
 #     Show the generated PDF file name on top of the page.
-#	  Show red “Hkpx” centered on the page as Text element, 
+#	  Show red A1 centered on the page as Text element, 
 #     with its baseline on the middle of page height
 #
 from pagebot import getContext
@@ -60,7 +60,7 @@ page.padding = padding
 
 style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=-em(0.02), leading=em(1), textFill=textColor, xAlign=CENTER)
 bs = context.newString('A1', style)
-print(bs.textLines())
+print(bs.lines)
 print('A1 text size:', bs.textSize)
 t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, yAlign=BASE_TOP)
 print('Text in box size:', t.w, t.h)

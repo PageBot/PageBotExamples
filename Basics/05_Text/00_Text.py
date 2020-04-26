@@ -18,8 +18,9 @@
 #	  Setup the document view to show registration marks and cropmarks
 #     Show the page frame and padding frame in blue
 #     Show the generated PDF file name on top of the page.
-#	  Show red “Hkpx” centered on the page as Text element, 
+#	  Show red “A4” centered on the page as Text element, 
 #     with its baseline on the middle of page height
+#     Draw the background of the Text element in light gray
 #
 from pagebot import getContext
 context = getContext('DrawBot')
@@ -60,7 +61,7 @@ page.padding = padding
 
 style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=-em(0.02), 
 	leading=em(1), textFill=textColor, xAlign=CENTER)
-bs = context.newString('A4\n', style)
+bs = context.newString('A4', style)
 print('Rendered text size:', bs.tw, bs.th)
 print('Lines:', bs.lines)
 t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, yAlign=BASE_TOP)
@@ -68,4 +69,5 @@ print('Box size:', t.w, t.h)
 print('Text in box size:', t.bs.tw, t.bs.th)
 
 print(bs.lines)
+# Export the document as PDF
 doc.export(EXPORT_PATH)
