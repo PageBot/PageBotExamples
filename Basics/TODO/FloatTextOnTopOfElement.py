@@ -17,9 +17,6 @@
 #     This script generates a page with random color squares, indicating where
 #     their position is.
 #
-#     This script is using the style parameters "originTop", making the
-#     coordinate system run downwards.
-#
 
 
 #import pagebot # Import to know the path of non-Python resources.

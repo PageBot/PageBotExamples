@@ -61,7 +61,6 @@ view.showBaselineGrid = False # Show default setting of baseline grid of the col
 
 # Get the page
 page = doc[1]
-page.originTop = True
 # Make text box as child element of the page and set its layout conditions
 # to fit the padding of the page and the condition that checks on text overflow.
 n = 0

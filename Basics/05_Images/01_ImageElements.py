@@ -15,7 +15,6 @@
 #     UseImageElements.py
 #
 #     This script generates a page with random color squares, indicating where their position is.
-#     This script is using the style parameters "originTop", making the coordinate system run downwards.
 #
 
 from pagebot.filepaths import getResourcesPath

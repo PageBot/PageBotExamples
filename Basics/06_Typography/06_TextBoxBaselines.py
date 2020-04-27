@@ -48,7 +48,6 @@ view.showPadding = True # Show the padding of the page. The size is then (page.p
 view.showOrigin = False # No origin showing
 
 page = doc[1] # Get the first (and only) page of the document
-page.originTop = True
 
 # Define the style dictionary fir the main text.
 style = dict(name='body', font='Verdana', fontSize=pt(12), leading=em(1.4))

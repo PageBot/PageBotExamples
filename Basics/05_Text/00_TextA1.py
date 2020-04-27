@@ -14,7 +14,7 @@
 #
 #     00_TextA1.py
 #
-#	  Create a page in A1 portrait (as it coul be a poster)
+#	  Create a page in A1 portrait (as it could be start of a poster)
 #	  Setup the document view to show registration marks and cropmarks
 #     Show the page frame and padding frame in blue
 #     Show the generated PDF file name on top of the page.

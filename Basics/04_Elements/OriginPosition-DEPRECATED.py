@@ -14,6 +14,11 @@
 #
 #     OriginPosition.py
 #
+#     The originTop attribute is no longer supported
+#     (In never worked properly and was a lot of work to make consistent)
+#     All y-origin is in bottom-left.
+#
+"""
 # Document is the main instance holding all information about
 # the document togethers (pages, styles, etc.)
 from pagebot.document import Document
@@ -67,10 +72,4 @@ def makeDocument(context):
     EXPORT_PATH = '_export/OriginPosition-%s.pdf' % context.name
     doc.export(EXPORT_PATH)
 
-
-if __name__ == '__main__':
-    from pagebot import getContext
-
-    for contextName in ('DrawBot', 'Flat'):
-        context = getContext(contextName)
-        makeDocument(context)
+"""

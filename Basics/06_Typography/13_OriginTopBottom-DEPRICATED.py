@@ -12,9 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     13_OriginTopBottom-DEPRICATED.py
-#
-#     originTop is no longer supported.
+#     13_OriginTopBottom.py
 #
 #     Test the relation between hard-coded positions (from e.x and e.w, etc.)
 #     and the more abstract positions of e.top, e.right, e.bottom and e.left
@@ -24,7 +22,7 @@
 #     TODO: Seems to be a problem when using picas p( ) as measurements for page size
 #     TODO: duplicate drawing (shifted) of element origin
 #
-"""
+
 from pagebot.document import Document # Get the main Document class
 from pagebot.toolbox.units import pt, inch, p
 from pagebot.toolbox.color import color
@@ -232,4 +230,3 @@ newCircle(x=r1.left+R, y=r1.middle, r=R, fill=RED, parent=page)
 
 # Export the document showing the baselines of the page as horizontal lines and the padding.
 doc.export('_export/OriginTopBottom.pdf')
-"""

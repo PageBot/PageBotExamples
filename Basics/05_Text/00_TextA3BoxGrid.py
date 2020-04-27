@@ -90,13 +90,13 @@ bs += context.newString(article, style, w=page.pw)
 
 t = newText(bs, parent=page, x=padding, y=page.ph + padding, w=page.pw, h=page.ph,
 	fill=bgColor, # Show background to mark the real position of the box.
-	xAlign=LEFT, yAlign=BASELINE, # Vertical align on largest capheight of top line.
+	xAlign=LEFT, yAlign=CAPHEIGHT, # Vertical align on largest capheight of top line.
 	showOrigin=True)
 
 for line in bs.lines:
 	if page.ph+padding-line.y <= padding:
 		break
-	newLine(x=padding+line.x, y=page.ph+padding-line.y+bs.lines[0].y, w=page.pw, 
+	newLine(x=padding+line.x, y=page.ph+padding-line.y, w=page.pw, 
 		h=0, parent=page, stroke=(0, 0, 0.5), strokeWidth=pt(0.5))
 
 doc.export(EXPORT_PATH)
