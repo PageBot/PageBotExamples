@@ -19,6 +19,7 @@
 #
 
 from pagebot.filepaths import getResourcesPath
+from pagebot.contexts import getContext
 from pagebot.constants import TOP, BOTTOM
 from pagebot.conditions import *
 from pagebot.elements import *
@@ -27,6 +28,8 @@ from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt
 # Document is the main instance holding all information about the
 # document together (pages, styles, etc.)
+
+context = getContext('DrwaBot')
 
 PagePadding = 30
 PageSize = 400
@@ -42,83 +45,73 @@ SQUARE = 10 * GUTTER # Size of the squares
 # that is very similar to what happens in CSS.
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
-EXPORT_PATH = '_export/UseImageElements.pdf'
+EXPORT_PATH = '_export/01_ImageElements.pdf'
 
-def makeDocument():
-    """Make a new document."""
+FONT_NAME = 'PageBot-Regular'
 
-    #W = H = 120 # Get the standard a4 width and height in points.
-    W = PageSize
-    H = PageSize
+#W = H = 120 # Get the standard a4 width and height in points.
+W = PageSize
+H = PageSize
 
-    # Hard coded SQUARE and GUTTE, just for simple demo, instead of filling padding an columns in the root style.
-    # Page size decides on the amount squares that is visible.
-    # Page padding is centered then.
-    sqx = int(W/(SQUARE + GUTTER)) # Whole amount of squares that fit on the page.
-    sqy = int(H/(SQUARE + GUTTER))
-    # Calculate centered paddings for the amount of fitting squares.
-    # Set values in the rootStyle, so we can compare with column calculated square position and sizes.
-    #rs['colH'] = rs['colW'] = SQUARE  # Make default colW and colH square.
+# Hard coded SQUARE and GUTTE, just for simple demo, instead of filling padding an columns in the root style.
+# Page size decides on the amount squares that is visible.
+# Page padding is centered then.
+sqx = int(W/(SQUARE + GUTTER)) # Whole amount of squares that fit on the page.
+sqy = int(H/(SQUARE + GUTTER))
+# Calculate centered paddings for the amount of fitting squares.
+# Set values in the rootStyle, so we can compare with column calculated square position and sizes.
+#rs['colH'] = rs['colW'] = SQUARE  # Make default colW and colH square.
 
-    #padX = (W - sqx*(SQUARE + GUTTER) + GUTTER)/2
-    my = (H - sqy*(SQUARE + GUTTER) + GUTTER)/2
+#padX = (W - sqx*(SQUARE + GUTTER) + GUTTER)/2
+my = (H - sqy*(SQUARE + GUTTER) + GUTTER)/2
 
-    doc = Document(w=W, h=H, title='Color Squares', autoPages=1)
+doc = Document(w=W, h=H, title='Color Squares', autoPages=1, context=context)
 
-    view = doc.getView()
-    view.padding = 0 # Aboid showing of crop marks, etc.
-    view.showOrigin = True
+view = doc.getView()
+view.padding = 0 # Avoid the showing of crop marks, etc.
+view.showOrigin = True
 
-    # Get list of pages with equal y, then equal x.
-    #page = doc[1][0] # Get the single page from te document.
-    page = doc.getPage(1) # Get page on pageNumber, first in row (this is only one now).
-    page.name = 'This is a demo page for floating child elements'
-    page.padding = PagePadding
+# Get list of pages with equal y, then equal x.
+page = doc[1] # Get page on pageNumber, first in row (this is only one now).
+page.name = 'This is a demo page for floating child elements'
+page.padding = PagePadding
 
-    page.gutter3D = GUTTER # Set all 3 gutters to same value
+page.gutter3D = GUTTER # Set all 3 gutters to same value
 
-    path = getResourcesPath() + '/images/cookbot10.jpg'
+path = getResourcesPath() + '/images/cookbot10.jpg'
 
-    img = newImage(path, padding=0,
-                   parent=page, 
-                   conditions=(Bottom2Bottom(),
-                               Fit2Width(),
-                               SolveBlock(),
-                               #Shrink2BlockBottom()
-                               ),
-                   yAlign=BOTTOM,
-                   fill=color(0, 1, 0, 0.3),
-                   stroke=color(1, 0, 0),
-                   scaleImage=False)
-    # Give parent on creation, to have the css chain working.
+img = newImage(path, padding=0,
+               parent=page, 
+               conditions=(Bottom2Bottom(),
+                           Fit2Width(),
+                           SolveBlock(),
+                           #Shrink2BlockBottom()
+                           ),
+               yAlign=BOTTOM,
+               fill=color(0, 1, 0, 0.3),
+               stroke=color(1, 0, 0),
+               scaleImage=False)
+# Give parent on creation, to have the self.css chain working and self.context.
 
-    # Caption falls through the yr2 (with differnt z) and lands on yr1 by Float2SideBottom()
-    fs = doc.context.newString('Captions float below the image',
-                               style=dict(font='Verdana',
-                                          fontSize=20,
-                                          textFill=color(1)))
-    cap = newTextBox(fs, name='Caption', parent=img, z=0,
-        conditions=[ Fit2Width(), Float2Top()],
-        padding=4, font='Verdana',
-        yAlign=TOP, fontSize=9, textFill=color(1), strokeWidth=pt(0.5),
-        fill=color(0, 0, 1, 0.3), stroke=color(0, 0, 1),
-    )
-    score = page.solve()
-    if score.fails:
-        print(score.fails)
+# Caption falls through the yr2 (with different z) and lands on yr1 by Float2SideBottom()
+bs = context.newString('Captions float below the image',
+                           style=dict(font='FONT_NAME',
+                                      fontSize=20,
+                                      textFill=color(1)))
+cap = newText(bs, name='Caption', parent=img, z=0,
+    conditions=[ Fit2Width(), Float2Top()],
+    padding=4, font=FONT_NAME,
+    yAlign=TOP, fontSize=9, textFill=color(1), strokeWidth=pt(0.5),
+    fill=color(0, 0, 1, 0.3), stroke=color(0, 0, 1),
+)
+score = page.solve()
+if score.fails:
+    print(score.fails)
 
-    print('Image size', img.w, img.h)
-    print('Image file size', img.iw, img.ih) # TODO: Should not be pt(0, 0)
-    for e in img.elements:
-        print('Element', e)
+print('Image size', img.w, img.h)
+print('Image file size', img.iw, img.ih) # TODO: Should not be pt(0, 0)
+for e in img.elements:
+    print('Element', e)
 
-    return doc # Answer the doc for further doing.
-
-d = makeDocument()
-d.context.Variable(
-  [dict(name='PagePadding', ui='Slider', args=dict(minValue=10, value=30, maxValue=100)),
-   dict(name='PageSize', ui='Slider', args=dict(minValue=100, value=400, maxValue=800)),
-  #dict(name='ElementOrigin', ui='CheckBox', args=dict(value=False)),
-  ], globals())
-d.export(EXPORT_PATH)
+doc.export(EXPORT_PATH)
 

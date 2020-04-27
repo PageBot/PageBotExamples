@@ -65,7 +65,7 @@ style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=-em(0.02),
 bs = context.newString('A4', style)
 print('Rendered text size:', bs.tw, bs.th)
 print('Lines:', bs.lines)
-t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, yAlign=BASE_TOP)
+t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, yAlign=BASELINE)
 print('Text element size:', t.w, t.h)
 print('Text in box size:', t.bs.tw, t.bs.th)
 

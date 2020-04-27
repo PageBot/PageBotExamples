@@ -90,7 +90,7 @@ bs += context.newString(article, style, w=page.pw)
 
 t = newText(bs, parent=page, x=padding, y=page.ph + padding, w=page.pw, h=page.ph,
 	fill=bgColor, # Show background to mark the real position of the box.
-	xAlign=LEFT, yAlign=BASE_TOP, # Vertical align on largest capheight of top line.
+	xAlign=LEFT, yAlign=BASELINE, # Vertical align on largest capheight of top line.
 	showOrigin=True)
 
 for line in bs.lines:

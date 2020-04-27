@@ -26,7 +26,7 @@ import sys
 
 from pagebot.document import Document
 from pagebot.filepaths import getResourcesPath
-from pagebot.toolbox.units import pt
+from pagebot.toolbox.units import pt, mm
 from pagebot import getContext
 from pagebot.constants import A4
 from pagebot.elements import *
@@ -34,28 +34,29 @@ from pagebot.conditions import *
 
 context = getContext()
 
-W, H = A4
-M = pt(8) # Margin between the images
+W, H = mm(1000, 240) 
 
-EXPORT_PATH = '_export/CacheScaledImage.pdf'
+M = pt(12) # Margin between the images
+P = mm(30) # Padding of the page
 
-if __name__ == '__main__':
+EXPORT_PATH = '_export/01_CacheScaledImage.pdf'
 
-	# Define the path where to find the example image.
-	path = getResourcesPath() + "/images/cookbot1.jpg"
-	# Use the standard DrawBot function to get the width/height of the image from the file.
-	doc = Document(w=W, h=1.35*H, context=context) # New simple document with default padding.
+# Define the path where to find the example image.
+path = getResourcesPath() + "/images/cookbot1.jpg"
+# Use the standard DrawBot function to get the width/height of the image from the file.
+doc = Document(w=W, h=H, context=context) # New simple document with default padding.
 
-	page = doc[1] # Get first (and only) automatic page.
-	factor = 1 # Incremental scale division factor of the image width.
+page = doc[1] # Get first (and only) automatic page.
+page.padding = P
+factor = 5 # Incremental scale division factor of the image width.
 
-	for n in range(12): # Stop before they become invisible small
-		# Create a range of scaled imaged that try to fit by floating conditions.
-		newImage(path, w=page.pw/factor, mr=M, mb=M, parent=page, 
-			conditions=(Right2Right(), Float2Top(), Float2Left()),
-			scaleImage=False)
-		factor *= 1.6
+for n in range(15): # Stop before they become invisible small
+	# Create a range of scaled imaged that try to fit by floating conditions.
+	newImage(path, w=page.pw/factor, mr=10*M/(n+1), parent=page,
+		conditions=(Right2Right(), Float2Top(), Float2Left()),
+		scaleImage=False)
+	factor *= 1.3
 
-	doc.solve() # Solve the fitting of the scaled images on the page.
+doc.solve() # Solve the fitting of the scaled images on the page.
 
-	doc.export(EXPORT_PATH)
+doc.export(EXPORT_PATH)

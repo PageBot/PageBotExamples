@@ -15,7 +15,7 @@
 #     Draw a two columns with a single text, showing overflow from one column
 #     into the other. Use some view.showGrid options to show the grid.
 #     Use view.showBaselineGrid = True to show the default baselines of the text.
-#     Then use BASE_TOP and BASE_BOTTOM to place the top and bottom baseline
+#     Then use BASELINE and BASE_BOTTOM to place the top and bottom baseline
 #     on vertical position page.h/2
 
 from pagebot import getContext
@@ -70,13 +70,13 @@ page = doc[1]
 # Make text box as child element of the page and set its layout conditions
 # to fit the padding of the page and the condition that checks on text overflow.
 c1 = newTextBox(t, w=CW, h=CH, y=page.h/2, name='c1', parent=page, nextElement='c2', 
-    yAlign=BASE_TOP, showOrigin=True, 
+    yAlign=BASELINE, showOrigin=True, 
     showBaselineGrid=(BASE_LINE, BASE_INDEX_LEFT, BASE_Y_RIGHT), # Overwrite view setting.
     conditions=[Left2Left(), Bottom2Bottom(), Baseline2Grid(), Overflow2Next()])
 # Text without initial content, will be filled by overflow of c1.
 # Not showing the [+] marker, as the overflow text fits in the second column.
 c2 = newTextBox(w=CW, h=CH, y=page.h/2, name='c2', parent=page, 
-    yAlign=BASE_TOP, showOrigin=True, 
+    yAlign=BASELINE, showOrigin=True, 
     showBaselineGrid=(BASE_LINE, BASE_INDEX_LEFT, BASE_Y_RIGHT), # Overwrite view setting.
     conditions=[Right2Right(), Bottom2Bottom(), Baseline2Grid()])
 

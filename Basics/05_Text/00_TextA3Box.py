@@ -38,8 +38,8 @@ from pagebot.fonttoolbox.objects.font import findFont
 
 DO_BLURB = True
 
-fontSize = pt(24
-	)
+fontSize = pt(24)
+
 W, H = A3 # Standard portrait
 padding = mm(30) # Outside measures to accommodate the crop makrs.
 #FONT_NAME = 'Responder_P-Base_Italic' 
@@ -90,7 +90,7 @@ bs += context.newString(article, style, w=page.pw)
 
 t = newText(bs, parent=page, x=padding, y=page.ph + padding, w=page.pw, h=page.ph,
 	fill=bgColor, # Show background to mark the real position of the box.
-	xAlign=LEFT, yAlign=BASE_TOP, # Vertical align on largest capheight of top line.
+	xAlign=LEFT, yAlign=BASELINE, # Vertical align on largest capheight of top line.
 	showOrigin=True)
 
 doc.export(EXPORT_PATH)
