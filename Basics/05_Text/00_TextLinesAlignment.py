@@ -29,7 +29,7 @@ from pagebot.constants import *
 from pagebot.elements import newText, newRect, newLine
 from pagebot.document import Document
 from pagebot.conditions import *
-from pagebot.toolbox.color import color, blackColor
+from pagebot.toolbox.color import color, blackColor, noColor
 from pagebot.toolbox.units import pt, em, mm
 from pagebot.toolbox.loremipsum import loremipsum
 from pagebot.contributions.filibuster.blurb import Blurb
@@ -86,7 +86,7 @@ for ix, yAlign in enumerate(YALIGNS): # Flipped, yAligns show horizontal
 		x = padding + ix*page.pw/colCnt
 		y = padding + iy*page.ph/rowCnt
 		t = newText(bs, parent=page, x=x, y=y, 
-			stroke=None, fill=bgColor, # Show background to mark the real position of the box.
+			stroke=noColor, fill=bgColor, # Show background to mark the real position of the box.
 			yAlign=yAlign, # Vertical alignment is part of the Text element box.
 			showOrigin=True)
 		# Ajust the style for label

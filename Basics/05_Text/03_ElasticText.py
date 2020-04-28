@@ -78,9 +78,9 @@ newText(txt,
     leading=em(1.1), textFill=0, strokeWidth=pt(0.5), fill=color(0.9), stroke=noColor,
     mb=gutter,
 )
-newRect(parent=page, w=cw, h=pt(24), fill=rectColor, stroke=None, conditions=[Left2Left(), Float2Top()])
-newRect(parent=page, w=cw, h=pt(24), fill=rectColor, stroke=None, conditions=[Center2Center(), Float2Top()])
-newRect(parent=page, w=cw, h=pt(24), fill=rectColor, stroke=None, conditions=[Right2Right(), Float2Top()])
+newRect(parent=page, w=cw, h=pt(24), fill=rectColor, stroke=noColor, conditions=[Left2Left(), Float2Top()])
+newRect(parent=page, w=cw, h=pt(24), fill=rectColor, stroke=noColor, conditions=[Center2Center(), Float2Top()])
+newRect(parent=page, w=cw, h=pt(24), fill=rectColor, stroke=noColor, conditions=[Right2Right(), Float2Top()])
 
 doc.solve() # Make the Text elements position on their conditional places.
 
