@@ -25,9 +25,6 @@ from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.color import color
 
 
-thisFile = __file__.split('/')[0].replace('.pt', '')
-print('File:', thisFile)
-
 W, H = pt(600, 300)
 M = pt(100)
 
@@ -46,14 +43,14 @@ for contextId, context in contexts:
     y = H - M
     style = dict(textFill=color(0, 0, 1), leading=em(1.4), fontSize=36) 
     bs = context.newString('Context: %s\n' % contextId, style=style)
-    context.text(bs, (100, y))
+    context.drawText(bs, (100, y, bs.tw, bs.th)) # Get size from unwrapped string.
     y -= 36
 
     # Create formatted string, with default settings of font, fontSize and textFill color
     style = dict(textFill=color(spot=300), leading=em(1.4), fontSize=18) 
     bs = context.newString('This is a formatted BabelString of class %s\n' % context.__class__.__name__, style)
     print(bs.__class__.__name__)
-    context.text(bs, (100, y))
+    context.drawText(bs, (100, y, bs.tw, bs.th))
 
     y -= 50
 
@@ -61,7 +58,7 @@ for contextId, context in contexts:
     bs += context.newString('Add an other string with color/size/leading format',
         style=dict(textFill=color(1, 0, 0), fontSize=20, leading=em(1.4)))
     print('BabelString:', bs)
-    context.text(bs, (100, y))
+    context.drawText(bs, (100, y, bs.tw, bs.th))
 
     # Save the context as PDF document
     context.saveImage(exportPath)

@@ -39,7 +39,9 @@ W, H = mm(600, 250) # Customize paper size
 FONT_NAME = 'PageBot-Bold'
 #FONT_NAME = 'PageBot-Regular'
 #FONT_NAME = 'PageBot-Book'
-#FONT_NAME = 'PageBot-Light'
+FONT_NAME = 'PageBot-Light'
+#FONT_NAME = 'Roboto-Regular' # Give wrong values for vertical box position
+#FONT_NAME = 'Georgia' # Gives wrong value for /p descender positions
 
 LABEL_FONT_NAME = 'PageBot-Regular'
 fontSize = pt(64)
@@ -87,8 +89,10 @@ for ix, yAlign in enumerate(YALIGNS): # Flipped, yAligns show horizontal
 			yAlign=yAlign, # Vertical alignment is part of the Text element box.
 			showOrigin=True)
 		# Ajust the style for label
+		style['font'] = LABEL_FONT_NAME
 		style['fontSize'] = fontSize/8
 		style['textFill'] = color(0.4)
+		style['tracking'] = em(0.04) # Some correction for small label
 		
 		# Position capHeight of the the label on distance bs1.leading from 
 		# the bottom position of element t.

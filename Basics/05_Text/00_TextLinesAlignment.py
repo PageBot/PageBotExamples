@@ -41,6 +41,7 @@ W, H = mm(600, 250) # Customize paper size
 
 padding = mm(60) # Outside measures to accommodate the crop makrs.
 FONT_NAME = 'PageBot-Regular'
+LABEL_FONT_NAME = 'PageBot-Book'
 
 textColor = blackColor
 bgColor = color(0.9) # Background color of the text box
@@ -89,8 +90,11 @@ for ix, yAlign in enumerate(YALIGNS): # Flipped, yAligns show horizontal
 			yAlign=yAlign, # Vertical alignment is part of the Text element box.
 			showOrigin=True)
 		# Ajust the style for label
+		style['font'] = LABEL_FONT_NAME
+		style['fontSize'] = fontSize/3
 		style['textFill'] = color(0.4)
-		style['fontSize'] = fontSize/2
+		style['tracking'] = em(0.04) # Some correction for small label
+	
 		bs = context.newString(' %s | %s ' % (xAlign.capitalize(), yAlign.capitalize()), style)
 		newText(bs, parent=page, x=x, y=t.bottom - pt(4) , yAlign=TOP, showOrigin=False)
 
@@ -98,7 +102,7 @@ for ix, yAlign in enumerate(YALIGNS): # Flipped, yAligns show horizontal
 newLine(x=padding, y=padding+page.ph/2, w=page.pw, h=0, parent=page,
 	stroke=(0, 0, 0.5), strokeWidth=0.5)
 
-style = dict(font='PageBot-Book', fontSize=64*0.8, leading=em(1), 
+style = dict(font=LABEL_FONT_NAME, fontSize=64*0.8, leading=em(1), 
 	textFill=textColor, xAlign=LEFT, yAlign=BASELINE) # xAlignment is part of the BabelString.
 newText('PageBot text alignments', style=style, x=padding, y=page.h-padding/2, 
 	w=page.pw, parent=page)
