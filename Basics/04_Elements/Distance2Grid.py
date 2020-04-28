@@ -12,14 +12,14 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     TextBoxSideWHConditions.py
+#     TextSideWHConditions.py
 #
 #     Position fixed size textbox elements by their page side with conditions
 #
 # Document is the main instance holding all information about
 # the document togethers (pages, styles, etc.)
 from pagebot.document import Document
-from pagebot.elements import newTextBox
+from pagebot.elements import newText
 from pagebot.toolbox.units import p, pt
 from pagebot.toolbox.color import color, whiteColor, blackColor
 from pagebot.conditions import *
@@ -52,19 +52,19 @@ def makeDocument(context):
     #page.showOrigin = True
 
     '''
-    e1 = newTextBox(getText(doc, font, 'Middle y on grid'), parent=page,
+    e1 = newText(getText(doc, font, 'Middle y on grid'), parent=page,
         fill=color('red'), yAlign=MIDDLE, showOrigin=True, h=50, w=100,
         conditions=[Left2Left(), Bottom2Bottom(), Baseline2Grid()])
     '''
 
     t = getText(doc, font, 'Middle y on grid')
-    e2 = newTextBox(t, parent=page, h=100,
+    e2 = newText(t, parent=page, h=100,
         fill=color('orange'),)
         #yAlign=MIDDLE, showOrigin=True, h=50, w=100,
         #conditions=[Left2Left(), Middle2Middle(), Baseline2Grid()])
 
     '''
-    e3 = newTextBox(getText(doc, font, 'Middle y on grid'), parent=page,
+    e3 = newText(getText(doc, font, 'Middle y on grid'), parent=page,
         fill=color('yellow').darker(0.8), yAlign=MIDDLE, showOrigin=True, h=50, w=100,
         conditions=[Left2Left(), Top2Top(), Baseline2Grid()])
     '''
@@ -73,33 +73,33 @@ def makeDocument(context):
 
     '''
 
-    e1 = newTextBox(getText(doc, font, 'e1 Bottom2Bottom'),
+    e1 = newText(getText(doc, font, 'e1 Bottom2Bottom'),
         parent=page, fill=color('red'),
         showOrigin=True, conditions=[Left2Left(), Bottom2Bottom()])
-    e2 = newTextBox(getText(doc, font, 'e2 Middle2Middle'),
+    e2 = newText(getText(doc, font, 'e2 Middle2Middle'),
         parent=page, fill=color('orange'),
         showOrigin=True, conditions=[Left2Left(), Middle2Middle()])
-    e3 = newTextBox(getText(doc, font, 'e3 Top2Top'), parent=page,
+    e3 = newText(getText(doc, font, 'e3 Top2Top'), parent=page,
         fill=color('yellow').darker(0.8),
         showOrigin=True, conditions=[Left2Left(), Top2Top()])
 
-    e4 = newTextBox(getText(doc, font, 'e4 Bottom y on grid'),
+    e4 = newText(getText(doc, font, 'e4 Bottom y on grid'),
         parent=page, fill=color('red'),
         showOrigin=True, conditions=[Center2Center(), Bottom2Bottom()])
-    e5 = newTextBox(getText(doc, font, 'e5 Bottom y on grid'),
+    e5 = newText(getText(doc, font, 'e5 Bottom y on grid'),
         parent=page, fill=color('orange'),
         showOrigin=True, conditions=[Center2Center(), Middle2Middle()])
-    e6 = newTextBox(getText(doc, font, 'e6 Bottom y on grid'),
+    e6 = newText(getText(doc, font, 'e6 Bottom y on grid'),
         parent=page, fill=color('yellow').darker(0.8),
         showOrigin=True, conditions=[Center2Center(), Top2Top()])
 
-    e7 = newTextBox(getText(doc, font, 'e7 Top y on grid'),
+    e7 = newText(getText(doc, font, 'e7 Top y on grid'),
         parent=page, fill=color('red'), yAlign=TOP,
         showOrigin=True, conditions=[Right2Right(), Bottom2Bottom()])
-    e8 = newTextBox(getText(doc, font, 'e8 Top y on grid'),
+    e8 = newText(getText(doc, font, 'e8 Top y on grid'),
         parent=page, fill=color('orange'), yAlign=TOP,
         showOrigin=True, conditions=[Right2Right(), Middle2Middle()])
-    e9 = newTextBox(getText(doc, font, 'e9 Top y on grid'),
+    e9 = newText(getText(doc, font, 'e9 Top y on grid'),
         parent=page, fill=color('yellow').darker(0.8), yAlign=TOP,
         showOrigin=True, conditions=[Right2Right(), Top2Top()])
 
@@ -131,33 +131,33 @@ def makeDocument(context):
     page.showPadding = True
     page.showOrigin = True
 
-    e1 = newTextBox(getText(doc, font, 'Baseline2Grid'), parent=page, showBaselineGrid=True,
+    e1 = newText(getText(doc, font, 'Baseline2Grid'), parent=page, showBaselineGrid=True,
         fill=color('red'), yAlign=MIDDLE, showOrigin=True,
         conditions=[Left2Left(), Bottom2Bottom(), Baseline2Grid()])
-    e2 = newTextBox(getText(doc, font, 'Baseline2Grid'), parent=page, showBaselineGrid=True,
+    e2 = newText(getText(doc, font, 'Baseline2Grid'), parent=page, showBaselineGrid=True,
         fill=color('orange'), yAlign=MIDDLE, showOrigin=True,
         conditions=[Left2Left(), Middle2Middle(), Baseline2Grid()])
-    e3 = newTextBox(getText(doc, font, 'Baseline2Grid'), parent=page, showBaselineGrid=True,
+    e3 = newText(getText(doc, font, 'Baseline2Grid'), parent=page, showBaselineGrid=True,
         fill=color('yellow').darker(0.8), yAlign=MIDDLE, showOrigin=True,
         conditions=[Left2Left(), Top2Top(), Baseline2Grid()])
 
-    e4 = newTextBox(getText(doc, font, 'BaselineUp2Grid'), parent=page,
+    e4 = newText(getText(doc, font, 'BaselineUp2Grid'), parent=page,
         fill=color('red'), showOrigin=True,
         conditions=[Center2Center(), Bottom2Bottom(), BaselineUp2Grid()])
-    e5 = newTextBox(getText(doc, font, 'BaselineUp2Grid'), parent=page,
+    e5 = newText(getText(doc, font, 'BaselineUp2Grid'), parent=page,
         fill=color('orange'), showOrigin=True,
         conditions=[Center2Center(), Middle2Middle(), BaselineUp2Grid()])
-    e6 = newTextBox(getText(doc, font, 'BaselineUp2Grid'), parent=page,
+    e6 = newText(getText(doc, font, 'BaselineUp2Grid'), parent=page,
         fill=color('yellow').darker(0.8), showOrigin=True,
         conditions=[Center2Center(), Top2Top(), BaselineUp2Grid()])
 
-    e7 = newTextBox(getText(doc, font, 'BaselineDown2Grid'), parent=page,
+    e7 = newText(getText(doc, font, 'BaselineDown2Grid'), parent=page,
         fill=color('red'), yAlign=TOP, showOrigin=True,
         conditions=[Right2Right(), Bottom2Bottom(), BaselineDown2Grid()])
-    e8 = newTextBox(getText(doc, font, 'BaselineDown2Grid'), parent=page,
+    e8 = newText(getText(doc, font, 'BaselineDown2Grid'), parent=page,
         fill=color('orange'), yAlign=TOP, showOrigin=True,
         conditions=[Right2Right(), Middle2Middle(), BaselineDown2Grid()])
-    e9 = newTextBox(getText(doc, font, 'BaselineDown2Grid'), parent=page,
+    e9 = newText(getText(doc, font, 'BaselineDown2Grid'), parent=page,
         fill=color('yellow').darker(0.8), yAlign=TOP, showOrigin=True,
         conditions=[Right2Right(), Top2Top(), BaselineDown2Grid()])
 

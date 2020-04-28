@@ -67,7 +67,7 @@ def wordAlignment(context):
     ):
             style = dict(font=f, fontSize=100, textFill=color(name=c))
             bs = context.newString(t, style=style)
-            newTextBox(bs, parent=page, fill=(0.5, 0.5, 0.5, 0.5), conditions=conditions)
+            newText(bs, parent=page, fill=(0.5, 0.5, 0.5, 0.5), conditions=conditions)
 
     page.solve()
     doc.export('_export/WordAlignment-%s.pdf' % context.name)

@@ -44,7 +44,7 @@ from pagebot.composer import Composer
 
 # Import element layout conditions.
 from pagebot.conditions import *
-from pagebot.elements import newRect, newTextBox, newImage, Galley
+from pagebot.elements import newRect, newText, newImage, Galley
 from pagebot.toolbox.units import units, p, pt, em, inch
 from pagebot.constants import (GRID_COL, GRID_ROW, GRID_SQR, LEFT, RIGHT,
     CENTER, MIDDLE, TOP, RIGHT, INLINE, OUTLINE, ONLINE)
@@ -135,7 +135,7 @@ def setPageStyle(page, index):
     page.gridX = (CW, GUTTER), (CW, GUTTER), (CW, GUTTER), (CW, 0)
     page.gridY = (CH, GUTTER), (CH, GUTTER), (CH, GUTTER), (CH, GUTTER), (CH, GUTTER), (CH, GUTTER), (CH, GUTTER), (CH, 0)
 
-    #newTextBox(parent=page, name=BOX_NAME, fill=0.9, nextElementName=BOX_NAME, bleed=0,
+    #newText(parent=page, name=BOX_NAME, fill=0.9, nextElementName=BOX_NAME, bleed=0,
     #    conditions=[Fit()])
 
     if SHOW_TEMPLATE:
@@ -149,17 +149,17 @@ def setPageStyle(page, index):
     dy2 = BASELINE
     if page.isLeft:
         bs = context.newString('FALL 2018', style=styles['typeTitleRight'])
-        newTextBox(bs, w=CW, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Right2Right()],
+        newText(bs, w=CW, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Right2Right()],
             bleed=0)
         bs = context.newString(page.pn[0], style=styles['pnLeft'])
-        newTextBox(bs, w=CW, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Left2Left()],
+        newText(bs, w=CW, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Left2Left()],
             bleed=0)
     else:
         bs = context.newString('TYPE No. 3', style=styles['typeTitleLeft'])
-        newTextBox(bs, w=CW, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Left2Left()],
+        newText(bs, w=CW, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Left2Left()],
             bleed=0)
         bs = context.newString(page.pn[0], style=styles['pnRight'])
-        newTextBox(bs, w=CW, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Right2Right()],
+        newText(bs, w=CW, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Right2Right()],
             bleed=0)
 
     path = '../../../Art_TYPE-3/Firsts_images_TYPE-3/1. page-number-printed-1470.pdf'
@@ -226,7 +226,7 @@ def makeDocument():
             page=page,
             style=doc.styles,
             box=page.select('people'),
-            newTextBox=newTextBox)
+            newText=newText)
 
         composer.compose(galley, targets=targets, page=page)
 

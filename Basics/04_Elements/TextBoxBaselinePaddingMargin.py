@@ -12,12 +12,12 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     TextBoxBaselinePaddingMargin.py
+#     TextBaselinePaddingMargin.py
 #
 #     Show element padding and margin
 #
 from pagebot.document import Document
-from pagebot.elements import newTextBox
+from pagebot.elements import newText
 from pagebot.toolbox.units import p, pt
 from pagebot.toolbox.color import color
 from pagebot.conditions import *
@@ -43,7 +43,7 @@ page.showBaselineGrid = True
 # Condition alignment takes the element margin into account.
 style = dict(font=font, fontSize=100, textFill=(1, 0, 0))
 bs = doc.context.newString('Hkpx', style=style)
-newTextBox(bs, parent=page, fill=color(0.7, 0.7, 0.7, 0.3), 
+newText(bs, parent=page, fill=color(0.7, 0.7, 0.7, 0.3), 
     w=300, h=300, showMargin=True, showPadding=True, 
     margin=MARGIN, padding=PADDING, showBaselineGrid=True,
     conditions=[Right2Right(), Top2Top(), BaselineDown2Grid()])
@@ -52,7 +52,7 @@ page.solve()
 
 # Export in _export folder that does not commit in Git. 
 # Force to export PDF.
-EXPORT_PATH = '_export/TextBoxBaselinePaddingMargin.pdf'
+EXPORT_PATH = '_export/TextBaselinePaddingMargin.pdf'
 doc.export(EXPORT_PATH)
 
 

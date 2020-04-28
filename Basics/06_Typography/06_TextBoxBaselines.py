@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     06a_TextBoxBaselines.py
+#     06a_TextBaselines.py
 #
 #     Show the baseline grid of the page (drawn by the PageView)
 #     and the relation with the baseline of a positioned text box.
@@ -21,7 +21,7 @@
 
 from pagebot.document import Document
 from pagebot.conditions import *
-from pagebot.elements import newTextBox, newLine
+from pagebot.elements import newText, newLine
 from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.color import color
 from pagebot import getContext
@@ -54,7 +54,7 @@ style = dict(name='body', font='Verdana', fontSize=pt(12), leading=em(1.4))
 conditions = [Fit()] # Fitting conditions for the text box on (page.pw, page.ph)
 
 # Create a new text box and set the view-parameres, so they angue for today.
-tb = newTextBox(text * 5, parent=page, stroke=0.5, strokeWidth=0.5,
+tb = newText(text * 5, parent=page, stroke=0.5, strokeWidth=0.5,
     style=style, conditions=conditions,
     baselineColor=color(1, 0, 0), # Show baselines and indices in red.
     showBaselineGrid=[BASE_LINE_BG, BASE_INDEX_RIGHT]) # Define type of baseline view.
@@ -77,4 +77,4 @@ newLine(x=0, y=tb.y,
     stroke=color(0, 0, 1), strokeWidth=pt(0.5))
 
 # Export to the given file name. The "_export" folder content does snot commit to git.
-doc.export('_export/TextBoxBaselines.pdf')
+doc.export('_export/TextBaselines.pdf')

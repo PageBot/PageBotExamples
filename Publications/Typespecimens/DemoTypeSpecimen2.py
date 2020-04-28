@@ -47,7 +47,7 @@ def buildPage(page, font):
     nameOfFont = font.info.familyName + ' ' + font.info.styleName
     style = dict(font=font, fontSize=H1_FONTSIZE, leading=H1_FONTSIZE, textFill=color(0.2))
     bs = context.newString(nameOfFont, style=style)
-    newTextBox(bs, padding=0, h=H1_FONTSIZE*1.5, conditions=[Top2Top(), Fit2Width()], parent=page)
+    newText(bs, padding=0, h=H1_FONTSIZE*1.5, conditions=[Top2Top(), Fit2Width()], parent=page)
 
     # Waterfall until the bottom of the page.
     bs = context.newString('')
@@ -60,14 +60,14 @@ def buildPage(page, font):
     
         style = dict(font=font, fontSize=P_FONTSIZE+n, leading=P_FONTSIZE+n, textFill=0)
         bs += context.newString(WATERFALL_TEXT+'\n', style=style)
-    newTextBox(bs, padding=0, h=H1_FONTSIZE, conditions=[Float2Top(), Left2Left(), Fit2Bottom()], w=page.pw/2, parent=page)
+    newText(bs, padding=0, h=H1_FONTSIZE, conditions=[Float2Top(), Left2Left(), Fit2Bottom()], w=page.pw/2, parent=page)
     
     style = dict(font=font, fontSize=H2_FONTSIZE, leading=H2_FONTSIZE*1.4)
     bs = context.newString(blurbHeadline+'\n', style=style)
 
     style = dict(font=font, fontSize=P_FONTSIZE, leading=P_FONTSIZE*1.4)
     bs += context.newString(blurbArticle, style=style)
-    newTextBox(bs, h=page.ph, w=page.pw/2-pt(12), conditions=[Right2Right(), Top2Top()], parent=page)
+    newText(bs, h=page.ph, w=page.pw/2-pt(12), conditions=[Right2Right(), Top2Top()], parent=page)
 # ------------------------------------
 
 page = None

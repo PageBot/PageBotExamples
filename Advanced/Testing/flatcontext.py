@@ -113,7 +113,7 @@ def testFlatContext():
     bs = context.newString(msg, style=style)
     print(type(bs))
 
-    newTextBox(bs, font=pagebotFont, parent=pbPage, conditions=c, fill=0.9,
+    newText(bs, font=pagebotFont, parent=pbPage, conditions=c, fill=0.9,
             margin=4)
     #print(p.items)
 

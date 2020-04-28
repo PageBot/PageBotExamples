@@ -87,7 +87,7 @@ class LogoTopLeft_BusinessCard(BaseBusinessCard):
         bs = context.newString(self.idData['logo'], style=logoStyle)
         bs += context.newString(' '+self.idData['name'], style=bodyStyle)
         tw, th = bs.size
-        e = newTextBox(bs, parent=page, w=tw, stroke=noColor, fill=0.7,
+        e = newText(bs, parent=page, w=tw, stroke=noColor, fill=0.7,
         	conditions=[Left2Left(), Top2Top()])
         print('===', e.x, tw, th, e.w, e.h)
 
@@ -96,7 +96,7 @@ class LogoTopLeft_BusinessCard(BaseBusinessCard):
         bs += context.newString('\n\n'+self.person['addressStreet'], style=captionStyle)
         bs += context.newString('\n'+self.person['addressCity'], style=captionStyle)
         bs += context.newString('\n'+self.person['addressTelephone'], style=captionStyle)
-        newTextBox(bs, parent=page, fill=noColor, stroke=noColor,
+        newText(bs, parent=page, fill=noColor, stroke=noColor,
         	conditions=[Left2Left(), Fit2Width(), Middle2Middle()])
 
         self.showFrame = True

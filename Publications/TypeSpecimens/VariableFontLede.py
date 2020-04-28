@@ -145,5 +145,5 @@ for frameIndex in range(frameCnt):
 
     AnimatedBannerFrame(sample, font, frameCnt, frameIndex, parent=page, style=style,
         w=page.w, h=page.h, context=c)
-    #newTextBox('%s %s %s %s' % (da1,da2,frameIndex,location), style=dict(font='Verdana', fontSize=50, textFill=whiteColor), x=10, y=10, w=page.w, parent=page)
+    #newText('%s %s %s %s' % (da1,da2,frameIndex,location), style=dict(font='Verdana', fontSize=50, textFill=whiteColor), x=10, y=10, w=page.w, parent=page)
 doc.export('_export/%s_%s.gif' % (font.info.familyName, sample))

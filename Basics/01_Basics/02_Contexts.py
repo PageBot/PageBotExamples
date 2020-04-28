@@ -64,7 +64,7 @@ r = newRect(w=SQ, h=2*SQ, parent=page, conditions=c, fill=noColor, stroke=0, str
 # Create two text boxes and align it on top-left,
 # floating to that position relative to what is already there.
 newText('Text    !', parent=page, conditions=c, fontSize=60, stroke=(1, 1, 0), strokeWidth=20, textFill=0.5, font=bungee)
-newTextBox('Text Box', parent=page, conditions=c, stroke=0, strokeWidth=0.5, fill=(1, 1, 0), fontSize=30, font=bungee, textFill=(0, 0, 1))
+newText('Text Box', parent=page, conditions=c, stroke=0, strokeWidth=0.5, fill=(1, 1, 0), fontSize=30, font=bungee, textFill=(0, 0, 1))
 
 # A number of circles that will float the remaining space.
 for n in range(50):

@@ -30,7 +30,7 @@ from pagebot.elements import *
 from pagebot.toolbox.units import fr, px
 
 
-class MobileNavigation(TextBox):
+class MobileNavigation(Text):
 
     def build_html(self, view, origin=None, drawElements=True, **kwargs):
         b = self.context.b
@@ -58,7 +58,7 @@ class MobileNavigation(TextBox):
         b._div() # .row
         b._div() # .container .mobilenavigation
 
-class Navigation(TextBox):
+class Navigation(Text):
 
     def build_html(self, view, origin=None, drawElements=True, **kwargs):
         b = self.context.b
@@ -89,7 +89,7 @@ class Navigation(TextBox):
         b._div() # .row
         b._div() # .container .top
 
-class Introduction(TextBox):
+class Introduction(Text):
 
     def build_html(self, view, origin=None, drawElements=True, **kwargs):
         """Build a page wide in intoduction box for large type, if there is any
@@ -114,8 +114,8 @@ class Featured(Rect):
     def __init__(self, **kwargs):
         Rect.__init__(self, **kwargs)
         """Initialize the generic featured item, adding and image text box and side text box."""
-        TextBox('', parent=self, name='Image')
-        TextBox('', parent=self, name='Side')
+        Text('', parent=self, name='Image')
+        Text('', parent=self, name='Side')
 
     def build_html(self, view, origin=None, drawElements=True, **kwargs):
         """Build the featured topic, image on the left and side column on the right."""
@@ -141,8 +141,8 @@ class Main(Rect):
     def __init__(self, **kwargs):
         Rect.__init__(self,  **kwargs)
         """Initialize the generic featured item, adding and image text box and side text box."""
-        TextBox('', parent=self, name='Content') # Note that child elements should not have the same name as parent to find them.
-        TextBox('', parent=self, name='Side')
+        Text('', parent=self, name='Content') # Note that child elements should not have the same name as parent to find them.
+        Text('', parent=self, name='Side')
 
     def append(self, bs):
         """Add FormattedString to main content."""
@@ -176,10 +176,10 @@ class Section(Rect):
     def __init__(self, rows=5, **kwargs):
         Rect.__init__(self,  **kwargs)
         self._sectionRows = rows
-        TextBox('', parent=self, name='Title')
+        Text('', parent=self, name='Title')
         for row in range(0, rows):
-            TextBox('', parent=self, name=repr(row*2))
-            TextBox('', parent=self, name=repr(row*2+1))
+            Text('', parent=self, name=repr(row*2))
+            Text('', parent=self, name=repr(row*2+1))
 
     def build_html(self, view, origin=None, drawElements=True, **kwargs):
         b = self.context.b
@@ -214,7 +214,7 @@ class Section(Rect):
 
             b._div() # .container .section
 
-class Footer(TextBox):
+class Footer(Text):
 
     def build_html(self, view, origin=None, drawElements=True, **kwargs):
         b = self.context.b
@@ -244,9 +244,9 @@ class Footer(TextBox):
         b._div() # class: row
         b._div() # class: container footer
 
-class JS(TextBox):
+class JS(Text):
     def __init__(self, **kwargs):
-        TextBox.__init__(self, '', **kwargs)
+        Text.__init__(self, '', **kwargs)
 
     def build_html(self, view, origin=None, drawElements=True, **kwargs):
         b = self.context.b

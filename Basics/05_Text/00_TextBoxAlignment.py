@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     00_TextBoxAlignment.py
+#     00_TextAlignment.py
 #
 #	  Create a landscape page
 #	  Show text box with multiple lines, mixed styles and fixed width,
@@ -47,7 +47,7 @@ bgColor = color(0.9) # Background color of the text box
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
-EXPORT_PATH = '_export/00_TextBoxAlignment.pdf'
+EXPORT_PATH = '_export/00_TextAlignment.pdf'
 print('Generating:', EXPORT_PATH)
 
 # Make a new document with one text box.

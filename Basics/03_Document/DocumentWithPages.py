@@ -50,7 +50,7 @@ def makeDocument(context):
     # (left) does not matter for the conditions. Measures can be any type of
     # units. Their type is show in the measured output.
 
-    newTextBox(page.name, w=mm(86), h=pt(164), parent=page, pl=3, pt=3,
+    newText(page.name, w=mm(86), h=pt(164), parent=page, pl=3, pt=3,
         showDimensions=True,
         conditions=conditions, fill=color(0.8))
 

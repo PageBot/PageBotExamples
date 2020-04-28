@@ -112,7 +112,7 @@ fs = context.newString('Headline in red box.',
                                       fontSize=fontSize,
                                       leading=fontSize,
                                       font='LucidaGrande'))
-newTextBox(fs, z=0, w=RedWidth, h=RedHeight, name='RedRect',
+newText(fs, z=0, w=RedWidth, h=RedHeight, name='RedRect',
            parent=page, fill=color(1, 0.1, 0.1),
            yAlign=TOP, padding=4, conditions=(Center2Center(),
                                   Top2Top()))
@@ -130,7 +130,7 @@ fs += doc.context.newString(scriptGlobals.blurbText,
                                        fontSize=10,
                                        leading=12,
                                        textFill=blackColor))
-newTextBox(fs, z=0, w=YellowWidth, h=YellowHeight, parent=page,
+newText(fs, z=0, w=YellowWidth, h=YellowHeight, parent=page,
            padding=4, fill=0.7, conditions=(Left2Left(),
                                                      Float2Top()))
 

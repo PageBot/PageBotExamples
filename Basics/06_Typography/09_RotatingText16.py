@@ -66,7 +66,7 @@ page = doc[1]
 n = 0
 for ix in range(4): # Horizontal index for x-position
     for iy in range(4): # Vertical index for y-position
-        newTextBox(t, x=page.pl+ix*(CW+G), y=page.pt+iy*(CH+G), w=CW, h=CH,
+        newText(t, x=page.pl+ix*(CW+G), y=page.pt+iy*(CH+G), w=CW, h=CH,
             rx=CW/2, ry=CH/2, angle=90*n/15, # Local rotation center and contructed angle.
             conditions=[Overflow2Next()], # Just overflow conditions, position is hard-coded.
             name='c%d' % n, parent=page, nextElement='c%d' % (n+1),

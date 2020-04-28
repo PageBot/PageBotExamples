@@ -143,15 +143,15 @@ def makeDocument():
     template1.cContainer(0, 5, 2, 3, rs)
     # Create linked text boxes.
     # Note the "nextPage" to keep on the same page or to next.
-    template1.cTextBox('', 0, 0, 2, 5,
+    template1.cText('', 0, 0, 2, 5,
                        style=rs,
                        prevBox=flowId0,
                        nextBox=flowId1, nextPage=0, fill=BOX_COLOR)
-    template1.cTextBox('', 2, 0, 2, 8,
+    template1.cText('', 2, 0, 2, 8,
                        style=rs,
                        prevBox=flowId1,
                        nextBox=flowId2, nextPage=0, fill=BOX_COLOR)
-    template1.cTextBox('', 4, 4, 2, 4,
+    template1.cText('', 4, 4, 2, 4,
                        style=rs,
                        prevBox=flowId2,
                        nextBox=flowId0, nextPage=1, fill=BOX_COLOR)
@@ -175,15 +175,15 @@ def makeDocument():
     template2.cContainer(2, 2, 2, 2, style=rs)
     template2.cContainer(2, 0, 2, 2, style=rs)
     template2.cContainer(4, 6, 2, 2, style=rs)
-    template2.cTextBox('', 0, 0, 2, 5,
+    template2.cText('', 0, 0, 2, 5,
                        style=rs,
                        prevBox=flowId0,
                        nextBox=flowId1, nextPage=0, fill=BOX_COLOR)
-    template2.cTextBox('', 2, 4, 2, 4,
+    template2.cText('', 2, 4, 2, 4,
                        style=rs,
                        prevBox=flowId1,
                        nextBox=flowId2, nextPage=0, fill=BOX_COLOR)
-    template2.cTextBox('', 4, 3, 2, 3,
+    template2.cText('', 4, 3, 2, 3,
                        style=rs,
                        prevBox=flowId2,
                        nextBox=flowId0, nextPage=1, fill=BOX_COLOR)

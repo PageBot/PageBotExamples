@@ -57,7 +57,7 @@ view.showBaselineGrid = True # Show default baseline grid of the column lines.
 page = doc[1]
 
 bs = context.newString('Headline Kphx', style=dict(font=f, fontSize=150, textFill=(1, 0, 0)))
-e = newTextBox(bs, x=100, y=300, parent=page,
+e = newText(bs, x=100, y=300, parent=page,
 	conditions=[Fit2Width(), Shrink2TextHeight(), CapHeight2Top()])
 print(sorted(e.baselines), e.parent.top, e.top, e.bottom, e.bs.size, context.b.textSize(e.bs.s))
 page.solve()

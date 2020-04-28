@@ -22,7 +22,7 @@
 # Document is the main instance holding all information about
 # the document togethers (pages, styles, etc.)
 from pagebot.document import Document
-from pagebot.elements import newTextBox, newRect
+from pagebot.elements import newText, newRect
 from pagebot.toolbox.units import p
 from pagebot.toolbox.color import color
 from pagebot.conditions import *

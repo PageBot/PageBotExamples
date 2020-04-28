@@ -75,7 +75,7 @@ page.padding = PADDING # Set the padding of this page.
 
 # Make a text box, fitting the page padding on all sides.
 # The name "Box" is used to identiify the box that MarkDown text goes into.
-newTextBox(parent=page, name='Box', conditions=[Fit()])
+newText(parent=page, name='Box', conditions=[Fit()])
 
 page.solve() # Solve the fitting condition.
 

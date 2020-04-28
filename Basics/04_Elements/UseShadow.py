@@ -59,7 +59,7 @@ def makeDocument():
                                 fontSize=30,
                                 textFill=blackColor,
                                 leading=em(1.2)))
-    newTextBox(fs, fill=color(0.8), parent=page,
+    newText(fs, fill=color(0.8), parent=page,
                w=RectSize, h=RectSize, shadow=shadow, textShadow=textShadow,
                conditions=conditions, xAlign=CENTER, yAlign=MIDDLE)
     # Solve the layout conditions of the red rectangle.

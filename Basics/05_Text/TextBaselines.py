@@ -79,7 +79,7 @@ doc = Document(w=W, h=H, padding=PADDING, gridX=GRIDX, gridY=GRIDY, styles=style
     baselineGrid=LEADING, language=LANGUAGE_EN)
 
 view = doc.view
-view.showTextBoxY = True
+view.showTextY = True
 view.showBaselineGrid = [BASE_LINE, BASE_INDEX_LEFT, BASE_Y_RIGHT] # Set the view to show the baseline grid
 view.showGrid = [GRID_COL_BG, GRID_ROW_BG, GRID_SQR_BG] # Set the view to display the grid
 view.showPadding = True
@@ -160,11 +160,11 @@ tb1.conditions = (Right2Right(), Top2Top(), Baseline2Grid(index=3))
 
 
 s = doc.context.newString('Ha', style=titleStyle)
-tb2 = newTextBox(s, parent=page, w=CW, 
+tb2 = newText(s, parent=page, w=CW, 
     conditions=(Left2Left(), Top2Top(), Baseline2Grid()))
 
 s = doc.context.newString('Ha', style=titleStyle)
-tb3 = newTextBox(s, parent=page, w=CW, top=100,
+tb3 = newText(s, parent=page, w=CW, top=100,
     conditions=(Left2Left(), Baseline2Grid()))
 """
 
@@ -191,7 +191,7 @@ tb3.conditions = (Left2Col(2), Top2Top(), Fit2Height())
 style = dict(font=font, fontSize=pt(18), leading=18, textFill=0, fill=(1, 0, 0), xTextAlign=LEFT)
 
 bs = c.newString('Aaaa\nBbbb\nCccc\nDddd', style=style)
-tb = newTextBox(bs, parent=page, padding=G, fill=(1, 1, 0), w=page.pw, h=page.ph, 
+tb = newText(bs, parent=page, padding=G, fill=(1, 1, 0), w=page.pw, h=page.ph, 
     baselineWidth=pt(3), 
     baselineColor=color(1, 0, 0), 
     conditions=[Left2Left(), Baseline2Grid(index=2)])

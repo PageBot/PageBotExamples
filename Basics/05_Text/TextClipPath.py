@@ -79,7 +79,7 @@ doc = Document(w=W, h=H, padding=PADDING, gridX=GRIDX, gridY=GRIDY, styles=style
     baselineGrid=LEADING, language=LANGUAGE_EN)
 
 view = doc.view
-view.showTextBoxY = True
+view.showTextY = True
 view.showBaselineGrid = [BASE_LINE, BASE_INDEX_LEFT, BASE_Y_RIGHT] # Set the view to show the baseline grid
 view.showGrid = [GRID_COL_BG, GRID_ROW_BG, GRID_SQR_BG] # Set the view to display the grid
 view.showPadding = True
@@ -164,7 +164,7 @@ clipPath.rect(0, 0, tb1.w, tb1.h)
 tb1.clipPath = clipPath - newRectPath(doc.context, x=tb1.w-200, w=200, h=300) - newRectPath(doc.context, y=tb1.h-300, w=200, h=300)
 
 s = doc.context.newString('Ha', style=titleStyle)
-tb2 = newTextBox(s, parent=page, w=CW, 
+tb2 = newText(s, parent=page, w=CW, 
     conditions=(Left2Left(), Top2Top(), Baseline2Grid()))
 
 doc.solve()

@@ -75,7 +75,7 @@ doc = Document(name='TestBabelString', context=drawBotContext)
 context.readDocument(doc) 
 # Get the first page of the document
 page = doc[1]
-# Get the Sketch textbox that is now on the page as PageBot TextBox element.
+# Get the Sketch textbox that is now on the page as PageBot Text element.
 e = page.elements[0] 
 print(e)
 print(e.bs.runs[0].style['font'])

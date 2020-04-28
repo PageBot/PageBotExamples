@@ -69,7 +69,7 @@ def testElements(context, page):
     def newTemplate(**kwargs):
     def newPlacer(**kwargs):
     def newColumn(**kwargs):
-    def newTextBox(bs='', **kwargs):
+    def newText(bs='', **kwargs):
     def newText(bs='', **kwargs):
     def newRect(**kwargs):
     def newQuire(**kwargs):
@@ -119,18 +119,18 @@ def testElements(context, page):
     for n in range(10):
         newLine(x=100, y=n*100, parent=page, stroke=0)
 
-    testTextBox(context, page)
+    testText(context, page)
 
     score = page.solve()
     print(' - %s' % score)
 
 
-def testTextBox(context, page):
+def testText(context, page):
 
     style = dict(font=bungee, fontSize=pt(32), baselineShift=6)
     bs = context.newString(txt, style=style)
 
-    tb = newTextBox(bs, context=context, x=M, y=H-10*M, w=W/2, h=300,
+    tb = newText(bs, context=context, x=M, y=H-10*M, w=W/2, h=300,
             parent=page, stroke=color(0.3, 0.2, 0.1, 0.5),
             style=dict(hyphenation=True, language='en', leading=200))
 

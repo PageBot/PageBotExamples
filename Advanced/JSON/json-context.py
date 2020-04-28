@@ -23,7 +23,7 @@ from pagebot.toolbox.units import pt
 from pagebot.toolbox.transformer import json2Dict
 from pagebot.document import Document
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.elements import newTextBox
+from pagebot.elements import newText
 
 W = 652
 H = 850
@@ -139,7 +139,7 @@ def drawDescription(context, description, dh):
 
     # TODO: calculate overflow.
     #tb = context.textBox(bs, box)
-    #tb = newTextBox(bs, box, context=context)
+    #tb = newText(bs, box, context=context)
     context.rect(x, y, w, -h)
     #bs2 = context.textOverflow(bs, box)
     #print('Overflow: %s' % bs2)

@@ -14,7 +14,7 @@
 #
 #     05_StringFlows.py
 #
-#     If a TextBox as self.nextElement defined as name for another text box on the
+#     If a Text as self.nextElement defined as name for another text box on the
 #     same page, then overflow of self will go into the other text box.
 
 from pagebot.constants import LEFT, BOTTOM, TOP
@@ -66,9 +66,9 @@ def makeDocument():
     else:
         h1 = None
 
-    e1 = newTextBox(bs,
-        name='ElasticTextBox1',
-        nextElement='ElasticTextBox2', # Overflow goes here.
+    e1 = newText(bs,
+        name='ElasticText1',
+        nextElement='ElasticText2', # Overflow goes here.
         parent=page0, padding=4, x=100, w=BoxWidth, font='Verdana', h=h1,
         mb=20, mr=10,       # Conditions make the element move to top-left of the page.
         # And the condition that there should be no overflow, otherwise the text box
@@ -79,9 +79,9 @@ def makeDocument():
         yAlign=BOTTOM, xAlign=LEFT,
         strokeWidth=0.5, fill=color(0.9), stroke=noColor,
     )
-    e2 = newTextBox('', # Empty box, will get the overflow from e1, if there is any.
-        name='ElasticTextBox2', # Flow reference by element.name
-        nextElementName='ElasticTextBox3', nextPageName='Page 2',
+    e2 = newText('', # Empty box, will get the overflow from e1, if there is any.
+        name='ElasticText2', # Flow reference by element.name
+        nextElementName='ElasticText3', nextPageName='Page 2',
         parent=page1, padding=4, x=100, w=BoxWidth, h=200,
         conditions=[Right2Right(), Float2Top(), Fit2Bottom(), Overflow2Next()], yAlign=TOP,  fill=whiteColor, stroke=noColor,
     )
@@ -90,8 +90,8 @@ def makeDocument():
     page2.name = 'Page 2'
     page2.padding = PagePadding
 
-    e3 = newTextBox('', # Empty box, will get the overflow from e2, if there is any.
-        name='ElasticTextBox3', # Flow reference by element.name
+    e3 = newText('', # Empty box, will get the overflow from e2, if there is any.
+        name='ElasticText3', # Flow reference by element.name
         parent=page1, padding=4, w=BoxWidth,
         conditions=[Right2Right(), Float2Top(), Fit2Bottom()],
         yAlign=TOP,  fill=whiteColor, stroke=noColor)

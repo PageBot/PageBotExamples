@@ -25,7 +25,7 @@ import re
 import sys
 
 from pagebot import getContext
-from pagebot.elements import newTextBox
+from pagebot.elements import newText
 from pagebot.toolbox.color import color
 from pagebot.document import Document
 
@@ -219,8 +219,8 @@ class TextRun:
 class TextLine:
     def __init__(self, ctLine, p, lineIndex):
         self._ctLine = ctLine
-        self.x, self.y = p # Relative position from top of TextBox
-        self.lineIndex = lineIndex # Vertical line index in TextBox.
+        self.x, self.y = p # Relative position from top of Text
+        self.lineIndex = lineIndex # Vertical line index in Text.
         self.glyphCount = CoreText.CTLineGetGlyphCount(ctLine)
 
         self.string = ''
@@ -290,12 +290,12 @@ class TextLine:
             founds.append(FoundPattern(self.string[iStart:iEnd], xStart, iStart, line=self, run=run))
         return founds
 
-class TextBox:
-    """A TextBox holds a formatted string, as well as an ordered list of TextLine instances,
+class Text:
+    """A Text holds a formatted string, as well as an ordered list of TextLine instances,
     that hold information about the sequence of TextRun instances (with their unique typographic
     properties). Also self.baseLines is available, ordered list of baseLine positions, relative
-    to the origin of the TextBox element."""
-    # @@@ This is a stand alone testing class. The real one is implemented as PageBot TextBox Element.
+    to the origin of the Text element."""
+    # @@@ This is a stand alone testing class. The real one is implemented as PageBot Text Element.
     def __init__(self, fs, x, y, w, h):
         self.x = x
         self.y = y
@@ -451,12 +451,12 @@ doc = Document(w=W+G*2, h=H + G*2, autoPages=1)
 view = doc.view
 
 page = doc[1]
-myTextBox = newTextBox(fs, x=G, y=G, w=W, h=H, parent=page)
-#myTextBox._drawBaselines(showIndex=True, showY=True, showLeading=True)
+myText = newText(fs, x=G, y=G, w=W, h=H, parent=page)
+#myText._drawBaselines(showIndex=True, showY=True, showLeading=True)
 
 """
 FIX
-for pattern in myTextBox.findPattern('Find'):
+for pattern in myText.findPattern('Find'):
     #print(pattern)
     px = pattern.x
     py = pattern.y
@@ -470,9 +470,9 @@ for pattern in myTextBox.findPattern('Find'):
 for yy in range(-3,10):
     context.stroke(1, 0, 0)
     context.fill(None)
-    y = (myTextBox.y + myTextBox.h +
-         yy*fittingSize/10 - myTextBox.baseLines[-1][1])
-    context.line((myTextBox.x, y), (myTextBox.x + myTextBox.w, y))
+    y = (myText.y + myText.h +
+         yy*fittingSize/10 - myText.baseLines[-1][1])
+    context.line((myText.x, y), (myText.x + myText.w, y))
 
 context.saveImage('_export/testTextLineTextRun.pdf')
 """

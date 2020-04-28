@@ -51,15 +51,15 @@ page.padding = PADDING
 newRect(x=0, y=0, z=-100, w=W, h=H, fill=(1, 0, 0), parent=page)
 
 t = context.newString('Design\nDesign\n.Space\n', style=ddsStyle)
-newTextBox(t, w=page.pw, parent=page, conditions=[Left2Left(), Top2Top(), Fit2Width()], mb=40*S)
+newText(t, w=page.pw, parent=page, conditions=[Left2Left(), Top2Top(), Fit2Width()], mb=40*S)
 
 t = context.newString('WELCOMES', style=welcomeStyle )
-newTextBox(t, w=300, parent=page, conditions=[Left2Left(), Float2Top(), Fit2Width()], mb=80*S)
+newText(t, w=300, parent=page, conditions=[Left2Left(), Float2Top(), Fit2Width()], mb=80*S)
 
 newImage(IMAGE_PATH, x=M, y=M, w=W-2*M, parent=page, conditions=(Left2Left(), Float2Top()), mb=80*S)
 
 t = context.newString('IN DELFT', style=inDelftStyle )
-newTextBox(t, w=300, parent=page, conditions=[Left2Left(), Float2Top(), Fit2Width()], mb=40*S)
+newText(t, w=300, parent=page, conditions=[Left2Left(), Float2Top(), Fit2Width()], mb=40*S)
 
 
 page.solve()

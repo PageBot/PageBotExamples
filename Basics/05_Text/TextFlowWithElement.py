@@ -14,7 +14,7 @@
 #
 #     UseTextFlows.py
 #
-#     If a TextBox such as self.nextElement is defined as name for another text
+#     If a Text such as self.nextElement is defined as name for another text
 #     box on the same page, then overflow of self will go into the other text
 #     box.
 
@@ -76,9 +76,9 @@ def makeDocument():
     bs = context.newString(s, style=style)
     h1 = 120 # Fox on a given height, to show the text flowing to the e2 element.
 
-    e1 = newTextBox(bs,
-        name='TextBox1',
-        nextElement='TextBox2', # Overflow goes here.
+    e1 = newText(bs,
+        name='Text1',
+        nextElement='Text2', # Overflow goes here.
         parent=page1, padding=4, x=100, w=BoxWidth, h=h1,
         mb=20, mr=10, # Conditions make the element move to top-left of the page.
         # And the condition that there should be no overflow, otherwise the text box
@@ -93,9 +93,9 @@ def makeDocument():
         stroke=noColor,
         strokeWidth=pt(0.5)
     )
-    e2 = newTextBox('', # Empty box, will get the overflow from e1, if there is any.
-        name='TextBox2', # Flow reference by element.name
-        nextElement='ElasticTextBox3', nextPage='Page 1',
+    e2 = newText('', # Empty box, will get the overflow from e1, if there is any.
+        name='Text2', # Flow reference by element.name
+        nextElement='ElasticText3', nextPage='Page 1',
         parent=page1, padding=4, x=100, w=BoxWidth, h=200,
         conditions=[Right2Right(), Float2Top(), Fit2Bottom(), Overflow2Next()], yAlign=TOP,
         fill=whiteColor, stroke=noColor,
@@ -105,8 +105,8 @@ def makeDocument():
     page2.name = 'Page 2'
     page2.padding = PagePadding
 
-    e3 = newTextBox('', # Empty box, will get the overflow from e2, if there is any.
-        name='ElasticTextBox3', # Flow reference by element.name
+    e3 = newText('', # Empty box, will get the overflow from e2, if there is any.
+        name='ElasticText3', # Flow reference by element.name
         parent=page2, padding=4, w=BoxWidth,
         conditions=[Right2Right(), Float2Top(), Fit2Bottom()],
         yAlign=TOP,
