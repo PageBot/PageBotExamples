@@ -25,7 +25,7 @@ from pagebot import getContext
 context = getContext('DrawBot')
 #context = getContext('Flat')
 
-from pagebot.constants import A4, CENTER, LEFT, RIGHT
+from pagebot.constants import A4, CENTER, LEFT, RIGHT, TOP, BASELINE
 from pagebot.elements import newText, newLine, newText
 from pagebot.document import Document
 from pagebot.toolbox.color import color
@@ -54,6 +54,7 @@ view = doc.view # Get the current view of the document.
 view.padding = padding # Make space to show crop marks, etc.
 view.showCropMarks = True 
 view.showRegistrationMarks = True
+view.showPadding = True # Show the padding of the page = traditional margins
 view.showFrame = True # Show the frame of the  page as blue line
 view.showNameInfo = True # Showing page info and title on top of the page.
 
@@ -69,19 +70,19 @@ colW = (page.pw - G)/2
 # Style, BabelString and left text box
 style = dict(font='PageBot-Regular', tracking=em(0.02), fontSize=fontSize, leading=em(1.4))
 bs = context.newString(article, style)
-newText(bs, parent=page, x=padding, y=padding, w=(page.pw - G)/2, h=page.ph)
+newText(bs, parent=page, x=padding, y=page.h-padding, w=(page.pw - G)/2, h=page.ph, yAligh=TOP)
 
 # Style with hyphenation and right text box
 style = dict(font='PageBot-Regular', tracking=em(0.02), hyphenation=True, fontSize=fontSize, leading=em(1.4))
 bs = context.newString(article, style)
-newText(bs, parent=page, x=padding+colW+G, y=padding, w=colW, h=page.ph)
+newText(bs, parent=page, x=padding+colW+G, y=page.h-padding, w=colW, h=page.ph, yAlign=TOP)
 
 # Labels under the columns
 labelStyle = dict(font='PageBot-Regular', fontSize=pt(12), tracking=em(0.02), textFill=0.5)
 label = context.newString('Not hyphenated', labelStyle)
-newText(label, x=padding, y=padding/2, parent=page)
+newText(label, x=padding, y=padding/2, parent=page, yAlign=BASELINE)
 label = context.newString('Hyphenated (%s)' % bs.language, labelStyle)
-newText(label, x=padding+colW+G, y=padding/2, parent=page)
+newText(label, x=padding+colW+G, y=padding/2, parent=page, yAlign=BASELINE)
 
 # Export the page to PDF
 doc.export(EXPORT_PATH)

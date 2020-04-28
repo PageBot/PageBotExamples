@@ -16,7 +16,7 @@ creates a BabelString that has
 ~~~
 bs.context 
 ~~~
-defined as internal weakref property to the context.
+defined as internal weakref property.
 
 ~~~
 e = newText(txt, style, parent=page)
