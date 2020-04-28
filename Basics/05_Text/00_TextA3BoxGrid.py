@@ -32,7 +32,7 @@ from pagebot.document import Document
 from pagebot.conditions import *
 from pagebot.toolbox.color import color, blackColor
 from pagebot.toolbox.units import pt, em, mm
-from pagebot.toolbox.lorumipsum import lorumipsum
+from pagebot.toolbox.loremipsum import loremipsum
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.fonttoolbox.objects.font import findFont
 
@@ -56,7 +56,7 @@ if DO_BLURB:
 	article += '\n\n' + b.getBlurb('article')
 else:
 	headline = 'Headline of column'
-	article = lorumipsum()
+	article = loremipsum()
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
