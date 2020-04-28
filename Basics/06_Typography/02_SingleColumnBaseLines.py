@@ -75,7 +75,7 @@ page = doc[1]
 # Red frame to show position and dimensions of the text box element.
 # Default behavior of the textbox is to align the text at "top of the em-square".
 # Show index of baselines on left and vertical position of baselines on the right.
-c1 = newTextBox(t, parent=page, stroke=(1, 0, 0), conditions=[Fit()],
+c1 = newText(t, parent=page, stroke=(1, 0, 0), conditions=[Fit()],
     showOrigin=True,
     showBaselineGrid=[BASE_LINE, BASE_INDEX_LEFT, BASE_Y_RIGHT])
 

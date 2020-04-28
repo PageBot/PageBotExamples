@@ -138,7 +138,7 @@ def makeDocument():
         captionStyle = dict(font=font.path, fontSize=11, textFill=color(0))
         captionConditions = (Fit2Width(), Float2Top())
         fs = context.newString('Captions float below the image', style=captionStyle)
-        img.caption = newTextBox(fs, name='Caption', z=0, conditions=captionConditions,
+        img.caption = newText(fs, name='Caption', z=0, conditions=captionConditions,
             padding=4, yAlign=TOP,
                 #strokeWidth=0.5,
                 #fill=color(0, 0, 1, 0.3),

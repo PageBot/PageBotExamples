@@ -68,7 +68,7 @@ coverImage.clipPath = newRectPath(context, 100, 200)
 coverImage.conditions = [Bottom2BleedBottom()]#, Fit2BleedTop()]
 
 """
-#titleBox = newTextBox('Magazine', style=coverTitleStyle, fill=(1, 1, 0), conditions=[Fit2Width(), Bottom2Bottom()])
+#titleBox = newText('Magazine', style=coverTitleStyle, fill=(1, 1, 0), conditions=[Fit2Width(), Bottom2Bottom()])
 #test = newRect(fill=(1, 1, 0, 0.5), stroke=None, h=p(2), conditions=[Fit2Width(), Bottom2BleedBottom()])
 
 # Create a coverFront part/element in the Magazine, including a Cover part.

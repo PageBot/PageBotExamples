@@ -124,7 +124,7 @@ def makeHeader(page, font):
         fill=0.4, conditions=[Fit2Width(), Top2Top()])
     title = context.newString('Key map', style=titleStyle)
     mr = pt(8)
-    newTextBox(title, w=page.pw*0.35, fill=0.5, parent=header, 
+    newText(title, w=page.pw*0.35, fill=0.5, parent=header, 
         pt=pt(12), # Padding top
         mr=mr, # Margin right of the "Key map" text box element   
         borderTop=dict(stroke=whiteColor, strokeWidth=SHADOW),
@@ -135,7 +135,7 @@ def makeHeader(page, font):
     t = 'Size: %s  Font: %s\nNotice: © %s\nPrinted by PageBot on %s' % \
         (pt(SQSIZE), font.path.split('/')[-1], font.info.copyright, now().datetime)
     fontInfo = context.newString(t, style=fontInfoStyle)
-    newTextBox(fontInfo, fill=1, parent=header, margin=0, w=page.pw*0.65-3*mr,
+    newText(fontInfo, fill=1, parent=header, margin=0, w=page.pw*0.65-3*mr,
         padding=pt(4),
         borderTop=dict(stroke=blackColor, strokeWidth=SHADOW),
         borderLeft=dict(stroke=blackColor, strokeWidth=SHADOW),

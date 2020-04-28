@@ -34,7 +34,7 @@ view = doc.view
 
 page = doc[1]
 t = context.newString('aa ' * 200)
-newTextBox(t, parent=page, conditions=[Fit()])
+newText(t, parent=page, conditions=[Fit()])
 
 doc.solve()
 """

@@ -22,7 +22,7 @@
 #     http://localhost:8888
 #
 from tornado.web import StaticFileHandler
-from pagebot.server.tornadoserver.baseserver import BasicRequestHandler, RequestData, BaseServer 
+from pagebot.server.tornadoserver.baseserver import BasicRequestHandler, RequestData, BaseServer
 from pagebot.publications.websites.nanosite.nanosite import NanoSite
 
 class RequestHandler(BasicRequestHandler):
@@ -51,7 +51,7 @@ class RequestHandler(BasicRequestHandler):
 class AdServer(BaseServer):
     """Server online/Linux usage, generating parametric advertizements from PageBot
     Publication instances.
-    
+
     >>> import urllib
     >>> port = 9999
     >>> server = AdServer(port=port)

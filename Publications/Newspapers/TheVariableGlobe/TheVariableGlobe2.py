@@ -45,11 +45,11 @@ context = getContext()
 class TopHead(Rect):
     def __init__(self, **kwargs):
         Rect.__init__(self, **kwargs)
-        newTextBox(parent=self, name='TopHeadQuote', mr=G, h=RH, w=CW3,
+        newText(parent=self, name='TopHeadQuote', mr=G, h=RH, w=CW3,
             conditions=(Left2Left(), Top2Top()))
-        newTextBox(parent=self, name='TopHeadImage', mr=G, h=RH, w=CW1, 
+        newText(parent=self, name='TopHeadImage', mr=G, h=RH, w=CW1, 
             conditions=(Right2Right(), Float2Top(), Float2Left()))
-        newTextBox(parent=self, name='TopHeadDate', h=RH, w=CW1,
+        newText(parent=self, name='TopHeadDate', h=RH, w=CW1,
             conditions=(Right2Right(), Top2Top(), Float2Left()))
     
 # =============================================================================
@@ -241,14 +241,14 @@ if SHOW_TITLE:
     bs = context.newString(TITLE, style=titleStyle, w=page.pw)
     tw, th = bs.size # Get the (width, height) if the created string.
     #print('Calculated fitting title size: ', bs.fittingFontSize)
-    titleBox= newTextBox(bs, parent=page, h=th, borderBottom=border,
+    titleBox= newText(bs, parent=page, h=th, borderBottom=border,
         conditions=(Left2Left(), Fit2Width(), Float2Top()))
     titleBox.solve()
     # Title subline of the newspaper
     txt = blurb.getBlurb('design_article_title').capitalize()
     bs = context.newString(txt, style=subTitleStyle)
     tw, th = bs.size
-    titleSublineBox = newTextBox(bs, parent=page, h=4*BASELINE, borderBottom=border, pt=th/2,
+    titleSublineBox = newText(bs, parent=page, h=4*BASELINE, borderBottom=border, pt=th/2,
         conditions=(Left2Left(), Fit2Width(), Float2Top()))
 
 
@@ -259,15 +259,15 @@ if SHOW_ARTICLE1:
     txt = blurb.getBlurb('design_theory').capitalize()
     bs = context.newString(txt, style=headline1Style)
     tw, th = bs.size
-    head1 = newTextBox(bs, name='head1', parent=main1, conditions=(Left2Left(), Fit2Width(), Float2Top()))
+    head1 = newText(bs, name='head1', parent=main1, conditions=(Left2Left(), Fit2Width(), Float2Top()))
 
     txt = blurb.getBlurb('article_content')
     bs = context.newString(txt, style=mainStyle)
-    newTextBox(bs, name='main11', h=1200, w=CW1, parent=main1,
+    newText(bs, name='main11', h=1200, w=CW1, parent=main1,
         conditions=(Left2Left(), Float2Top()))
     txt = blurb.getBlurb('article_content')
     bs = context.newString(txt, style=mainStyle)
-    newTextBox(bs, name='main12', h=1200, w=CW1, parent=main1, fill=0.95,
+    newText(bs, name='main12', h=1200, w=CW1, parent=main1, fill=0.95,
         conditions=(Right2Right(), Float2Top()))
 '''
 if 1:
@@ -276,13 +276,13 @@ if 1:
 
     bs = context.newString('Headline main 2', style=headline1Style)
     tw, th = bs.size
-    newTextBox(bs, name='head2', parent=main2, conditions=(Left2Left(), Fit2Width(), Float2Top()))
+    newText(bs, name='head2', parent=main2, conditions=(Left2Left(), Fit2Width(), Float2Top()))
 
     bs = context.newString('Aaaa ' * 120, style=mainStyle)
-    newTextBox(bs, name='main21', h=400, w=CW2, parent=main2, fill=0.8, mt=3*G,
+    newText(bs, name='main21', h=400, w=CW2, parent=main2, fill=0.8, mt=3*G,
         conditions=(Left2Left(), Float2Top()))
     bs = context.newString('Aaaa ' * 120, style=mainStyle)
-    newTextBox(bs, name='main22', h=400, w=CW2, parent=main2, fill=0.8, mt=3*G, 
+    newText(bs, name='main22', h=400, w=CW2, parent=main2, fill=0.8, mt=3*G, 
         conditions=(Right2Right(), Float2Top()))
 
 '''

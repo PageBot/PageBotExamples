@@ -11,7 +11,7 @@
 #     Supporting DrawBot, www.drawbot.com
 # -----------------------------------------------------------------------------
 #
-#     TextBoxes.py
+#     Textes.py
 #
 #     Tests pagebot text boxes.
 
@@ -88,7 +88,7 @@ def test(context):
     print("creating doc")
     doc = Document(w=W, h=H, context=context)
 
-    doc.name = 'TextBoxes-%s' % doc.context.name
+    doc.name = 'Textes-%s' % doc.context.name
     print('# Testing text boxes in %s' % doc)
 
     page = doc[1]
@@ -118,8 +118,8 @@ def test(context):
     y = H - M - h
 
     sc = color(0.3, 0.2, 0.1, 0.5)
-    tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page)
-    #tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
+    tb = newText(s, x=x, y=y, w=w, h=h, parent=page)
+    #tb = newText(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
     y0 = H - M
     drawBaselines(x, y0, w, tb.baselines, s, page)
 
@@ -134,7 +134,7 @@ def test(context):
     x = M
     y = M
 
-    tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
+    tb = newText(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
     y0 = M + h
     drawBaselines(x, y0, w, tb.baselines, s, page)
 
@@ -147,7 +147,7 @@ def test(context):
     x = W / 2
     y = M
     w = W / 2 - M
-    tb = newTextBox(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
+    tb = newText(s, x=x, y=y, w=w, h=h, parent=page, stroke=sc)
     y0 =  M + h
     drawBaselines(x, y0, w, tb.baselines, s, page)
     '''

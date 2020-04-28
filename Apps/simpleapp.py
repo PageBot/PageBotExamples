@@ -17,7 +17,7 @@ from vanilla import *
 from pagebot.filepaths import getResourcesPath
 from pagebot.apps.baseapp import BaseApp
 from pagebot.publications import PublicationCategories
-from pagebot.elements import newGroup, newTextBox, newRect
+from pagebot.elements import newGroup, newText, newRect
 from pagebot.constants import *
 from pagebot.composer import Composer
 from pagebot.typesetter import Typesetter
@@ -127,13 +127,13 @@ class PageBotApp(BaseApp):
         # D E S I G N  U I
         tab = self.uiDesign = self.window.uiGroup.tabs[0]
 
-        tab.documentNameLabel = TextBox((pad, y-12, -pad, uiLS), 'Document name', sizeStyle='mini')
+        tab.documentNameLabel = Text((pad, y-12, -pad, uiLS), 'Document name', sizeStyle='mini')
         tab.documentName = TextEditor((pad, y, -pad, uiLS), self.publication.name)
 
         y += uiL-2
-        tab.publicationLabel = TextBox((pad, y-8, (uiWidth-pad)/2, uiLS),
+        tab.publicationLabel = Text((pad, y-8, (uiWidth-pad)/2, uiLS),
             'Publication category', sizeStyle='mini')
-        tab.templateLabel = TextBox(((uiWidth-pad)/2+pad, y-8, -pad, uiLS),
+        tab.templateLabel = Text(((uiWidth-pad)/2+pad, y-8, -pad, uiLS),
             'Publication type', sizeStyle='mini')
 
         publicationCategories = sorted(PublicationCategories.keys())
@@ -148,19 +148,19 @@ class PageBotApp(BaseApp):
         tab.templateType.set(0)
 
         y += uiL
-        tab.themeLabel = TextBox((pad, y-8, (uiWidth-pad)*2/3, uiLS), 'Theme', sizeStyle='mini')
+        tab.themeLabel = Text((pad, y-8, (uiWidth-pad)*2/3, uiLS), 'Theme', sizeStyle='mini')
         themeNames = sorted(ThemeClasses.keys())
         tab.theme = PopUpButton((pad, y, (uiWidth-pad*2)*2/3-pad, uiH), themeNames, callback=self.makeSample,
             sizeStyle='small')
         tab.theme.set(themeNames.index(DEFAULT_THEME_CLASS.NAME))
-        tab.themeMoodLabel = TextBox(((uiWidth-pad)*2/3, y-8, -pad, uiLS), 'Mood', sizeStyle='mini')
+        tab.themeMoodLabel = Text(((uiWidth-pad)*2/3, y-8, -pad, uiLS), 'Mood', sizeStyle='mini')
         themeMoods = BaseTheme.MOOD_NAMES
         tab.themeMood = PopUpButton(((uiWidth-pad)*2/3, y, -pad, uiH), themeMoods,
             callback=self.makeSample, sizeStyle='small')
         tab.themeMood.set(themeMoods.index(BaseTheme.DEFAULT_MOOD_NAME))
 
         y += uiL
-        tab.pageSizeLabel = TextBox((pad, y-8, -pad, uiLS), 'Page size', sizeStyle='mini')
+        tab.pageSizeLabel = Text((pad, y-8, -pad, uiLS), 'Page size', sizeStyle='mini')
         options = sorted(self.publication.PAGE_SIZES.keys())
         tab.pageSize = PopUpButton((pad, y, -pad, uiH), options, callback=self.makeSample,
             sizeStyle='small')
@@ -184,29 +184,29 @@ class PageBotApp(BaseApp):
         tbW = 40 # Padding text box width
         tw = 10
         x = pad
-        tab.paddingLabel = TextBox((pad, y-14, -pad, uiLS), 'Padding', sizeStyle='mini')
-        tab.paddingTopLabel = TextBox((x, y, tw, uiLS), 'T', sizeStyle='small')
+        tab.paddingLabel = Text((pad, y-14, -pad, uiLS), 'Padding', sizeStyle='mini')
+        tab.paddingTopLabel = Text((x, y, tw, uiLS), 'T', sizeStyle='small')
         tab.paddingTop = TextEditor((x+tw, y, tbW, uiLS), '48', callback=self.makeSample,)
         x += tw + tbW + 2
-        tab.paddingRightLabel = TextBox((x, y, 12, uiLS), 'R', sizeStyle='small')
+        tab.paddingRightLabel = Text((x, y, 12, uiLS), 'R', sizeStyle='small')
         tab.paddingRight = TextEditor((x+tw, y, tbW, uiLS), '48', callback=self.makeSample,)
         x += tw + tbW + 2
-        tab.paddingBottomLabel = TextBox((x, y, 12, uiLS), 'B', sizeStyle='small')
+        tab.paddingBottomLabel = Text((x, y, 12, uiLS), 'B', sizeStyle='small')
         tab.paddingBottom = TextEditor((x+tw, y, tbW, uiLS), '60', callback=self.makeSample,)
         x += tw + tbW + 2
-        tab.paddingLeftLabel = TextBox((x, y, 12, uiLS), 'L', sizeStyle='small')
+        tab.paddingLeftLabel = Text((x, y, 12, uiLS), 'L', sizeStyle='small')
         tab.paddingLeft = TextEditor((x+tw, y, tbW, uiLS), '72', callback=self.makeSample,)
 
         y += uiL
-        tab.gridLabel = TextBox((pad, y-8, -pad, uiLS), 'Grid', sizeStyle='mini')
+        tab.gridLabel = Text((pad, y-8, -pad, uiLS), 'Grid', sizeStyle='mini')
         columnOptions = []
         for columns in range(1, 17):
             columnOptions.append(str(columns))
-        tab.columnsLabel = TextBox((pad, y+5, 36, uiLS), 'Cols', sizeStyle='small')
+        tab.columnsLabel = Text((pad, y+5, 36, uiLS), 'Cols', sizeStyle='small')
         tab.columns = PopUpButton((pad+36, y, uiWidth/5, uiH), columnOptions, callback=self.makeSample,
             sizeStyle='small')
         tab.columns.set(3) # 4 columns
-        tab.hGutterLabel = TextBox((uiWidth/2, y+5, 60, uiLS), 'HGutter', sizeStyle='small')
+        tab.hGutterLabel = Text((uiWidth/2, y+5, 60, uiLS), 'HGutter', sizeStyle='small')
         tab.hGutter = PopUpButton((-pad-uiWidth/5, y, uiWidth/5, uiH), columnOptions, callback=self.makeSample,
             sizeStyle='small')
         tab.hGutter.set(11) # pt(12)
@@ -215,11 +215,11 @@ class PageBotApp(BaseApp):
         rowsOptions = []
         for rows in range(1, 25):
             rowsOptions.append(str(rows))
-        tab.rowssLabel = TextBox((pad, y+5, 36, uiLS), 'Rows', sizeStyle='small')
+        tab.rowssLabel = Text((pad, y+5, 36, uiLS), 'Rows', sizeStyle='small')
         tab.rows = PopUpButton((pad+36, y, uiWidth/5, uiH), columnOptions, callback=self.makeSample,
             sizeStyle='small')
         tab.rows.set(0) # 1 row
-        tab.vGutterLabel = TextBox((uiWidth/2, y+5, 60, uiLS), 'VGutter', sizeStyle='small')
+        tab.vGutterLabel = Text((uiWidth/2, y+5, 60, uiLS), 'VGutter', sizeStyle='small')
         tab.vGutter = PopUpButton((-pad-uiWidth/5, y, uiWidth/5, uiH), columnOptions, callback=self.makeSample,
             sizeStyle='small')
         tab.vGutter.set(11) # pt(12)
@@ -254,7 +254,7 @@ class PageBotApp(BaseApp):
         y = pad + dy
         tab = self.uiContent = self.window.uiGroup.tabs[1]
 
-        tab.contentSelectionLabel = TextBox((pad, y-8, -pad, uiLS),
+        tab.contentSelectionLabel = Text((pad, y-8, -pad, uiLS),
             'Content selection', sizeStyle='mini')
         options = sorted(('Random content', 'Open...'))
         tab.contentSelection = PopUpButton((pad, y, -pad, uiH), options, callback=self.makeSample,
@@ -376,7 +376,7 @@ class PageBotApp(BaseApp):
 
         """
         theme = self.getTheme()
-        newTextBox(str(theme.mood.name), style=headStyle, parent=grp, conditions=[Fit2Width(), Top2Top()])
+        newText(str(theme.mood.name), style=headStyle, parent=grp, conditions=[Fit2Width(), Top2Top()])
         for colorName in sorted(theme.mood.palette.colorNames):
             color = theme.mood.palette[colorName]
             newRect(parent=grp, w=32, h=32, fill=color, conditions=[Right2Right(), Float2Top(), Float2Left()])

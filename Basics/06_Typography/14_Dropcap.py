@@ -51,7 +51,7 @@ view.showTextOverflowMarker = False
 page = doc[1]
 
 # Show the principle of building a dropcap.
-# In normal PageBot usage, this is hidden as child elements of TextBox that define the layout
+# In normal PageBot usage, this is hidden as child elements of Text that define the layout
 # of the clipping path. Here is it shown as separate steps.
 
 # Make main text, skipping the first character
@@ -81,7 +81,7 @@ textFramePath = PageBotPath(context=context)
 textFramePath.rect(0, 0, page.pw, page.ph) # Make a rectangle path with size of text box.
 # Make a new path for the available text flow, which is the difference between the paths
 textFlowPath = textFramePath.difference(dropCapPathFrame)
-newTextBox(bs1, parent=page, yAlign=TOP, showFrame=True, conditions=[Fit()], clipPath=textFlowPath)
+newText(bs1, parent=page, yAlign=TOP, showFrame=True, conditions=[Fit()], clipPath=textFlowPath)
 
 newPaths(textFlowPath, parent=page, conditions=(Left2Left(), Top2Top()))
 newPaths(dropCapPath, parent=page, mr=PADDING, mb=PADDING, fill=(1, 0, 0), conditions=(Left2Left(), Top2Top()))

@@ -77,27 +77,27 @@ def composeBase(magazine, part, doc, page, index):
     dy2 = BASELINE
     if page.isLeft:
         bs = doc.context.newString('FALL 2018', style=styles['typeTitleRight'])
-        newTextBox(bs, w=magazine.cw, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Right2Right()], 
+        newText(bs, w=magazine.cw, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Right2Right()], 
             bleed=0)
         bs = doc.context.newString(page.pn[0], style=styles['pnLeft'])
-        newTextBox(bs, w=magazine.cw, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Left2Left()], 
+        newText(bs, w=magazine.cw, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Left2Left()], 
             bleed=0)
     else:
         bs = doc.context.newString('TYPE No. 3', style=styles['typeTitleLeft'])
-        newTextBox(bs, w=magazine.cw, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Left2Left()], 
+        newText(bs, w=magazine.cw, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Left2Left()], 
             bleed=0)
         bs = doc.context.newString(page.pn[0], style=styles['pnRight'])
-        newTextBox(bs, w=magazine.cw, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Right2Right()], 
+        newText(bs, w=magazine.cw, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Right2Right()], 
             bleed=0)
   
 def composePeopleTitleLeft(magazine, part, doc, page, index):
-    newTextBox(parent=page, x=page.pl, y=page.pb, w=page.pw, h=page.ph, fill=(0, 0, 1, 0.5))
+    newText(parent=page, x=page.pl, y=page.pb, w=page.pw, h=page.ph, fill=(0, 0, 1, 0.5))
 
 def composePeopleTitleRight(magazine, part, doc, page, index):
-    newTextBox(parent=page, x=page.pl, y=page.pb, w=page.pw, h=page.ph, fill=(0, 1, 1, 0.5))
+    newText(parent=page, x=page.pl, y=page.pb, w=page.pw, h=page.ph, fill=(0, 1, 1, 0.5))
 
 def composePeopleTitle(magazine, part, doc, page, index):
-    newTextBox(parent=page, x=page.pl, y=page.pb, w=page.pw, h=page.ph, fill=(1, 0, 1, 0.5))
+    newText(parent=page, x=page.pl, y=page.pb, w=page.pw, h=page.ph, fill=(1, 0, 1, 0.5))
 
 def compose_People(magazine, part, doc):
     """This function builds the elements and layout of the People article

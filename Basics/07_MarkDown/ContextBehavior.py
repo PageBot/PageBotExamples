@@ -74,17 +74,17 @@ for doc in (pdfDoc, htmlDoc):
     page1 = doc[1] # Get the first/single page of the document.
     page1.padding = PADDING # Set the padding of this page.
     # Make a text box, fitting the page padding on all sides.
-    newTextBox(parent=page1, name='Box', conditions=[Fit()])
+    newText(parent=page1, name='Box', conditions=[Fit()])
     page1.solve() # Solve the fitting condition.
 
     # Create a new page after the current one
     page2 = page1.next
     page2.padding = PADDING # Set the padding of this page.
     # Make a text box, fitting the page padding on all sides.
-    newTextBox(parent=page2, name='Box', w=(page2.pw-G)/2, fill=0.9,
+    newText(parent=page2, name='Box', w=(page2.pw-G)/2, fill=0.9,
         conditions=[Left2Left(), Top2Top(), Fit2Bottom(), Overflow2Next()],
         nextElement='Box2')
-    newTextBox(parent=page2, name='Box2', w=(page2.pw-G)/2, fill=0.9, firstColumnIndent=30,
+    newText(parent=page2, name='Box2', w=(page2.pw-G)/2, fill=0.9, firstColumnIndent=30,
         conditions=[Right2Right(), Top2Top(), Fit2Bottom()])
 
     # Create the Composer instance that will interpret the galley.

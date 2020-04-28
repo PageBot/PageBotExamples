@@ -75,7 +75,7 @@ textShadow = Shadow(offset=pt(8, -8), blur=pt(16), color=color(spot=300).darker(
 # to fit the padding of the page.
 # Red frame to show position and dimensions of the text box element.
 # Default behavior of the textbox is to align the text at "top of the em-square".
-c1 = newTextBox(t, parent=page, w=500, yAlign=TOP,
+c1 = newText(t, parent=page, w=500, yAlign=TOP,
     showOrigin=True, showBaselineGrid=False, gradient=gradient, 
     textShadow=textShadow, shadow=shadow,
     padding=pt(24), # Padding inside gradient rect

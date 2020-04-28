@@ -12,9 +12,9 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     TextBoxLinesRuns.py
+#     TextLinesRuns.py
 #
-#     If a TextBox as self.nextElement defined as name for another text box on the
+#     If a Text as self.nextElement defined as name for another text box on the
 #     same page, then overflow of self will go into the other text box.
 
 from pagebot.constants import LEFT, BOTTOM
@@ -33,7 +33,7 @@ W = H = 500
 BoxWidth = W - 2 * PagePadding
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
-EXPORT_PATH = '_export/useTextBoxLinesRuns.png'
+EXPORT_PATH = '_export/useTextLinesRuns.png'
 
 def makeDocument():
     """Make a new document."""
@@ -71,7 +71,7 @@ def makeDocument():
                                     font='Verdana',
                                     fontSize=pt(10+n*2)))
 
-    e1 = newTextBox(s, parent=page0, padding=pt(4), x=pt(100),
+    e1 = newText(s, parent=page0, padding=pt(4), x=pt(100),
                     w=BoxWidth, font='Verdana', h=None, mb=20, mr=10,
                     #Conditions make the element move to top-left of the page.
                     # And the condition that there should be no overflow,

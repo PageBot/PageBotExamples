@@ -97,7 +97,7 @@ def testContext(context, path):
     style['font'] = robotoBold
     bs += context.newString(' even more!', style=style)
     context.text(bs, (M, H-2*M))
-    #tb = newTextBox(bs, context=context, x=M, y=H-M, w=W/2, h=300, parent=page, stroke=color(0.3, 0.2, 0.1, 0.5), style=dict(hyphenation=True, language='en', leading=200))
+    #tb = newText(bs, context=context, x=M, y=H-M, w=W/2, h=300, parent=page, stroke=color(0.3, 0.2, 0.1, 0.5), style=dict(hyphenation=True, language='en', leading=200))
 
     style = dict(font=bungee, fontSize=pt(bungeeSize))
     bs = context.newString(txt, style=style)
@@ -120,7 +120,7 @@ def testContext(context, path):
     style = dict(font=bungee, fontSize=pt(bungeeSize), baselineShift=6)
     bs = context.newString(txt, style=style)
 
-    tb = newTextBox(bs, context=context, x=M, y=H-10*M, w=W/2, h=300, parent=page, stroke=color(0.3, 0.2, 0.1, 0.5), style=dict(hyphenation=True, language='en', leading=200))
+    tb = newText(bs, context=context, x=M, y=H-10*M, w=W/2, h=300, parent=page, stroke=color(0.3, 0.2, 0.1, 0.5), style=dict(hyphenation=True, language='en', leading=200))
 
     #for line in tb.textLines:
     #    print(line.string)

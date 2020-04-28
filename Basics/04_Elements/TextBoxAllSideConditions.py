@@ -19,7 +19,7 @@
 # Document is the main instance holding all information about
 # the document togethers (pages, styles, etc.)
 from pagebot.document import Document
-from pagebot.elements import newTextBox
+from pagebot.elements import newText
 from pagebot.toolbox.units import p, pt
 from pagebot.toolbox.color import color, whiteColor, blackColor
 from pagebot.conditions import *
@@ -56,7 +56,7 @@ def makePage(page, data, xAlign, yAlign):
             name = 'Hkpx%d%d' % (ix, iy)
             c = [Shrink2TextBounds()] + list(row)
             bgColor = color(ix/3, 0, iy/3, 0.8)
-            newTextBox(getText(name), conditions=c,
+            newText(getText(name), conditions=c,
                 xAlign=xAlign, yAlign=yAlign,
                 parent=page, fill=bgColor,
                 showOrigin=True)
@@ -98,7 +98,7 @@ for ax in (LEFT, CENTER, RIGHT):
         page = page.next
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
-EXPORT_PATH = '_export/TextBoxALlSidesConditions.pdf'
+EXPORT_PATH = '_export/TextALlSidesConditions.pdf'
 doc.export(EXPORT_PATH)
 
 

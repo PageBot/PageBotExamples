@@ -81,7 +81,7 @@ doc = Document(name='TestBabelString', context=drawBotContext)
 context.readDocument(doc) 
 # Get the first page of the document
 page = doc[1]
-# Get the Sketch textbox that is now on the page as PageBot TextBox element.
+# Get the Sketch textbox that is now on the page as PageBot Text element.
 e = page.elements[0] 
 e.fill = 0.8
 print(e, e.yAlign)

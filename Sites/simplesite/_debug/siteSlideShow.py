@@ -115,7 +115,7 @@ class MenuItem(Element):
 class Logo(Element):
     def __init__(self, **kwargs):
         Element.__init__(self, **kwargs)
-        newTextBox('', parent=self, cssId='Logo')
+        newText('', parent=self, cssId='Logo')
     
     def build(self, view, path, **kwargs):
         pass
@@ -134,7 +134,7 @@ class Logo(Element):
 
 class SlideShow(Element):
     def newSlide(self):
-        return newTextBox('', parent=self)
+        return newText('', parent=self)
 
     def build_html(self, view, path, **kwargs):
         b = self.context.b
@@ -152,7 +152,7 @@ class SlideShow(Element):
 class Hero(Element):
     def __init__(self, **kwargs):
         Element.__init__(self, **kwargs)
-        newTextBox('', parent=self, cssId='HeroIntroduction')
+        newText('', parent=self, cssId='HeroIntroduction')
         SlideShow(parent=self, cssId='HeroSlides')
 
     def build_html(self, view, path, **kwargs):
@@ -182,7 +182,7 @@ class Hero(Element):
 class Content(Element):
     def __init__(self, **kwargs):
         Element.__init__(self, **kwargs)
-        newTextBox('', parent=self, cssId='Content')
+        newText('', parent=self, cssId='Content')
 
     def build_html(self, view, path, **kwargs):
         b = self.context.b
@@ -205,10 +205,10 @@ class Content(Element):
 class ColoredSection(Element):
     def __init__(self, **kwargs):
         Element.__init__(self, **kwargs)
-        newTextBox('', parent=self, cssId='ColoredSectionHeader')
-        newTextBox('', parent=self, cssId='ColoredSection0')
-        newTextBox('', parent=self, cssId='ColoredSection1')
-        newTextBox('', parent=self, cssId='ColoredSection2')
+        newText('', parent=self, cssId='ColoredSectionHeader')
+        newText('', parent=self, cssId='ColoredSection0')
+        newText('', parent=self, cssId='ColoredSection1')
+        newText('', parent=self, cssId='ColoredSection2')
 
     def build_html(self, view, path, **kwargs):
         b = self.context.b
@@ -233,7 +233,7 @@ class ColoredSection(Element):
 class Footer(Element):
     def __init__(self, **kwargs):
         Element.__init__(self, **kwargs)
-        newTextBox('', parent=self, cssId='Footer')
+        newText('', parent=self, cssId='Footer')
 
     def build_html(self, view, path, **kwargs):
         b = self.context.b

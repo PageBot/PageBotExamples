@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     ElasticTextBox.py
+#     ElasticText.py
 #
 
 from pagebot import getContext
@@ -43,7 +43,7 @@ SQUARE = 10 * GUTTER # Size of the squares
 # happens in CSS.
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
-EXPORT_PATH = '_export/UseElasticTextBox.pdf'
+EXPORT_PATH = '_export/UseElasticText.pdf'
 
 def makeDocument():
     """Make a new document."""
@@ -95,14 +95,14 @@ def makeDocument():
         h1 = 100
     else:
         h1 = None
-    e1 = newTextBox(s,
-        name='ElasticTextBox1',
+    e1 = newText(s,
+        name='ElasticText1',
         parent=page, padding=4, x=100, w=min(BoxWidth, page.pw), font='Verdana', h=h1,
         conditions=[Left2Left(), Float2Top()], yAlign=BOTTOM, xAlign=LEFT,
         leading=em(1.4), fontSize=9, textFill=tColor, strokeWidth=pt(0.5), fill=color(0.9), stroke=noColor,
     )
-    e2 = newTextBox(s,
-        name='ElasticTextBox2',
+    e2 = newText(s,
+        name='ElasticText2',
         parent=page, padding=4, x=100, w=min(BoxWidth, page.pw), font='Verdana',
         conditions=[Right2Right(), Float2Top()], yAlign=TOP, leading=em(1.4),
         fontSize=9, textFill=0.9, strokeWidth=0.5, fill=tColor, stroke=noColor,

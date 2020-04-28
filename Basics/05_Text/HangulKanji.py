@@ -34,9 +34,9 @@ fsb = context.newString(s, style=dict(font='Verdana-Bold', fontSize=fontSize))
 fsbRed = context.newString(s, style=dict(font='Verdana', fill=color(1, 0, 0),
     fontSize=fontSize))
 
-newTextBox(fsr, x=100, y=600, w=820, h=300, parent=page)
-newTextBox(fsb, x=100, y=400, w=820, h=300, parent=page)
-newTextBox(fsbRed, x=100, y=200, w=820, h=300, parent=page)
-newTextBox(fsr, x=100, y=0, w=820, h=330, parent=page)
+newText(fsr, x=100, y=600, w=820, h=300, parent=page)
+newText(fsb, x=100, y=400, w=820, h=300, parent=page)
+newText(fsbRed, x=100, y=200, w=820, h=300, parent=page)
+newText(fsr, x=100, y=0, w=820, h=330, parent=page)
 
 doc.export('_export/TestKanjiFormattedString.pdf')

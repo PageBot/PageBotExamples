@@ -24,7 +24,7 @@ from pagebot.toolbox.color import color, noColor
 from pagebot.toolbox.units import em, p, pt, inch, degrees
 from pagebot.conditions import * # Import all conditions for convenience.
 from pagebot.constants import *
-from pagebot.elements import newTextBox
+from pagebot.elements import newText
 from pagebot.elements.pbimage2 import Image
 
 #context = FlatContext()
@@ -70,7 +70,7 @@ imd.ry = 60
 imd.angle = -a
 
 bs = context.newString('Rotating images', style=dict(fontSize=32, textFill=1))
-tb = newTextBox(bs, w=400, parent=im, conditions=(Center2Center(), Middle2Middle()), angle=-a, fill=noColor)
+tb = newText(bs, w=400, parent=im, conditions=(Center2Center(), Middle2Middle()), angle=-a, fill=noColor)
 # Solve the page/element conditions
 doc.solve()
 

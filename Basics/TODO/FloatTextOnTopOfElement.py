@@ -89,7 +89,7 @@ def makeDocument():
                                           xTextAlign=CENTER,
                                           textFill=blackColor))
     # Text falls through the yr2 (with differnt z) and lands on yellowSquare by Float2SideBottom()
-    newTextBox(fs, name='Caption', parent=redContainer, z=8,
+    newText(fs, name='Caption', parent=redContainer, z=8,
                fill=color(0, 1, 0), strokeWidth=0.5, stroke=color(1, 1, 0),
                conditions=[Fit2Width(), Float2SideBottom()], padding=3)
     score = page.solve()

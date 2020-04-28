@@ -59,7 +59,7 @@ page = doc[1]
 # to fit the padding of the page.
 # Red frame to show position and dimensions of the text box element.
 # Default behavior of the textbox is to align the text at "top of the em-square".
-c1 = newTextBox(t, parent=page, w=500, stroke=(1, 0, 0), yAlign=TOP,
+c1 = newText(t, parent=page, w=500, stroke=(1, 0, 0), yAlign=TOP,
     showOrigin=True,
     showBaselineGrid=False, 
     conditions=[Left2Left(), Top2Top(), Fit2Height(), Fit2Width()])

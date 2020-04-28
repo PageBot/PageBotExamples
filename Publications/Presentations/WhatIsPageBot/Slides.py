@@ -117,12 +117,12 @@ for pn, slide in enumerate(CONTENT):
         content = slide.get('content')
         if content is not None:
             bs += context.newString('\n\n'+content, style=contentStyle)
-        newTextBox(bs, name='content', x=M+1.5*P, y=P, w=W-M-4*P, h=H-2*P-T, parent=page)
+        newText(bs, name='content', x=M+1.5*P, y=P, w=W-M-4*P, h=H-2*P-T, parent=page)
        
     content2 = slide.get('content2')
     if content2 is not None:
         bs = context.newString(content2, style=contentStyle)
-        newTextBox(bs, name='content2', x=3*M, y=-7.3*P, w=W-M-4*P, h=H-2*P-T, parent=page)
+        newText(bs, name='content2', x=3*M, y=-7.3*P, w=W-M-4*P, h=H-2*P-T, parent=page)
         
     imageInfo = slide.get('image')
     if imageInfo is not None:
@@ -137,16 +137,16 @@ for pn, slide in enumerate(CONTENT):
     head2 = slide.get('head2')
     if head2 is not None:
         bs = context.newString(head2,style=headStyle)
-        newTextBox(bs, name='content', x=M+1.5*P, y=P, w=W-M-4*P, h=H-2*P-T, parent=page)
+        newText(bs, name='content', x=M+1.5*P, y=P, w=W-M-4*P, h=H-2*P-T, parent=page)
 
     logo = context.newString(LOGO, style=logoStyle)
-    newTextBox(logo, y=H-T, w=M+P, h=T, pt=12, pl=P/2, parent=page)
+    newText(logo, y=H-T, w=M+P, h=T, pt=12, pl=P/2, parent=page)
     
     title = context.newString(TITLE, style=titleStyle)
-    newTextBox(title, y=H-T, w=W-M-2*P, x=M+P, h=T, pt=12, pl=P/2, parent=page)
+    newText(title, y=H-T, w=W-M-2*P, x=M+P, h=T, pt=12, pl=P/2, parent=page)
     
     slideNumber = context.newString('%d/%d' % (pn+1, len(CONTENT)), style=slideNumberStyle)
-    newTextBox(slideNumber, y=H-T, w=150, x=W-P-150, h=T, pt=12, parent=page)
+    newText(slideNumber, y=H-T, w=150, x=W-P-150, h=T, pt=12, parent=page)
     
 
 """

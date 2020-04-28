@@ -58,7 +58,7 @@ page = doc[1]
 # Make text box as child element of the page and set its layout conditions
 # to fit the padding of the page.
 # Text overflows the edge of the text box, but currently we cannot see that.
-tb = newTextBox(t, parent=page, yAlign=TOP, showFrame=True, conditions=[Fit()])
+tb = newText(t, parent=page, yAlign=TOP, showFrame=True, conditions=[Fit()])
 # Solve the page/element conditions
 doc.solve()
 # Export the document to this PDF file.
