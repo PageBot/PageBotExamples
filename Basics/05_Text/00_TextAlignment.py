@@ -34,31 +34,22 @@ from pagebot.toolbox.lorumipsum import lorumipsum
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.fonttoolbox.objects.font import findFont
 
-DO_BLURB = True
+W, H = mm(600, 250) # Customize paper size
 
+FONT_NAME = 'PageBot-Bold'
+#FONT_NAME = 'PageBot-Regular'
+#FONT_NAME = 'PageBot-Book'
+#FONT_NAME = 'PageBot-Light'
+
+LABEL_FONT_NAME = 'PageBot-Regular'
 fontSize = pt(64)
-
-W, H = mm(500, 250) # Customize paper size
-
-padding = mm(60) # Outside measures to accommodate the crop makrs.
-FONT_NAME = 'PageBot-Regular'
-
 textColor = blackColor
 bgColor = color(0.9) # Background color of the text box
-
-if DO_BLURB:
-	# Get a random english article text to show hyphenation
-	b = Blurb()
-	headline = b.getBlurb('news_headline')
-	article = b.getBlurb('article')
-	article += '\n\n' + b.getBlurb('article')
-else:
-	headline = 'Headline of column'
-	article = lorumipsum()
+padding = mm(60) # Outside measures to accommodate alignment of the text boxes
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
-EXPORT_PATH = '_export/00_TextAlignment.pdf'
+EXPORT_PATH = '_export/00_TextAlignment%s.pdf' % FONT_NAME
 print('Generating:', EXPORT_PATH)
 
 # Make a new document with one text box.
@@ -73,11 +64,12 @@ page = doc[1] # Get page on pageNumber, first in row (this is only one now).
 page.padding = padding
 
 XALIGNS = (LEFT, CENTER, RIGHT)
-YALIGNS = (TOP, CAPHEIGHT, XHEIGHT, MIDDLE_CAP, MIDDLE_X, BASELINE, BOTTOM)
+YALIGNS = (TOP, ASCENDER, CAPHEIGHT, XHEIGHT, MIDDLE_CAP, MIDDLE_X, BASELINE, DESCENDER, BOTTOM)
 
 rowCnt = len(XALIGNS)-1
 colCnt = len(YALIGNS)-1
 
+# FIXME: Probably a view problem: why is one of the boxes without frame?
 
 for ix, yAlign in enumerate(YALIGNS): # Flipped, yAligns show horizontal
 
@@ -90,16 +82,18 @@ for ix, yAlign in enumerate(YALIGNS): # Flipped, yAligns show horizontal
 
 		x = padding + ix*page.pw/colCnt
 		y = padding + iy*page.ph/rowCnt
-		newText(bs, parent=page, x=x, y=y,
+		t = newText(bs, parent=page, x=x, y=y,
 			fill=bgColor, # Show background to mark the real position of the box.
 			yAlign=yAlign, # Vertical alignment is part of the Text element box.
 			showOrigin=True)
 		# Ajust the style for label
 		style['fontSize'] = fontSize/8
 		style['textFill'] = color(0.4)
-		y -= bs.th + 4
+		
+		# Position capHeight of the the label on distance bs1.leading from 
+		# the bottom position of element t.
 		bs = context.newString(' %s | %s ' % (xAlign.capitalize(), yAlign.capitalize()), style)
-		newText(bs, parent=page, x=x, y=y, yAlign=TOP, showOrigin=False)
+		newText(bs, parent=page, x=x, y=t.bottom - bs.leading, yAlign=CAPHEIGHT, showOrigin=False)
 
 	if 0 < ix < colCnt:
 		# Show the line for the middle row of texts
@@ -109,5 +103,10 @@ for ix, yAlign in enumerate(YALIGNS): # Flipped, yAligns show horizontal
 # Show the line for the middle row of texts
 newLine(x=padding, y=padding+page.ph/2, w=page.pw, h=0, parent=page,
 	stroke=(0, 0, 0.5), strokeWidth=0.5)
+
+style = dict(font='PageBot-Book', fontSize=fontSize*0.8, leading=em(1), 
+	textFill=textColor, xAlign=LEFT, yAlign=BASELINE) # xAlignment is part of the BabelString.
+newText('PageBot text alignments', style=style, x=padding, y=page.h-padding/2, 
+	w=page.pw, parent=page)
 
 doc.export(EXPORT_PATH)

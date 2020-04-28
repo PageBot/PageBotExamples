@@ -35,26 +35,15 @@ from pagebot.toolbox.lorumipsum import lorumipsum
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.fonttoolbox.objects.font import findFont
 
-DO_BLURB = True
-
 fontSize = pt(24)
 
-W, H = mm(500, 250) # Customize paper size
+W, H = mm(600, 250) # Customize paper size
+
 padding = mm(60) # Outside measures to accommodate the crop makrs.
 FONT_NAME = 'PageBot-Regular'
 
 textColor = blackColor
 bgColor = color(0.9) # Background color of the text box
-
-if DO_BLURB:
-	# Get a random english article text to show hyphenation
-	b = Blurb()
-	headline = b.getBlurb('news_headline')
-	article = b.getBlurb('article')
-	article += '\n\n' + b.getBlurb('article')
-else:
-	headline = 'Headline of column'
-	article = lorumipsum()
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
@@ -73,7 +62,7 @@ page = doc[1] # Get page on pageNumber, first in row (this is only one now).
 page.padding = padding
 
 XALIGNS = (LEFT, CENTER, RIGHT)
-YALIGNS = (TOP, CAPHEIGHT, XHEIGHT, MIDDLE_CAP, MIDDLE_X, BASELINE, BASE_BOTTOM, BOTTOM)
+YALIGNS = (TOP, ASCENDER, CAPHEIGHT, XHEIGHT, MIDDLE_CAP, MIDDLE_X, BASELINE, BASE_BOTTOM, DESCENDER, BOTTOM)
 
 rowCnt = len(XALIGNS)-1
 colCnt = len(YALIGNS)-1
@@ -95,19 +84,23 @@ for ix, yAlign in enumerate(YALIGNS): # Flipped, yAligns show horizontal
 
 		x = padding + ix*page.pw/colCnt
 		y = padding + iy*page.ph/rowCnt
-		newText(bs, parent=page, x=x, y=y, 
+		t = newText(bs, parent=page, x=x, y=y, 
 			stroke=None, fill=bgColor, # Show background to mark the real position of the box.
 			yAlign=yAlign, # Vertical alignment is part of the Text element box.
 			showOrigin=True)
 		# Ajust the style for label
 		style['textFill'] = color(0.4)
 		style['fontSize'] = fontSize/2
-		y -= bs.th + 4
 		bs = context.newString(' %s | %s ' % (xAlign.capitalize(), yAlign.capitalize()), style)
-		newText(bs, parent=page, x=x, y=y, yAlign=TOP, showOrigin=False)
+		newText(bs, parent=page, x=x, y=t.bottom - pt(4) , yAlign=TOP, showOrigin=False)
 
 # Show the line for the middle row of texts
 newLine(x=padding, y=padding+page.ph/2, w=page.pw, h=0, parent=page,
 	stroke=(0, 0, 0.5), strokeWidth=0.5)
+
+style = dict(font='PageBot-Book', fontSize=64*0.8, leading=em(1), 
+	textFill=textColor, xAlign=LEFT, yAlign=BASELINE) # xAlignment is part of the BabelString.
+newText('PageBot text alignments', style=style, x=padding, y=page.h-padding/2, 
+	w=page.pw, parent=page)
 
 doc.export(EXPORT_PATH)

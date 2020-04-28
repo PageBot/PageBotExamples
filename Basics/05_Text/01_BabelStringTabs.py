@@ -14,7 +14,7 @@
 #
 #     00_Text.py
 #
-#	  Create a page in A4 landscape
+#	  Create a page in custom landscape size
 #	  Setup the document view to show registration marks and cropmarks
 #     Show the page frame and padding frame in blue
 #     Show the generated PDF file name on top of the page.
@@ -26,7 +26,7 @@ from pagebot import getContext
 context = getContext('DrawBot')
 #context = getContext('Flat')
 
-from pagebot.constants import A4, CENTER, LEFT, RIGHT
+from pagebot.constants import A4, CENTER, LEFT, RIGHT, TOP
 from pagebot.elements import newText, newLine
 from pagebot.document import Document
 from pagebot.toolbox.color import color
@@ -47,8 +47,7 @@ EXPORT_PATH = '_export/01_BabelStringTabs.pdf'
 
 # Make a new document with one text box.
 
-title = 'Single text box' # As will be shown on the page name info.
-doc = Document(w=W, h=H, title=title, autoPages=1, context=context)
+doc = Document(w=W, h=H, autoPages=1, context=context)
 
 view = doc.view # Get the current view of the document.
 view.padding = padding # Make space to show crop marks, etc.
@@ -63,17 +62,17 @@ TABS = ((pt(100), LEFT), (pt(200), LEFT), (pt(400), CENTER), (pt(600), RIGHT))
 style = dict(font='PageBot-Regular', fontSize=fontSize, textFill=textColor, tabs=TABS)
 bs = context.newString('ABCD\tFirst tab\tSecond tab\tCentered tab\tRight tab\nMore\tMore\tMore\tMore\tMore\n', style)
 x = 100
-newText(bs, parent=page, x=x, y=page.h/2, fill=bgColor, showElementOrigin=True)
+t = newText(bs, parent=page, x=x, y=page.h/2, fill=bgColor, showElementOrigin=True)
 
 #Show vertical lines on the tab positions.
 labelStyle = dict(font='PageBot-Regular', fontSize=pt(12), textFill=0.5)
 label = context.newString('Tab start 0', labelStyle)
-newText(label, x=x+M, y=M, parent=page)
-newLine(x=x, y=0, w=0, h=H, parent=page, stroke=lineColor, strokeWidth=pt(0.5))
+newText(label, x=x+M, y=t.bottom - pt(4), parent=page)
+newLine(x=x, y=0, w=0, h=H, parent=page, stroke=lineColor, strokeWidth=pt(0.3))
 for value, alignment in TABS:
 	# Add a vertical line element, with a label showing the alignment and tab distance.
-	newLine(x=x+value, y=0, w=0, h=H, parent=page, stroke=lineColor, strokeWidth=pt(0.5))
+	newLine(x=x+value, y=0, w=0, h=H, parent=page, stroke=lineColor, strokeWidth=pt(0.3))
 	label = context.newString('Tab %s %s' % (alignment, value), labelStyle)
-	newText(label, x=x+M+value, y=M, parent=page)
+	newText(label, x=x+M+value, y=t.bottom - pt(4), parent=page, yAlign=TOP)
 
 doc.export(EXPORT_PATH)
