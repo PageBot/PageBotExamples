@@ -65,14 +65,14 @@ page.padding = padding
 # width xAlign and xTextAlign a equivalent.
 # yAlign is positioning on middle of the capHeight
 style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02), 
-	leading=em(0.8), textFill=textColor, yAlign=MIDDLE_CAP)
+	textFill=textColor, yAlign=MIDDLE_CAP)
 bs = context.newString('A4', style)
 print('Text align:', bs.xAlign)
 print('Rendered text size:', bs.tw, bs.th)
 print('Lines:', bs.lines)
 
 t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, 
-	xTextAlign=CENTER, xAlign=CENTER, showOrigin=True)
+	xTextAlign=CENTER, showOrigin=True)
 print(t.bs.xAlign)
 print('Text element size:', t.w, t.h)
 print('Text in box size:', t.bs.tw, t.bs.th)
