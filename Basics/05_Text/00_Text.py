@@ -65,18 +65,21 @@ page.padding = padding
 # width xAlign and xTextAlign a equivalent.
 # yAlign is positioning on middle of the capHeight
 style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02), 
-	leading=em(0.8), textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP)
-bs = context.newString('A4\nAA\nBB', style)
+	leading=em(0.8), textFill=textColor, yAlign=MIDDLE_CAP)
+bs = context.newString('A4', style)
 print('Text align:', bs.xAlign)
 print('Rendered text size:', bs.tw, bs.th)
 print('Lines:', bs.lines)
 
-t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True)
+t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, 
+	xTextAlign=CENTER, xAlign=CENTER, showOrigin=True)
 print(t.bs.xAlign)
 print('Text element size:', t.w, t.h)
 print('Text in box size:', t.bs.tw, t.bs.th)
 
-newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.7), strokeWidth=0.5)
+# Horizontal and vertial lines, to show text position,
+newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.8), strokeWidth=0.5)
+newLine(parent=page, x=page.w/2, y=0, w=0, h=page.h, stroke=(0, 0, 0.8), strokeWidth=0.5)
 
 print(bs.lines)
 # Export the document as PDF

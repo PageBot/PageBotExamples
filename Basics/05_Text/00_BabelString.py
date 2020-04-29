@@ -14,6 +14,8 @@
 #
 #     00_BabelString.py
 #
+#     For demo, run this in DrawBot, with PageBot installed.
+#
 #     Some examples showing the working of BabelString with context
 #     without the making of Document and Text elements.
 #
