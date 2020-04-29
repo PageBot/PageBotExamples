@@ -59,12 +59,14 @@ view.showNameInfo = True # Showing page info and title on top of the page.
 page = doc[1] # Get page on pageNumber, first in row (this is only one now).
 page.padding = padding
 
-style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02), leading=em(1), textFill=textColor, xAlign=CENTER)
+style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02), leading=em(1), 
+	textFill=textColor, xAlign=CENTER, fill=bgColor, showOrigin=True, yAlign=XHEIGHT)
 bs = context.newString('Hkpx', style)
 print(bs.lines)
-print('Hkpx text size:', bs.textSize)
-t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, yAlign=MIDDLE_X)
+t = newText('Hkpx', parent=page, x=page.w/2, y=page.h/2, style=style)
+print('Hkpx text size:', t.bs.textSize)
 print('Text in box size:', t.w, t.h)
+print(t.bs.xAlign)
 
 # Horizontal guides
 newLine(x=0, y=t.y, w=page.w, h=0, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
@@ -75,7 +77,5 @@ newLine(x=0, y=t.top, w=page.w, h=0, stroke=(0, 0, 0.7), strokeWidth=sw, parent=
 newLine(x=t.left, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
 newLine(x=t.center, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
 newLine(x=t.right, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
-
-newRect(x=0, y=0, w=100, h=100, parent=page, fill=(1, 0, 0))
 
 doc.export(EXPORT_PATH)

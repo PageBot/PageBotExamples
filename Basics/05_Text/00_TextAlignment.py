@@ -86,7 +86,7 @@ for ix, yAlign in enumerate(YALIGNS): # Flipped, yAligns show horizontal
 		t = newText(bs, parent=page, x=x, y=y,
 			fill=bgColor, # Show background to mark the real position of the box.
 			yAlign=yAlign, # Vertical alignment is part of the Text element box.
-			showOrigin=True, shadow=shadow, stroke=noColor)
+			showOrigin=True, shadow=shadow, stroke=None, strokeWidth=5)
 		# Ajust the style for label
 		style['font'] = LABEL_FONT_NAME
 		style['fontSize'] = fontSize/8
@@ -104,12 +104,12 @@ for ix, yAlign in enumerate(YALIGNS): # Flipped, yAligns show horizontal
 		newLine(x=padding + ix*page.pw/colCnt, y=padding, w=0, h=page.ph, parent=page,
 			stroke=(0, 0, 0.5), strokeWidth=0.5)
 
-# Show the line for the middle row of texts
+# Show the line for the middle row of texts, where vertical alignments is.
 newLine(x=padding, y=padding+page.ph/2, w=page.pw, h=0, parent=page,
 	stroke=(0, 0, 0.5), strokeWidth=0.5)
 
 style = dict(font=LABEL_FONT_NAME, fontSize=fontSize*0.8, leading=em(1), 
-	textFill=textColor, xAlign=LEFT, yAlign=BASELINE) # xAlignment is part of the BabelString.
+	textFill=textColor, xAlign=LEFT, yAlign=BASELINE) # xAlign is part of the BabelString.
 newText('PageBot text alignments', style=style, x=padding, y=page.h-padding/2, 
 	w=page.pw, parent=page)
 
