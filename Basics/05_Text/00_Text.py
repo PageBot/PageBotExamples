@@ -32,6 +32,7 @@ from pagebot.document import Document
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 
+FONT_NAME = 'PageBot-Regular'
 fontSize = pt(300)
 H, W = A4 # Standard portrait, swapped to be used as landscape ratio.
 padding = pt(40) # Outside measures to accommodate the crop makrs.
@@ -60,10 +61,10 @@ page = doc[1] # Get page on pageNumber, first in row (this is only one now).
 page.padding = padding
 
 # Create a style dictionary and a BabelString with that style.
-# xAlign is centered on the (x, y) position for strings without width
+# xAlign is centered on the (x, y) position for strings without width.
 # yAlign is on middle of the capHeight
-style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=-em(0.02), 
-	leading=em(1), textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP)
+style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02), 
+	leading=em(1), textFill=textColor, xAlign=CENTER, yAlign=MIDDLE_CAP)
 bs = context.newString('A4', style)
 print('Rendered text size:', bs.tw, bs.th)
 print('Lines:', bs.lines)
