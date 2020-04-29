@@ -1,5 +1,5 @@
 # 
-#    Show the DrawBot relation bestween baseline of text() and textbox()
+#    Show the DrawBot relation bestween baseline of text() and text()
 #
 size(200, 200)
 fontSize(17)

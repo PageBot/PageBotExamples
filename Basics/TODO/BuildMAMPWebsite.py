@@ -57,7 +57,7 @@ def makeDocument():
     rs['fontSize'] = 14
     rs['textFill'] = 1
 
-    #textBoxStyle = doc.addStyle('textbox', dict(fill=color(0, 0, 0, 0.7),
+    #textBoxStyle = doc.addStyle('text', dict(fill=color(0, 0, 0, 0.7),
     #                                            padding=40))
     pStyle = doc.addStyle('p', dict(textFill=blackColor))
     h1Style = doc.addStyle('h1', dict(fontSize=24, textFill=(0, 0, 1)))

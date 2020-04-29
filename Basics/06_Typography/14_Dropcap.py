@@ -15,7 +15,7 @@
 #     Draw one column that fills the entire usable space of the page,
 #     add a positioned element, containing a dropcap and fill the rest
 #     of the column as path, constructed from the position of the
-#     child elements in the textbox element.
+#     child elements in the text element.
 #     The usable area of the page is defined by the remainder of page.padding.
 #
 #     TODO: This example needs to be more generalized, hiding most of the code.
@@ -74,7 +74,7 @@ dropCapPathFrame.rect(0, 0, maxX+PADDING, maxY+PADDING)
 dropCapPathFrame.moveBy((0, page.ph - dch - PADDING))
 
 # Create another path with the size and position of the dropcap reserved space.
-# Normally this would come from the position of a child element inside the main textbox.
+# Normally this would come from the position of a child element inside the main text.
 # Note that the core context.newPath() answers a DrawBot.BezierPath, which is contained
 # by a PageBothPath() instance.
 textFramePath = PageBotPath(context=context)
