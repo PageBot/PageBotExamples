@@ -19,7 +19,7 @@
 #     Show the page frame and padding frame in blue
 #     Show the generated PDF file name on top of the page.
 #	  Show red “A4” centered on the page as Text element, 
-#     with its baseline on the middle of page height
+#     with its middle capHeight on the middle of page height
 #     Draw the background of the Text element in light gray
 #
 from pagebot import getContext
@@ -47,8 +47,7 @@ print('Generating:', EXPORT_PATH)
 
 # Make a new document with one text box.
 
-title = 'Single text box' # As will be shown on the page name info.
-doc = Document(w=W, h=H, title=title, autoPages=1, context=context)
+doc = Document(w=W, h=H, title=EXPORT_PATH, autoPages=1, context=context)
 
 view = doc.view # Get the current view of the document.
 view.padding = padding # Make space to show crop marks, etc.
@@ -60,12 +59,18 @@ view.showNameInfo = True # Showing page info and title on top of the page.
 page = doc[1] # Get page on pageNumber, first in row (this is only one now).
 page.padding = padding
 
+# Create a style dictionary and a BabelString with that style.
+# xAlign is centered on the (x, y) position for strings without width
+# yAlign is on middle of the capHeight
 style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=-em(0.02), 
-	leading=em(1), textFill=textColor, xAlign=CENTER)
+	leading=em(1), textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP)
 bs = context.newString('A4', style)
 print('Rendered text size:', bs.tw, bs.th)
 print('Lines:', bs.lines)
-t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, yAlign=BASELINE)
+
+# For Text elements, where width is not defined, xAlign and xTextAlign behave identical.
+# For Text elements, yAlign and yTextAlign are always identical.
+t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True)
 print('Text element size:', t.w, t.h)
 print('Text in box size:', t.bs.tw, t.bs.th)
 

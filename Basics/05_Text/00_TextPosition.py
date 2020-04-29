@@ -32,6 +32,7 @@ from pagebot.document import Document
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 
+FONT_NAME = 'PageBot-Regular'
 fontSize = pt(300)
 H, W = A4 # Standard portrait, swapped to be used as landscape ratio.
 padding = pt(40) # Outside measures to accommodate the crop makrs.
@@ -47,7 +48,7 @@ EXPORT_PATH = '_export/00_TextPosition.pdf'
 # Make a new document with one text box.
 
 title = 'Single text box' # As will be shown on the page name info.
-doc = Document(w=W, h=H, title=title, autoPages=1, context=context)
+doc = Document(w=W, h=H, title=EXPORT_PATH, autoPages=1, context=context)
 
 view = doc.view # Get the current view of the document.
 view.padding = padding # Make space to show crop marks, etc.
@@ -59,11 +60,13 @@ view.showNameInfo = True # Showing page info and title on top of the page.
 page = doc[1] # Get page on pageNumber, first in row (this is only one now).
 page.padding = padding
 
-style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=-em(0.02), leading=em(1), textFill=textColor, xAlign=CENTER)
+style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02), 
+	leading=em(1), textFill=textColor, xAlign=CENTER)
 bs = context.newString('Hkpx', style)
 print('BabelString lines:', bs.lines)
 print('A4 text size:', bs.textSize)
-t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, yAlign=MIDDLE_X)
+t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, 
+	yAlign=MIDDLE_X)
 print('Text in box size:', t.w, t.h)
 
 # Horizontal guides
