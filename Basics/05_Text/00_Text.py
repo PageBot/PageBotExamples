@@ -61,19 +61,22 @@ page = doc[1] # Get page on pageNumber, first in row (this is only one now).
 page.padding = padding
 
 # Create a style dictionary and a BabelString with that style.
-# xAlign is centered on the (x, y) position for strings without width.
-# yAlign is on middle of the capHeight
+# xAlign is centered on the (x, y) position. For strings without defined 
+# width xAlign and xTextAlign a equivalent.
+# yAlign is positioning on middle of the capHeight
 style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02), 
-	leading=em(1), textFill=textColor, xAlign=CENTER, yAlign=MIDDLE_CAP)
-bs = context.newString('A4', style)
+	leading=em(0.8), textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP)
+bs = context.newString('A4\nAA\nBB', style)
+print('Text align:', bs.xAlign)
 print('Rendered text size:', bs.tw, bs.th)
 print('Lines:', bs.lines)
 
-# For Text elements, where width is not defined, xAlign and xTextAlign behave identical.
-# For Text elements, yAlign and yTextAlign are always identical.
 t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True)
+print(t.bs.xAlign)
 print('Text element size:', t.w, t.h)
 print('Text in box size:', t.bs.tw, t.bs.th)
+
+newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.7), strokeWidth=0.5)
 
 print(bs.lines)
 # Export the document as PDF
