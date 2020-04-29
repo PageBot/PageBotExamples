@@ -65,9 +65,6 @@ article = b.getBlurb('article') + '\n' + b.getBlurb('article')
 page = doc[1] # Get page on pageNumber, first in row (this is only one now).
 page.padding = padding
 
-# Make styles for the side labels;
-labelStyle = dict(font='PageBot-Regular', fontSize=pt(8), tracking=em(0.02), textFill=0.7)
-
 # Style, BabelString and left text box
 style = dict(font='PageBot-Regular', tracking=em(0.02), fontSize=fontSize, 
 	hyphenation=True, language='en', leading=em(1.4))
@@ -79,15 +76,17 @@ t = newText(article, style=style, parent=page, x=padding, y=padding+page.ph,
 lines = t.bs.lines
 
 for lineIndex, line in enumerate(lines):
-	print('===', lineIndex, line.x, line.y)
 	# Labels with line index on left side
+	# Make styles for the side labels;
+	labelStyle = dict(font='PageBot-Regular', fontSize=pt(8), tracking=em(0.02), textFill=0.7)
 	label = context.newString(str(len(lines)-lineIndex-1), labelStyle)
-	newText(label, x=padding+line.x-M, y=padding+line.y+pt(2), parent=page)
+	newText(label, x=padding+line.x-M, y=padding+line.y+pt(3), w=M, parent=page, yAlign=BASELINE)
 	newLine(x=padding+line.x-M, y=padding+line.y, w=M, h=0, parent=page, stroke=0.5, fill=None, strokeWidth=0.5)
 	
 	# Labels with line index on right side
+	labelStyle = dict(font='PageBot-Regular', fontSize=pt(8), tracking=em(0.02), textFill=0.7, xAlign=RIGHT)
 	label = context.newString(str(len(lines)-lineIndex-1), labelStyle)
-	newText(label, x=padding+line.x+page.pw, y=padding+line.y+pt(2), parent=page)
+	newText(label, x=padding+line.x+page.pw, y=padding+line.y+pt(3), w=M, parent=page, yAlign=BASELINE)
 	newLine(x=padding+line.x+page.pw, y=padding+line.y, w=M, h=0, parent=page, stroke=0.5, fill=None, strokeWidth=0.5)
 
 # Export the page to PDF
