@@ -74,7 +74,7 @@ textShadow = Shadow(offset=pt(8, -8), blur=pt(16), color=color(spot=300).darker(
 # Make text box as child element of the page and set its layout conditions
 # to fit the padding of the page.
 # Red frame to show position and dimensions of the text box element.
-# Default behavior of the textbox is to align the text at "top of the em-square".
+# Default behavior of the text is to align the text at "top of the em-square".
 c1 = newText(t, parent=page, w=500, yAlign=TOP,
     showOrigin=True, showBaselineGrid=False, gradient=gradient, 
     textShadow=textShadow, shadow=shadow,

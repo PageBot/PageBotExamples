@@ -62,7 +62,7 @@ tb = newText(text * 5, parent=page, stroke=0.5, strokeWidth=0.5,
 # Make the text box fit to the page padding, solving position and size.
 doc.solve()
 
-# Adjust vertical position of the fitting textbox, so that textLines[4]
+# Adjust vertical position of the fitting text, so that textLines[4]
 # locks on page baseline.
 lineIndex = 4
 print(tb.x, tb.y, tb.baselineShift(lineIndex))

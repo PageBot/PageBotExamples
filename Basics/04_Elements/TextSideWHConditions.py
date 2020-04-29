@@ -14,7 +14,7 @@
 #
 #     TextSideWHConditions.py
 #
-#     Position fixed size textbox elements by their page side with conditions
+#     Position fixed size text elements by their page side with conditions
 #
 # Document is the main instance holding all information about
 # the document togethers (pages, styles, etc.)
@@ -38,15 +38,15 @@ page.showPadding = True
 font = findFont('PageBot Regular')
 
 t = doc.context.newString('TEXT', style=dict(font=font, fontSize=36, textFill=whiteColor, xTextAlign=CENTER))
-newText(t, parent=page, fill=color('red'), conditions=[Left2Left(), Bottom2Bottom()])
-newText(t, parent=page, fill=color('green'), conditions=[Center2Center(), Top2Top()])
-newText(t, parent=page, fill=color('blue'), conditions=[Right2Right(), Top2Top()])
-e1 = newText(t, parent=page, fill=color('orange'), conditions=[Left2Left(), Middle2Middle()])
-newText(t, parent=page, fill=color('yellow').darker(0.8), conditions=[Left2Left(), Top2Top()])
-newText(t, parent=page, fill=color('purple'), conditions=[Bottom2Bottom(), Right2Right()])
-e3 = newText(t, parent=page, fill=color('violet'), conditions=[Right2Right(), Middle2Middle()])
-newText(t, parent=page, fill=color('cyan').darker(0.8), conditions=[Center2Center(), Bottom2Bottom()])
-e2 = newText(t, parent=page, fill=color('black'), conditions=[Center2Center(), Middle2Middle()])
+newText(t, parent=page, w=w, h=w, fill=color('red'), conditions=[Left2Left(), Bottom2Bottom()])
+newText(t, parent=page, w=w, h=w, fill=color('green'), conditions=[Center2Center(), Top2Top()])
+newText(t, parent=page, w=w, h=w, fill=color('blue'), conditions=[Right2Right(), Top2Top()])
+newText(t, parent=page, w=w, h=w, fill=color('orange'), conditions=[Left2Left(), Middle2Middle()])
+newText(t, parent=page, w=w, h=w, fill=color('yellow').darker(0.8), conditions=[Left2Left(), Top2Top()])
+newText(t, parent=page, w=w, h=w, fill=color('purple'), conditions=[Bottom2Bottom(), Right2Right()])
+newText(t, parent=page, w=w, h=w, fill=color('violet'), conditions=[Middle2Middle(), Right2Right()])
+newText(t, parent=page, w=w, h=w, fill=color('cyan').darker(0.8), conditions=[Center2Center(), Bottom2Bottom()])
+newText(t, parent=page, w=w, h=w, fill=color('black'), conditions=[Center2Center(), Middle2Middle()])
 
 page.solve()
 

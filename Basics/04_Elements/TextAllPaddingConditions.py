@@ -14,7 +14,7 @@
 #
 #     TextAllPaddingConditions.py
 #
-#     Position fixed size textbox elements by their page side with conditions
+#     Position fixed size text elements by their page side with conditions
 #
 # Document is the main instance holding all information about
 # the document togethers (pages, styles, etc.)

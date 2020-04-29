@@ -11,9 +11,9 @@
 #     Supporting DrawBot, www.drawbot.com
 # -----------------------------------------------------------------------------
 #
-#     Textes.py
+#     Texts.py
 #
-#     Tests pagebot text boxes.
+#     Tests pagebot texts.
 
 from pagebot import getContext
 from pagebot.document import Document

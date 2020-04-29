@@ -73,8 +73,8 @@ for ix in range(4): # Horizontal index for x-position
             showOrigin=True, # Show origin cross-hair at top-left of un-rotate text box.
             # Set the baseline flag. Note that the baseline and index rotate nicely.
             showBaselineGrid=(BASE_LINE, BASE_INDEX_RIGHT)) # Overwrite the view setting.
-        t = '' # Just text in the first textbox, to it will flow into the others.
-        n += 1 # Next counter that controls the textbox name and rotation angle.
+        t = '' # Just text in the first text, to it will flow into the others.
+        n += 1 # Next counter that controls the text name and rotation angle.
 doc.solve() # Solve the overflowing conditions.
 
 # Export the document to this PDF file.

@@ -67,7 +67,7 @@ page = doc[1]
 # Make text box as child element of the page and set its layout conditions
 # to fit the padding of the page.
 # Red frame to show position and dimensions of the text box element.
-# Default behavior of the textbox is to align the text at "top of the em-square".
+# Default behavior of the text is to align the text at "top of the em-square".
 t = context.newString('Hkpx0\n', style=style)
 t += context.newString('Move baseline to top', style=captionStyle)
 c0 = newText(t, parent=page, w=CW, stroke=(1, 0, 0),
