@@ -88,9 +88,11 @@ style = dict(font=FONT_NAME, fontSize=fontSize, leading=em(1.2),
 	textFill=textColor, xAlign=LEFT, hyphenation=True)
 bs += context.newString(article, style, w=page.pw)
 
-t = newText(bs, parent=page, x=padding, y=page.ph + padding, w=page.pw, h=page.ph,
+t = newText(bs, parent=page, conditions=[Fit()],
 	fill=bgColor, # Show background to mark the real position of the box.
 	xAlign=LEFT, yAlign=BASELINE, # Vertical align on largest capheight of top line.
 	showOrigin=True)
+
+doc.solve()
 
 doc.export(EXPORT_PATH)

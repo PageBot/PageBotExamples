@@ -59,10 +59,12 @@ view.showNameInfo = True # Showing page info and title on top of the page.
 page = doc[1] # Get page on pageNumber, first in row (this is only one now).
 page.padding = padding
 
-style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=-em(0.02), leading=em(1), textFill=textColor, xAlign=CENTER)
+style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=-em(0.02), 
+	leading=em(1), textFill=textColor, xTextAlign=CENTER)
 bs = context.newString('A1', style)
 print('A1 text size:', bs.textSize)
-t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, yAlign=BASELINE)
+t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, 
+	xAlign=CENTER, yAlign=BASELINE)
 print('Text in box size:', t.w, t.h)
 
 doc.export(EXPORT_PATH)

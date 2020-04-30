@@ -110,7 +110,7 @@ newLine(x=padding, y=padding+page.ph/2, w=page.pw, h=0, parent=page,
 
 style = dict(font=LABEL_FONT_NAME, fontSize=fontSize*0.8, leading=em(1), 
 	textFill=textColor, xAlign=LEFT, yAlign=BASELINE) # xAlign is part of the BabelString.
-newText('PageBot text alignments', style=style, x=padding, y=page.h-padding/2, 
-	w=page.pw, parent=page)
+newText('PageBot text alignments', style=style, x=padding*2, y=page.h-padding/2, 
+	parent=page, showOrigin=True)
 
 doc.export(EXPORT_PATH)
