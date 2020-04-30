@@ -39,12 +39,14 @@ doc.view.showPadding = True
 page = doc[1]
 page.padding = padding
 
-fsr = context.newString(s, style=dict(font=FONT_NAME, fontSize=fontSize))
-fsb = context.newString(s, style=dict(font=BOLD_NAME, fontSize=fontSize))
+fsr = context.newString(s, style=dict(font=FONT_NAME, fontSize=fontSize,
+	xTextAlign=CENTER))
+fsb = context.newString(s, style=dict(font=BOLD_NAME, fontSize=fontSize, 
+	xTextAlign=CENTER))
 fsrRed = context.newString(s, style=dict(font=FONT_NAME, textFill=color(1, 0, 0),
-    fontSize=fontSize))
+    fontSize=fontSize, xTextAlign=CENTER))
 fsrWhite = context.newString(s, style=dict(font=FONT_NAME, textFill=1,
-    fontSize=fontSize))
+    fontSize=fontSize, xTextAlign=CENTER))
 
 # All Text elements fit to width of the page, and then float to top,
 # until they hit the bottom margin (e.bm) of the Text element above.
@@ -53,11 +55,11 @@ conditions = [Fit2Width(), Float2Top()]
 newText(fsr, conditions=conditions, parent=page, mb=gutter)
 newText(fsb, conditions=conditions, parent=page, mb=gutter)
 # Text in red
-newText(fsrRed, conditions=conditions, parent=page, mb=gutter)
-# Text is dia-positive
-newText(fsrWhite, conditions=conditions, parent=page,
-	textFill=1, fill=0.2, mb=gutter/2)
-newLine(h=0, conditions=conditions, stroke=(1, 0, 0), strokeWidth=4, parent=page, mb=gutter/2)
+newText(fsrRed, conditions=conditions, parent=page, mb=gutter/2)
+# Text is white on black background
+newText(fsrWhite, conditions=conditions, parent=page, padding=pt(20, 40, 10, 40),
+	textFill=1, fill=0.2, mb=2.5*gutter, showPadding=True)
+# Text is white on red background
 newText(fsrWhite, conditions=conditions, parent=page, xTextAlign=LEFT, yAlign=BASELINE,
 	padding=pt(20), showMargin=True, showPadding=True, 
 	textFill=1, fill=(1, 0, 0))

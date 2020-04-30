@@ -62,7 +62,7 @@ page.padding = padding
 
 style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02), leading=em(1), 
 	textFill=textColor, xAlign=CENTER, fill=bgColor, showOrigin=True, yAlign=XHEIGHT)
-t = newText('Hkpxin', parent=page, x=page.w/2, y=page.h/2, style=style, margin=M,
+t = newText('Hkpx', parent=page, x=page.w/2, y=page.h/2, style=style, margin=M,
 	showMargin=True, showPadding=True)
 # In Text mode (no width defined), adding padding will increase width
 # FIXME: Something wrong here still: Maximum indent of FormattedString is 20 and -20
