@@ -20,7 +20,7 @@ from pagebot.elements import *
 from pagebot.conditions import *
 from pagebot.toolbox.units import pt
 from pagebot.toolbox.color import color
-from pagebot.constants import TOP, CENTER, MIDDLE, LEFT
+from pagebot.constants import TOP, CENTER, MIDDLE, LEFT, BASELINE
 
 context = getContext('DrawBot')
 fontSize = pt(26)
@@ -56,11 +56,11 @@ newText(fsb, conditions=conditions, parent=page, mb=gutter)
 newText(fsrRed, conditions=conditions, parent=page, mb=gutter)
 # Text is dia-positive
 newText(fsrWhite, conditions=conditions, parent=page,
-	textFill=1, fill=0.2, mb=gutter)
+	textFill=1, fill=0.2, mb=gutter/2)
 newLine(h=0, conditions=conditions, stroke=(1, 0, 0), strokeWidth=4, parent=page, mb=gutter/2)
-newText(fsrWhite, conditions=conditions, parent=page, xTextAlign=LEFT, yAlign=MIDDLE,
-	padding=pt(10), showMargin=True, showPadding=True,
-	textFill=1, fill=0.2)
+newText(fsrWhite, conditions=conditions, parent=page, xTextAlign=LEFT, yAlign=BASELINE,
+	padding=pt(30), showMargin=True, showPadding=True, 
+	textFill=1, fill=(1, 0, 0))
 
 doc.solve()
 
