@@ -35,7 +35,7 @@ G = pt(12)
 MARKDOWN_PATH = 'EmbeddedPython.md'
 
 pdfContext = getContext('DrawBot')
-htmlContext = getContext('HTML')
+htmlContext = getContext('Html')
 
 styles = dict(
     h1=dict(textFill=color('red'), fontSize=pt(24), leading=em(1.4), firstTagIndent=pt(0),

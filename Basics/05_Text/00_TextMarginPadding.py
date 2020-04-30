@@ -68,7 +68,7 @@ t = newText('Hkpxin', parent=page, x=page.w/2, y=page.h/2, style=style, margin=M
 # FIXME: Something wrong here still: Maximum indent of FormattedString is 20 and -20
 # And it does not work yet in case width is fixed.
 # https://developer.apple.com/documentation/uikit/nsparagraphstyle/1525556-tailindent
-t.padding = pt(0, 20) 
+t.padding = pt(0, 30) 
 
 print('Text/BabelString indent:', t.bs.indent, t.bs.tailIndent)
 print('Hkpx text size:', t.bs.textSize)
