@@ -59,7 +59,7 @@ newText(fsrWhite, conditions=conditions, parent=page,
 	textFill=1, fill=0.2, mb=gutter/2)
 newLine(h=0, conditions=conditions, stroke=(1, 0, 0), strokeWidth=4, parent=page, mb=gutter/2)
 newText(fsrWhite, conditions=conditions, parent=page, xTextAlign=LEFT, yAlign=BASELINE,
-	padding=pt(30), showMargin=True, showPadding=True, 
+	padding=pt(20), showMargin=True, showPadding=True, 
 	textFill=1, fill=(1, 0, 0))
 
 doc.solve()
