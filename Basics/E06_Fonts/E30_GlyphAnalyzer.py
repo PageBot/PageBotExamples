@@ -10,10 +10,15 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     UseGlyphAnalyzer.py
+#     E30_GlyphAnalyzer.py
 #
 #     Implements a PageBot font classes to get info from a TTFont.
 #     Show the values that the GlyphAnalyzer get derive from font and glyph outline.
+#
+#	  The GlyphAnalyzer tries to collect structure from a glyph, that it not
+#     readily available in the font.info, such as stem widths, bars and diagonals.
+#     The analyzer can be compared with “auto-hinters” that try to figure out
+#     the same kind of information from an outline.
 #   
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot import getContext

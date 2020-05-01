@@ -58,4 +58,4 @@ for metric in (0, font.getDescender(), font.getAscender(), font.getXHeight(), fo
     # Context drawing functions expect measures to be Unit instances.
     newLine(x=x, y=y+metric*ratio, w=tw, h=0, parent=page, strokeColor=strokeColor)
 
-doc.export('_export/UseFontMetric.pdf')
+doc.export('_export/E00_FontMetric.pdf')

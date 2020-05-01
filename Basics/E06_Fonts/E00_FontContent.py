@@ -16,8 +16,8 @@
 #     and generate a simple 1000 x 1000 PDF, showing part of the glyph set.
 #     This is the simple demo version of the FontSpecimen.py that will generate 
 #     a full specimen of the font.
+#     It does not use Document and Element, directly drawing on the context.
 #
-import pagebot
 from pagebot import getContext
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.color import color, noColor
@@ -25,19 +25,19 @@ from pagebot.toolbox.units import pt
 
 c = getContext()
 
-EXPORT_PATH = '_export/FontContent.pdf'
+EXPORT_PATH = '_export/E00_FontContent.pdf'
 
 L = 50
 W = H = 1000
 GX = GY = 11
 M = 50
 
-FONTNAME = 'Amstelvar-Roman-VF'
+FONT_NAME = 'Amstelvar-Roman-VF'
 
-f = findFont(FONTNAME) # Get PageBot Font instance of Variable font.
+f = findFont(FONT_NAME) # Get PageBot Font instance of Variable font.
 
 if f is None:
-    print('%s cannot be found' % FONTNAME)
+    print('%s cannot be found' % FONT_NAME)
 else:
     # Names and text fields
     print('-- Names', '-'*L)
@@ -76,8 +76,8 @@ else:
     print('-- GSUB', '-'*L)
     print('gsubFeatures:', f.info.gsubFeatures)
     # Glyph content of the font
-    print('-- Glyhps', '-'*L)
-    print('Char set:', f.info.charSet)
+    print('-- Glyhps sorted by name', '-'*L)
+    #print('Char set:', f.info.charSet)
     print('Glyph set:', f.info.glyphSet)
 
     glyphIndex = 1
@@ -86,7 +86,7 @@ else:
         for xIndex in range(GX):
             # Offset of drawing origin
             if glyphIndex > len(f.info.glyphSet):
-                break
+                break # Just do one page for sample demo.
             c.save()
             c.translate(M+(W-2*M)/GX*xIndex, H-M-(H-2*M)/GY*(yIndex+1))
             g = f[f.info.glyphSet[glyphIndex-1]]

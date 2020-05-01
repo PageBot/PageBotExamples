@@ -32,7 +32,7 @@ from pagebot.document import Document
 from pagebot.toolbox.color import color, noColor, blackColor
 from pagebot.toolbox.units import pt
 
-context = getContext()
+context = getContext('DrawBot')
 
 PAGE_PADDING = 32
 W, H = A4
@@ -73,7 +73,7 @@ fontPath = getTestFontsPath() + '/djr/bungee/Bungee-Regular.ttf'
 font = getFont(fontPath)
 glyphName = 'e'#'cid05405.1'
 
-doc = Document(w=W, h=H, autoPages=1)
+doc = Document(w=W, h=H, autoPages=1, context=context)
 
 view = doc.getView()
 view.padding = 40 # Aboid showing of crop marks, etc.
