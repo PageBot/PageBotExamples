@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     00_BabelString.py
+#     E00_BabelString.py
 #
 #     For demo, run this in DrawBot, with PageBot installed.
 #

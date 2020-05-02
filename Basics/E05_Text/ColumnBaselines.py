@@ -14,9 +14,10 @@
 #
 #     TextBaselines.py
 #
-#     Show how alignment of baselines work for
+#     Show how alignment of baselines work for 
 
 from pagebot.document import Document
+from pagebot.contexts import getContext
 from pagebot.constants import *
 from pagebot.toolbox.units import p, pt, em, upt
 from pagebot.toolbox.color import color, noColor
@@ -24,6 +25,8 @@ from pagebot.typesetter import Typesetter
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.conditions import *
 from pagebot.elements import *
+
+context = getContext('DrawBot')
 
 COLS = 3 # Number of columns
 LINES_PER_ROW = 7
@@ -53,7 +56,7 @@ fontItalic = findFont('Roboto-Italic')
 fontBold = findFont('Roboto-Bold')
 
 # TODO: Needs some extra debugging for tab-indent relation
-tabs = (INDENT, INDENT+0.5, 100, 150, 200)
+tabs = ((INDENT, LEFT), (INDENT+0.5, LEFT), (100, LEFT), (150, LEFT), (200, LEFT))
 
 # Create styles for the Markdown tags that we use in the example text
 titleStyle = dict(font=fontBold, fontSize=220, textFill=1, textStroke=color(1, 0, 0), textStrokeWidth=pt(3))
@@ -76,7 +79,7 @@ styles = dict(root=pStyle,
 
 # Create a document with these attributes, single page.
 doc = Document(w=W, h=H, padding=PADDING, gridX=GRIDX, gridY=GRIDY, styles=styles,
-    baselineGrid=LEADING, language=LANGUAGE_EN)
+    baselineGrid=LEADING, language=LANGUAGE_EN, context=context)
 
 view = doc.view
 view.showTextY = True
@@ -146,7 +149,7 @@ page.baselineGridStart = page.pt
 page.showBaselineGrid = [BASE_LINE_BG, BASE_INDEX_LEFT]
 page.baselineColor = color(1, 0, 0)
 
-t = Typesetter(doc.context, styles=styles)
+t = Typesetter(doc.view.context, styles=styles)
 galley = t.typesetMarkdown(s)
 
 
@@ -159,11 +162,11 @@ tb1.h = H
 tb1.conditions = (Right2Right(), Top2Top(), Baseline2Grid(index=3))
 
 
-s = doc.context.newString('Ha', style=titleStyle)
+s = context.newString('Ha', titleStyle)
 tb2 = newText(s, parent=page, w=CW, 
     conditions=(Left2Left(), Top2Top(), Baseline2Grid()))
 
-s = doc.context.newString('Ha', style=titleStyle)
+s = context.newString('Ha', titleStyle)
 tb3 = newText(s, parent=page, w=CW, top=100,
     conditions=(Left2Left(), Baseline2Grid()))
 """
@@ -211,4 +214,4 @@ doc.solve()
 #tb1.styledBaselineDown2Grid(pStyle, 3)
 #tb1.capHeightDown2Grid(0)
 
-doc.export('_export/TextBaselines.pdf')
+doc.export('_export/E30_TextBaselines.pdf')

@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     03_HyphenatedColumns.py
+#     E30_ContextTextLines.py
 #
 #	  Create a page in A4 landscape
 #	  Setup the document view to show registration marks and cropmarks
@@ -44,7 +44,7 @@ lineColor = color(0, 0, 0.5)
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
-EXPORT_PATH = '_export/03_ContextTextLines.pdf'
+EXPORT_PATH = '_export/E30_ContextTextLines.pdf'
 
 # Make a new document with with one page.
 doc = Document(w=W, h=H, title=EXPORT_PATH, autoPages=1, context=context)
