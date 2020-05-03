@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     HangulKanji.py
+#     E08_CJKBabelString.py
 
 from pagebot import getContext
 from pagebot.document import Document
@@ -28,7 +28,7 @@ W, H = pt(750, 750)
 padding = pt(48)
 gutter = pt(18)
 
-EXPORT_PAH = '_export/E08_CJKBabelString.pdf'
+EXPORT_PATH = '_export/E08_CJKBabelString.pdf'
 
 FONT_NAME = 'PageBot-Regular'
 BOLD_NAME = 'PageBot-Bold'

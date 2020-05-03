@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     00_TextA3Box.py
+#     E00_TextA3Box.py
 #
 #	  Create a page in A3 landscape
 #	  Setup the document view to show registration marks and cropmarks
@@ -60,7 +60,7 @@ else:
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
-EXPORT_PATH = '_export/00_TextA3Box.pdf'
+EXPORT_PATH = '_export/E00_TextA3Box.pdf'
 print('Generating:', EXPORT_PATH)
 
 # Make a new document with one text box.

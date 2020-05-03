@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     01_BabelStringsContexts.py
+#     E10_BabelStringsContexts.py
 #
 #     Show the working on BabelStrings in a defined context.
 #     Construct the export file name from this source.

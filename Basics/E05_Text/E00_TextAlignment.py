@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     00_TextAlignment.py
+#     E00_TextAlignment.py
 #
 #	  Create a page in A3 landscape
 #	  Show "Hkpx" on all alignment combination horizontal/vertical
@@ -36,14 +36,14 @@ from pagebot.gradient import Shadow
 
 W, H = mm(600, 250) # Customize paper size
 
+LABEL_FONT_NAME = 'PageBot-Book'
 FONT_NAME = 'PageBot-Bold'
 #FONT_NAME = 'PageBot-Regular'
 #FONT_NAME = 'PageBot-Book'
 #FONT_NAME = 'PageBot-Light'
-#FONT_NAME = 'Roboto-Regular' # Give wrong values for vertical box position
+#FONT_NAME = 'Roboto-Regular' # Gives wrong values for vertical box position
 #FONT_NAME = 'Georgia' # Gives wrong value for /p descender positions
 
-LABEL_FONT_NAME = 'PageBot-Book'
 fontSize = pt(64)
 textColor = blackColor
 bgColor = color(0.9) # Background color of the text box
@@ -51,11 +51,11 @@ padding = mm(60) # Outside measures to accommodate alignment of the text boxes
 shadow = Shadow(offset=pt(3, -3), blur=pt(3), color=0.2)
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
-# The _export folder is automatically created.
-EXPORT_PATH = '_export/00_TextAlignment%s.pdf' % FONT_NAME
+# The _export folder is automatically created by Document.
+EXPORT_PATH = '_export/E00_TextAlignment%s.pdf' % FONT_NAME
 print('Generating:', EXPORT_PATH)
 
-# Make a new document with one text box.
+# Make a new document with one text box. Default is to make one page.
 
 doc = Document(w=W, h=H, title=EXPORT_PATH, autoPages=1, context=context)
 

@@ -23,7 +23,7 @@ from pagebot.toolbox.units import pt
 from pprint import pprint
 
 context = getContext('DrawBot')
-EXPORT_PATH = '_export/07_AlteredGlyphWithPoints.pdf'
+EXPORT_PATH = '_export/E07_AlteredGlyphWithPoints.pdf'
 f = findFont('Amstelvar-Roman-VF') # Get PageBot Font instance of Variable font.
 
 W = H = 1000

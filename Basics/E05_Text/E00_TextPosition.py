@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     00_TextPosition.py
+#     E00_TextPosition.py
 #
 #	  Create a page in A4 landscape
 #	  Setup the document view to show registration marks and cropmarks
@@ -43,7 +43,7 @@ bgColor = color(0.9) # Background color of the text box
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
-EXPORT_PATH = '_export/00_TextPosition.pdf'
+EXPORT_PATH = '_export/E00_TextPosition.pdf'
 
 # Make a new document with one text box.
 

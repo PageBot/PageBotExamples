@@ -12,20 +12,21 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     DocumentWithPages.py
+#     E00_DocumentWithPages.py
 #
 #     Test handling of pages in a document.
 #
-#import pagebot # Import to know the path of non-Python resources.
-
+from pagebot.contexts import getContext
 from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.conditions import *
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, mm
 
-W, H = pt(400, 300)
+# Template for the export path, allowing to include context name
+EXPORT_PATH = '_export/E00_DocumentWithPages-%s.pdf' 
 
+W, H = pt(400, 300)
 
 def makeDocument(context):
     doc = Document(w=W, h=H, autoPages=1, context=context)
@@ -56,12 +57,9 @@ def makeDocument(context):
 
     page.solve()
     # Export in _export folder that does not commit in Git. Force to export PDF.
-    EXPORT_PATH = '_export/DocumentWithPages-%s.pdf' % context.name
-    doc.export(EXPORT_PATH)
+    doc.export(EXPORT_PATH % context.name)
 
-if __name__ == '__main__':
-    from pagebot import getContext
 
-    for contextName in ('DrawBot', 'Flat'):
-        context = getContext(contextName)
-        makeDocument(context)
+for contextName in ('DrawBot', 'Flat'):
+    context = getContext(contextName)
+    makeDocument(context)

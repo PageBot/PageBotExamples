@@ -43,4 +43,4 @@ import E30_ElasticText
 import E30_HyphenatedColumn
 
 import E70_AlterGlyphCoordinates
-import E70_FindFont
+import E70_FindFonts
