@@ -32,7 +32,7 @@ from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.loremipsum import loremipsum
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
-EXPORT_PATH = '_export/03_ElasticText.pdf'
+EXPORT_PATH = '_export/E30_ElasticText.pdf'
 
 FONT_NAME = 'PageBot-Regular'
 

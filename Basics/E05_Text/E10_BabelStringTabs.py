@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     00_Text.py
+#     E10BabelStringTabs.py
 #
 #	  Create a page in custom landscape size
 #	  Setup the document view to show registration marks and cropmarks
@@ -45,7 +45,7 @@ lineColor = color(0, 0, 0.5)
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
-EXPORT_PATH = '_export/01_BabelStringTabs.pdf'
+EXPORT_PATH = '_export/E10_BabelStringTabs.pdf'
 
 # Make a new document with one text box.
 

@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     BabelStrings.py
+#     E10_BabelStringFromSketch.py
 #
 #     BabelStrings are the (new) internal string format that can hold any information
 #     that contexts need for their own formatted strings.
@@ -46,6 +46,8 @@ import sketchapp2py
 from sketchcontext.context import SketchContext
 
 FONT_NAME = 'PageBot-Regular'
+
+EXPORT_PATH = '_export/E01_BabelStringFromSketch.pdf'
 
 # Create a BabelString, that PageBot uses in internal in text elements.
 # This plain BabelString has no context defined, so we can't apply 
@@ -88,6 +90,6 @@ print(e, e.yAlign)
 print(e.bs.runs[0].style['font'])
 # Move the element
 e.x += 200
-doc.export('_export/01_BabelStringFromSketch.pdf')
+doc.export(EXPOT_PATH)
 
 

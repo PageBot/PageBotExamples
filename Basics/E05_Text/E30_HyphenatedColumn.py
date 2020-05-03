@@ -46,7 +46,7 @@ lineColor = color(0, 0, 0.5)
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
-EXPORT_PATH = '_export/03_HyphenatedColumns.pdf'
+EXPORT_PATH = '_export/E30_HyphenatedColumns.pdf'
 
 # Make a new document with with one page.
 doc = Document(w=W, h=H, title=EXPORT_PATH, autoPages=1, context=context)

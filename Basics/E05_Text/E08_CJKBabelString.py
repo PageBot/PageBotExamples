@@ -28,6 +28,8 @@ W, H = pt(750, 750)
 padding = pt(48)
 gutter = pt(18)
 
+EXPORT_PAH = '_export/E08_CJKBabelString.pdf'
+
 FONT_NAME = 'PageBot-Regular'
 BOLD_NAME = 'PageBot-Bold'
 
@@ -66,4 +68,4 @@ newText(fsrWhite, conditions=conditions, parent=page, xTextAlign=LEFT, yAlign=BA
 
 doc.solve()
 
-doc.export('_export/08_CJKBabelString.pdf')
+doc.export(EXPORT_PATH)

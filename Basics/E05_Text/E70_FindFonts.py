@@ -10,7 +10,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     FindFont.py
+#     E70_FindFont.py
 #
 #     Some examples how to find Font instances, for the given installed fonts.
 #     PageBot scans through places where it can find font files. 

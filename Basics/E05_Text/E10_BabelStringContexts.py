@@ -36,7 +36,7 @@ contexts = (
 for contextId, context in contexts:
 
     # Make export path from this filename, and dependent on the context.
-    exportPath = '_export/01_BabelStringContexts-%s.pdf' % contextId
+    exportPath = '_export/E01_BabelStringContexts-%s.pdf' % contextId
     
     # Create a page and set y on top margin.
     context.newPage(W, H)
