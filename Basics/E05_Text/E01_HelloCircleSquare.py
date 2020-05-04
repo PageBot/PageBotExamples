@@ -12,6 +12,8 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
+#     E01_HelloCircleSquare.py
+#
 from random import random
 from pagebot import getContext
 
@@ -31,6 +33,6 @@ for p in range(20):
         else:
             bs = context.newString('Hello world on %d,%d' % (x, y),
                              style=dict(fontSize=24))
-            context.text(bs, (x, y))
+            context.drawString(bs, (x, y))
 
-context.saveImage('_export/HelloCircleSquare.pdf')
+context.saveImage('_export/E01_HelloCircleSquare.pdf')

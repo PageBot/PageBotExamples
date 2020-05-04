@@ -8,6 +8,7 @@
 #
 # -----------------------------------------------------------------------------
 #
+#     E08_RedCenteredSquare.py
 
 from pagebot.document import Document
 from pagebot.elements import newRect
@@ -28,4 +29,4 @@ newRect(parent=page, fill=color('red'), size=pt(240, 140),
 # Make the page apply all conditions.
 page.solve() 
 # Export the document page as png, so it shows as web image.
-doc.export('_export/RedSquare.png') 
+doc.export('_export/E08_RedCenteredSquare.png') 

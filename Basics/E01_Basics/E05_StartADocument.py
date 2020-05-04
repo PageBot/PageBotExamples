@@ -22,16 +22,7 @@
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt
 
-EXPORT_PATH = '_export/StartADocument'
-
-# Export in _export folder that does not commit in Git.
-# Force to export to a few file formats:
-EXPORT_PATHS = (
-    EXPORT_PATH + '.pdf',
-    EXPORT_PATH + '.jpg',
-    EXPORT_PATH + '.png',
-    EXPORT_PATH + '.svg'
-)
+EXPORT_PATH = '_export/E05_StartADocument-%s%s' # Template for export file formats.
 
 # Document is the main instance holding all information about the document
 # together (pages, styles, etc.)
@@ -45,6 +36,14 @@ RW = RH = pt(40)
 PADDING = pt(28)
 
 def makeDocument(context):
+    # Export in _export folder that does not commit in Git.
+    # Force to export to a few file formats:
+    exportPaths = (
+        EXPORT_PATH % (context.name, '.pdf'),
+        EXPORT_PATH % (context.name, '.jpg'),
+        EXPORT_PATH % (context.name, '.png'),
+        EXPORT_PATH % (context.name, '.svg')
+    )
     # Creates the publication/document that holds the pages.
     doc = Document(w=W, h=H, context=context)
 
@@ -53,7 +52,6 @@ def makeDocument(context):
     page = doc[1]
     page.padding = PADDING
     page.showPadding = True
-
 
     conditions = [Right2Right(), Float2Top(), Float2Left()]
     # TODO: Solve this bug, does not mirror.
@@ -75,7 +73,7 @@ def makeDocument(context):
     # is returned in the Score instance.
     score = doc.solve()
     # Export to various export formats
-    for exportPath in EXPORT_PATHS:
+    for exportPath in exportPaths:
         doc.export(exportPath)
 
 if __name__ == '__main__':
