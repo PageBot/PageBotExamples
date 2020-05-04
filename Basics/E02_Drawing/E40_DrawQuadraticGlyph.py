@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     DrawQuadraticGlyph.py
+#     E40_DrawQuadraticGlyph.py
 #
 #     Shows how to draw quadratic curves with cubic curves.
 #
@@ -203,7 +203,7 @@ def draw(context):
         d = 15
         x += d
         y += d
-        context.text('%d' % i, (x, y))
+        context.drawString('%d' % i, (x, y))
 
     segments = []
     implied = []
@@ -273,17 +273,20 @@ def draw(context):
     context.fill(0)
     x += 30
     y = -100
-    context.text('On-curve point', (x, y))
+    context.drawString('On-curve point', (x, y))
     y -= 30
-    context.text('Implied on-curve point', (x, y))
+    context.drawString('Implied on-curve point', (x, y))
     y -= 30
-    context.text('Cubic control point', (x, y))
+    context.drawString('Cubic control point', (x, y))
     y -= 30
-    context.text('Quadratic control point', (x, y))
-    context.saveImage("_export/QuadraticGlyph-%s.pdf" % context.name)
+    context.drawString('Quadratic control point', (x, y))
+    context.saveImage("_export/E40_DrawQuadraticGlyph-%s.pdf" % context.name)
 
 
-for contextName in ('DrawBot', 'Flat'):
+for contextName in (
+        'DrawBot', 
+        #'Flat'
+    ):
     context = getContext(contextName)
     context.fontSize(24)
     draw(context)

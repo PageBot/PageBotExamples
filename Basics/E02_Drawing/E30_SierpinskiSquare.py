@@ -10,7 +10,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     SierpinskiSquare.py
+#     E30_SierpinskiSquare.py
 
 # by Petr van Blokland @petrvanblokland
 # https://twitter.com/petrvanblokland/status/860610270410018817
@@ -20,7 +20,7 @@ from pagebot import getContext
 from pagebot.toolbox.units import *
 from pagebot.toolbox.color import Color, whiteColor
 
-context = getContext()
+context = getContext('DrawBot')
     
 MAX_I = 6
 
@@ -42,23 +42,22 @@ def drawSierpinskiSquare(px, py, w, size, i):
             elif px <= size and py <= size:
                 drawSierpinskiSquare(px+x*w, py+y*w, w/3, size, i)
 
-if __name__ == '__main__':
-    canvasSize = 500
-    numFrames = 40
-    factor = 3 ** (1/numFrames)
+canvasSize = 500
+numFrames = 40
+factor = 3 ** (1/numFrames)
 
-    for frame in range(numFrames):
-        context.newPage(pt(canvasSize), pt(canvasSize))
-        context.frameDuration(1/20)
-        col = whiteColor
-        context.fill(col)
-        context.rect(pt(0), pt(0), pt(canvasSize), pt(canvasSize))
-        w = canvasSize * factor ** frame
-        #print(w)
-        #print(canvasSize)
-        i = 0
-        drawSierpinskiSquare(0, 0, w, canvasSize, i)
+for frame in range(numFrames):
+    context.newPage(pt(canvasSize), pt(canvasSize))
+    context.frameDuration(1/20)
+    col = whiteColor
+    context.fill(col)
+    context.rect(pt(0), pt(0), pt(canvasSize), pt(canvasSize))
+    w = canvasSize * factor ** frame
+    #print(w)
+    #print(canvasSize)
+    i = 0
+    drawSierpinskiSquare(0, 0, w, canvasSize, i)
 
-    #DrawBotContext can save as animated gif
-    context.saveDrawing("_export/SierpinskiSquare.gif")
-    print('Done')
+#DrawBotContext can save as animated gif
+context.saveDrawing("_export/E30_SierpinskiSquare.gif")
+print('Done')
