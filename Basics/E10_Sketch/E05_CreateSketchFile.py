@@ -36,8 +36,8 @@ FONT_NAME = 'PageBot-Regular'
 EXPORT_PATH = '_export/E05_CreateSketchFile.pdf'
 
 #templatePath = path2Dir(pagebot.__file__) + '/resources/sketchapp/Base.sketch'
-templatePath = '/Users/petr/Desktop/PageBot-DeliciousTest/Delicious-template.sketch'
-#templatePath = '/Users/petr/Desktop/PageBot-DeliciousTest/TEST.sketch'
+#templatePath = '/Users/petr/Desktop/PageBot-DeliciousTest/Delicious-template.sketch'
+templatePath = '/Users/petr/Desktop/PageBot-DeliciousTest/TEST.sketch'
 sketchContext = SketchContext(templatePath) # Used for reading/writing Sketch files.
 
 # Create a drawBotContext to save the Sketch based Document as other format.
