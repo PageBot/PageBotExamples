@@ -58,18 +58,7 @@ view.showPadding = True # Show the page padding
 view.showFrame = True # Show the frame of the  page as blue line
 view.showNameInfo = True # Showing page info and title on top of the page.
 view.showGrid = doc[1].showGrid
-print(view.showGrid)
-# Add colums
-page = doc[7]
-g = page.gw
-cw = page.gridX[0][0]
-print(g, cw, page.w-52-52)
-fff = (0, 0, 0, 0.2)
-print(page.gridX, page.gw)
 
-newRect(parent=page, x=page.pl, w=cw, y=page.pb, h=page.ph, fill=fff)
-newRect(parent=page, x=page.pl+cw+g, w=cw, y=page.pb, h=page.ph, fill=fff)
-newRect(parent=page, x=page.pl+cw+g+cw+g, w=cw, y=page.pb, h=page.ph, fill=fff)
 doc.export(EXPORT_PATH)
 
 
