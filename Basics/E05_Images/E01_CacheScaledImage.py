@@ -10,7 +10,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     ScalingAnImage.py
+#     E01_ScalingAnImage.py
 #
 #     How to scale an image (without being an element) in plain DrawBot?
 #     Since the core DrawBot does not support w/h attrbiutes for images,

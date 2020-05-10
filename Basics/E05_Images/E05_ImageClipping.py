@@ -10,7 +10,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     050_ImageClipping.py
+#     E05_ImageClipping.py
 #
 #     Draw images with clipping paths and rotation.
 #
@@ -24,23 +24,24 @@ from pagebot.toolbox.color import color, noColor
 from pagebot.toolbox.units import em, p, pt, inch, degrees
 from pagebot.conditions import * # Import all conditions for convenience.
 from pagebot.constants import *
-from pagebot.elements import newText
-from pagebot.elements.pbimage2 import Image
+from pagebot.elements import *
 
 #context = FlatContext()
-context = getContext()
+context = getContext('DrawBot')
 
 # Example image that has nice areas to put text as example.
 imagePath = getResourcesPath() + '/images/peppertom_lowres_398x530.png'
+EXPORT_PATH = '_export/05_ImageClipping.pdf'
 
-W = H = pt(1000) # Document size
-PADDING = pt(100) # Page padding on all sides
+W = pt(400) # Document size
+H = pt(400)
+PADDING = pt(24) # Page padding on all sides
 
 # Create a new document with 1 page. Set overall size and padding.
 doc = Document(w=W, h=H, padding=PADDING, context=context)
 # Get the default page view of the document and set viewing parameters
 view = doc.view
-view.padding = inch(1)
+view.padding = pt(20)
 view.showFrame = True
 view.showPadding = True
 view.showColorBars = False
@@ -50,32 +51,18 @@ view.showRegistrationMarks = True
 # Get the page
 page = doc[1]
 # Make image box as child element of the page and set its layout conditions.
-im = Image(imagePath, parent=page, conditions=[Fit()],
-    showPadding=True, padding=100, stroke=(1, 0, 0))
+conditions = [Fit2Height(), Center2Center()]
+#conditions = [Center2Center()]
+conditions = [Fit2Height(), Right2Right()]
+im = newImage(imagePath, parent=page, conditions=conditions, 
+	xAlign=RIGHT, showOrigin=True)
+conditions = [Center2Center(), Middle2Middle()]
+conditions = None 
+#mask = newMask(parent=page, conditions=conditions, showOrigin=True)
+#mask.rect(0, 0, w=200, h=300)
 
-# Rotate the whole by selecting the value and then cmd-drag to alter the value
-# The elements rotate independently. Note that the image is rotating in the
-# reversed direction, so it stays upright in the clipping rectangle.
-a = degrees(100)
-
-im.angle =a
-im.fill = (0, 0, 0.7+random()*0.3)
-imd = im.imageData
-imd.x = 366
-imd.y = 150
-imd.w = 300
-imd.h = 400
-imd.rx = 50
-imd.ry = 60
-imd.angle = -a
-
-bs = context.newString('Rotating images', style=dict(fontSize=32, textFill=1))
-tb = newText(bs, w=400, parent=im, conditions=(Center2Center(), Middle2Middle()), angle=-a, fill=noColor)
-# Solve the page/element conditions
 doc.solve()
 
-im.rx = im.w/2
-im.ry = im.h/2
 # Export the document to this PDF file.
-doc.export('_export/ImageClipping.pdf')
+doc.export(EXPORT_PATH)
 

@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     UseImageElements.py
+#     E01_ImageElements.py
 #
 #     This script generates a page with random color squares, indicating where their position is.
 #
@@ -28,13 +28,10 @@ from pagebot.toolbox.units import pt
 # Document is the main instance holding all information about the
 # document together (pages, styles, etc.)
 
-context = getContext('DrwaBot')
+context = getContext('DrawBot')
 
-PagePadding = 30
-PageSize = 400
-
-GUTTER = 8 # Distance between the squares.
-SQUARE = 10 * GUTTER # Size of the squares
+PADDING = 30
+W = H = 400
 
 # The standard PageBot function getRootStyle() answers a standard Python dictionary,
 # where all PageBot style entries are filled by their default values. The root style is kept in RS
@@ -46,24 +43,6 @@ SQUARE = 10 * GUTTER # Size of the squares
 # Export in _export folder that does not commit in Git. Force to export PDF.
 EXPORT_PATH = '_export/01_ImageElements.pdf'
 
-FONT_NAME = 'PageBot-Regular'
-
-#W = H = 120 # Get the standard a4 width and height in points.
-W = PageSize
-H = PageSize
-
-# Hard coded SQUARE and GUTTE, just for simple demo, instead of filling padding an columns in the root style.
-# Page size decides on the amount squares that is visible.
-# Page padding is centered then.
-sqx = int(W/(SQUARE + GUTTER)) # Whole amount of squares that fit on the page.
-sqy = int(H/(SQUARE + GUTTER))
-# Calculate centered paddings for the amount of fitting squares.
-# Set values in the rootStyle, so we can compare with column calculated square position and sizes.
-#rs['colH'] = rs['colW'] = SQUARE  # Make default colW and colH square.
-
-#padX = (W - sqx*(SQUARE + GUTTER) + GUTTER)/2
-my = (H - sqy*(SQUARE + GUTTER) + GUTTER)/2
-
 doc = Document(w=W, h=H, title='Color Squares', autoPages=1, context=context)
 
 view = doc.getView()
@@ -73,36 +52,30 @@ view.showOrigin = True
 # Get list of pages with equal y, then equal x.
 page = doc[1] # Get page on pageNumber, first in row (this is only one now).
 page.name = 'This is a demo page for floating child elements'
-page.padding = PagePadding
-
-page.gutter3D = GUTTER # Set all 3 gutters to same value
+page.padding = PADDING
 
 path = getResourcesPath() + '/images/cookbot10.jpg'
 
 img = newImage(path, padding=0,
                parent=page, 
-               conditions=(Bottom2Bottom(),
+               conditions=(Top2Top(),
                            Fit2Width(),
-                           SolveBlock(),
-                           #Shrink2BlockBottom()
                            ),
-               yAlign=BOTTOM,
+               yAlign=TOP,
                fill=color(0, 1, 0, 0.3),
                stroke=color(1, 0, 0),
                scaleImage=False)
-# Give parent on creation, to have the self.css chain working and self.context.
 
-# Caption falls through the yr2 (with different z) and lands on yr1 by Float2SideBottom()
-bs = context.newString('Captions float below the image',
-                           style=dict(font='FONT_NAME',
-                                      fontSize=20,
-                                      textFill=color(1)))
-cap = newText(bs, name='Caption', parent=img, z=0,
-    conditions=[ Fit2Width(), Float2Top()],
-    padding=4, font=FONT_NAME,
-    yAlign=TOP, fontSize=9, textFill=color(1), strokeWidth=pt(0.5),
-    fill=color(0, 0, 1, 0.3), stroke=color(0, 0, 1),
-)
+newImage(path, padding=0,
+               parent=page, 
+               conditions=(Bottom2Bottom(),
+                           Fit2Width(),
+                           ),
+               yAlign=BOTTOM,
+               fill=color(1, 0, 0, 0.3),
+               stroke=color(0, 0, 1),
+               scaleImage=False)
+
 score = page.solve()
 if score.fails:
     print(score.fails)

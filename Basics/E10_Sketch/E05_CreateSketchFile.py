@@ -26,6 +26,8 @@ from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.color import color
 from pagebot.document import Document
 from pagebot.elements import *
+from pagebot.typesetter import Typesetter
+from pagebot.composer import Composer
 
 # Sketch related SketchString --> BabelString conversion
 import sketchapp2py
@@ -36,8 +38,9 @@ FONT_NAME = 'PageBot-Regular'
 EXPORT_PATH = '_export/E05_CreateSketchFile.pdf'
 
 #templatePath = path2Dir(pagebot.__file__) + '/resources/sketchapp/Base.sketch'
-#templatePath = '/Users/petr/Desktop/PageBot-DeliciousTest/Delicious-template.sketch'
-templatePath = '/Users/petr/Desktop/PageBot-DeliciousTest/TEST.sketch'
+contentPath = '/Users/petr/Desktop/PageBot-DeliciousTest/'
+templatePath = contentPath + 'Delicious-template2.sketch'
+#templatePath = '/Users/petr/Desktop/PageBot-DeliciousTest/TEST.sketch'
 sketchContext = SketchContext(templatePath) # Used for reading/writing Sketch files.
 
 # Create a drawBotContext to save the Sketch based Document as other format.
@@ -47,8 +50,17 @@ drawBotContext = getContext('DrawBot')
 # Create an empty Document instance with this DrawBotContext and let the 
 # SketchContext read its pages into it, setting page sizes, etc.
 doc = Document(title=EXPORT_PATH, context=drawBotContext)
+
 # Read the Sketch file, convert SketchAttributedStrings into BabelStrings
-sketchContext.readDocument(doc) 
+sketchContext.readDocument(doc, contentPath=contentPath) 
+
+# Now er have read the position of frames, images and elements,
+# let the composer match the input file(s) with the naming of text
+# blocks that refer to a file + overflow index.
+typesetter = Typesetter(drawBotContext)
+galley  = typesetter.typesetFile(contentPath + 'Stoven.md')
+composer = Composer(doc)
+
 # Set output flag in the doc.view
 view = doc.view
 view.padding = pt(40)
