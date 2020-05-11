@@ -38,7 +38,7 @@ H = pt(400)
 PADDING = pt(24) # Page padding on all sides
 
 # Create a new document with 1 page. Set overall size and padding.
-doc = Document(w=W, h=H, padding=PADDING, context=context)
+doc = Document(w=W, h=H, title=EXPORT_PATH, padding=PADDING, context=context)
 # Get the default page view of the document and set viewing parameters
 view = doc.view
 view.padding = pt(20)

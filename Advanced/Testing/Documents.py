@@ -81,7 +81,7 @@ def testElements(context, page):
     def newPolygon(points=None, **kwargs):
     def newRuler(**kwargs):
     def newPageBotPath(**kwargs):
-    def newPaths(paths=None, **kwargs):
+    def newBezierPaths(paths=None, **kwargs):
     def newImage(path=None, **kwargs):
     def newTable(cols=1, rows=1, **kwargs):
     def newGalley(**kwargs):

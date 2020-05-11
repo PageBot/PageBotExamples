@@ -4,12 +4,12 @@ context = getContext()
 
 
 context.stroke(0, 1)
-context.newPath()
+context.newBezierPath()
 context.moveTo((0, 0))
 context.lineTo((100, 100))
 context.drawPath()
 
-print(context.path)
+print(context.bezierPath())
 
 # DrawBot Style.
 
