@@ -31,6 +31,7 @@ context = getContext('DrawBot')
 # Example image that has nice areas to put text as example.
 imagePath = getResourcesPath() + '/images/peppertom_lowres_398x530.png'
 EXPORT_PATH = '_export/02_ImageAlignment.pdf'
+BLEED = pt(6)
 
 W = pt(400) # Document size
 H = pt(400)
@@ -46,6 +47,7 @@ view.showPadding = True
 view.showColorBars = False
 view.showCropMarks = True
 view.showRegistrationMarks = True
+view.showNameInfo = True # Showing page info and title on top of the page.
 
 def addLabel(e, page, s, condition):
 	style = dict(font='PageBot-Regular', fontSize=pt(16),
@@ -57,6 +59,19 @@ def addLabel(e, page, s, condition):
 # Get the first page
 # LEFT
 page = doc[1]
+page.bleed = BLEED
+im = newImage(imagePath, parent=page, x=-page.bleedLeft, y=page.h/2,
+	w=page.w/2+page.bleedLeft, xAlign=LEFT, yAlign=MIDDLE, showOrigin=True)
+addLabel(im, page, 'x=-page.bleedLeft; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE', 
+	Top2Top())
+
+page = page.next
+im = newImage(imagePath, parent=page, x=0, y=page.h/2,
+	w=page.w/2, xAlign=LEFT, yAlign=MIDDLE, showOrigin=True)
+addLabel(im, page, 'x=0; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE', 
+	Top2Top())
+
+page = page.next
 im = newImage(imagePath, parent=page, x=page.pl, y=page.h/2,
 	w=page.pw/2, xAlign=LEFT, yAlign=MIDDLE, showOrigin=True)
 addLabel(im, page, 'x=page.pl; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE', 
@@ -112,6 +127,19 @@ im = newImage(imagePath, parent=page, x=page.w-page.pr, y=page.h/2,
 addLabel(im, page, 'x=page.w-page.pr; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE', 
 	Top2Top())
 
+page = page.next
+im = newImage(imagePath, parent=page, x=page.w/2, y=page.h/2,
+	w=page.w/2, xAlign=LEFT, yAlign=MIDDLE, showOrigin=True)
+addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE', 
+	Top2Top())
+
+page = page.next
+page.bleed = BLEED
+im = newImage(imagePath, parent=page, x=page.w/2, y=page.h/2,
+	w=page.w/2+page.bleedRight, xAlign=LEFT, yAlign=MIDDLE, showOrigin=True)
+addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE', 
+	Top2Top())
+
 # TOP
 page = page.next
 im = newImage(imagePath, parent=page, x=page.w/2, y=page.h/2,
@@ -134,9 +162,10 @@ addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE',
 	Top2Top())
 
 page = page.next
-im = newRect(fill=(1, 0, 0), parent=page, x=page.w/2, y=page.h/2,
-	h=page.ph/2, xAlign=CENTER, yAlign=TOP, showOrigin=True)
-addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE', 
+im = newRect(fill=(1, 0, 0), parent=page, y=page.h/2,
+	conditions=(Fit2Width(), Bottom2Bottom()),
+	h=page.ph/2, yAlign=TOP, showOrigin=True)
+addLabel(im, page, 'x=Fit2Width(); y=Bottom2Bottom()\nxAlign=LEFT; yAlign=MIDDLE', 
 	Top2Top())
 
 doc.solve()
