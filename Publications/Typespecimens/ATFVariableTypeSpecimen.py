@@ -26,7 +26,7 @@ from pagebot import getContext # Decide if running in DrawBot or Linux-Flat
 from pagebot.constants import CENTER, INLINE # Import some measure and alignments constants.
 from pagebot.document import Document # Overall container class of any PageBot script
 from pagebot.fonttoolbox.objects.family import getFamily # Access to installed fonts
-from pagebot.elements import newRect, newTextBox, newImage # Used elements in this specimen
+from pagebot.elements import newRect, newText, newImage # Used elements in this specimen
 from pagebot.toolbox.transformer import path2FontName # Convenient CSS color to PageBot color conversion
 from pagebot.toolbox.hyphenation import wordsByLength # Use English hyphenation dictionary as word selector
 from pagebot.conditions import * # Import layout conditions for automatic layout.
@@ -153,11 +153,11 @@ def buildSpecimenPage(doc, family, font, pn):
     # Centered title: family name and style name of the current font.
     titleBs = context.newString(pageTitle, 
                 style=dict(font=font.path, xTextAlign=CENTER, textFill=0))
-    titleBox = newTextBox(titleBs, parent=page, h=2*L,  
+    titleBox = newText(titleBs, parent=page, h=2*L,  
                 conditions=[Top2Top(), Fit2Width()], fill=DEBUG_COLOR0)
     titleBox.solve()
     
-    largeSampleBox = newTextBox('', parent=page, w=C1+G/2, 
+    largeSampleBox = newText('', parent=page, w=C1+G/2, 
                 conditions=[Float2Top(), Left2Left(), Fit2Bottom()],
                 fill=DEBUG_COLOR1)
     largeSampleBox.solve()
@@ -193,14 +193,14 @@ def buildSpecimenPage(doc, family, font, pn):
         label = context.newString('%d Points\n' % round(smallSamples.fontSize), style=labelStyle)
         shortWordsSample = context.newString(getShortWordText(), 
                     style=dict(font=font.path, fontSize=smallSamples.fontSize, leading=em(1)))
-        newTextBox(label + smallSamples + ' ' + shortWordsSample, parent=page, w=C2+G/2, h=80, ml=G/2, mb=0,
+        newText(label + smallSamples + ' ' + shortWordsSample, parent=page, w=C2+G/2, h=80, ml=G/2, mb=0,
                    conditions=[Right2Right(), Float2Top(), Float2Left()],
                    fill=DEBUG_COLOR1)
                    
         label = context.newString('%d Points\n' % fontSize, style=labelStyle)
         smallSamples = context.newString(blurb.getBlurb('article', noTags=True), 
                                          style=dict(font=font.path, fontSize=fontSize))
-        newTextBox(label + smallSamples, parent=page, w=C2-2, h=80, mb=0, ml=G/2,
+        newText(label + smallSamples, parent=page, w=C2-2, h=80, mb=0, ml=G/2,
                    conditions=[Right2Right(), Float2Top()], 
                    fill=DEBUG_COLOR1)
 
@@ -216,7 +216,7 @@ def buildSpecimenPage(doc, family, font, pn):
         paragraphBottomSpacing=0)) #0.5))
     glyphSet += context.newString(GLYPH_SET, 
         style=dict(font=font.path, fontSize=23, xTextAlign=CENTER, leading=em(1)))
-    newTextBox(glyphSet, parent=glyphSetFrame, padding=(1.5*L, L, L, L),
+    newText(glyphSet, parent=glyphSetFrame, padding=(1.5*L, L, L, L),
                          borders=dict(line=INLINE, stroke=0, strokeWidth=0.25), 
                          conditions=[Left2Left(), Fit2Right(), Top2Top(), 
                          Fit2Bottom() ], 

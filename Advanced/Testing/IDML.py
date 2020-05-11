@@ -16,7 +16,7 @@
 # Test InDesign Markup Language.
 #
 import traceback
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 
 IDML = False
 

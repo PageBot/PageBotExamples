@@ -24,7 +24,7 @@ from pagebot.toolbox.units import pt
 from pagebot.toolbox.transformer import json2Dict
 from pagebot.document import Document
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.elements import newTextBox, newImage
+from pagebot.elements import newText, newImage
 
 W = 652
 H = 850
@@ -117,13 +117,13 @@ def loadJSON(context):
 def addTitle(page, context, title):
     style = {'font': boldFont.path, 'fontSize': HEADSIZE}
     bs = context.newString(title, style=style)
-    newTextBox(bs, parent=page, w=W/2, conditions=[Right2SideRight(),
+    newText(bs, parent=page, w=W/2, conditions=[Right2SideRight(),
         Top2Top()])
 
 def addDescription(page, context, description):
     style = {'font': regularFont.path, 'fontSize': 12, 'leading': 14}
     bs = context.newString(description, style=style)
-    newTextBox(bs, parent=page, w=W/2, conditions=[Right2SideRight(),
+    newText(bs, parent=page, w=W/2, conditions=[Right2SideRight(),
         Top2Top()])
 
 def addImage(page, context, src):

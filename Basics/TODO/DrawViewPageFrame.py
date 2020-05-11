@@ -17,7 +17,9 @@
 #     Needs debug in view dimension showing.
 #
 from pagebot.style import getRootStyle
+from pagebot.contexts import getContext
 from pagebot.constants import CENTER
+from pagebot.toolbox.color import color
 from pagebot import getContext
 # Document is the main instance holding all information about
 # the document togethers (pages, styles, etc.)
@@ -31,22 +33,18 @@ def makeDocument():
     # Create new document with (w,h) and fixed amount of pages.
     # Make number of pages with default document size.
     # Initially make all pages default with template
-    doc = Document(w=W, h=H, autoPages=1)
+    context = getContext('DrawBot')
+    doc = Document(w=W, h=H, autoPages=1, context=context)
 
     page = doc[1] # Get the first/single page of the document.
     page.size = W, H
-    #print(page.originTop)
-    if OriginTop:
-        s = u'Origin on top'
-        conditions = (Center2Center(), Top2Top())
-    else:
-        s = u'Origin on bottom'
-        conditions = (Center2Center(), Bottom2Bottom())
+    s = u'Origin on bottom'
+    conditions = (Center2Center(), Bottom2Bottom())
 
-    bs = doc.context.newString(s, style=dict(fontSize=30,
+    bs = context.newString(s, style=dict(fontSize=30,
                                              textFill=(1, 0, 0),
                                              xTextAlign=CENTER))
-    nt = newTextBox(bs, x=100, y=100, conditions=conditions, parent=page, fill=color(1, 1, 0))
+    nt = newText(bs, x=100, y=100, conditions=conditions, parent=page, fill=color(1, 1, 0))
     print(bs.s)
     #print(nt.x, nt.y, nt.w, nt.h)
     score = page.solve()
@@ -65,13 +63,6 @@ def makeDocument():
 
     return doc
 
-if __name__ == '__main__':
-
-    context.Variable([
-        #dict(name='ElementOrigin', ui='CheckBox', args=dict(value=False)),
-        dict(name='OriginTop', ui='CheckBox', args=dict(value=False)),
-    ], globals())
-
-    d = makeDocument()
-    d.export('_export/DrawViewPageFrame.pdf')
+d = makeDocument()
+d.export('_export/DrawViewPageFrame.pdf')
 

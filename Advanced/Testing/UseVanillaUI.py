@@ -56,7 +56,7 @@ class VariableController:
             # create a label for every ui element except a checkbox
             if uiElement not in ("CheckBox", "Button"):
                 # create the label view
-                label = vanilla.TextBox((0, y + 2,
+                label = vanilla.Text((0, y + 2,
                                          labelSize - gutter, height),
                                         "%s:" % name,
                                         alignment="right",

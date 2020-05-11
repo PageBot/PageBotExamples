@@ -38,7 +38,7 @@ class BarChart(Rect):
 
         >>> from random import shuffle
         >>> from pagebot.document import Document
-        >>> from pagebot.elements import newTextBox
+        >>> from pagebot.elements import newText
         >>> doc = Document(title='BarChart', viewId='Site')
         >>> view = doc.newView('Mamp')
         >>> page = doc[1]
@@ -50,7 +50,7 @@ class BarChart(Rect):
         >>> data = range(2, 90, 4)
         >>> shuffle(data)
         >>> barChart.data = data
-        >>> #tb = newTextBox('This is a bar chart.', parent=barChart)
+        >>> #tb = newText('This is a bar chart.', parent=barChart)
         >>> doc.build()
         >>> import os
         >>> result = os.system('open %s' % (view.LOCAL_HOST_URL % (doc.name, view.DEFAULT_HTML_FILE)))

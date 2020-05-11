@@ -31,7 +31,7 @@ from pagebot.toolbox.color import color
 from pagebot.constants import LEFT, RIGHT, CENTER # Import some measure and alignments constants.
 from pagebot.document import Document # Overall container class of any PageBot script
 from pagebot.fonttoolbox.objects.family import getFamily # Access to installed fonts
-from pagebot.elements import newRect, newTextBox, newImage, newLine # Used elements in this specimen
+from pagebot.elements import newRect, newText, newImage, newLine # Used elements in this specimen
 from pagebot.toolbox.transformer import path2FontName # Convenient CSS color to PageBot color conversion
 from pagebot.toolbox.hyphenation import wordsByLength # Use English hyphenation dictionary as word selector
 from pagebot.conditions import * # Import layout conditions for automatic layout.
@@ -170,13 +170,13 @@ def buildSpecimenPages(page, family):
     # Left and right family name the current font.
     titleBs = context.newString(pageTitle, 
                                 style=dict(font=labelFont.path, fontSize=16, xTextAlign=LEFT, textFill=0))
-    titleBox = newTextBox(titleBs, parent=page, h=3*U, w=C3, 
+    titleBox = newText(titleBs, parent=page, h=3*U, w=C3, 
                conditions=[Top2Top(), Left2Left()],
                fill=DEBUG_COLOR0)
 
     titleBs = context.newString(pageTitle, 
                                 style=dict(font=labelFont.path, fontSize=16, xTextAlign=RIGHT, textFill=0))
-    titleBox = newTextBox(titleBs, parent=page, h=3*U, w=C3,
+    titleBox = newText(titleBs, parent=page, h=3*U, w=C3,
                conditions=[Top2Top(), Right2Right()],
                fill=DEBUG_COLOR0)
 
@@ -206,14 +206,14 @@ def buildSpecimenPages(page, family):
                 continue
             sample = context.newString(blurb.getBlurb('article'), style=dict(font=font.path, fontSize=9, leading=em(1.1)))
             h = H/len(family)+L
-            newTextBox(sample, parent=page, w=C3, h=h, conditions=(Right2Right(), Float2Top()),
+            newText(sample, parent=page, w=C3, h=h, conditions=(Right2Right(), Float2Top()),
                 fill=DEBUG_COLOR1)
             y -= h
             if y <= PB + descriptionH:
                 break
 
     if description:
-        newTextBox(description, parent=page, w=C3, h=descriptionH, 
+        newText(description, parent=page, w=C3, h=descriptionH, 
                    conditions=(Right2Right(), Bottom2Bottom()),
                    fill=DEBUG_COLOR1)
  
@@ -223,7 +223,7 @@ def buildSpecimenPages(page, family):
     charSetString += context.newString(GLYPH_SET, style=charSetStyle)
     _, charSetStringH = context.textSize(charSetString, w=C3)
             
-    newTextBox(charSetString, parent=page, w=C3, h=charSetStringH, conditions=(Left2Left(), Bottom2Bottom()))
+    newText(charSetString, parent=page, w=C3, h=charSetStringH, conditions=(Left2Left(), Bottom2Bottom()))
 
 
     page.solve() # So far with conditional placement. 
@@ -247,7 +247,7 @@ def buildSpecimenPages(page, family):
         tw, th = context.textSize(charSetString)
         if y - bh < PB + th: # Reserve space for glyph set
             break # Filled the page.
-        newTextBox(stackLine, parent=page, x=PL, y=y-bh-by-U, w=C3, h=th+2, fill=DEBUG_COLOR1)
+        newText(stackLine, parent=page, x=PL, y=y-bh-by-U, w=C3, h=th+2, fill=DEBUG_COLOR1)
         y -= bh + by + U
         page = page.nextc
     

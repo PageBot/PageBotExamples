@@ -20,10 +20,10 @@ from flat import rgb, font, shape, strike, document
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot import getContext
 from pagebot.toolbox.color import blackColor, color
-from pagebot import getResourcesPath
+from pagebot.filepaths import getResourcesPath
 from pagebot.toolbox.units import pt
 from pagebot.conditions import *
-from pagebot.elements import newTextBox
+from pagebot.elements import newText
 import os, os.path
 
 WIDTH = 400
@@ -113,7 +113,7 @@ def testFlatContext():
     bs = context.newString(msg, style=style)
     print(type(bs))
 
-    newTextBox(bs, font=pagebotFont, parent=pbPage, conditions=c, fill=0.9,
+    newText(bs, font=pagebotFont, parent=pbPage, conditions=c, fill=0.9,
             margin=4)
     #print(p.items)
 

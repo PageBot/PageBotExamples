@@ -16,7 +16,8 @@
 
 import traceback
 from random import random
-from pagebot import getContext, getAllContexts, getResourcesPath
+from pagebot import getContext, getAllContexts
+from pagebot.filepaths import getResourcesPath
 from pagebot.constants import A4Rounded
 from pagebot.contexts.basecontext.babelstring import BabelString
 from pagebot.document import Document

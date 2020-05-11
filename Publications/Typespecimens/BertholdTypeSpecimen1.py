@@ -28,7 +28,7 @@ from pagebot import getContext # Decide if running in DrawBot or Linux-Flat
 from pagebot.constants import * # Import some measure and alignments constants.
 from pagebot.document import Document # Overall container class of any PageBot script
 from pagebot.fonttoolbox.objects.font import findFont # Access to installed fonts
-from pagebot.elements import newRect, newTextBox, newImage # Used elements in this specimen
+from pagebot.elements import newRect, newText, newImage # Used elements in this specimen
 from pagebot.conditions import * # Import layout conditions for automatic layout.
 from pagebot.contributions.filibuster.blurb import Blurb
 
@@ -109,7 +109,7 @@ def makePage1(page, font):
     # Title as 2-letter abbreviation of the family name, as in Berthold original
     style = dict(font=font, fontSize=pt(24))
     bs = context.newString(font.info.familyName[:2].capitalize(), style=style)
-    newTextBox(bs, parent=page, conditions=[Left2Left(), Top2SideTop()], 
+    newText(bs, parent=page, conditions=[Left2Left(), Top2SideTop()], 
         yAlign=BOTTOM)
 
     """
@@ -120,7 +120,7 @@ def makePage1(page, font):
     fullName = '%s %s' % (font.info.familyName, font.info.styleName)
     style = dict(font=font, fontSize=pt(24), xTextAlign=CENTER)
     bs = context.newString(fullName.upper(), style=style)
-    newTextBox(bs, parent=r, borderTop=border, borderBottom=border, margin=0, padding=0,
+    newText(bs, parent=r, borderTop=border, borderBottom=border, margin=0, padding=0,
         h=34,
         conditions=[Left2Left(), Top2Top(), Fit2Width()])
     
@@ -137,7 +137,7 @@ def makePage2(page, font):
     fullName = '%s %s' % (font.info.familyName, font.info.styleName)
     style = dict(font=font, fontSize=pt(24), xTextAlign=CENTER)
     bs = context.newString(fullName.upper(), style=style)
-    newTextBox(bs, parent=r, borderTop=border, borderBottom=border, margin=0, padding=0,
+    newText(bs, parent=r, borderTop=border, borderBottom=border, margin=0, padding=0,
         conditions=[Left2Left(), Top2Top(), Fit2Width()])
          
 def makeDocument(font):

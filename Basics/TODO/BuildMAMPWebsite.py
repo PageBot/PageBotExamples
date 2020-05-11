@@ -22,7 +22,7 @@ import os
 from pagebot.constants import LEFT, TOP, BOTTOM
 from pagebot.toolbox.units import fr, px
 from pagebot.conditions import *
-from pagebot.elements import newTextBox
+from pagebot.elements import newText
 from pagebot.document import Document
 
 DoTextFlow = False
@@ -57,7 +57,7 @@ def makeDocument():
     rs['fontSize'] = 14
     rs['textFill'] = 1
 
-    #textBoxStyle = doc.addStyle('textbox', dict(fill=color(0, 0, 0, 0.7),
+    #textBoxStyle = doc.addStyle('text', dict(fill=color(0, 0, 0, 0.7),
     #                                            padding=40))
     pStyle = doc.addStyle('p', dict(textFill=blackColor))
     h1Style = doc.addStyle('h1', dict(fontSize=24, textFill=(0, 0, 1)))
@@ -88,8 +88,8 @@ def makeDocument():
                                    style=pStyle)
         h1 = None
 
-    e1 = newTextBox(s,
-                    name='CSSTextBox1',
+    e1 = newText(s,
+                    name='CSSText1',
                     parent=page0, padding=4, x=100, font='Verdana', h=h1,
                     mb=20, mr=10, # Conditions make the element
                                             # move to top-left of the page.
@@ -105,9 +105,9 @@ def makeDocument():
                     strokeWidth=pt(0.5), fill=color(0.9), stroke=noColor)
     print(e1.style)
 
-    newTextBox(s, # Empty box, will get the overflow
+    newText(s, # Empty box, will get the overflow
                   # from e1, if there is any.
-               name='CSSTextBox2', # Flow reference by element.name
+               name='CSSText2', # Flow reference by element.name
                parent=page0, padding=4, x=100, h=200,
                conditions=[Left2Left(), Fit2Width(), Float2Top()],
                yAlign=TOP, fill=whiteColor, stroke=noColor)

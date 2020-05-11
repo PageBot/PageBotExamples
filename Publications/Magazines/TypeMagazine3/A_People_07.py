@@ -44,7 +44,7 @@ from pagebot.composer import Composer
 
 # Import element layout conditions.
 from pagebot.conditions import *
-from pagebot.elements import newRect, newTextBox, newImage, Galley, Template
+from pagebot.elements import newRect, newText, newImage, Galley, Template
 from pagebot.toolbox.units import units, p, pt, em, inch
 from pagebot.constants import (GRID_COL, GRID_ROW, GRID_SQR, LEFT, RIGHT,
     CENTER, MIDDLE, TOP, RIGHT, INLINE, OUTLINE, ONLINE)
@@ -118,15 +118,15 @@ def getTemplates():
     path = '../../../Art_TYPE-3/Type-People_TYPE-3/Selects_Type-People/Frida-Medrano_02_177797.tif'
 
     newImage(path=path, parent=titleLeft, name='images', conditions=(Left2Col(1), Top2Top()))
-    newTextBox(name='title', h=300, parent=titleLeft, conditions=[Top2Top(), Left2Left(), Fit2Width()], bleed=0)
-    newTextBox(name='people', h=300, parent=titleLeft, conditions=[Bottom2Bottom(), Left2Left(), Fit2Width()], bleed=0)
+    newText(name='title', h=300, parent=titleLeft, conditions=[Top2Top(), Left2Left(), Fit2Width()], bleed=0)
+    newText(name='people', h=300, parent=titleLeft, conditions=[Bottom2Bottom(), Left2Left(), Fit2Width()], bleed=0)
 
     newImage(path=path, parent=titleRight, name='images', conditions=(Left2Col(1), Top2Top()))
 
     for template in (left, right):
         im = newImage(path=path, parent=template, name='image', bleed=0,
             conditions=[Left2Left(), Fit2Width(), Top2Top()], borders=borders)
-        newTextBox(name='people', h=300, parent=template, conditions=[Bottom2Bottom(), Left2Left(), Fit2Width()],
+        newText(name='people', h=300, parent=template, conditions=[Bottom2Bottom(), Left2Left(), Fit2Width()],
             bleed=0)
 
     return dict(
@@ -149,17 +149,17 @@ def setPageStyle(page, index):
     dy2 = BASELINE
     if page.isLeft:
         bs = context.newString('FALL 2018', style=styles['typeTitleRight'])
-        newTextBox(bs, w=CW, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Right2Right()],
+        newText(bs, w=CW, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Right2Right()],
             bleed=0)
         bs = context.newString(page.pn[0], style=styles['pnLeft'])
-        newTextBox(bs, w=CW, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Left2Left()],
+        newText(bs, w=CW, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Left2Left()],
             bleed=0)
     else:
         bs = context.newString('TYPE No. 3', style=styles['typeTitleLeft'])
-        newTextBox(bs, w=CW, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Left2Left()],
+        newText(bs, w=CW, h=page.pb-dy1, parent=page, conditions=[Bottom2SideBottom(), Left2Left()],
             bleed=0)
         bs = context.newString(page.pn[0], style=styles['pnRight'])
-        newTextBox(bs, w=CW, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Right2Right()],
+        newText(bs, w=CW, h=page.pb-dy2, parent=page, conditions=[Bottom2SideBottom(), Right2Right()],
             bleed=0)
 
     page.solve()
@@ -219,7 +219,7 @@ def makeDocument():
             page=page,
             style=doc.styles,
             box=page.select('people'),
-            newTextBox=newTextBox)
+            newText=newText)
 
         composer.compose(galley, targets=targets, page=page)
 
