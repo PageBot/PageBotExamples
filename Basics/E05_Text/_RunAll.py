@@ -19,7 +19,7 @@ import os
 
 EXPORT_PATH = '_export'
 if not os.path.exists(EXPORT_PATH):
-	os.path.mkdir(EXPORT_PATH)
+	os.mkdir(EXPORT_PATH)
 
 import E00_BabelString
 import E00_Text
