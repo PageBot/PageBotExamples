@@ -35,9 +35,9 @@ from pagebot.toolbox.color import Color
 
 W, H = 500, 400
 
-def makeDocument():
+def makeDocument(context):
     # Creates the publication/document that holds the pages.
-    doc = Document(w=W, h=H, autoPages=1)
+    doc = Document(w=W, h=H, context=context)
     print(doc.view)
     print(doc.pages)
 
@@ -59,7 +59,7 @@ def makeDocument():
         makePage(doc, page, c)
         #page = page.next
 
-    testCoordinates()
+    testCoordinates(context)
 
 
 rectSets = []
@@ -85,8 +85,7 @@ def makePage(doc, page, conditions):
     score = doc.solve()
     doc.build()
 
-def testCoordinates():
-    context = getContext()
+def testCoordinates(context):
     context.fill((0, 1, 0))
     context.stroke(None)
 
@@ -100,4 +99,5 @@ def testCoordinates():
             context.circle(x, y, 2)
             context.text('%d' % i, (x + 5, y - 5))
 
-makeDocument()
+context = getContext()
+makeDocument(context)

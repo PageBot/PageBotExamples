@@ -18,7 +18,7 @@
 #	  Setup the document view to show registration marks and cropmarks
 #     Show the page frame and padding frame in blue
 #     Show the generated PDF file name on top of the page.
-#	  Show red “A4” centered on the page as Text element, 
+#	  Show red “A4” centered on the page as Text element,
 #     with its middle capHeight on the middle of page height
 #     Draw the background of the Text element in light gray
 #
@@ -52,7 +52,7 @@ doc = Document(w=W, h=H, title=EXPORT_PATH, autoPages=1, context=context)
 
 view = doc.view # Get the current view of the document.
 view.padding = padding # Make space to show crop marks, etc.
-view.showCropMarks = True 
+view.showCropMarks = True
 view.showRegistrationMarks = True
 view.showFrame = True # Show the frame of the  page as blue line
 view.showNameInfo = True # Showing page info and title on top of the page.
@@ -61,17 +61,17 @@ page = doc[1] # Get page on pageNumber, first in row (this is only one now).
 page.padding = padding
 
 # Create a style dictionary and a BabelString with that style.
-# xAlign is centered on the (x, y) position. For strings without defined 
+# xAlign is centered on the (x, y) position. For strings without defined
 # width xAlign and xTextAlign a equivalent.
 # yAlign is positioning on middle of the capHeight
-style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02), 
+style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02),
 	textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP)
 bs = context.newString('A4', style)
 print('Text align:', bs.xAlign)
 print('Rendered text size:', bs.tw, bs.th)
 print('Lines:', bs.lines)
 
-t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, 
+t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor,
 	xAlign=CENTER, showOrigin=True)
 print(t.bs.xAlign)
 print('Text element size:', t.w, t.h)

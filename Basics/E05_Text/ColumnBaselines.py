@@ -14,7 +14,7 @@
 #
 #     TextBaselines.py
 #
-#     Show how alignment of baselines work for 
+#     Show how alignment of baselines work for
 
 from pagebot.document import Document
 from pagebot.contexts import getContext
@@ -37,7 +37,7 @@ G = pt(12)
 INDENT = pt(12) # Indent, firstline indent and bullet indent
 
 # Calculate the width of the page from the column measures
-W = 1000 
+W = 1000
 H = 1000 # Fixed height
 
 CW = (W - 2*PADDING - (COLS-1)*G)/COLS
@@ -68,13 +68,13 @@ pStyle = dict(font=font, fontSize=PS, leading=LEADING, textFill=color(0), tabs=t
 aStyle = dict(font=fontItalic, fontSize=PS, leading=LEADING, textFill=color(1, 0, 0), tabs=tabs)
 bStyle = dict(font=fontBold, fontSize=PS, leading=LEADING, tabs=tabs)
 ulStyle = dict(leading=LEADING*0.000000000000001) # Pragmatic solution for now.
-liStyle = dict(font=font, fontSize=PS, indent=INDENT, firstLineIndent=0, textFill=0, 
+liStyle = dict(font=font, fontSize=PS, indent=INDENT, firstLineIndent=0, textFill=0,
     leading=LEADING, tabs=tabs, listBullet='•\t')
 
 # Collect all styles for package into Typesetter
-styles = dict(root=pStyle, 
-    h1=h1Style, h2=h2Style, h3=h3Style, h4=h4Style, p=pStyle, b=bStyle, 
-    ul=ulStyle, li=liStyle, 
+styles = dict(root=pStyle,
+    h1=h1Style, h2=h2Style, h3=h3Style, h4=h4Style, p=pStyle, b=bStyle,
+    ul=ulStyle, li=liStyle,
     bullet=liStyle, brStyle=pStyle, a=aStyle)
 
 # Create a document with these attributes, single page.
@@ -89,7 +89,7 @@ view.showPadding = True
 
 s = """
 
-# What is PageBot?  
+# What is PageBot?
 <!--
 21\t22\t2\t2\t2
 21\tAA\t2\tXX
@@ -98,7 +98,7 @@ s = """
 PageBot is a page layout program that enables designers to create high quality[S]
 documents using code. It is available both as Python library working with[S]
 [DrawBot](http://www.drawbot.com) and as part of a collection of stand-alone[S]
-desktop applications that can be created from it. 
+desktop applications that can be created from it.
 
 Other contexts such as[S]
 [Flat](http://xxyxyz.org/flat) (currently under development) allow PageBot to[S]
@@ -163,7 +163,7 @@ tb1.conditions = (Right2Right(), Top2Top(), Baseline2Grid(index=3))
 
 
 s = context.newString('Ha', titleStyle)
-tb2 = newText(s, parent=page, w=CW, 
+tb2 = newText(s, parent=page, w=CW,
     conditions=(Left2Left(), Top2Top(), Baseline2Grid()))
 
 s = context.newString('Ha', titleStyle)
@@ -194,9 +194,9 @@ tb3.conditions = (Left2Col(2), Top2Top(), Fit2Height())
 style = dict(font=font, fontSize=pt(18), leading=18, textFill=0, fill=(1, 0, 0), xTextAlign=LEFT)
 
 bs = c.newString('Aaaa\nBbbb\nCccc\nDddd', style=style)
-tb = newText(bs, parent=page, padding=G, fill=(1, 1, 0), w=page.pw, h=page.ph, 
-    baselineWidth=pt(3), 
-    baselineColor=color(1, 0, 0), 
+tb = newText(bs, parent=page, padding=G, fill=(1, 1, 0), w=page.pw, h=page.ph,
+    baselineWidth=pt(3),
+    baselineColor=color(1, 0, 0),
     conditions=[Left2Left(), Baseline2Grid(index=2)])
 tb.showBaselineGrid = True
 tb.baselineGrid=pt(28)
