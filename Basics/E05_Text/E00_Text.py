@@ -32,9 +32,10 @@ from pagebot.document import Document
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 
-FONT_NAME = 'PageBot-Regular'
-fontSize = pt(300)
 H, W = A4 # Standard portrait, swapped to be used as landscape ratio.
+FONT_NAME = 'PageBot-Regular'
+EXPORT_PATH = '_export/E00_Text-%s.pdf'
+fontSize = pt(300)
 padding = pt(40) # Outside measures to accommodate the crop makrs.
 sw = pt(0.5) # Stroke width of guide lines
 
@@ -43,44 +44,50 @@ bgColor = color(0.9) # Background color of the text box
 
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created.
-EXPORT_PATH = '_export/E00_Text.pdf'
-print('Generating:', EXPORT_PATH)
 
-# Make a new document with one text box.
+def makeText(context):
+    export_path = EXPORT_PATH % context.name
+    print('Generating:', export_path)
 
-doc = Document(w=W, h=H, title=EXPORT_PATH, autoPages=1, context=context)
+    # Make a new document with one text box.
 
-view = doc.view # Get the current view of the document.
-view.padding = padding # Make space to show crop marks, etc.
-view.showCropMarks = True
-view.showRegistrationMarks = True
-view.showFrame = True # Show the frame of the  page as blue line
-view.showNameInfo = True # Showing page info and title on top of the page.
+    doc = Document(w=W, h=H, title=export_path, context=context)
 
-page = doc[1] # Get page on pageNumber, first in row (this is only one now).
-page.padding = padding
+    view = doc.view # Get the current view of the document.
+    view.padding = padding # Make space to show crop marks, etc.
+    view.showCropMarks = True
+    view.showRegistrationMarks = True
+    view.showFrame = True # Show the frame of the  page as blue line
+    view.showNameInfo = True # Showing page info and title on top of the page.
 
-# Create a style dictionary and a BabelString with that style.
-# xAlign is centered on the (x, y) position. For strings without defined
-# width xAlign and xTextAlign a equivalent.
-# yAlign is positioning on middle of the capHeight
-style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02),
-	textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP)
-bs = context.newString('A4', style)
-print('Text align:', bs.xAlign)
-print('Rendered text size:', bs.tw, bs.th)
-print('Lines:', bs.lines)
+    page = doc[1] # Get page on pageNumber, first in row (this is only one now).
+    page.padding = padding
 
-t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor,
-	xAlign=CENTER, showOrigin=True)
-print(t.bs.xAlign)
-print('Text element size:', t.w, t.h)
-print('Text in box size:', t.bs.tw, t.bs.th)
+    # Create a style dictionary and a BabelString with that style.
+    # xAlign is centered on the (x, y) position. For strings without defined
+    # width xAlign and xTextAlign a equivalent.
+    # yAlign is positioning on middle of the capHeight
+    style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02),
+            textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP)
+    bs = context.newString('A4', style)
+    print('Text align:', bs.xAlign)
+    print('Rendered text size:', bs.tw, bs.th)
+    print('Lines:', bs.lines)
 
-# Horizontal and vertial lines, to show text position,
-newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.8), strokeWidth=0.5)
-newLine(parent=page, x=page.w/2, y=0, w=0, h=page.h, stroke=(0, 0, 0.8), strokeWidth=0.5)
+    t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor,
+            xAlign=CENTER, showOrigin=True)
+    print(t.bs.xAlign)
+    print('Text element size:', t.w, t.h)
+    print('Text in box size:', t.bs.tw, t.bs.th)
 
-print(bs.lines)
-# Export the document as PDF
-doc.export(EXPORT_PATH)
+    # Horizontal and vertial lines, to show text position,
+    newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.8), strokeWidth=0.5)
+    newLine(parent=page, x=page.w/2, y=0, w=0, h=page.h, stroke=(0, 0, 0.8), strokeWidth=0.5)
+
+    print(bs.lines)
+    # Export the document as PDF
+    doc.export(export_path)
+
+for contextName in ('DrawBot', 'Flat'):
+    context = getContext(contextName)
+    makeText(context)
