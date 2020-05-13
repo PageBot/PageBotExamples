@@ -33,6 +33,7 @@ from pagebot.contexts.sketchcontext.sketchcontext import SketchContext
 FONT_NAME = 'PageBot-Regular'
 
 EXPORT_PATH = '_export/E01_VerticalMetricsInSketch.pdf'
+EXPORT_PATH_MODIFIED = '_export/E01_VerticalMetricsInSketch_Modified.pdf'
 
 # Get a SketchString from an existing Sketch template file, 
 # convert the string to BabelString with SketchContext flavor.
@@ -41,9 +42,13 @@ context = SketchContext(path)
 print('SketchContext:', context)
 artboard = context.b.artboards[0] # Get the first artboard of the Sketch file
 print('Artboard:', artboard) 
-skText = artboard.layers[-1] # Get the text from the first artboard layer
-print('Artboard.layers[0]:', skText)
-print('skText.attriutedString:', skText.attributedString)
+# Find a Text in the list of elements
+for eIndex, e in enumerate(artboard.layers):
+	if e.__class__.__name__ == 'SketchText':
+		skText = e # Get the text from the first artboard layer
+		print('Artboard.layers[%d]:' % eIndex, skText)
+		break
+print('skText.attributedString:', skText.attributedString)
 # The SketchContext knows how to convert the attributed string to BabelString.
 bs = context.asBabelString(skText.attributedString)
 print('BabelString.runs:', bs.runs)
@@ -62,9 +67,14 @@ drawBotContext = getContext('DrawBot')
 doc = Document(name='TestBabelString', context=drawBotContext)
 # Read the Sketch file, convert SketchAttributedStrings into BabelStrings
 context.readDocument(doc) 
+print('Doc page size', doc.w, doc.h, doc[1].w, doc[1].h)
+# Eport the document "as is" for checking consistency with the original.
+doc.export(EXPORT_PATH)
+
+# Now we'll make some modifications.
 # Get the first page of the document
 page = doc[1]
-# Get the Sketch text that is now on the page as PageBot Text element.
+# Get one of the the SketchText that is now on the page as PageBot Text element.
 for e in page.elements:
 	if isinstance(e, Text):
 		break
@@ -75,6 +85,7 @@ print('Text element vertical alignment:', e.yAlign)
 print('BabelString context:', e.bs.context, 'Font in run:', e.bs.runs[0].style['font'])
 # Move the element
 e.x += 200
-doc.export(EXPORT_PATH)
+# Export as different name.
+doc.export(EXPORT_PATH_MODIFIED)
 
 
