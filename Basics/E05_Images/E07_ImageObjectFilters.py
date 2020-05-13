@@ -76,7 +76,6 @@ group.solve()
 conditions = (Right2Right(), Float2Top(), Float2Left(), SolveBlock())
 for n in range(15):
     imo = context.getImageObject(IMAGE_PATH)
-    print('3453534535434', imo.path)
     img = newImage(imo=imo, x=50,y=50, z=10, padding=0, mb=GUTTER,
                    parent=group, w=CW-2, h=CW-2, #clipRect=(120, 120, 1440, 440),
                    conditions=conditions,
