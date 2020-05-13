@@ -49,12 +49,14 @@ def babelString(c):
     # Draw frame on the text
     c.fill(None)
     c.stroke((0, 0, 0.5))
-    x = W/2-bs.tw/2 # Left side of the frame
-    y = H/2-bs.th+bs.topLineAscender # Bottom position
+    x = W / 2 - bs.tw / 2 # Left side of the frame
+    y = H / 2 - bs.th + bs.topLineAscender # Bottom position
     c.rect(x, y, bs.tw, bs.th)
 
+
+    print(type(bs))
     # Draw the string, centered/baseline in middle of the page.
-    c.drawString(bs, (W/2, H/2))
+    #c.drawString(bs, (W/2, H/2))
 
 for contextName in ('DrawBot', 'Flat'):
     context = getContext(contextName)
