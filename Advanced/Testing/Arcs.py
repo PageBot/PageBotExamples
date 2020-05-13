@@ -70,7 +70,7 @@ def testArcs():
 
     for i, c in enumerate(contexts):
         if i in (0, 1):
-            path = c.newBezierPath()
+            path = c.newPath()
             print(path)
             testArc(path)
             printArc(path)

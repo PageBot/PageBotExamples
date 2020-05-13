@@ -69,7 +69,7 @@ def testBezierPaths():
 
     for i, c in enumerate(contexts):
         if i in (0, 1):
-            path = c.newBezierPath()
+            path = c.newPath()
             print(path)
             testBezierPath(path)
             printBezierPath(path)

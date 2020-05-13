@@ -4,7 +4,7 @@ context = getContext()
 
 
 context.stroke(0, 1)
-context.newBezierPath()
+context.newPath()
 context.moveTo((0, 0))
 context.lineTo((100, 100))
 context.drawPath()
