@@ -56,7 +56,7 @@ def babelString(c):
     # Draw the string, centered/baseline in middle of the page.
     c.drawString(bs, (W/2, H/2))
 
-#context = getContext('DrawBot')
-context = getContext('Flat')
-babelString(context)
+for contextName in ('DrawBot', 'Flat'):
+    context = getContext(contextName)
+    babelString(context)
 
