@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -21,7 +22,7 @@ from pagebot.toolbox.units import *
 from pagebot.toolbox.color import Color, whiteColor
 
 context = getContext('DrawBot')
-    
+
 MAX_I = 6
 
 def drawSierpinskiSquare(px, py, w, size, i):
@@ -29,10 +30,10 @@ def drawSierpinskiSquare(px, py, w, size, i):
         return
 
     i += 1
-        
+
     if w < 1:
         return
-        
+
     for x in range(3):
         for y in range(3):
             if x == 1 and y == 1:

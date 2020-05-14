@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -42,7 +43,7 @@ print('Difference: %f' % (aa.fontAscender() - aa.fontDescender()))
 
 context.stroke(blackColor)
 context.fill(noColor)
-w, h = textSize(aa)
+w, h = context.textSize(aa)
 context.rect(pt(100), pt(100), pt(w), pt(h))
 context.fill(blackColor)
 context.fontSize(pt(80))
