@@ -23,7 +23,6 @@ import weakref
 from fontTools.ttLib import TTFont, TTLibError
 from pagebot import getContext
 from pagebot.contexts.basecontext.basebezierpoint import BaseBezierPoint as BezierPoint
-#from drawBot import BezierPath # FIXME: use PageBot Bezier path
 from pagebot.contexts.basecontext.bezierpath import BezierPath
 from pagebot.fonttoolbox.objects.fontinfo import FontInfo
 from pagebot.fonttoolbox.fontpaths import getFontPaths
@@ -41,18 +40,6 @@ QUADRATIC_CONTROLPOINT_COLOR = greenColor
 QUADRATIC_CONTROLPOINT_SIZE = R
 CUBIC_CONTROLPOINT_COLOR = blackColor
 CUBIC_CONTROLPOINT_SIZE = R / 2
-
-'''
-class Point:
-
-    # FIX: See more generic implentation in PageBotPath
-    def __init__(self, x, y, onCurve=True, smooth=False, start=False):
-        self.x = x
-        self.y = y
-        self.onCurve = onCurve
-        self.smooth = smooth
-        self.start = start
-'''
 
 def drawSegment(context, path, segment, implied, cps, verbose=False):
     """
@@ -284,8 +271,8 @@ def draw(context):
 
 
 for contextName in (
-        'DrawBot', 
-        #'Flat'
+        'DrawBot',
+        'Flat'
     ):
     context = getContext(contextName)
     context.fontSize(24)

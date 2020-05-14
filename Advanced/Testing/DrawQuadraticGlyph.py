@@ -26,7 +26,7 @@ from drawBot import (BezierPath, translate, line, text, stroke, fill, oval,
         drawPath)
 
 from pagebot import getContexts
-from pagebot.elements.paths.pagebotpath import PageBotPoint as Point
+from pagebot.contexts.basecontext.bezierpoint import BezierPoint as Point
 from pagebot.fonttoolbox.objects.fontinfo import FontInfo
 from pagebot.fonttoolbox.fontpaths import getFontPaths
 from pagebot.fonttoolbox.objects.glyph import *
