@@ -19,8 +19,9 @@
 #     Some examples showing the working of BabelString with context
 #     without the making of Document and Text elements.
 #
-from pagebot import getContext
+import traceback
 
+from pagebot import getContext
 from pagebot.constants import *
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
@@ -53,10 +54,11 @@ def babelString(c):
     y = H / 2 - bs.th + bs.topLineAscender # Bottom position
     c.rect(x, y, bs.tw, bs.th)
 
-
-    print(type(bs))
-    # Draw the string, centered/baseline in middle of the page.
-    #c.drawString(bs, (W/2, H/2))
+    try:
+        # Draw the string, centered/baseline in middle of the page.
+        c.drawString(bs, (W/2, H/2))
+    except Exception as e:
+        print(traceback.format_exc())
 
 for contextName in ('DrawBot', 'Flat'):
     context = getContext(contextName)

@@ -30,7 +30,7 @@ WIDTH = 400
 HEIGHT = 200
 FONTSIZE = 24
 LEADING = 36
-FONTNAME = 'BungeeHairline-Regular'
+FONTNAME = 'PageBot-Regular'
 
 def testFlatContext():
     context = getContext('Flat')
@@ -55,22 +55,22 @@ def testFlatContext():
     flatPage = flatDoc.addpage()
 
     # Pagebot equivalent.
-    context.newDrawing(WIDTH, HEIGHT)
-    pbPage = context.newPage()
-    print(pbPage)
+    #context.newDrawing(WIDTH, HEIGHT)
+    pbPage = context.newPage(WIDTH, HEIGHT)
+    # print(pbPage)
 
     ''' Draws a figure. '''
 
     # Flat.
-    #figure = shape().fill(flatFill).stroke(flatStroke).width(strokeWidth)
-    #r = figure.rectangle(50, 50, 20, 20)
-    #p.place(r)
+    figure = shape().fill(flatFill).stroke(flatStroke).width(strokeWidth)
+    r = figure.rectangle(50, HEIGHT - 50, 20, 20)
+    flatPage.place(r)
 
     # Pagebot.
-    #context.fill(pagebotFill)
-    #context.stroke(pagebotStroke)
-    #context.strokeWidth(strokeWidth)
-    #context.rect(50, 50, 20, 20)
+    context.fill(pagebotFill)
+    context.stroke(pagebotStroke)
+    context.strokeWidth(strokeWidth)
+    context.rect(50, 50, 20, 20)
 
     #print(p.items[0].item.style.width)
     #print(context.pages[0].items[0].item.style.width)
@@ -96,9 +96,8 @@ def testFlatContext():
     style = dict(font=pagebotFont, fontSize=FONTSIZE, textFill=pagebotStroke,
             leading=LEADING)
     bs = context.newString(msg, style=style)
-    context.text('bla', (50, 100)) # TODO: also for native flat.
+    #context.text('bla', (50, 100)) # TODO: also for native flat.
     context.text(bs, (100, 100))
-
 
     #print(headline.style.size)
     #print(headline.style.leading)
