@@ -270,10 +270,7 @@ def draw(context):
     context.saveImage("_export/E40_DrawQuadraticGlyph-%s.pdf" % context.name)
 
 
-for contextName in (
-        'DrawBot',
-        'Flat'
-    ):
+for contextName in ('DrawBot', 'Flat'):
     context = getContext(contextName)
     context.fontSize(24)
     draw(context)

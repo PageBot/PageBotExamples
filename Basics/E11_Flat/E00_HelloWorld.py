@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -17,13 +18,18 @@
 #
 import os
 from flat import rgb, font, shape, strike, document
+from pagebot.fonttoolbox.objects.font import findFont
+from pagebot.constants import DEFAULT_FONT
 
 fileName = '00_HelloWorld'
 if not os.path.exists('_export'):
 	os.mkdir('_export')
 
 red = rgb(255, 0, 100)
-flatFont = font.open('/Library/Fonts/Georgia Bold.ttf')
+
+pagebotFont = findFont(DEFAULT_FONT)
+flatFont = font.open(pagebotFont.path)
+#flatFont = font.open('/Library/Fonts/Georgia Bold.ttf')
 figure = shape().stroke(red).width(2.5)
 headline = strike(flatFont).color(red).size(20, 24)
 
