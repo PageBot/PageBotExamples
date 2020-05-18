@@ -1,6 +1,25 @@
+#
+#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
+#     www.pagebot.io
+#     Licensed under MIT conditions
+#
+#     Supporting DrawBot, www.drawbot.com
+#     Supporting Flat, xxyxyz.org/flat
+# -----------------------------------------------------------------------------
+#
+#     E01_TextPosition.py
+#
+#	  This examples creates a Hello world" file, by just using
+#     Flat functions.
+#
 
+import os
 from flat import rgb, font, shape, strike, document, paragraph, text
 from pagebot.fonttoolbox.objects.font import findFont
+
+EXPORT_PATH = '_export/01_TextPosition.pdf'
+if not os.path.exists('_export'):
+	os.mkdir('_export')
 
 # Get the PageFont instance
 pbFont = findFont('PageBot-Regular')
@@ -46,6 +65,6 @@ placedText = flatPage.place(text(par))
 #placedText.position(x, 400-) # Placing on baseline
 ascender = fontSize*pbFont.info.typoAscender/pbFont.info.unitsPerEm
 placedText.frame(x, y-ascender, placedText.width, fontSize)
-flatDoc.pdf('_export/E00_TextPosition.pdf')
+flatDoc.pdf(EXPORT_PATH)
 
 print('Done')
