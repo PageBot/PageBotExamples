@@ -40,6 +40,6 @@ for context in contexts:
 	bs = context.newString(loremipsum(), style)
 	newText(bs, parent=page, x=padding, y=padding, w=page.pw, h=page.ph)
 
-	doc.export(EXPORT_PATH)
+	doc.export(EXPORT_PATH % context.name)
 
 print('Done')

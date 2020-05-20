@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 #
 #     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io
@@ -10,7 +9,7 @@
 #
 #     E02_TextBoxPosition.py
 #
-#     This examples creates a Hello world" file, by just using
+#	  This examples creates a Hello world" file, by just using
 #     Flat functions.
 #
 

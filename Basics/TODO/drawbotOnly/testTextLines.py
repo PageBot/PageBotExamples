@@ -15,10 +15,11 @@
 #     testTextLines.py
 #
 import sys
+from pagebot.toolbox.units import pt
 from pagebot import getContext
 context = getContext()
 
-if not context.isDrawBot:
+if context.name != 'DrawBotContext':
     print('Example only runs on DrawBot.')
     sys.exit()
 
@@ -138,10 +139,12 @@ class TextLine:
         return CoreText.CTLineGetTrailingWhitespaceWidth(self._ctLine)
     trailingWhiteSpace = property(_get_trailingWhiteSpace)
 
-def getTextLines(fs, w, h):
+def getTextLines(bs, w, h):
     """Answer an ordered list of all baseline position, starting at the top."""
+    # Get the FormattedString by property. BabelString ask the context
+    # to create it, if it doesn't exist.
+    attrString = bs.cs.getNSObject()
     box = 0, 0, w, h
-    attrString = fs.getNSObject()
     setter = CoreText.CTFramesetterCreateWithAttributedString(attrString)
     path = Quartz.CGPathCreateMutable()
     Quartz.CGPathAddRect(path, None, Quartz.CGRectMake(*box))
@@ -154,51 +157,48 @@ def getTextLines(fs, w, h):
     origins = CoreText.CTFrameGetLineOrigins(box, (0, len(ctLines)), None)
     return textLines, origins
 
-fs = FormattedString(u'This åéöøa', font='BitcountMonoDouble-MediumCircleItalic', fontSize=24)
-fs = fs + FormattedString('This an example. ' * 20, font='Verdana', fontSize=16)
+bs = context.newString('This åéöøa', dict(font='BitcountMonoDouble-MediumCircleItalic', fontSize=pt(24)))
+bs += context.newString('This an example. ' * 20, dict(font='Verdana', fontSize=pt(16)))
 
-textLines, o = getTextLines(fs, 500, 200)
-#print(o)
-#print
-for tl in textLines:
-    #print('Bounds:', tl.bounds, tl.imageBounds, tl.trailingWhiteSpace, 'Len:', len(tl), 'Index:', tl.stringIndex, )
-    #tl.alignment
-    #print('Index at position (100, 10):', tl.getIndexForPosition((100, 10)))
-    #print('Offset at string index (0):', tl.runs)
-    print('Runs:', len(tl.runs))
-    print('String:', tl.string)
-    for textRun in tl.runs:
-        """
-        print(CoreText.CTRunGetTextMatrix(ctRun._ctRun))
-        print(CoreText.CTRunGetStringRange(ctRun._ctRun))
-        print(CoreText.CTRunGetStringIndicesPtr(ctRun._ctRun)[20])
-        print(CoreText.CTRunGetStringIndices(ctRun._ctRun, CoreText.CFRange(0, 5), None)[4])
-        print(CoreText.CTRunGetAdvances(ctRun._ctRun, CoreText.CFRange(0, 5), None))
-        print(CoreText.CTRunGetPositionsPtr(ctRun._ctRun)[20])
-        print(CoreText.CTRunGetPositions(ctRun._ctRun, CoreText.CFRange(0, 5), None)[4])
-        print(CoreText.CTRunGetGlyphsPtr(ctRun._ctRun)[20])
-        print(CoreText.CTRunGetGlyphs(ctRun._ctRun, CoreText.CFRange(0, 5), None)[0:5])
-        print(CoreText.CTRunGetStatus(ctRun._ctRun))
-        print(CoreText.CTRunGetAttributes(ctRun._ctRun)['NSColor'])
-        print(CoreText.CTRunGetAttributes(ctRun._ctRun)['NSParagraphStyle'])
-        print(CoreText.CTRunGetAttributes(ctRun._ctRun)['NSFont'])
-        print(ctRun._ctRun)
-        """
-        print(textRun.nsFont, textRun.glyphFontIndices, textRun.positions)
-        print('========')
-        print(textRun.displayName)
-        print(textRun.familyName)
-        print(textRun.fontName)
-        print(textRun.glyphCount)
-        print(textRun.fontDescriptor)
-        print(textRun.isFixedPitch)
-        print(textRun.renderingMode)
-        print(textRun.capHeight)
-        print(textRun.ascender)
-        print(textRun.descender)
-        print(textRun.fontBoundingRect)
-        print(textRun.italicAngle)
-        print
-        #print(CoreText.CTLineGetGlyphRuns(tl._ctLine))
-    #print(CoreText.CTLineGetStringRange(tl._ctLine))
-    #print(tl.string )
+textLines = context.getTextLines(bs, 500, 200)
+
+for textLineInfo in textLines:
+    print('TextLineInfo')
+    print('RunInfo count:', len(textLineInfo.runs))
+    for runInfo in textLineInfo.runs:
+        print(textLineInfo.x, textLineInfo.y, runInfo)
+        # The code below is old, from the time that we directly used CRTun, etc.
+        # Now, using contexts that are not aware of DrawBot/OSX, that information
+        # is hidden in the BabelLineInfo.
+        # Note that after processing the line by the context, we don't have the
+        # original run and string anymore (e.g. due to OT-feature glyph replacement.)
+
+        # print(CoreText.CTRunGetTextMatrix(ctRun._ctRun))
+        # print(CoreText.CTRunGetStringRange(ctRun._ctRun))
+        # print(CoreText.CTRunGetStringIndicesPtr(ctRun._ctRun)[20])
+        # print(CoreText.CTRunGetStringIndices(ctRun._ctRun, CoreText.CFRange(0, 5), None)[4])
+        # print(CoreText.CTRunGetAdvances(ctRun._ctRun, CoreText.CFRange(0, 5), None))
+        # print(CoreText.CTRunGetPositionsPtr(ctRun._ctRun)[20])
+        # print(CoreText.CTRunGetPositions(ctRun._ctRun, CoreText.CFRange(0, 5), None)[4])
+        # print(CoreText.CTRunGetGlyphsPtr(ctRun._ctRun)[20])
+        # print(CoreText.CTRunGetGlyphs(ctRun._ctRun, CoreText.CFRange(0, 5), None)[0:5])
+        # print(CoreText.CTRunGetStatus(ctRun._ctRun))
+        # print(CoreText.CTRunGetAttributes(ctRun._ctRun)['NSColor'])
+        # print(CoreText.CTRunGetAttributes(ctRun._ctRun)['NSParagraphStyle'])
+        # print(CoreText.CTRunGetAttributes(ctRun._ctRun)['NSFont'])
+        # print(ctRun._ctRun)
+
+        # print(textRun.nsFont, textRun.glyphFontIndices, textRun.positions)
+        # print('========')
+        # print(textRun.displayName)
+        # print(textRun.familyName)
+        # print(textRun.fontName)
+        # print(textRun.glyphCount)
+        # print(textRun.fontDescriptor)
+        # print(textRun.isFixedPitch)
+        # print(textRun.renderingMode)
+        # print(textRun.capHeight)
+        # print(textRun.ascender)
+        # print(textRun.descender)
+        # print(textRun.fontBoundingRect)
+        # print(textRun.italicAngle)
