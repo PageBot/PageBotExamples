@@ -7,18 +7,16 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E02_TextBoxPosition.py
+#     E14_TextBoxBaselines.py
 #
-#	  This examples creates a Hello world" file, by just using
-#     Flat functions.
-#
+#     Show a page filling column with baselines.
 
 import os
 from flat import rgb, font, shape, strike, document, paragraph, text
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.loremipsum import loremipsum
 
-EXPORT_PATH = '_export/02_TextBoxPosition.pdf'
+EXPORT_PATH = '_export/14_TextBoxBaselines.pdf'
 if not os.path.exists('_export'):
 	os.mkdir('_export')
 
@@ -30,31 +28,47 @@ black = rgb(0, 0, 0)
 flatFont = font.open(pbFont.path)
 
 figure = shape().stroke(black).width(1)
-strk = strike(flatFont).color(red).size(fontSize, tracking=0.1)
+st = strike(flatFont).color(red).size(fontSize).tracking(0.1)
 
 W, H = 1000, 1000
+R = 20 # radius of origin marker
 
 # Flat has origin in top-left
-flatDoc = document(W, H, 'pt')
-flatPage = flatDoc.addpage()
+fDoc = document(W, H, 'pt')
+fPage = fDoc.addpage()
 
 txt = loremipsum()
 
 # Text has to be split, not to contain newlines, into paragraphs.
-M = 80 # Margin
-x = M
-y = M # Flat has origin on top left
-flatPage.place(figure.rectangle(x, y-20, 20, 20))
+P = 80 # Padding
+x = P
+y = P # Flat has origin on top left
 paragraphs = []
 for txtParagraph in txt.split('\n'):
-    strk = strike(flatFont).color(red).size(fontSize)
-    paragraphs.append(paragraph([strk.span(txtParagraph)]))
-placedText = flatPage.place(text(paragraphs))
+    st = strike(flatFont).color(red).size(fontSize)
+    paragraphs.append(paragraph([st.span(txtParagraph)]))
+pt = fPage.place(text(paragraphs)) # Place the text
 # Placing as frame seems to give better control on vertical position.
-#placedText.position(x, y) # Placing on baseline
 ascender = fontSize*pbFont.info.typoAscender/pbFont.info.unitsPerEm
 # Baseline of the blox on M from top-left
-placedText.frame(x, y-ascender, W-2*M, H-2*M)
-flatDoc.pdf(EXPORT_PATH)
+pt.frame(x, y, W-2*P, H-2*P)
 
-print('Done')
+# Get the bounding box of this placedText,
+# so we can use the (w, h) to create the doc/page size.
+lines = [0]
+# Find the y-positions of the lines
+for lIndex, (height, _) in enumerate(pt.layout.runs()):
+	if lIndex >= 0:
+		lines.append(lines[-1]+height)
+for ly in lines:
+	fPage.place(figure.line(x, y+ly, W-P, y+ly))
+
+# Cross hair marker on text origin baseline
+y += ascender
+fPage.place(figure.circle(x, y, R))
+fPage.place(figure.line(x-R, y, x+R, y))
+fPage.place(figure.line(x, y-R, x, y+R))
+
+fDoc.pdf(EXPORT_PATH)
+
+print('Done', EXPORT_PATH)

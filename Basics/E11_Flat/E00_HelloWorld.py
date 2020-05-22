@@ -21,7 +21,7 @@ from flat import rgb, font, shape, strike, document
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.constants import DEFAULT_FONT
 
-fileName = '00_HelloWorld'
+EXPORT_PATH = '_export/00_HelloWorld'
 if not os.path.exists('_export'):
 	os.mkdir('_export')
 
@@ -37,6 +37,8 @@ d = document(100, 100, 'mm')
 p = d.addpage()
 p.place(figure.circle(50, 50, 20))
 p.place(headline.text('Hello world!')).frame(10, 10, 80, 80)
-p.image(kind='rgb').png('_export/%s.png' % fileName)
-p.svg('_export/%s.svg' % fileName)
-d.pdf('_export/%s.pdf' % fileName)
+p.image(kind='rgb').png(EXPORT_PATH + '.png') # Export the page
+p.svg(EXPORT_PATH + '.svg') # Export the page 
+d.pdf(EXPORT_PATH + '.pdf') # Export the document
+
+print('Done', EXPORT_PATH)

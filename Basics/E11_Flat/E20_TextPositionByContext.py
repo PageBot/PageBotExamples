@@ -7,9 +7,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E01_TextPosition.py
-#
-#	  This examples creates a Hello world" file, by using FlatContext
+#     E20_TextPositionByContext.py
 #
 
 import os
@@ -23,7 +21,7 @@ from pagebot.fonttoolbox.objects.font import findFont
 W = H = pt(800)
 padding = pt(30)
 
-EXPORT_PATH = '_export/10_TextPositionByContext%s.pdf'
+EXPORT_PATH = '_export/20_TextPositionByContext%s.pdf'
 if not os.path.exists('_export'):
 	os.mkdir('_export')
 
@@ -42,4 +40,4 @@ for context in contexts:
 
 	doc.export(EXPORT_PATH % context.name)
 
-print('Done')
+print('Done', EXPORT_PATH)
