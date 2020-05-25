@@ -13,7 +13,7 @@
 #     the use of PageBot document, pages and components.
 #
 #     Show the position of a text box.
-#
+
 import os
 from flat import rgb, font, shape, strike, document, paragraph, text
 from pagebot.fonttoolbox.objects.font import findFont
@@ -50,9 +50,11 @@ x = M
 y = M # Flat has origin on top left
 
 paragraphs = []
+
 for txtParagraph in txt.split('\n'):
     st = strike(flatFont).color(red).size(fontSize)
     paragraphs.append(paragraph([st.span(txtParagraph)]))
+
 placedText = fPage.place(text(paragraphs))
 # Placing as frame seems to give better control on vertical position.
 #placedText.position(x, y) # Placing on baseline

@@ -14,7 +14,7 @@
 #
 #     E00_BabelStringFromSketch.py
 #
-#     BabelStrings are the generic internal string format that can hold any 
+#     BabelStrings are the generic internal string format that can hold any
 #     specific information that contexts need for their own formatted strings.
 #     They store the context that created them, as well as context native representations
 #     of the string, text size and lines with recovered styles per run.
@@ -25,7 +25,7 @@
 #     to the context, instead of writing converters from all contexts to all contexts.
 #     In the original architecture of PageBot, the DrawBot FormattedStrings were used as
 #     native format. But that only works in MacOS, and it only works to generate them,
-#     not to retrieve information from them easily. 
+#     not to retrieve information from them easily.
 #     While PageBot is extending the number of contexts, it no longer needs to run
 #     on MacOS and contexts like SketchContext needs to read and write it strings into
 #     PageBot elements, there is more need for a generic common independent format.
@@ -34,7 +34,8 @@
 #     conversions, such as context.textSize, context.textLines, context.overflow,
 #     fromBabelString and asBabelString() methods, without the need to know about
 #     string behavior of any of the other contexts.
-# 
+#
+import pysketch
 
 from pagebot.contexts.basecontext.babelstring import BabelString
 from pagebot.contexts import getContext
@@ -44,7 +45,6 @@ from pagebot.toolbox.color import color
 from pagebot.document import Document
 
 # Sketch related SketchString --> BabelString conversion
-import sketchapp2py
 from pagebot.contexts.sketchcontext.sketchcontext import SketchContext
 
 FONT_NAME = 'PageBot-Regular'
@@ -52,7 +52,7 @@ FONT_NAME = 'PageBot-Regular'
 EXPORT_PATH = '_export/E00_BabelStringFromSketch.pdf'
 
 # Create a BabelString, that PageBot uses in internal in text elements.
-# This plain BabelString has no context defined, so we can't apply 
+# This plain BabelString has no context defined, so we can't apply
 # rendering methods, such as bs.textSize bs.overflow.
 style = dict(font=FONT_NAME, fontSize=pt(18), textFill=color(1, 0, 0))
 bs = BabelString('ABCD', style=style)
@@ -61,7 +61,7 @@ print('BabelString.textSize', bs.textSize)
 print()
 
 # Creating a BabelString, with context, those rendering methods work.
-# With DrawBot as context, BabelString.cs (from "context-string") 
+# With DrawBot as context, BabelString.cs (from "context-string")
 # contains the DrawBot native FormattedString as data.
 context = getContext('DrawBot')
 style = dict(font=FONT_NAME, fontSize=pt(18), textFill=color(1, 0, 0))
@@ -71,13 +71,13 @@ print('BabelString.textSize', bs.textSize)
 print('Context-string:', bs.cs, bs.cs.__class__.__name__)
 print()
 
-# Get a SketchString from an existing Sketch template file, 
+# Get a SketchString from an existing Sketch template file,
 # convert the string to BabelString with SketchContext flavor.
-path = path2Dir(sketchapp2py.__file__) + '/Resources/TemplateText.sketch'
+path = path2Dir(pysketch.__file__) + '/Resources/TemplateText.sketch'
 context = SketchContext(path)
 print('SketchContext:', context)
 artboard = context.b.artboards[0] # Get the first artboard of the Sketch file
-print('Artboard:', artboard) 
+print('Artboard:', artboard)
 skText = artboard.layers[0] # Get the text from the first artboard layer
 print('Artboard.layers[0]:', skText)
 # The SketchContext knows how to convert the attributed string to BabelString.
@@ -89,15 +89,15 @@ print('BabelString.textSize:', bs.textSize) # Not implemented yet for Sketch.
 # The content and styles of the BabelStrings comes from the Sketch file,
 # but they are converted to DrawBot behavior, able to export to PDF.
 drawBotContext = getContext('DrawBot')
-# Create a Document instance with this DrawBotContext and let the 
+# Create a Document instance with this DrawBotContext and let the
 # SketchContext read its pages into it.
 doc = Document(name='TestBabelString', context=drawBotContext)
 # Read the Sketch file, convert SketchAttributedStrings into BabelStrings
-context.readDocument(doc) 
+context.readDocument(doc)
 # Get the first page of the document
 page = doc[1]
 # Get the Sketch text that is now on the page as PageBot Text element.
-e = page.elements[0] 
+e = page.elements[0]
 print('Element type:', e.__class__.__name__, )
 e.fill = 0.8
 print('Text element from file:', e)

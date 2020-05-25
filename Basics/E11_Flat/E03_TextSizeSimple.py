@@ -8,7 +8,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E02_TextSizeSimple.py
+#     E03_TextSizeSimple.py
 #
 #     This example shows the basics of the Flat library, without
 #     the use of PageBot document, pages and components.
@@ -21,7 +21,7 @@ from flat import rgb, font, shape, strike, document, paragraph, text
 from flat.misc import inf
 from pagebot.fonttoolbox.objects.font import findFont
 
-EXPORT_PATH = '_export/02_TextSizeSimple.pdf'
+EXPORT_PATH = '_export/03_TextSizeSimple.pdf'
 if not os.path.exists('_export'):
 	os.mkdir('_export')
 
@@ -62,7 +62,7 @@ pt = tx.placed(1)
 # Get the bounding box of this placedText,
 # so we can use the (w, h) to create the doc/page size.
 w = h = 0
-# Find the max width of the paragraph, 
+# Find the max width of the paragraph,
 # so they with on the page
 for p in paragraphs:
 	for span in p.spans:

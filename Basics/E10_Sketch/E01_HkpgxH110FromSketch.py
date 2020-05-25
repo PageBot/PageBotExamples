@@ -18,6 +18,9 @@
 #
 #	  Sketch has a special way to decide on vertical positioning of text line.
 #
+# Sketch related SketchString --> BabelString conversion
+import pysketch
+
 from pagebot.contexts.basecontext.babelstring import BabelString
 from pagebot.contexts import getContext
 from pagebot.constants import XHEIGHT, RIGHT
@@ -27,15 +30,13 @@ from pagebot.toolbox.color import color, noColor
 from pagebot.document import Document
 from pagebot.elements import *
 
-# Sketch related SketchString --> BabelString conversion
-import sketchapp2py
 from pagebot.contexts.sketchcontext.sketchcontext import SketchContext
 
 FONT_NAME = 'PageBot-Regular'
 
 LINE_HEIGHT = 110
 
-# Get a SketchString from an existing Sketch template file, 
+# Get a SketchString from an existing Sketch template file,
 # convert the string to BabelString with SketchContext flavor.
 path = 'HpgxH%d.sketch' % LINE_HEIGHT
 #path = 'HpgxH%dImpact.sketch' % LINE_HEIGHT
@@ -44,7 +45,7 @@ EXPORT_PATH = '_export/' + path + '.pdf'
 context = SketchContext(path)
 print('SketchContext:', context)
 artboard = context.b.artboards[0] # Get the first artboard of the Sketch file
-print('Artboard:', artboard) 
+print('Artboard:', artboard)
 # Find a Text in the list of elements
 for eIndex, e in enumerate(artboard.layers):
 	if e.__class__.__name__ == 'SketchText':
@@ -66,11 +67,11 @@ print('Font/fontSize/leading:', font, fontSize, leading)
 # but they are converted to DrawBot behavior, able to export to PDF.
 #exportContext = getContext('DrawBot')
 exportContext = getContext('Flat')
-# Create a Document instance with this exportContext and let the 
+# Create a Document instance with this exportContext and let the
 # SketchContext read its pages into it.
 doc = Document(name='TestBabelString', context=exportContext)
 # Read the Sketch file, convert SketchAttributedStrings into BabelStrings
-context.readDocument(doc) 
+context.readDocument(doc)
 print('Doc page size', doc.w, doc.h, doc[1].w, doc[1].h)
 
 # Now we'll make some modifications.
@@ -114,7 +115,7 @@ lines = (
 for lIndex, (label, my, style) in enumerate(lines):
 	lIndex = len(lines)-lIndex
 	newLine(x=e.x, y=e.y+my, w=e.w-60, h=0, style=style, parent=page)
-	newText('%s: %d (%d)' % (label, my, font.info.unitsPerEm/fontSize*my), parent=page, style=labelStyle, 
+	newText('%s: %d (%d)' % (label, my, font.info.unitsPerEm/fontSize*my), parent=page, style=labelStyle,
 		xAlign=RIGHT, x=e.x-G, y=e.y+labelLeading*lIndex-90, yAlign=XHEIGHT)
 	newLine(x=e.x-40, y=e.y+labelLeading*lIndex-90, w=40, h=-labelLeading*lIndex+my+90, style=style, parent=page)
 
