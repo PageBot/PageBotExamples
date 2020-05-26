@@ -17,7 +17,7 @@
 #     As it is much easier to use an existing Sketch document, than creating
 #     one from scratch, we use one of the exiting template documents, such as
 #     PageBot/resources/sketchapp/Base.sketch
-# 
+#
 
 import pagebot
 from pagebot.contexts import getContext
@@ -30,7 +30,7 @@ from pagebot.typesetter import Typesetter
 from pagebot.composer import Composer
 
 # Sketch related SketchString --> BabelString conversion
-import sketchapp2py
+import pysketch
 from pagebot.contexts.sketchcontext.sketchcontext import SketchContext
 
 FONT_NAME = 'PageBot-Regular'
@@ -47,12 +47,12 @@ sketchContext = SketchContext(templatePath) # Used for reading/writing Sketch fi
 # The content and styles of the BabelStrings comes from the Sketch file,
 # but they are converted to DrawBot behavior, able to export to PDF.
 drawBotContext = getContext('DrawBot')
-# Create an empty Document instance with this DrawBotContext and let the 
+# Create an empty Document instance with this DrawBotContext and let the
 # SketchContext read its pages into it, setting page sizes, etc.
 doc = Document(title=EXPORT_PATH, context=drawBotContext)
 
 # Read the Sketch file, convert SketchAttributedStrings into BabelStrings
-sketchContext.readDocument(doc, contentPath=contentPath) 
+sketchContext.readDocument(doc, contentPath=contentPath)
 
 # Now er have read the position of frames, images and elements,
 # let the composer match the input file(s) with the naming of text
