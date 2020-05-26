@@ -50,10 +50,12 @@ print('Flat.strike for this run bs.cs.runs[0].st:', bs.cs.runs[0].st)
 print('Dummy Flat.document and Flat.page:', bs.cs.doc, bs.cs.page)
 # Set the BabelString at a requested width
 bs.w = 500
-print('Request width of the bs:', bs.w)
-# And there is a placed text, that we can query for its frame
-print(bs.tw)
+print('Request column width of the bs:', bs.w, bs.h)
+# Now there is a placed text, that we can query for its frame
+print('Calculated column width:', bs.tw)
 print('Placed text:', bs.cs.pt, bs.cs.pt.width, bs.cs.pt.height)
+print('context.textSize():', context.textSize(bs, w=bs.w))
+print('context.textLines():', context.textLines(bs))
 
 doc.export()
 print('Done', EXPORT_PATH)
