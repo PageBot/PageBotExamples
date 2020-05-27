@@ -512,3 +512,4 @@ for contextName in ('DrawBot', 'Flat'):
 
     c.saveImage(exportPath)
 
+print('Done')

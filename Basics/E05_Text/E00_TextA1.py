@@ -29,7 +29,7 @@ from pagebot.document import Document
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 
-fontSize = pt(300)
+fontSize = pt(1000)
 W, H = A1 # Standard portrait, swapped to be used as landscape ratio.
 padding = pt(40) # Outside measures to accommodate the crop makrs.
 sw = pt(0.5) # Stroke width of guide lines

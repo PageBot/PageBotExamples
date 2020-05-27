@@ -91,3 +91,5 @@ for contextName in ('DrawBot', 'Flat'):
 
 	doc.export(exportPath)
 
+print('Done')
+

@@ -30,9 +30,8 @@ from pagebot.document import Document
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 
-W, H = mm(120), pt(300)
-#H, W = A4 # Standard portrait, swapped to be used as landscape ratio.
-W, H = mm(120), pt(300)
+H, W = A4 # Standard portrait, swapped to be used as landscape ratio.
+#W, H = mm(120), pt(300)
 fontSize = pt(200)
 padding = pt(40) # Outside measures to accommodate the crop makrs.
 FONT_NAME = 'PageBot-Regular'
@@ -43,7 +42,7 @@ def makeText(context):
     context = getContext(contextName)
     exportPath = '_export/00_Text-%s.pdf' % contextName
     print('Generating:', exportPath)
-    
+
     doc = Document(w=W, h=H, title=exportPath, context=context)
     page = doc[1] # Get page on pageNumber, first in row (this is only one now).
     page.padding = padding
