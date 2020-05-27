@@ -41,14 +41,13 @@ def babelStringMetrics(c):
             leading=em(1.2), textFill=0, xTextAlign=CENTER)
     # Have the context create a BabelString with the style.
     bs = context.newString(txt, style)
+    bs.w = 1000
 
     # (999.19pt, 1556pt) in DrawBot, ( ) in Flat
-    #print(bs.getTextSize(w=2000)) 
-    for span in bs.cs.pt.layout.lines:
-        print(span)
+    print(bs.textSize) 
 
 for contextName in (
-    #'DrawBot', 
+    'DrawBot', 
     'Flat',):
     context = getContext(contextName)
     babelStringMetrics(context)

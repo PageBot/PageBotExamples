@@ -16,7 +16,7 @@
 
 from pagebot import getContext
 from pagebot.document import Document
-from pagebot.constants import A5
+from pagebot.constants import A3, TOP
 from pagebot.conditions import *
 from pagebot.elements import *
 from pagebot.toolbox.units import *
@@ -32,10 +32,10 @@ for contextName in ('DrawBot', 'Flat'):
 	FILE_NAME = '_export/10_TextByContext%s.pdf' % contextName
 
 	# Landscape A3.
-	H, W = A5
+	H, W = A3
 	SQ = 150
 	P  = 50
-	fontSize = pt(150)
+	fontSize = pt(300)
 
 	# Create a new document for the current context. Create one automatic page.
 	doc = Document(w=W, h=H, context=context)
@@ -45,13 +45,36 @@ for contextName in ('DrawBot', 'Flat'):
 	style = dict(font='PageBot-Regular', fontSize=fontSize, textFill=color(1))
 	bs = context.newString('ABCD', style)
 	# Parent of the element is the current page.
-	r = newText(bs, w=SQ, h=SQ, parent=page, conditions=Fit(), 
-		fill=(0.2,0.2,0.5), stroke=noColor)
-	print(r.bs) # <-- $ABCD$
-	print(r.bs.cs) # FormattedString (DrawBot), <FlatBabelData (Flat)
+	e = newText(bs, w=SQ, h=SQ, parent=page, conditions=Fit(), 
+		fill=(0.8), stroke=noColor)
+	print(e.bs) # <-- $ABCD$
+	print(e.bs.cs) # FormattedString (DrawBot), <FlatBabelData (Flat)
 
 	# Solve conditions of all placed elements on the page
 	page.solve()
+
+	if contextName == 'Flat':
+		span = bs.cs.tx.paragraphs[0].spans[0]
+		print('e.bs.cs.tx.paragraphs[0].spans[0].string', span.string, span.style.width(span.string))
+		print('e.bs.cs.pt.width, e.bs.cs.pt.height', e.bs.cs.pt.width, e.bs.cs.pt.height)
+		for height, run in e.bs.cs.pt.layout.runs():
+			for rr in run:
+				print('e.bs.cs.pt.layout.runs():', rr)
+		print('e.bs.textSize:', e.bs.textSize)
+		print('e.bs.getTextSize():', e.bs.getTextSize())
+		print('e.bs.getTextSize(w=e.w, h=e.h):', e.bs.getTextSize(w=e.w, h=e.h))
+
+		print('context.getTextSize(bs):', context.getTextSize(bs))
+		print('context.getTextSize(bs, w=e.w, h=e.h):', context.getTextSize(bs, w=e.w, h=e.h))
+
+
+		span = bs.cs.tx.paragraphs[0].spans[0]
+		newRect(parent=page, w=span.style.width(span.string), h=bs.th, x=page.pl, 
+			y=page.ph-page.pt, yAlign=TOP,
+			fill=None, stroke=color(1, 0, 0), strokeWidth=0.5)
+
+	newRect(parent=page, w=bs.tw, h=bs.th, x=page.pl, y=page.ph-page.pt, yAlign=TOP,
+		fill=None, stroke=color(0, 0, 1), strokeWidth=0.5)
 
 	# Set some viewing parameters.
 	view = doc.view

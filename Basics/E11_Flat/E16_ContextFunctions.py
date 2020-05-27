@@ -23,21 +23,12 @@ from pagebot.document import Document
 
 context = getContext('Flat')
 
-W = H = pt(1000)
-
-EXPORT_PATH = '_export/16_FlatBabelDataFunctions.pdf'
-if not os.path.exists('_export'):
-	os.mkdir('_export')
-
 # Get the PageFont instance
 font = findFont('PageBot-Regular')
 fontSize = pt(16)
 
 style = dict(font=font, fontSize=fontSize)
 txt = loremipsum()
-
-doc = Document(w=W, h=H, context=context)
-page = doc[1]
 
 bs = context.newString(txt, style)
 print('BabelString runs:', len(bs.runs))
@@ -77,6 +68,4 @@ print('context.getTextSize(bs):', context.getTextSize(bs))
 print('len(context.getTextLines(bs)):', len(context.getTextLines(bs)))
 print()
 
-
-doc.export()
-print('Done', EXPORT_PATH)
+print('Done')
