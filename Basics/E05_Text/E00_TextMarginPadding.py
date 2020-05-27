@@ -4,7 +4,7 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
+#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E00_TextPosition.py
+#     E00_TextMarginPadding.py
 #
 #	  Create a page in A4 landscape
 #	  Setup the document view to show registration marks and cropmarks
@@ -44,10 +44,10 @@ for contextName in ('DrawBot', 'Flat'):
 
 	# Export in _export folder that does not commit in Git. Force to export PDF.
 	# The _export folder is automatically created.
-	EXPORT_PATH = '_export/E00_TextMarginPadding%s.pdf' % contextName
+	exportPath = '_export/00_TextMarginPadding%s.pdf' % contextName
 
 	# Make a new document with one text box.
-	doc = Document(w=W, h=H, title=EXPORT_PATH, autoPages=1, context=context)
+	doc = Document(w=W, h=H, title=exportPath, autoPages=1, context=context)
 
 	view = doc.view # Get the current view of the document.
 	view.padding = padding # Make space to show crop marks, etc.
@@ -83,4 +83,4 @@ for contextName in ('DrawBot', 'Flat'):
 	newLine(x=t.center, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
 	newLine(x=t.right, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
 
-	doc.export(EXPORT_PATH)
+	doc.export(exportPath)

@@ -22,8 +22,6 @@
 #     Show labels with alignment names.
 #
 from pagebot import getContext
-context = getContext('DrawBot')
-#context = getContext('Flat')
 
 from pagebot.constants import *
 from pagebot.elements import newText, newRect, newLine
@@ -53,12 +51,14 @@ shadow = Shadow(offset=pt(3, -3), blur=pt(3), color=0.2)
 # Export in _export folder that does not commit in Git. Force to export PDF.
 # The _export folder is automatically created by Document.
 
-def textAlign(context):
-    EXPORT_PATH = '_export/E00_TextAlignment-%s-%s.pdf' % (FONT_NAME, context.name)
-    print('Generating:', EXPORT_PATH)
+def textAlign(contextName):
+    context = getContext(contextName)
+
+    exportPath = '_export/00_TextAlignment-%s-%s.pdf' % (FONT_NAME, contextName)
+    print('Generating:', exportPath)
     # Make a new document with one text box. Default is to make one page.
 
-    doc = Document(w=W, h=H, title=EXPORT_PATH, autoPages=1, context=context)
+    doc = Document(w=W, h=H, title=exportPath, autoPages=1, context=context)
     view = doc.view # Get the current view of the document.
     view.showPadding = True # Show the page padding
     page = doc[1] # Get page on pageNumber, first in row (this is only one now).
@@ -111,8 +111,7 @@ def textAlign(context):
             parent=page, showOrigin=True)
 
     page.solve()
-    doc.export(EXPORT_PATH)
+    doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    context = getContext(contextName)
-    textAlign(context)
+    textAlign(contextName)

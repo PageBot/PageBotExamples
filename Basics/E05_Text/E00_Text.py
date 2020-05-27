@@ -33,7 +33,6 @@ from pagebot.toolbox.units import pt, em
 W, H = mm(120), pt(300)
 #H, W = A4 # Standard portrait, swapped to be used as landscape ratio.
 W, H = mm(120), pt(300)
-EXPORT_PATH = '_export/E00_Text-%s.pdf'
 fontSize = pt(200)
 padding = pt(40) # Outside measures to accommodate the crop makrs.
 FONT_NAME = 'PageBot-Regular'
@@ -41,9 +40,11 @@ textColor = color(1, 0, 0) # Red of the “A4”
 bgColor = color(0.9) # Background color of the text box
 
 def makeText(context):
-    export_path = EXPORT_PATH % context.name
-    print('Generating:', export_path)
-    doc = Document(w=W, h=H, title=export_path, context=context)
+    context = getContext(contextName)
+    exportPath = '_export/00_Text-%s.pdf' % contextName
+    print('Generating:', exportPath)
+    
+    doc = Document(w=W, h=H, title=exportPath, context=context)
     page = doc[1] # Get page on pageNumber, first in row (this is only one now).
     page.padding = padding
     view = doc.getView() # Get the current view of the document.
@@ -87,8 +88,7 @@ def makeText(context):
 
     # Export the document as PDF
     page.solve()
-    doc.export(export_path)
+    doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    context = getContext(contextName)
-    makeText(context)
+    makeText(contextName)

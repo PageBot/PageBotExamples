@@ -4,7 +4,7 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
+#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
@@ -23,8 +23,6 @@
 #     Show the box of the element as blue guidelines with labels.
 #
 from pagebot import getContext
-context = getContext('DrawBot')
-#context = getContext('Flat')
 
 from pagebot.constants import *
 from pagebot.elements import newText, newRect, newLine
@@ -41,42 +39,45 @@ sw = pt(0.5) # Stroke width of guide lines
 textColor = color(1, 0, 0) # Red of the “Hkpx”
 bgColor = color(0.9) # Background color of the text box
 
-# Export in _export folder that does not commit in Git. Force to export PDF.
-# The _export folder is automatically created.
-EXPORT_PATH = '_export/E00_TextPosition.pdf'
+for contextName in ('DrawBot', 'Flat'):
+	context = getContext(contextName)
 
-# Make a new document with one text box.
+	# Export in _export folder that does not commit in Git. Force to export PDF.
+	# The _export folder is automatically created.
+	exportPath = '_export/00_TextPosition-%s.pdf' % contextName
 
-title = 'Single text box' # As will be shown on the page name info.
-doc = Document(w=W, h=H, title=EXPORT_PATH, autoPages=1, context=context)
+	# Make a new document with one text box.
 
-view = doc.view # Get the current view of the document.
-view.padding = padding # Make space to show crop marks, etc.
-view.showCropMarks = True 
-view.showRegistrationMarks = True
-view.showFrame = True # Show the frame of the  page as blue line
-view.showNameInfo = True # Showing page info and title on top of the page.
+	title = 'Single text box' # As will be shown on the page name info.
+	doc = Document(w=W, h=H, title=exportPath, autoPages=1, context=context)
 
-page = doc[1] # Get page on pageNumber, first in row (this is only one now).
-page.padding = padding
+	view = doc.view # Get the current view of the document.
+	view.padding = padding # Make space to show crop marks, etc.
+	view.showCropMarks = True 
+	view.showRegistrationMarks = True
+	view.showFrame = True # Show the frame of the  page as blue line
+	view.showNameInfo = True # Showing page info and title on top of the page.
 
-style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02), 
-	leading=em(1), textFill=textColor, xAlign=CENTER)
-bs = context.newString('Hkpx', style)
-print('BabelString lines:', bs.lines)
-print('A4 text size:', bs.textSize)
-t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, 
-	yAlign=MIDDLE_X)
-print('Text in box size:', t.w, t.h)
+	page = doc[1] # Get page on pageNumber, first in row (this is only one now).
+	page.padding = padding
 
-# Horizontal guides
-newLine(x=0, y=t.y, w=page.w, h=0, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
-newLine(x=0, y=t.bottom, w=page.w, h=0, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
-newLine(x=0, y=t.top, w=page.w, h=0, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
+	style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02), 
+		leading=em(1), textFill=textColor, xAlign=CENTER)
+	bs = context.newString('Hkpx', style)
+	print('BabelString lines:', bs.lines)
+	print('A4 text size:', bs.textSize)
+	t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, 
+		yAlign=MIDDLE_X)
+	print('Text in box size:', t.w, t.h)
 
-# Vertical guides
-newLine(x=t.left, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
-newLine(x=t.center, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
-newLine(x=t.right, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
+	# Horizontal guides
+	newLine(x=0, y=t.y, w=page.w, h=0, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
+	newLine(x=0, y=t.bottom, w=page.w, h=0, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
+	newLine(x=0, y=t.top, w=page.w, h=0, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
 
-doc.export(EXPORT_PATH)
+	# Vertical guides
+	newLine(x=t.left, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
+	newLine(x=t.center, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
+	newLine(x=t.right, y=0, w=0, h=page.h, stroke=(0, 0, 0.7), strokeWidth=sw, parent=page)
+
+	doc.export(exportPath)

@@ -29,7 +29,9 @@ from pagebot.toolbox.units import pt, em
 
 txt = loremipsum()
 
-def babelStringMetrics(c):
+def babelStringMetrics(contextName):
+
+    context = getContext(contextName)
 
     # Define font, fontSize and color of the square
     fontName = 'PageBot-Regular'
@@ -46,9 +48,6 @@ def babelStringMetrics(c):
     # (999.19pt, 1556pt) in DrawBot, ( ) in Flat
     print(bs.textSize) 
 
-for contextName in (
-    'DrawBot', 
-    'Flat',):
-    context = getContext(contextName)
-    babelStringMetrics(context)
+for contextName in ('DrawBot', 'Flat'):
+    babelStringMetrics(contextName)
 

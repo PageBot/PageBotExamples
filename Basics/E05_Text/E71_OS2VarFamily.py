@@ -41,24 +41,6 @@ ORIGIN_OS2_WEIGHT_CLASS = 400
 
 GLYPH = 'H'
 
-EXPORT_PATH = '_export/OS2VarFamily.pdf'
-CSV_PATH = EXPORT_PATH.replace('.pdf', '.csv')
-#BASE_PATH = u"/Volumes/iTunes/Private/FontDevelopment/Fontbureau/TN-admin-2017-10-10T05_34_28.861995/"
-BASE_PATH = u"/Library/Fonts"
-
-#EXPORT_PATH = '_export/TYPETR-Upgrade.pdf'
-#BASE_PATH = u"/Users/petr/Desktop/TYPETR-git/TYPETR-Upgrade/scripts/export/"
-
-#EXPORT_PATH = '_export/GoogleFontFamilies.pdf'
-#BASE_PATH = u"/Users/petr/Desktop/git/fonts/ofl/"
-
-#EXPORT_PATH = '_export/WindowsFamilies.pdf'
-#BASE_PATH = u"/FontDevelopment/Microsoft/MSFonts/"
-
-# Old data
-#EXPORT_GIF = '_export/FontBureauFamilies.gif'
-#BASE_PATH = '/FontDevelopment/WebType-Raw/WT-TTF/'
-
 def findFontPaths(basePath, paths=None):
     u"""Answer the recursive list of TTF non-Italic font paths that are in directory basePath."""
     if paths is None:
@@ -493,22 +475,40 @@ def drawFamilyOverview(path):
 
     return varFamily
 
-exportCSV = open(CSV_PATH, 'w')
-#exportCSV.write('StyleName,em,H-stem,%H-stem,H-width,%H-width,OS/2-width,OS/2-weight,capHeight,%capHeight\n')
-#for path in PATHS:
-index = 0
-for path in os.listdir(BASE_PATH):#[:20]:
-    if path.startswith('.'):
-        continue
-    dirPath = BASE_PATH + path
-    if not os.path.isdir(dirPath):
-        continue
-    drawFamilyOverview(dirPath)
-    index += 1
-    if index > 3:
-        break
-exportCSV.close()
+for contextName in ('DrawBot', 'Flat'):
+    exportPath = '_export/71_OS2VarFamily-%s.pdf' % contextName
+    CSV_PATH = exportPath.replace('.pdf', '.csv')
+    BASE_PATH = u"/Library/Fonts"
+
+    #EXPORT_PATH = '_export/TYPETR-Upgrade.pdf'
+    #BASE_PATH = u"/Users/petr/Desktop/TYPETR-git/TYPETR-Upgrade/scripts/export/"
+
+    #EXPORT_PATH = '_export/GoogleFontFamilies.pdf'
+    #BASE_PATH = u"/Users/petr/Desktop/git/fonts/ofl/"
+
+    #EXPORT_PATH = '_export/WindowsFamilies.pdf'
+    #BASE_PATH = u"/FontDevelopment/Microsoft/MSFonts/"
+
+    # Old data
+    #EXPORT_GIF = '_export/FontBureauFamilies.gif'
+    #BASE_PATH = '/FontDevelopment/WebType-Raw/WT-TTF/'
+
+    exportCSV = open(CSV_PATH, 'w')
+    #exportCSV.write('StyleName,em,H-stem,%H-stem,H-width,%H-width,OS/2-width,OS/2-weight,capHeight,%capHeight\n')
+    #for path in PATHS:
+    index = 0
+    for path in os.listdir(BASE_PATH):#[:20]:
+        if path.startswith('.'):
+            continue
+        dirPath = BASE_PATH + path
+        if not os.path.isdir(dirPath):
+            continue
+        drawFamilyOverview(dirPath)
+        index += 1
+        if index > 3:
+            break
+    exportCSV.close()
 
 
-#c.saveImage(EXPORT_PATH)
+    c.saveImage(exportPath)
 

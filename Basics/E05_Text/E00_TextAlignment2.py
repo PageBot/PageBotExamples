@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E00_TextAlignment.py
+#     E00_TextAlignment2.py
 #
 #	  Create a landscape page
 #	  Show text box with multiple lines, mixed styles and fixed width,
@@ -22,8 +22,6 @@
 #     Show labels with alignment names.
 #
 from pagebot import getContext
-context = getContext('DrawBot')
-#context = getContext('Flat')
 
 from pagebot.constants import *
 from pagebot.elements import newText, newRect, newLine
@@ -46,69 +44,72 @@ LABEL_FONT_NAME = 'PageBot-Book'
 textColor = blackColor
 bgColor = color(0.9) # Background color of the text box
 
-# Export in _export folder that does not commit in Git. Force to export PDF.
-# The _export folder is automatically created.
-EXPORT_PATH = '_export/E00_TextAlignment.pdf'
-print('Generating:', EXPORT_PATH)
+for contextName in ('DrawBot', 'Flat'):
+	context = getContext(contextName)
 
-# Make a new document with one text box.
-doc = Document(w=W, h=H, autoPages=1, context=context)
+	# Export in _export folder that does not commit in Git. Force to export PDF.
+	# The _export folder is automatically created.
+	exportPath = '_export/00_TextAlignment2-%s.pdf' % contextName
+	print('Generating:', exportPath)
 
-view = doc.view # Get the current view of the document.
-view.showPadding = True # Show the page padding
+	# Make a new document with one text box.
+	doc = Document(w=W, h=H, autoPages=1, context=context)
 
-page = doc[1] # Get page on pageNumber, first in row (this is only one now).
-page.padding = padding
+	view = doc.view # Get the current view of the document.
+	view.showPadding = True # Show the page padding
 
-XALIGNS = (LEFT, CENTER, RIGHT)
-YALIGNS = (TOP, ASCENDER, CAPHEIGHT, XHEIGHT, MIDDLE_CAP, MIDDLE_X, BASELINE, DESCENDER, BOTTOM)
+	page = doc[1] # Get page on pageNumber, first in row (this is only one now).
+	page.padding = padding
 
-rowCnt = len(XALIGNS)-1
-colCnt = len(YALIGNS)-1
+	XALIGNS = (LEFT, CENTER, RIGHT)
+	YALIGNS = (TOP, ASCENDER, CAPHEIGHT, XHEIGHT, MIDDLE_CAP, MIDDLE_X, BASELINE, DESCENDER, BOTTOM)
 
-for ix, yAlign in enumerate(YALIGNS): # Flipped, yAligns show horizontal
+	rowCnt = len(XALIGNS)-1
+	colCnt = len(YALIGNS)-1
 
-	if 0 < ix < colCnt:
-		# Show the line for the middle row of texts
-		newLine(x=padding + ix*page.pw/colCnt, y=padding, w=0, h=page.ph, parent=page,
-			stroke=(0, 0, 0.5), strokeWidth=0.5)
+	for ix, yAlign in enumerate(YALIGNS): # Flipped, yAligns show horizontal
 
-	for iy, xAlign in enumerate(XALIGNS):
+		if 0 < ix < colCnt:
+			# Show the line for the middle row of texts
+			newLine(x=padding + ix*page.pw/colCnt, y=padding, w=0, h=page.ph, parent=page,
+				stroke=(0, 0, 0.5), strokeWidth=0.5)
 
-		style1 = dict(font=FONT_NAME, fontSize=fontSize, leading=em(0.8), 
-			paragraphBottomSpacing=em(0.15), # Line goes up, larger value is smaller spacing.
-			textFill=textColor, xAlign=xAlign) # xAlignment is part of the BabelString.
-		# Add width to the string, as target width value for the box.
-		bs = context.newString('Hkpx\n', style1)
-		style2 = dict(font=FONT_NAME, fontSize=fontSize/2, leading=em(1), 
-			#paragraphTopSpacing=em(0.2), # Line goes up, larger value is smaller spacing.
-			textFill=textColor, xAlign=xAlign) # xAlignment is part of the BabelString.
-		bs += context.newString(' Multiple lines of text making it a BabelString box', style2)
-		
-		x = padding + ix*page.pw/colCnt
-		y = padding + iy*page.ph/rowCnt
-		t = newText(bs, parent=page, x=x, y=y, w=colWidth, h=mm(30),
-			fill=bgColor, # Show background to mark the real position of the box.
-			yAlign=yAlign, # Vertical alignment is part of the Text element box.
-			showOrigin=True)
-		# Ajust the style for label
-		style2['font'] = LABEL_FONT_NAME
-		style2['fontSize'] = fontSize/3
-		style2['textFill'] = color(0.4)
-		style2['tracking'] = em(0.04) # Some correction for small label
-		
-		# Label just under the bottom position of the Text element.
-		bs = context.newString(' %s | %s ' % (xAlign, yAlign), style2)
-		newText(bs, parent=page, x=x, y=t.bottom - pt(40), yAlign=TOP, showOrigin=False)
+		for iy, xAlign in enumerate(XALIGNS):
 
-# Show the line for the middle row of texts
-newLine(x=padding, y=padding+page.ph/2, w=page.pw, h=0, parent=page,
-	stroke=(0, 0, 0.5), strokeWidth=0.5)
+			style1 = dict(font=FONT_NAME, fontSize=fontSize, leading=em(0.8), 
+				paragraphBottomSpacing=em(0.15), # Line goes up, larger value is smaller spacing.
+				textFill=textColor, xAlign=xAlign) # xAlignment is part of the BabelString.
+			# Add width to the string, as target width value for the box.
+			bs = context.newString('Hkpx\n', style1)
+			style2 = dict(font=FONT_NAME, fontSize=fontSize/2, leading=em(1), 
+				#paragraphTopSpacing=em(0.2), # Line goes up, larger value is smaller spacing.
+				textFill=textColor, xAlign=xAlign) # xAlignment is part of the BabelString.
+			bs += context.newString(' Multiple lines of text making it a BabelString box', style2)
+			
+			x = padding + ix*page.pw/colCnt
+			y = padding + iy*page.ph/rowCnt
+			t = newText(bs, parent=page, x=x, y=y, w=colWidth, h=mm(30),
+				fill=bgColor, # Show background to mark the real position of the box.
+				yAlign=yAlign, # Vertical alignment is part of the Text element box.
+				showOrigin=True)
+			# Ajust the style for label
+			style2['font'] = LABEL_FONT_NAME
+			style2['fontSize'] = fontSize/3
+			style2['textFill'] = color(0.4)
+			style2['tracking'] = em(0.04) # Some correction for small label
+			
+			# Label just under the bottom position of the Text element.
+			bs = context.newString(' %s | %s ' % (xAlign, yAlign), style2)
+			newText(bs, parent=page, x=x, y=t.bottom - pt(40), yAlign=TOP, showOrigin=False)
 
-# Example where a title is made directly by the Text element, a plain string and a style.
-style = dict(font=LABEL_FONT_NAME, fontSize=64*0.8, leading=em(1), 
-	textFill=textColor, xAlign=LEFT, yAlign=BASELINE) # xAlignment is part of the BabelString.
-newText('PageBot text line alignments', style=style, x=padding, y=page.h-padding/2, 
-	w=page.pw, parent=page)
+	# Show the line for the middle row of texts
+	newLine(x=padding, y=padding+page.ph/2, w=page.pw, h=0, parent=page,
+		stroke=(0, 0, 0.5), strokeWidth=0.5)
 
-doc.export(EXPORT_PATH)
+	# Example where a title is made directly by the Text element, a plain string and a style.
+	style = dict(font=LABEL_FONT_NAME, fontSize=64*0.8, leading=em(1), 
+		textFill=textColor, xAlign=LEFT, yAlign=BASELINE) # xAlignment is part of the BabelString.
+	newText('PageBot text line alignments', style=style, x=padding, y=page.h-padding/2, 
+		w=page.pw, parent=page)
+
+	doc.export(exportPath)

@@ -4,7 +4,7 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
+#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
@@ -28,21 +28,17 @@ from pagebot.toolbox.color import color
 W, H = pt(600, 300)
 M = pt(100)
 
-contexts = (
-    ('DrawBot', getContext('DrawBot')),
-    #('Flat', getContext('Flat'))
-)
-
-for contextId, context in contexts:
+for contextName in ('DrawBot', 'Flat'):
+    context = getContext(contextName)
 
     # Make export path from this filename, and dependent on the context.
-    exportPath = '_export/E01_BabelStringContexts-%s.pdf' % contextId
+    exportPath = '_export/E01_BabelStringContexts-%s.pdf' % contextName
     
     # Create a page and set y on top margin.
     context.newPage(W, H)
     y = H - M
     style = dict(textFill=color(0, 0, 1), leading=em(1.4), fontSize=36) 
-    bs = context.newString('Context: %s\n' % contextId, style=style)
+    bs = context.newString('Context: %s\n' % contextName, style=style)
     context.drawText(bs, (100, y, bs.tw, bs.th)) # Get size from unwrapped string.
     y -= 36
 
@@ -63,3 +59,4 @@ for contextId, context in contexts:
     # Save the context as PDF document
     context.saveImage(exportPath)
 
+print('Done')

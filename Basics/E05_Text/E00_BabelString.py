@@ -28,8 +28,10 @@ from pagebot.toolbox.units import pt, em
 
 W, H = A4 # Standard paper size from constants.
 
-def babelString(c):
-    c.newPage(W, H) # Make a new A4 page.
+def babelString(contextName):
+    context = getContext(contextName)
+
+    context.newPage(W, H) # Make a new A4 page.
 
     # Define font, fontSize and color of the square
     fontName = 'PageBot-Regular'
@@ -40,27 +42,26 @@ def babelString(c):
     style = dict(font=fontName, fontSize=fontSize, tracking=-em(0.02),
             leading=em(1), textFill=0, xTextAlign=CENTER)
     # Have the context create a BabelString with the style.
-    bs = c.newString('Hkpx', style)
+    bs = context.newString('Hkpx', style)
 
     # Draw red square, bottom-left on middle of the page
     # and sides of 50% page width.
-    c.fill(textColor)
-    c.rect(W/2, H/2, W/2, W/2)
+    context.fill(textColor)
+    context.rect(W/2, H/2, W/2, W/2)
 
     # Draw frame on the text
-    c.fill(None)
-    c.stroke((0, 0, 0.5))
+    context.fill(None)
+    context.stroke((0, 0, 0.5))
     x = W / 2 - bs.tw / 2 # Left side of the frame
     y = H / 2 - bs.th + bs.topLineAscender # Bottom position
-    c.rect(x, y, bs.tw, bs.th)
+    context.rect(x, y, bs.tw, bs.th)
 
     try:
         # Draw the string, centered/baseline in middle of the page.
-        c.drawString(bs, (W/2, H/2))
+        context.drawString(bs, (W/2, H/2))
     except Exception as e:
         print(traceback.format_exc())
 
 for contextName in ('DrawBot', 'Flat'):
-    context = getContext(contextName)
-    babelString(context)
+    babelString(contextName)
 
