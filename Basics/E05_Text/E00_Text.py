@@ -30,7 +30,7 @@ from pagebot.document import Document
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 
-H, W = A4 # Standard portrait, swapped to be used as landscape ratio.
+H, W = pt(A4) # Standard portrait, swapped to be used as landscape ratio.
 fontSize = pt(300)
 padding = pt(40) # Outside measures to accommodate the crop makrs.
 FONT_NAME = 'PageBot-Regular'
@@ -57,7 +57,7 @@ def makeText(context):
     # xAlign is centered on the (x, y) position. For strings without defined
     # width xAlign and xTextAlign a equivalent.
     # yAlign is positioning on middle of the capHeight
-    style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02),
+    style = dict(font=FONT_NAME, fontSize=fontSize, tracking=0,#-em(0.02),
             textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP)
     bs = context.newString('A4', style)
 
@@ -67,10 +67,19 @@ def makeText(context):
             xAlign=CENTER, yAlign=MIDDLE, # Used for Text, in case (w, h) is defined.
             showOrigin=True)
     print(contextName, t.w, t.h, bs.w, bs.h, bs.tw, bs.th)
+    # Horizontal lines to mark top and bottom of elastic text box
+    newLine(parent=page, x=t.x, y=t.bottom, w=t.w, h=0, stroke=(1, 0, 0), strokeWidth=0.5, xAlign=CENTER)
+    newLine(parent=page, x=t.x, y=t.top, w=t.w, h=0, stroke=(0, 1, 0.3), strokeWidth=0.5, xAlign=CENTER)
 
-  # Horizontal and vertial lines, to show text position,
+    # Vertical lines to mark left and right of elastic text box
+    newLine(parent=page, x=t.left, y=t.y, w=0, h=t.h, stroke=(1, 0, 0), strokeWidth=0.5, yAlign=MIDDLE)
+    newLine(parent=page, x=t.right, y=t.y, w=0, h=t.h, stroke=(0, 1, 0.3), strokeWidth=0.5, yAlign=MIDDLE)
+
+    # Horizontal and vertial lines, to show text center/middle position,
     newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.8), strokeWidth=0.5)
     newLine(parent=page, x=page.w/2, y=0, w=0, h=page.h, stroke=(0, 0, 0.8), strokeWidth=0.5)
+
+    print('23@@@', t.bs.textSize)
 
     # Export the document as PDF
     doc.export(exportPath)

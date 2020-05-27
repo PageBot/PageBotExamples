@@ -64,7 +64,11 @@ for contextName in ('DrawBot', 'Flat'):
 	bs = context.newString('A2', style)
 	print('“A2” text size:', bs.textSize)
 	t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True, 
-		xAlign=CENTER, yAlign=BASELINE)
+		xAlign=CENTER, yAlign=MIDDLE_CAP)
 	print('Text in box size:', t.w, t.h)
+
+	# Horizontal and vertial lines, to show text center/middle position,
+	newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.8), strokeWidth=0.5)
+	newLine(parent=page, x=page.w/2, y=0, w=0, h=page.h, stroke=(0, 0, 0.8), strokeWidth=0.5)
 
 	doc.export(exportPath)
