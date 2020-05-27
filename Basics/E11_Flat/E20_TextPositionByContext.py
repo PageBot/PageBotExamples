@@ -1,4 +1,4 @@
-#
+#!/usr/bin/env python3
 #     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io
 #     Licensed under MIT conditions
@@ -17,7 +17,7 @@ from pagebot.elements import *
 from pagebot.toolbox.loremipsum import loremipsum
 from pagebot.toolbox.units import pt
 from pagebot.fonttoolbox.objects.font import findFont
- 
+
 W = H = pt(800)
 padding = pt(30)
 
@@ -27,7 +27,7 @@ if not os.path.exists('_export'):
 
 contexts = (
 	getContext('DrawBot'),
-	getContext('Flat'), 
+	getContext('Flat'),
 )
 style = dict(font='PageBot-Regular', fontSize=pt(24))
 

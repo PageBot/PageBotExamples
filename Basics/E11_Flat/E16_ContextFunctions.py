@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #
 #     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io
@@ -45,7 +46,7 @@ print('BabelString runs:', len(bs.runs))
 print('FlatContext stores cached data in bs._cs as FlatBabelData:', bs.cs)
 # The cache FlatBabelData.runs contain FlatRunData
 print('bs.cs.runs[0]:', bs.cs.runs[0])
-print('Flat.strike for this run bs.cs.runs[0].st:', bs.cs.runs[0].st) 
+print('Flat.strike for this run bs.cs.runs[0].st:', bs.cs.runs[0].st)
 # In the BabelString context cache, now htere is a dummy Flat.document and a Flat.page.
 print('Dummy Flat.document and Flat.page:', bs.cs.doc, bs.cs.page)
 # Set the BabelString at a requested width

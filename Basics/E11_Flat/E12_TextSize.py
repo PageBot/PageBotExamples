@@ -24,9 +24,9 @@ W, H = 1000, 1000
 R = 20 # radius of origin marker
 
 # Get the PageFont instance
-pbFont = findFont('Georgia')
+pbFont = findFont('PageBot-Bold')
+#pbFont = findFont('Georgia')
 #pbFont = findFont('Verdana')
-#pbFont = findFont('PageBot-Bold')
 #pbFont = findFont('PageBot-Book')
 #pbFont = findFont('Times New Roman')
 #pbFont = findFont('Stickway-Bold')
