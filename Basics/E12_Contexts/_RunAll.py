@@ -21,15 +21,10 @@ EXPORT_PATH = '_export'
 if not os.path.exists(EXPORT_PATH):
 	os.mkdir(EXPORT_PATH)
 
-import E00_HelloWorld
-import E02_Strike
-import E03_TextSizeSimple
-import E11_TextBoxPosition
-import E12_TextSize
-import E13_TextBoxLines
-import E14_TextBoxBaselines
-import E15_MixedBaselines
-import E16_ContextFunctions
-#import E20_TextPositionByContext
-
-
+import E00_RectByContext
+import E01_FitRectByContext
+import E02_OvalByContext
+import E03_FitOvalByContext
+import E04_CircleByContext
+import E05_FitCircleByContext
+import E10_TextByContext

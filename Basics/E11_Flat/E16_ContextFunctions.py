@@ -8,10 +8,12 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E16_ContextFunctions.py
+#     E16_FlatBabelDataFunctions.py
 #
 #     Prototyping the context functions for FlatContext
 #     that are required by PageBot AbstractContext
+#     FlatBabelData is defined in flatContext.py, used for
+#     caching Flat text data in BabelString.cs
 
 import os
 from pagebot.fonttoolbox.objects.font import findFont
@@ -24,13 +26,13 @@ context = getContext('Flat')
 
 W = H = pt(1000)
 
-EXPORT_PATH = '_export/16_ContextFunctions.pdf'
+EXPORT_PATH = '_export/16_FlatBabelDataFunctions.pdf'
 if not os.path.exists('_export'):
 	os.mkdir('_export')
 
 # Get the PageFont instance
 font = findFont('PageBot-Regular')
-fontSize = pt(24)
+fontSize = pt(16)
 
 style = dict(font=font, fontSize=fontSize)
 txt = loremipsum()
@@ -49,12 +51,27 @@ print('bs.cs.runs[0]:', bs.cs.runs[0])
 print('Flat.strike for this run bs.cs.runs[0].st:', bs.cs.runs[0].st)
 # In the BabelString context cache, now htere is a dummy Flat.document and a Flat.page.
 print('Dummy Flat.document and Flat.page:', bs.cs.doc, bs.cs.page)
+print()
+
 # Set the BabelString at a requested width
 bs.w = 500
-print('Request width of the bs:', bs.w)
-# And there is a placed text, that we can query for its frame
-print(bs.tw)
+print('Request column width of the bs:', bs.w, ' Undefined height:', bs.h)
+# Now there is a placed text, that we can query for its frame
+print('Calculated column width:', bs.tw)
 print('Placed text:', bs.cs.pt, bs.cs.pt.width, bs.cs.pt.height)
+print('context.getTextSize(bs):', context.getTextSize(bs))
+print('len(context.getTextLines(bs)):', len(context.getTextLines(bs)))
+print()
+
+bs.w = 1000
+print('Request column width of the bs:', bs.w, ' Undefined height:', bs.h)
+# Now there is a placed text, that we can query for its frame
+print('Calculated column width:', bs.tw)
+print('Placed text:', bs.cs.pt, bs.cs.pt.width, bs.cs.pt.height)
+print('context.getTextSize(bs):', context.getTextSize(bs))
+print('len(context.getTextLines(bs)):', len(context.getTextLines(bs)))
+print()
+
 
 doc.export()
 print('Done', EXPORT_PATH)

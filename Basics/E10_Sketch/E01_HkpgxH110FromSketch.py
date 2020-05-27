@@ -65,9 +65,9 @@ print('Font/fontSize/leading:', font, fontSize, leading)
 # Create a drawBotContext to save the Sketch based Document as other format.
 # The content and styles of the BabelStrings comes from the Sketch file,
 # but they are converted to DrawBot behavior, able to export to PDF.
-#exportContext = getContext('DrawBot')
-exportContext = getContext('Flat')
-# Create a Document instance with this exportContext and let the
+exportContext = getContext('DrawBot')
+#exportContext = getContext('Flat')
+# Create a Document instance with this exportContext and let the 
 # SketchContext read its pages into it.
 doc = Document(name='TestBabelString', context=exportContext)
 # Read the Sketch file, convert SketchAttributedStrings into BabelStrings
