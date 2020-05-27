@@ -31,8 +31,7 @@ from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 
 H, W = A4 # Standard portrait, swapped to be used as landscape ratio.
-#W, H = mm(120), pt(300)
-fontSize = pt(200)
+fontSize = pt(300)
 padding = pt(40) # Outside measures to accommodate the crop makrs.
 FONT_NAME = 'PageBot-Regular'
 textColor = color(1, 0, 0) # Red of the “A4”
@@ -61,32 +60,19 @@ def makeText(context):
     style = dict(font=FONT_NAME, fontSize=fontSize, tracking=-em(0.02),
             textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP)
     bs = context.newString('A4', style)
-    #print('Text align:', bs.xAlign)
-    #print('Rendered text size:', bs.tw, bs.th)
-    #print('Lines:', bs.lines)
 
-    t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor,
-            xAlign=CENTER, showOrigin=True)
+    w = h = None
+    #w, h = page.ph, h=page.ph 
+    t = newText(bs, parent=page, x=page.w/2, y=page.h/2, w=w, h=h, fill=bgColor,
+            xAlign=CENTER, yAlign=MIDDLE, # Used for Text, in case (w, h) is defined.
+            showOrigin=True)
+    print(contextName, t.w, t.h, bs.w, bs.h, bs.tw, bs.th)
 
-    #conditions = (Right2Right(), Top2SideTop())
-
-    '''
-    e = newText(bs, w=mm(86), h=pt(164), parent=page, pl=3, pt=3,
-        showDimensions=True, showOrigin=True, xAlign=CENTER,
-        conditions=conditions, fill=color(0.8))
-    '''
-    '''
-    print(t.bs.xAlign)
-    print('Text element size:', t.w, t.h)
-    print('Text in box size:', t.bs.tw, t.bs.th)
-    print(bs.lines)
-    '''
-    # Horizontal and vertial lines, to show text position,
+  # Horizontal and vertial lines, to show text position,
     newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.8), strokeWidth=0.5)
     newLine(parent=page, x=page.w/2, y=0, w=0, h=page.h, stroke=(0, 0, 0.8), strokeWidth=0.5)
 
     # Export the document as PDF
-    page.solve()
     doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
