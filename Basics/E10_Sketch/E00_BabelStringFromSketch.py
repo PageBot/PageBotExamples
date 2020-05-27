@@ -35,6 +35,7 @@
 #     fromBabelString and asBabelString() methods, without the need to know about
 #     string behavior of any of the other contexts.
 #
+
 import pysketch
 
 from pagebot.contexts.basecontext.babelstring import BabelString
@@ -106,5 +107,3 @@ print('BabelString context:', e.bs.context, 'Font in run:', e.bs.runs[0].style['
 # Move the element
 e.x += 200
 doc.export(EXPORT_PATH)
-
-

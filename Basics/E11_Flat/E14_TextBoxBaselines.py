@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #
 #     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io

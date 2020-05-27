@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #
 #     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io
@@ -36,15 +37,9 @@ print('BabelString runs:', len(bs.runs))
 # This means that queries and functions will address
 # the FlatContext for doing conversions and calculations.
 print('FlatContext stores cached data in bs._cs as FlatBabelData:', bs.cs)
-# The FlatBabelData is caching several calculated Flat entities
-print('\tFlat.placedtext', bs.cs.pt)
-print('\tFlat.text', bs.cs.tx)
-print('\tFlat.document', bs.cs.doc)
-print('\tFlat.page', bs.cs.page)
-# Then cache FlatBabelData.runs contain FlatRunData
-print('len(bs.cs.runs)', len(bs.cs.runs))
-print('\tbs.cs.runs[0]:', bs.cs.runs[0])
-print('\tFlat.strike for this run bs.cs.runs[0].st:', bs.cs.runs[0].st) 
+# The cache FlatBabelData.runs contain FlatRunData
+print('bs.cs.runs[0]:', bs.cs.runs[0])
+print('Flat.strike for this run bs.cs.runs[0].st:', bs.cs.runs[0].st)
 # In the BabelString context cache, now htere is a dummy Flat.document and a Flat.page.
 print('Dummy Flat.document and Flat.page:', bs.cs.doc, bs.cs.page)
 print()
