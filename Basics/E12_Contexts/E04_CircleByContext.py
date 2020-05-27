@@ -10,7 +10,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E00_RectByContext.py
+#     E04_CircleByContext.py
 #
 #     Show some principles of FlatContext usage.
 
@@ -24,7 +24,7 @@ from pagebot.toolbox.color import noColor, color
 for contextName in ('DrawBot', 'Flat'):
 	context = getContext(contextName)
 
-	FILE_NAME = '_export/00_RectByContext%s.pdf' % contextName
+	FILE_NAME = '_export/04_CircleByContext%s.pdf' % contextName
 
 	# Landscape A3.
 	H, W = A5
@@ -37,9 +37,10 @@ for contextName in ('DrawBot', 'Flat'):
 	page.padding = P, P, 2*P, P # Set the page padding, not equal to test vertical position.
 
 	# Parent of the element is the current page.
-	newRect(x=page.pl, y=page.pb, w=page.pw, h=page.ph, 
-		parent=page, fill=color(1,0,0), stroke=noColor)
-
+	# Default alignment of circle is (CENTER, MIDDLE)
+	newCircle(x=P+page.pw/2, y=2*P+page.ph/2, 
+		r=page.pw, parent=page, fill=color(1,0,0), stroke=noColor)
+	
 	# Set some viewing parameters.
 	view = doc.view
 	view.showPadding = True # Show the padding of the page, where conditions align.

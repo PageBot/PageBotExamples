@@ -10,7 +10,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E01_TetByContext.py
+#     E03_FitOvalByContext.py
 #
 #     Show some principles of FlatContext usage.
 
@@ -20,15 +20,12 @@ from pagebot.constants import A5
 from pagebot.conditions import *
 from pagebot.elements import *
 from pagebot.toolbox.units import *
-from pagebot.toolbox.color import noColor
-"""
-from pagebot.toolbox.color import Color, blackColor, blueColor, greenColor
-from pagebot.elements.paths.pagebotpath import PageBotPath
-"""
+from pagebot.toolbox.color import noColor, color
+
 for contextName in ('DrawBot', 'Flat'):
 	context = getContext(contextName)
 
-	FILE_NAME = '_export/00_TextByContext%s.pdf' % contextName
+	FILE_NAME = '_export/03_FitOvalByContext%s.pdf' % contextName
 
 	# Landscape A3.
 	H, W = A5
@@ -38,12 +35,11 @@ for contextName in ('DrawBot', 'Flat'):
 	# Create a new document for the current context. Create one automatic page.
 	doc = Document(w=W, h=H, context=context)
 	page = doc[1] # Get the one and single page of the document.
-	page.padding = P # Set the page padding.
+	page.padding = P, P, 2*P, P # Set the page padding, not equal to test vertical position.
 
-	style = dict(font='PageBot-Regular', fontSize=pt(50))
-	bs = context.newString('ABCD', style)
-	# Parent of the element is the current page.
-	r = newText(bs, w=SQ, h=SQ, parent=page, conditions=Fit(), fill=(1,0,0), stroke=noColor)
+	# Parent of the element is the current page. 
+	# Use conditions to make it fit the page.
+	newOval(parent=page, conditions=Fit(), fill=color(1,0,0), stroke=noColor)
 
 	# Solve conditions of all placed elements on the page
 	page.solve()

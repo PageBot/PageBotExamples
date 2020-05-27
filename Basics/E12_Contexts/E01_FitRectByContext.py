@@ -10,13 +10,14 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E00_RectByContext.py
+#     E01_FitRectByContext.py
 #
 #     Show some principles of FlatContext usage.
 
 from pagebot import getContext
 from pagebot.document import Document
 from pagebot.constants import A5
+from pagebot.conditions import *
 from pagebot.elements import *
 from pagebot.toolbox.units import *
 from pagebot.toolbox.color import noColor, color
@@ -24,7 +25,7 @@ from pagebot.toolbox.color import noColor, color
 for contextName in ('DrawBot', 'Flat'):
 	context = getContext(contextName)
 
-	FILE_NAME = '_export/00_RectByContext%s.pdf' % contextName
+	FILE_NAME = '_export/01_FitRectByContext%s.pdf' % contextName
 
 	# Landscape A3.
 	H, W = A5
@@ -36,9 +37,12 @@ for contextName in ('DrawBot', 'Flat'):
 	page = doc[1] # Get the one and single page of the document.
 	page.padding = P, P, 2*P, P # Set the page padding, not equal to test vertical position.
 
-	# Parent of the element is the current page.
-	newRect(x=page.pl, y=page.pb, w=page.pw, h=page.ph, 
-		parent=page, fill=color(1,0,0), stroke=noColor)
+	# Parent of the element is the current page. 
+	# Use conditions to make it fit the page.
+	newRect(parent=page, conditions=Fit(), fill=color(1,0,0), stroke=noColor)
+
+	# Solve conditions of all placed elements on the page
+	page.solve()
 
 	# Set some viewing parameters.
 	view = doc.view
