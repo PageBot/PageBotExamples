@@ -18,7 +18,7 @@
 #	  Setup the document view to show registration marks and cropmarks
 #     Show the page frame and padding frame in blue
 #     Show the generated PDF file name on top of the page.
-#	  Show red “A4” centered on the page as Text element, 
+#	  Show red “A4” centered on the page as Text element,
 #     with its baseline on the middle
 #     Show the box of the element as gray background color.
 #
@@ -39,8 +39,9 @@ DO_BLURB = True
 fontSize = pt(24)
 W, H = A3 # Standard portrait
 padding = mm(30) # Outside measures to accommodate the crop makrs.
-#FONT_NAME = 'Responder_P-Base_Italic' 
-FONT_NAME = 'Upgrade-Regular' #'PageBot-Regular'
+#FONT_NAME = 'Responder_P-Base_Italic'
+#FONT_NAME = #'Upgrade-Regular' #'PageBot-Regular'
+FONT_NAME = 'PageBot-Regular'
 
 textColor = blackColor
 bgColor = color(0.9) # Background color of the text box
@@ -69,7 +70,7 @@ for contextName in ('DrawBot', 'Flat'):
 
 	view = doc.view # Get the current view of the document.
 	view.padding = pt(40) # Make space to show crop marks, etc.
-	view.showCropMarks = True 
+	view.showCropMarks = True
 	view.showRegistrationMarks = True
 	view.showPadding = True # Show the page padding
 	view.showFrame = True # Show the frame of the  page as blue line
@@ -78,12 +79,12 @@ for contextName in ('DrawBot', 'Flat'):
 	page = doc[1] # Get page on pageNumber, f irst in row (this is only one now).
 	page.padding = padding
 
-	style = dict(font=FONT_NAME, fontSize=fontSize*1.5, leading=em(1), 
+	style = dict(font=FONT_NAME, fontSize=fontSize*1.5, leading=em(1),
 		textFill=textColor, xAlign=LEFT)
 	# Add width to the string, as target width value for the box.
 	bs = context.newString(headline+'\n', style, w=page.pw)
 
-	style = dict(font=FONT_NAME, fontSize=fontSize, leading=em(1.2), 
+	style = dict(font=FONT_NAME, fontSize=fontSize, leading=em(1.2),
 		textFill=textColor, xAlign=LEFT, hyphenation=True)
 	bs += context.newString(article, style, w=page.pw)
 
@@ -95,7 +96,7 @@ for contextName in ('DrawBot', 'Flat'):
 	for line in bs.lines:
 		if page.ph+padding-line.y <= padding:
 			break
-		newLine(x=padding+line.x, y=page.ph+padding-line.y, w=page.pw, 
+		newLine(x=padding+line.x, y=page.ph+padding-line.y, w=page.pw,
 			h=0, parent=page, stroke=(0, 0, 0.5), strokeWidth=pt(0.5))
 
 	doc.solve()
