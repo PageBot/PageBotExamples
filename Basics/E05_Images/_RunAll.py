@@ -33,3 +33,6 @@ import E05_ImageClipping
 
 # Filters
 #import E07_ImageObjectFilters
+
+# Outline tracing
+import E20_TraceImagesByDrawBot
