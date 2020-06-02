@@ -26,7 +26,7 @@ from pagebot.constants import *
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 
-W, H = A4 # Standard paper size from constants.
+W, H = 100, 100 #A4 # Standard paper size from constants.
 
 def babelString(contextName):
     context = getContext(contextName)
@@ -45,19 +45,24 @@ def babelString(contextName):
 
     # Draw red square, bottom-left on middle of the page
     # and sides of 50% page width.
-    context.fill(textColor)
-    context.rect(W/2, H/2, W/2, W/2)
+    #context.fill(textColor)
+    #context.rect(W/2, H/2, W/2, W/2)
 
     # Draw frame on the text
-    context.fill(None)
-    context.stroke((0, 0, 0.5))
-    x = W / 2 - bs.tw / 2 # Left side of the frame
-    y = H / 2 - bs.th + bs.topLineAscender # Bottom position
-    context.rect(x, y, bs.tw, bs.th)
+    #context.fill(None)
+    #context.stroke((0, 0, 0.5))
+    #x = W / 2 - bs.tw / 2 # Left side of the frame
+    #y = H / 2 - bs.th + bs.topLineAscender # Bottom position
+    x = 1
+    y = 10
+    r = 2
+    context.marker(x, y, r=r)
+    #context.rect(x, y, bs.tw, bs.th)
 
     try:
         # Draw the string, centered/baseline in middle of the page.
-        context.drawString(bs, (W/2, H/2))
+        #context.drawString(bs, (W/2, H/2))
+        pass
     except Exception as e:
         print(traceback.format_exc())
 
