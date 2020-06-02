@@ -33,10 +33,10 @@ def marker(contextName):
     context.newPage(W, H) # Make a new A4 page.
 
 
-    context.marker(1, 10)
-    context.marker(1, 1)
-    context.marker(10, 1)
-    context.marker(10, 10, 2)
+    context.marker(1, 10, fontSize=2)
+    context.marker(1, 1, fontSize=2)
+    context.marker(10, 1, fontSize=2)
+    context.marker(10, 10, 2, fontSize=2)
     context.saveImage('_export/00_Marker-%s.pdf' % contextName)
 
 for contextName in ('DrawBot', 'Flat'):

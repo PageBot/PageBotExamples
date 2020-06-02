@@ -26,7 +26,7 @@ from pagebot.constants import *
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 
-W, H = 100, 100 #A4 # Standard paper size from constants.
+W, H = A4 # Standard paper size from constants.
 
 def babelString(contextName):
     context = getContext(contextName)
@@ -39,7 +39,7 @@ def babelString(contextName):
 
     # Define the style of the text, alignment is centered on baseline.
     style = dict(font=fontName, fontSize=fontSize, tracking=-em(0.02),
-            leading=em(1), textFill=0, xTextAlign=CENTER)
+            leading=em(1), textFill=0) #, xTextAlign=CENTER)
     # Have the context create a BabelString with the style.
     bs = context.newString('Hkpx', style)
 
@@ -49,22 +49,25 @@ def babelString(contextName):
     #context.rect(W/2, H/2, W/2, W/2)
 
     # Draw frame on the text
-    #context.fill(None)
-    #context.stroke((0, 0, 0.5))
-    #x = W / 2 - bs.tw / 2 # Left side of the frame
-    #y = H / 2 - bs.th + bs.topLineAscender # Bottom position
-    x = 1
-    y = 10
-    r = 2
-    context.marker(x, y, r=r)
-    #context.rect(x, y, bs.tw, bs.th)
+    #x = W / 2 # Left side of the frame
+    #y = H / 2 # Bottom position
 
-    try:
-        # Draw the string, centered/baseline in middle of the page.
-        #context.drawString(bs, (W/2, H/2))
-        pass
-    except Exception as e:
-        print(traceback.format_exc())
+    x = W / 2 - bs.tw / 2 # Left side of the frame
+    y = H / 2 - bs.th + bs.topLineAscender # Bottom position
+
+    # Draw the string, centered/baseline in middle of the page.
+    #context.text(bs, (x, y))
+    #context.drawString(bs, (W/2, H/2))
+    context.drawString(bs, (x, y))
+    r = 2
+    x = pt(x)
+    y = pt(y)
+    r = pt(r)
+    context.marker(x, y, r=r, fontSize=pt(10))
+    context.fill(None)
+    context.stroke((0, 0, 0.5))
+    context.rect(x, y, bs.tw, bs.th)
+
 
     context.saveImage('_export/00_BabelString-%s.pdf' % contextName)
 
