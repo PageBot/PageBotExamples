@@ -53,20 +53,22 @@ def makeText(context):
     view.showNameInfo = True # Showing page info and title on top of the page.
     view.padding = padding # Make space to show crop marks, etc.
 
-    # Create a style dictionary and a BabelString with that style.
-    # xAlign is centered on the (x, y) position. For strings without defined
-    # width xAlign and xTextAlign a equivalent.
-    # yAlign is positioning on middle of the capHeight
+    # Creates a style dictionary and a BabelString with that style. xAlign is
+    # centered on the (x, y) position. For strings without defined width xAlign
+    # and xTextAlign a equivalent. yAlign is positioning on middle of the
+    # capHeight.
     style = dict(font=FONT_NAME, fontSize=fontSize, tracking=0,#-em(0.02),
             textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP)
     bs = context.newString('A4', style)
 
     w = h = None
-    #w, h = page.ph, h=page.ph 
+    #w, h = page.ph, h=page.ph
     t = newText(bs, parent=page, x=page.w/2, y=page.h/2, w=w, h=h, fill=bgColor,
             xAlign=CENTER, yAlign=MIDDLE, # Used for Text, in case (w, h) is defined.
             showOrigin=True)
+
     print(contextName, t.w, t.h, bs.w, bs.h, bs.tw, bs.th)
+
     # Horizontal lines to mark top and bottom of elastic text box
     newLine(parent=page, x=t.x, y=t.bottom, w=t.w, h=0, stroke=(1, 0, 0), strokeWidth=0.5, xAlign=CENTER)
     newLine(parent=page, x=t.x, y=t.top, w=t.w, h=0, stroke=(0, 1, 0.3), strokeWidth=0.5, xAlign=CENTER)
@@ -79,7 +81,7 @@ def makeText(context):
     newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.8), strokeWidth=0.5)
     newLine(parent=page, x=page.w/2, y=0, w=0, h=page.h, stroke=(0, 0, 0.8), strokeWidth=0.5)
 
-    print('23@@@', t.bs.textSize)
+    #print('23@@@', t.bs.textSize)
 
     # Export the document as PDF
     doc.export(exportPath)

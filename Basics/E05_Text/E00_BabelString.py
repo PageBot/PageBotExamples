@@ -30,7 +30,6 @@ W, H = A4 # Standard paper size from constants.
 
 def babelString(contextName):
     context = getContext(contextName)
-
     context.newPage(W, H) # Make a new A4 page.
 
     # Define font, fontSize and color of the square
@@ -62,6 +61,7 @@ def babelString(contextName):
     except Exception as e:
         print(traceback.format_exc())
 
+    context.saveImage('_export/00_BabelString-%s.pdf' % contextName)
+
 for contextName in ('DrawBot', 'Flat'):
     babelString(contextName)
-
