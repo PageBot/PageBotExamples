@@ -28,6 +28,7 @@ from pagebot.toolbox.loremipsum import loremipsum
 from pagebot.toolbox.units import pt, em
 
 txt = loremipsum()
+print(len(txt))
 
 def babelStringMetrics(contextName):
 
@@ -35,18 +36,35 @@ def babelStringMetrics(contextName):
 
     # Define font, fontSize and color of the square
     fontName = 'PageBot-Regular'
-    fontSize = pt(24)
-    textColor = color(1, 0, 0)
+    fontNameBold = 'PageBot-Bold'
+    fontSize = pt(36)
+    textColor = color(0, 1, 0)
 
     # Define the style of the text, alignment is centered on baseline.
     style = dict(font=fontName, fontSize=fontSize, tracking=-em(0.02),
-            leading=em(1.2), textFill=0, xTextAlign=CENTER)
+            leading=em(1.2), textFill=0)#, xTextAlign=CENTER)
     # Have the context create a BabelString with the style.
     bs = context.newString(txt, style)
     bs.w = 1000
+    bs.add('fsjfsdff')
+    style = dict(font=fontNameBold, fontSize=fontSize, tracking=-em(0.02),
+            leading=em(1.2), textFill=0)#, xTextAlign=CENTER)
+    bs2 = context.newString('sdfsfsdfs', style)
+    bs.add(bs2)
 
-    # (999.19pt, 1556pt) in DrawBot, ( ) in Flat
-    print(bs.textSize) 
+    # DrawBot: (7866.86pt, 288pt)
+    # Flat(8071.99pt, 277.15pt)
+    print(bs.context)
+    print(bs)
+    print(bs.textSize)
+    print(bs.runs)
+    print(len(bs.runs))
+    print(len(bs))
+    print(bs.lines)
+    print(len(bs.lines))
+
+    for run in bs.runs:
+        print(run)
 
 for contextName in ('DrawBot', 'Flat'):
     babelStringMetrics(contextName)
