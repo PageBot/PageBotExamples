@@ -27,8 +27,8 @@ from pagebot.toolbox.color import color
 from pagebot.toolbox.loremipsum import loremipsum
 from pagebot.toolbox.units import pt, em
 
-W, H = A4 # Standard paper size from constants.
-loremIpsum = loremipsum()
+H, W = A4 # Standard paper size from constants.
+loremIpsum = loremipsum()[:800]
 
 def babelLine(contextName):
     context = getContext(contextName)
@@ -42,9 +42,12 @@ def babelLine(contextName):
     # Define the style of the text, alignment is centered on baseline.
     style = dict(font=fontName, fontSize=fontSize, tracking=-em(0.02),
             leading=em(1), textFill=0) #, xTextAlign=CENTER)
+
     # Have the context create a BabelString with the style.
     bs = context.newString(loremIpsum, style)
-    bs.w = pt(200)
+    bs.w = pt(400)
+    bs.h = pt(400)
+    print(bs.cs)
 
     # Draw red square, bottom-left on middle of the page
     # and sides of 50% page width.
@@ -68,9 +71,14 @@ def babelLine(contextName):
     r = pt(r)
     context.marker(x, y, r=r, fontSize=pt(10))
     context.fill(None)
-    context.stroke((0, 0, 0.5))
+    context.stroke((0, 1, ))
     context.rect(x, y, bs.tw, bs.th)
+    context.stroke((1, 0, ))
+    context.rect(x, y, bs.w, bs.h)
 
+    for i, line in enumerate(bs.lines):
+        print(i)
+        context.marker(x, y-line.y, r=r, fontSize=pt(6), prefix='#%d' % i)
 
     context.saveImage('_export/00_BabelLine-%s.pdf' % contextName)
 
