@@ -61,13 +61,25 @@ def makeText(context):
             textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP)
     bs = context.newString('A4', style)
 
-    w = h = None
+    w = h = None # If not defined, the textSize will be equal to the contained string.
     #w, h = page.ph, h=page.ph
     t = newText(bs, parent=page, x=page.w/2, y=page.h/2, w=w, h=h, fill=bgColor,
             xAlign=CENTER, yAlign=MIDDLE, # Used for Text, in case (w, h) is defined.
             showOrigin=True)
 
-    print(contextName, t.w, t.h, bs.w, bs.h, bs.tw, bs.th)
+    print('Context:', contextName)
+    print('t.w: %0.2f, t.h: %0.2f, bs.w: %s, bs.h: %s, bs.tw: %0.2f, bs.th: %0.2f' % (t.w, t.h, bs.w, bs.h, bs.tw, bs.th))
+    print('bs.textSize:', bs.textSize)
+    print('bs.lines[0].runs:', bs.lines[0].runs, bs.lines[0].y) # Standardised between contexts.
+    print('bs.topLineCapHeight:', bs.topLineCapHeight)
+    print('bs.topLineXHeight:', bs.topLineXHeight)
+    print('bs.topLineCapHeight/2:', bs.topLineCapHeight/2)
+    print('bs.topLineXHeight/2:', bs.topLineXHeight/2)
+    print('bs.topLineAscender:', bs.topLineAscender)
+    print('bs.topLineAscender_h:', bs.topLineAscender_h)
+    print('bs.bottomLineDescender_p:', bs.bottomLineDescender_p)
+    print('bs.bottomLineDescender:', bs.bottomLineDescender)
+    print()
 
     # Horizontal lines to mark top and bottom of elastic text box
     newLine(parent=page, x=t.x, y=t.bottom, w=t.w, h=0, stroke=(1, 0, 0), strokeWidth=0.5, xAlign=CENTER)
@@ -77,7 +89,7 @@ def makeText(context):
     newLine(parent=page, x=t.left, y=t.y, w=0, h=t.h, stroke=(1, 0, 0), strokeWidth=0.5, yAlign=MIDDLE)
     newLine(parent=page, x=t.right, y=t.y, w=0, h=t.h, stroke=(0, 1, 0.3), strokeWidth=0.5, yAlign=MIDDLE)
 
-    # Horizontal and vertial lines, to show text center/middle position,
+    # Horizontal and vertical lines, to show text center/middle position,
     newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.8), strokeWidth=0.5)
     newLine(parent=page, x=page.w/2, y=0, w=0, h=page.h, stroke=(0, 0, 0.8), strokeWidth=0.5)
 
@@ -86,5 +98,8 @@ def makeText(context):
     # Export the document as PDF
     doc.export(exportPath)
 
-for contextName in ('DrawBot', 'Flat'):
+for contextName in (
+    'DrawBot', 
+    'Flat',
+    ):
     makeText(contextName)
