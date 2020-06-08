@@ -37,7 +37,7 @@ FONT_NAME = 'PageBot-Regular'
 textColor = color(1, 0, 0) # Red of the “A4”
 bgColor = color(0.9) # Background color of the text box
 
-def makeText(context):
+def makeText(contextName):
     context = getContext(contextName)
     exportPath = '_export/00_Text-%s.pdf' % contextName
     print('Generating:', exportPath)
@@ -98,8 +98,5 @@ def makeText(context):
     # Export the document as PDF
     doc.export(exportPath)
 
-for contextName in (
-    'DrawBot',
-    'Flat',
-    ):
+for contextName in ('DrawBot', 'Flat',):
     makeText(contextName)
