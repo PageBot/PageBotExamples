@@ -70,7 +70,7 @@ def makeText(context):
     print('Context:', contextName)
     print('t.w: %0.2f, t.h: %0.2f, bs.w: %s, bs.h: %s, bs.tw: %0.2f, bs.th: %0.2f' % (t.w, t.h, bs.w, bs.h, bs.tw, bs.th))
     print('bs.textSize:', bs.textSize)
-    print('bs.lines[0].runs:', bs.lines[0].runs, bs.lines[0].y) # Standardised between contexts.
+    #print('bs.lines[0].runs:', bs.lines[0].runs, bs.lines[0].y) # Standardised between contexts.
     print('bs.topLineCapHeight:', bs.topLineCapHeight)
     print('bs.topLineXHeight:', bs.topLineXHeight)
     print('bs.topLineCapHeight/2:', bs.topLineCapHeight/2)
@@ -99,7 +99,7 @@ def makeText(context):
     doc.export(exportPath)
 
 for contextName in (
-    'DrawBot', 
+    'DrawBot',
     'Flat',
     ):
     makeText(contextName)
