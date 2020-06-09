@@ -37,19 +37,8 @@ def babelLine(contextName):
     exportPath = '_export/00_BabelLine-%s.pdf' % contextName
     padding = pt(40) # Outside measures to accommodate the crop makrs.
     bgColor = color(0.9) # Background color of the text box
-
-    doc = Document(w=W, h=H, title='00_BabelLine', context=context)
-    page = doc[1] # Get page on pageNumber, first in row (this is only one now).
-    page.padding = padding
-    view = doc.getView() # Get the current view of the document.
-    view.showPadding = True
-    view.showCropMarks = True
-    view.showRegistrationMarks = True
-    view.showFrame = True # Show the frame of the  page as blue line
-    view.showNameInfo = True # Showing page info and title on top of the page.
-    view.padding = padding # Make space to show crop marks, etc.
-
-    #context.newPage(W, H) # Make a new A4 page.
+    black = color(0)
+    context.newPage(W, H) # Make a new A4 page.
 
     # Define font, fontSize and color of the square
     fontName = 'PageBot-Regular'
@@ -61,38 +50,41 @@ def babelLine(contextName):
             leading=em(1), textFill=0) #, xTextAlign=CENTER)
 
     # Have the context create a BabelString with the style.
-    w = pt(400)
-    h = pt(200)
     bs = context.newString(loremIpsum, style=style)
     #print(bs.h)
 
-    x = 20
-    y = H / 2
+    x = pt(20)
+    y = pt(H / 2)
+    r = 2
+    w = 600
+    h = 200
+    r = pt(r)
 
 
     # This doesn't give the same results.
     #context.drawString(bs, (x, y))
+    context.drawText(bs, (x, y, w, h))
 
-    r = 2
-    x = pt(x)
-    y = pt(y)
-    r = pt(r)
     context.marker(x, y, r=r, fontSize=pt(10))
     context.fill(None)
     context.stroke((0, 1, ))
     context.rect(x, y, w, h)
 
-    t = newText(bs, parent=page, x=x, y=y, w=w, h=h, fill=bgColor,
-            xAlign=CENTER, yAlign=MIDDLE, # Used for Text, in case (w, h) is defined.
-            showOrigin=True)
-    #context.stroke((1, 0, ))
+
+    context.stroke((1, 0, ))
+    context.rect(x, y, w, h)
     #context.rect(x, y, bs.w, bs.h)
 
-    #for i, line in enumerate(bs.lines):
-    #    context.marker(x, y-line.y, r=r, fontSize=pt(6), prefix='#%d' % i)
+    for i, line in enumerate(bs.lines):
+        yLine = line.y
+        if yLine > h:
+            break
 
-    #context.saveImage('_export/00_BabelLine-%s.pdf' % contextName)
-    doc.export(exportPath)
+        yLine = y + h - yLine
+        context.marker(x+w, yLine, r=r, fontSize=pt(6), prefix='#%d: %s' % (i, str(line.y)))
+        #context.line((x, yLine), (x+w, yLine))
+
+    context.saveImage(exportPath)
 
 
 
