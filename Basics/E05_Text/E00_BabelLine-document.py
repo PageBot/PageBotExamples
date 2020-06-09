@@ -58,7 +58,7 @@ def babelLine(contextName):
     textColor = color(1, 0, 0)
 
     # Define the style of the text, alignment is centered on baseline.
-    style = dict(font=fontName, fontSize=fontSize, tracking=-em(0.02),
+    style = dict(font=fontName, fontSize=fontSize,# tracking=-em(0.02),
             leading=em(1), textFill=0) #, xTextAlign=CENTER)
 
     # Have the context create a BabelString with the style.
@@ -69,20 +69,12 @@ def babelLine(contextName):
     y = pt(H / 2)
 
 
-    # This doesn't give the same results.
-    #context.drawString(bs, (x, y))
-    context.drawText(bs, (x, y))
-
     r = 2
     x = x
     y = y
     w = 600
     h = 200
     r = pt(r)
-    context.marker(x, y, r=r, fontSize=pt(10))
-    context.fill(None)
-    context.stroke((0, 1, ))
-    context.rect(x, y, w, h)
 
     t = newText(bs, parent=page, x=x, y=y, w=w, h=h, fill=bgColor,
             #xAlign=CENTER, yAlign=MIDDLE, # Used for Text, in case (w, h) is defined.

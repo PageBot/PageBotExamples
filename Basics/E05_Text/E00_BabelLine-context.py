@@ -34,7 +34,7 @@ loremIpsum = loremipsum()
 
 def babelLine(contextName):
     context = getContext(contextName)
-    exportPath = '_export/00_BabelLine-%s.pdf' % contextName
+    exportPath = '_export/00_BabelLine-context-%s.pdf' % contextName
     padding = pt(40) # Outside measures to accommodate the crop makrs.
     bgColor = color(0.9) # Background color of the text box
     black = color(0)
@@ -46,7 +46,7 @@ def babelLine(contextName):
     textColor = color(1, 0, 0)
 
     # Define the style of the text, alignment is centered on baseline.
-    style = dict(font=fontName, fontSize=fontSize, tracking=-em(0.02),
+    style = dict(font=fontName, fontSize=fontSize,# tracking=-em(0.02),
             leading=em(1), textFill=0) #, xTextAlign=CENTER)
 
     # Have the context create a BabelString with the style.
@@ -56,7 +56,7 @@ def babelLine(contextName):
     x = pt(20)
     y = pt(H / 2)
     r = 2
-    w = 600
+    w = pt(400)
     h = 200
     r = pt(r)
 
