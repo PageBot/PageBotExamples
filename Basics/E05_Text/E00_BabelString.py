@@ -38,7 +38,7 @@ def babelString(contextName):
     textColor = color(1, 0, 0)
 
     # Define the style of the text, alignment is centered on baseline.
-    style = dict(font=fontName, fontSize=fontSize, tracking=-em(0.02),
+    style = dict(font=fontName, fontSize=fontSize,# tracking=-em(0.02),
             leading=em(1), textFill=0) #, xTextAlign=CENTER)
     # Have the context create a BabelString with the style.
     bs = context.newString('Hkpx', style)
