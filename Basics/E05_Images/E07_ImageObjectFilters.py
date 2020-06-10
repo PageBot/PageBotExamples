@@ -53,7 +53,7 @@ EXPORT_PATH = '_export/07_ImageObjectFilters.pdf'
 
 gridX = ((CW, GUTTER), (CW, GUTTER), (CW, 0))
 
-doc = Document(w=W, h=H, title='Color Squares', autoPages=1, 
+doc = Document(w=W, h=H, title='Color Squares', autoPages=1,
     gridX=gridX, context=context)
 
 view = doc.getView()

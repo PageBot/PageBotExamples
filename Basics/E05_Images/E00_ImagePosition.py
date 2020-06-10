@@ -32,7 +32,7 @@ def imagePosition(contextName):
 
     P = pt(30) # Padding of the page
 
-    EXPORT_PATH = '_export/00_ImagePosition.pdf'
+    EXPORT_PATH = '_export/00_ImagePosition-%s.pdf' % contextName
 
     # Define the path where to find the example image.
     path = getResourcesPath() + "/images/cookbot1.jpg"

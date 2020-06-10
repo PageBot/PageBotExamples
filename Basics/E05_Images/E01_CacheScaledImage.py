@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -35,7 +36,7 @@ from pagebot.conditions import *
 for contextName in ('DrawBot'): #, 'Flat'):
 	context = getContext(contextName)
 
-	W, H = mm(1000, 240) 
+	W, H = mm(1000, 240)
 
 	M = pt(12) # Margin between the images
 	P = mm(30) # Padding of the page

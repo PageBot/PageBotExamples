@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -62,110 +63,110 @@ page = doc[1]
 page.bleed = BLEED
 im = newImage(imagePath, parent=page, x=-page.bleedLeft, y=page.h/2,
 	w=page.w/2+page.bleedLeft, xAlign=LEFT, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=-page.bleedLeft; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=-page.bleedLeft; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE',
 	Top2Top())
 
 page = page.next
 im = newImage(imagePath, parent=page, x=0, y=page.h/2,
 	w=page.w/2, xAlign=LEFT, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=0; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=0; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE',
 	Top2Top())
 
 page = page.next
 im = newImage(imagePath, parent=page, x=page.pl, y=page.h/2,
 	w=page.pw/2, xAlign=LEFT, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=page.pl; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.pl; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE',
 	Top2Top())
 
 page = page.next
 im = newImage(imagePath, parent=page, x=page.pl+page.pw/4, y=page.h/2,
 	w=page.pw/2, xAlign=CENTER, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=page.pl+page.pw/4; y=page.h/2\nxAlign=CENTER; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.pl+page.pw/4; y=page.h/2\nxAlign=CENTER; yAlign=MIDDLE',
 	Top2Top())
 
 page = page.next
 im = newImage(imagePath, parent=page, x=page.w/2, y=page.h/2,
 	w=page.pw/2, xAlign=RIGHT, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE',
 	Top2Top())
 
 # CENTER
 page = page.next
 im = newImage(imagePath, parent=page, x=page.pl+page.pw/4, y=page.h/2,
 	w=page.pw/2, xAlign=LEFT, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=page.pl+page.w/2; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.pl+page.w/2; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE',
 	Top2Top())
 
 page = page.next
 im = newImage(imagePath, parent=page, x=page.w/2, y=page.h/2,
 	w=page.pw/2, xAlign=CENTER, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=CENTER; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=CENTER; yAlign=MIDDLE',
 	Top2Top())
 
 page = page.next
 im = newImage(imagePath, parent=page, x=page.pl+page.pw*3/4, y=page.h/2,
 	w=page.pw/2, xAlign=RIGHT, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=page.pl+page.pw*3/4; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.pl+page.pw*3/4; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE',
 	Top2Top())
 
 # RIGHT
 page = page.next
 im = newImage(imagePath, parent=page, x=page.w/2, y=page.h/2,
 	w=page.pw/2, xAlign=LEFT, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE',
 	Top2Top())
 
 page = page.next
 im = newImage(imagePath, parent=page, x=page.pl+page.pw*3/4, y=page.h/2,
 	w=page.pw/2, xAlign=CENTER, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=page.pl*page.pw*3/4; y=page.h/2\nxAlign=CENTER; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.pl*page.pw*3/4; y=page.h/2\nxAlign=CENTER; yAlign=MIDDLE',
 	Top2Top())
 
 page = page.next
 im = newImage(imagePath, parent=page, x=page.w-page.pr, y=page.h/2,
 	w=page.pw/2, xAlign=RIGHT, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=page.w-page.pr; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.w-page.pr; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE',
 	Top2Top())
 
 page = page.next
 im = newImage(imagePath, parent=page, x=page.w/2, y=page.h/2,
 	w=page.w/2, xAlign=LEFT, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE',
 	Top2Top())
 
 page = page.next
 page.bleed = BLEED
 im = newImage(imagePath, parent=page, x=page.w/2, y=page.h/2,
 	w=page.w/2+page.bleedRight, xAlign=LEFT, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=LEFT; yAlign=MIDDLE',
 	Top2Top())
 
 # TOP
 page = page.next
 im = newImage(imagePath, parent=page, x=page.w/2, y=page.h/2,
 	h=page.ph/2, xAlign=CENTER, yAlign=BOTTOM, showOrigin=True)
-addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE',
 	Bottom2Bottom())
 
 # MIDDLE
 page = page.next
 im = newImage(imagePath, parent=page, x=page.w/2, y=page.h/2,
 	h=page.ph/2, xAlign=CENTER, yAlign=MIDDLE, showOrigin=True)
-addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE',
 	Top2Top())
 
 # BOTTOM
 page = page.next
 im = newImage(imagePath, parent=page, x=page.w/2, y=page.h/2,
 	h=page.ph/2, xAlign=CENTER, yAlign=TOP, showOrigin=True)
-addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=page.w/2; y=page.h/2\nxAlign=RIGHT; yAlign=MIDDLE',
 	Top2Top())
 
 page = page.next
 im = newRect(fill=(1, 0, 0), parent=page, y=page.h/2,
 	conditions=(Fit2Width(), Bottom2Bottom()),
 	h=page.ph/2, yAlign=TOP, showOrigin=True)
-addLabel(im, page, 'x=Fit2Width(); y=Bottom2Bottom()\nxAlign=LEFT; yAlign=MIDDLE', 
+addLabel(im, page, 'x=Fit2Width(); y=Bottom2Bottom()\nxAlign=LEFT; yAlign=MIDDLE',
 	Top2Top())
 
 doc.solve()

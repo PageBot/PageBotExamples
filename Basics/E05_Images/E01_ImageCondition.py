@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -27,7 +28,7 @@ from pagebot.conditions import *
 
 context = getContext('DrawBot')
 
-W, H = pt(400, 400) 
+W, H = pt(400, 400)
 
 P = pt(30) # Padding of the page
 
@@ -46,14 +47,14 @@ page.padding = P
 # Height of the image is 50% of usable space.
 newImage(path, x=P, y=P, h=page.ph/2, parent=page, showOrigin=True)
 # Position the image on bottom-right of the page padding.
-# Add opaque red overlay. 
+# Add opaque red overlay.
 newImage(path, x=page.w-P, y=P, h=page.ph/2, parent=page, fill=(1, 0, 0, 0.5),
 	xAlign=RIGHT, yAlign=BOTTOM)
 # Position at top-right, rotated, yellow opaque overlay.
-newImage(path, x=P, y=page.h-P, h=page.ph/2, parent=page, 
+newImage(path, x=P, y=page.h-P, h=page.ph/2, parent=page,
 	xAlign=LEFT, yAlign=TOP, fill=(0, 1, 1, 0.5), rotate=90)
 # Position at top-right, rotated, yellow opaque overlay.
-newImage(path, x=page.w-P, y=page.h-P, h=page.ph/2, parent=page, 
+newImage(path, x=page.w-P, y=page.h-P, h=page.ph/2, parent=page,
 	xAlign=RIGHT, yAlign=TOP, fill=(1, 1, 0, 0.5), rotate=90)
 
 doc.export(EXPORT_PATH)

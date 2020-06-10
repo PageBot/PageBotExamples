@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -56,20 +57,20 @@ page = doc[1]
 # The image is portrait, so fitting vertical makes the image fit in the
 # padding box of the page.
 conditions = [Fit2Height(), Center2Center()]
-im = newImage(imagePath, parent=page, conditions=conditions, 
+im = newImage(imagePath, parent=page, conditions=conditions,
 	showOrigin=True)
 
 page = page.next
 # Fitting the image by width, it does not fit vertically anymore.
 conditions = [Fit2Width(), Middle2Middle()]
-im = newImage(imagePath, parent=page, conditions=conditions, 
+im = newImage(imagePath, parent=page, conditions=conditions,
 	showOrigin=True)
 
 page = page.next
 # Fitting the image by width, it does not fit vertically anymore.
 # Adding a mask as sibling, we can clip the image on the page padding.
 conditions = [Fit2Width(), Middle2Middle()]
-im = newImage(imagePath, parent=page, conditions=conditions, 
+im = newImage(imagePath, parent=page, conditions=conditions,
 	showOrigin=True)
 conditions =[Fit()]
 mask = newMask(parent=page, conditions=conditions, # Fit page padding
@@ -79,7 +80,7 @@ page = page.next
 # Fitting the image by width, it does not fit vertically anymore.
 # The Mask can be any size and position on the page.
 conditions = [Fit2Width(), Middle2Middle()]
-im = newImage(imagePath, parent=page, conditions=conditions, 
+im = newImage(imagePath, parent=page, conditions=conditions,
 	showOrigin=True)
 conditions = [Right2Right(), Top2Top()]
 mask = newMask(parent=page, conditions=conditions,
@@ -90,7 +91,7 @@ page.bleed = BLEED # Set all bleed sides to the same value
 # Fitting the image by width, it does not fit vertically anymore.
 # Making the image bleed on page width.
 conditions = [Left2BleedLeft(), Fit2BleedRight(), Middle2Middle()]
-im = newImage(imagePath, parent=page, conditions=conditions, 
+im = newImage(imagePath, parent=page, conditions=conditions,
 	showOrigin=True)
 conditions = [Right2Right(), Top2Top()]
 
@@ -100,7 +101,7 @@ page.bleed = BLEED # Set all bleed sides to the same value
 # Making the image bleed on page width.
 # Now the mask needs to follow the bleed fit too.
 conditions = [Left2BleedLeft(), Fit2BleedRight(), Middle2Middle()]
-im = newImage(imagePath, parent=page, conditions=conditions, 
+im = newImage(imagePath, parent=page, conditions=conditions,
 	showOrigin=True)
 # Fit the mask on top half of the page, including bleed
 conditions = [Left2BleedLeft(), Fit2BleedRight(), Top2BleedTop()]
