@@ -24,7 +24,7 @@ from pagebot.toolbox.color import noColor, color
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.constants import *
 from pagebot.style import getRootStyle
-from pagebot.contexts.basecontext.babelstring import getFontPath
+from pagebot.fonttoolbox.objects.font import getFontPath
 
 # TODO: move to basics when finished.
 
@@ -105,12 +105,12 @@ def test(context):
     style = {'font': bungeeRegular, 'fontSize': 24, 'leading': 1.5}
     t0 = sentences[0] + '. '
 
-    s = page.newString(t0, style=style)
+    s = context.newString(t0, style=style)
 
     # Adds another string with a different style.
     t1 = '. '.join(sentences[1:])
     style = {'font': bungeeOutline, 'fontSize': 24, 'leading': 1.5}
-    s += page.newString(t1, style=style)
+    s += context.newString(t1, style=style)
 
     w = W/2 - 2*M
     h = 460 #H - 2*M
@@ -127,7 +127,7 @@ def test(context):
     # Get the rest of the text.
     txt = tb.getOverflow()
     style = {'font': pageBotBold, 'fontSize': 24, 'leading': 1.5}
-    s = page.newString(txt, style=style)
+    s = context.newString(txt, style=style)
 
     w = W/2 - 2*M
     h = 240 #H - 2*M
@@ -141,7 +141,7 @@ def test(context):
     # Get the rest of the text.
     txt = tb.getOverflow()
     style = {'font': robotoRegular, 'fontSize': 24, 'leading': 1.5}
-    s = page.newString(txt, style=style)
+    s = context.newString(txt, style=style)
 
     h = 500
     x = W / 2

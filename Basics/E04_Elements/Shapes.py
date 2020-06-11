@@ -11,7 +11,7 @@
 #     Supporting DrawBot, www.drawbot.com
 # -----------------------------------------------------------------------------
 #
-#     Images.py
+#     Shapes.py
 #
 #     Tests pagebot text boxes.
 
@@ -32,6 +32,7 @@ W = pt(W)
 H = pt(H)
 M = 50
 
+'''
 robotoRegular = findFont('Roboto-Regular')
 pageBotBold = findFont('PageBot-Bold')
 pageBotRegular = findFont('PageBot-Regular')
@@ -39,22 +40,28 @@ robotoBold = findFont('Roboto-Bold')
 bungeeRegular = findFont('Bungee-Regular')
 bungeeHairline = findFont('Bungee-HairlineRegular')
 bungeeOutline = findFont('Bungee-OutlineRegular')
+'''
 
 def test(context):
     print("creating doc")
     doc = Document(w=W, h=H, context=context)
-    doc.name = 'Images-%s' % doc.context.name
+    doc.name = 'Shapes-%s' % doc.context.name
     page = doc[1]
-    print('# Testing images in %s' % doc)
+    print('# Testing shapes in %s' % doc)
 
-    path = '%s/images/%s' % (getResourcesPath(), 'cookbot10.jpg')
-    newImage(path, x=0, y=50, z=0, w=300, h=300, parent=page, padding=8, scaleImage=False)
+    #path = '%s/shapes/%s' % (getResourcesPath(), 'cookbot10.jpg')
+    #newImage(path, x=0, y=50, z=0, w=300, h=300, parent=page, padding=8, scaleImage=False)
     #newRect(x=0, y=50, z=0, w=500, h=500)
     #conditions=[Left2SideLeft(), Float2SideTop()])
+    black = color(0)
+
+    style = dict(fill=black)
+    coords = ((0, 0), (100, 100), (20, 200), (40, 500))
+    newPolygon(coords)
 
     print('Starting doc build')
     doc.build()
-    EXPORT_PATH = '_export/Images-%s.pdf' % context.name
+    EXPORT_PATH = '_export/Shapes-%s.pdf' % context.name
     doc.export(EXPORT_PATH)
 
 #for contextName in ('Flat',):

@@ -39,7 +39,7 @@ def getText(doc, font, s):
     return t
 
 def makeDocument(context):
-    font = findFont('PageBot Regular')
+    font = findFont('PageBot-Regular')
     w = pt(8*12)
     doc = Document(w=W, h=H, context=context)
 
