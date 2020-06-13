@@ -51,7 +51,7 @@ class ThemeSpecimen(Element):
         for fontSize in range(24, 0, -1):
             styleHead['fontSize'] = pt(fontSize)
             themeName = context.newString(themeMoodName, style=styleHead)
-            tw, th = themeName.size
+            tw, th = themeName.textSize
             if tw < self.pw:
                 context.textBox(themeName,
                     (x+self.pl, y+self.h-th-self.pt, self.pw, th))
