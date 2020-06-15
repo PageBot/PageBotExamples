@@ -69,7 +69,7 @@ def drawColor(colorName, x, y, clr):
     labelString = context.newString('%s\n#%s' % (colorName, clr.hex),
         style=dict(font=labelFont, fontSize=labelSize, leading=labelLeading,
         textFill=textFill))
-    tw, th = labelString.size # Get the size of the label to center it
+    tw, th = labelString.textSize # Get the size of the label to center it
     context.text(labelString, (x+CW/2-tw/2, y+30)) # Position text in cell
 
 def makeThemePage(themeClass):
