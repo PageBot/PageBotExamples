@@ -59,7 +59,8 @@ def test(context):
     #coords = ((0, 0), (100, 100))
     newRect(x=0, y=0, w=100, h=100, parent=page, style=style)
     newCircle(x=200, y=100, r=100, parent=page, style=style)
-    newOval(x=400, y=100, w=100, h=50, parent=page, style=style)
+    o = newOval(x=400, y=100, w=100, h=50, parent=page, style=style)
+    print(o.box)
     coords = ((0, 0), (100, 100), (20, 200), (40, 500))
     #newPolygon(coords, parent=page, style=style)
     #newOval(

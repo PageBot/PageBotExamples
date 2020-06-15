@@ -21,7 +21,7 @@
 
 # Import all top-level values, such as the getContext() function.
 from pagebot import *
-from pagebot.filepaths import getResourcesPath
+from pagebot.filepaths import getRootPath, getResourcesPath
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.units import pt
 from pagebot.conditions import *
