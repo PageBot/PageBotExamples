@@ -32,11 +32,12 @@ P = pt(48)
 
 def verboseFam(fam):
     print(fam)
-    stylesDict = fam.getStyles()
-    for key, value in stylesDict.items():    
-        print(' - %s' % key)
-        for v in value:
-            print('   - %s' % v.path)
+    if fam:
+        stylesDict = fam.getStyles()
+        for key, value in stylesDict.items():
+            print(' - %s' % key)
+            for v in value:
+                print('   - %s' % v.path)
 
 def showAll():
     """Shows all fonts that are shipped with PageBot."""
@@ -44,18 +45,15 @@ def showAll():
     doc = Document(w=W, h=H, autoPages=1, context=context)
     page = doc[1]
     page.padding = P
-    
+
     c1 = (Left2Left(), Fit2Right(), Float2Top()) # Group condition
-    c2 = (Left2Left(), Float2Top()) # Title condition    
+    c2 = (Left2Left(), Float2Top()) # Title condition
     c3 = (Right2Right(), Float2Top()) # Speciment condition
 
     families = getFamilyPaths()
     fam = findFamily('Roboto')
     print(fam)
     fam = getFamily('Bungee')
-    print(fam)
-
-    fam = getFamily('BungeeOutline')
     print(fam)
 
     fam = getFamily('Roboto')
@@ -95,7 +93,7 @@ def showAll():
             page = page.next
             page.padding = P
             i = 0
-                
+
     doc.solve()
     doc.export('_export/04_Fonts.pdf')
 

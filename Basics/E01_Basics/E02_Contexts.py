@@ -23,7 +23,6 @@ from pagebot.document import Document
 from pagebot.toolbox.color import blueColor, darkGrayColor, redColor, Color, noColor, color
 from pagebot.conditions import *
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.elements.paths.pagebotpath import PageBotPath
 from pagebot.constants import A3
 
 context = getContext('DrawBot')
