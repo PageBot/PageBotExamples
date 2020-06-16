@@ -56,8 +56,8 @@ def makeDocument(context):
     # position is undefined, default is (0, 0), since will be filled by the
     # condition. Size measures can be any type of units. Their type is shown
     # in the measured output.
-    e = newText(bs, w=mm(86), h=pt(164), parent=page, pl=3, pt=3,
-        showDimensions=True, showOrigin=True, xAlign=CENTER,
+    e = newText(bs, w=mm(86), h=pt(164), parent=page, #pl=3, pt=3,
+        showDimensions=True, showOrigin=True,# xAlign=CENTER,
         conditions=conditions, fill=color(0.8))
 
     print((mm(120) - mm(86))/2)
