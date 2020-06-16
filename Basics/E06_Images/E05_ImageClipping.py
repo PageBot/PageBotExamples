@@ -26,13 +26,13 @@ from pagebot.toolbox.units import em, p, pt, inch, degrees
 from pagebot.conditions import * # Import all conditions for convenience.
 from pagebot.constants import *
 from pagebot.elements import *
+import flat
 
 def imageClipping(contextName):
-    #context = FlatContext()
     context = getContext(contextName)
 
     # Example image that has nice areas to put text as example.
-    imagePath = getResourcesPath() + '/images/peppertom_lowres_398x530.png'
+    imagePath = getResourcesPath() + '/images/pagebot.png'
     EXPORT_PATH = '_export/05_ImageClipping-%s.pdf' % contextName
 
     W = pt(400) # Document size
