@@ -11,10 +11,9 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     02_Contexts.py
+#     02_Elements.py
 #
-#     Make a page with a variety of elements that float into position,
-#     each taking its own space.
+#     Make a page with a variety of elements and use conditions to place them.
 
 from pagebot import getContext
 from pagebot.toolbox.units import *
@@ -26,6 +25,8 @@ from pagebot.conditions import *
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.constants import A3
 
+
+
 def build(contextName):
     context = getContext(contextName)
 
@@ -35,10 +36,10 @@ def build(contextName):
     Y0 = 100
     SQ = 150
     P  = 50
-    bungee = findFont('BungeeInline-Regular')
+    font = findFont('PageBot-Regular') # TYPETR Upgrade® subset font for demo.
 
     # Create a new document for the current context. Create one automatic page.
-    doc = Document(w=W, h=H, context=context)
+    doc = Document(w=W, h=H, autoPages=1, context=context)
     page = doc[1] # Get the one and single page of the document.
     page.padding = P # Set the page padding.
 
@@ -46,12 +47,14 @@ def build(contextName):
     # floating to that position in case something is already there.
     # Parent of the element is the current page.
     c = (Right2Right(), Float2Top(), Float2Left())
-    r = newRect(w=SQ, h=SQ, parent=page, conditions=(Left2Left(), Top2Top()), fill=(0,0,1), stroke=0)
+    r = newRect(w=SQ, h=SQ, parent=page, conditions=(Left2Left(), Top2Top()),
+            fill=(0,0,1), stroke=0, showOrigin=True)
 
     # Create a new red circle element and align it on top-left,
     # floating to that position relative to what is already there.
     # Parent of the element is the current page.
-    o = newOval(w=SQ, h=SQ, parent=page, conditions=c, fill=(1, 0, 0), stroke=0)
+    o = newOval(w=SQ, h=SQ, parent=page, conditions=c, fill=(1, 0, 0),
+            stroke=0, showOrigin=True)
 
     # Create a new black diagonal line element and align it on top-left,
     # floating to that position relative to what is already there.
@@ -64,8 +67,10 @@ def build(contextName):
 
     # Create two text boxes and align it on top-left,
     # floating to that position relative to what is already there.
-    newText('Text    !', parent=page, conditions=c, fontSize=60, stroke=(1, 1, 0), strokeWidth=20, textFill=0.5, font=bungee)
-    newText('Text Box', parent=page, conditions=c, stroke=0, strokeWidth=0.5, fill=(1, 1, 0), fontSize=30, font=bungee, textFill=(0, 0, 1))
+    newText('Text    !', parent=page, conditions=c, fontSize=60, stroke=(1, 1, 0),
+            strokeWidth=20, textFill=0.5, font=font)
+    newText('Text Box', parent=page, conditions=c, stroke=0, strokeWidth=0.5, fill=(1, 1, 0),
+            fontSize=30, font=font, textFill=(0, 0, 1))
 
     # A number of circles that will float the remaining space.
     for n in range(50):
@@ -74,7 +79,8 @@ def build(contextName):
 
     # Create two text boxes and align it on top-left,
     # floating to that position relative to what is already there.
-    newRect(parent=page, conditions=(Left2Left(), Fit2Width(), Float2Top(), Fit2Bottom()), fill=0.9)
+    newRect(parent=page, conditions=(Left2Left(), Fit2Width(), Float2Top(), Fit2Bottom()),
+            fill=0.9, showOrigin=True)
 
     # Solve conditions of all placed elements on the page
     page.solve()
@@ -84,8 +90,7 @@ def build(contextName):
     view.showPadding = True # Show the padding of the page, where conditions align.
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
-    doc.export('_export/02_Contexts-%s.pdf' % contextName)
-
+    doc.export('_export/02_Elements-%s.pdf' % contextName)
 
 for contextName in ('DrawBot', 'Flat'):
     build(contextName)
