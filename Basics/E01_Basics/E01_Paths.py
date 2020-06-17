@@ -89,7 +89,6 @@ def makeText(t, page, f, c):
     return newText(t, font=f, parent=page, conditions=c, fill=0.9,
         margin=GUTTER)
 
-
-for contextName in ('DrawBot',): #, 'Flat'):
+for contextName in ('DrawBot', 'Flat'):
     context = getContext(contextName)
     showFilePaths(context)
