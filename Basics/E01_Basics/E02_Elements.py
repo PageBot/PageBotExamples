@@ -25,8 +25,6 @@ from pagebot.conditions import *
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.constants import A3
 
-
-
 def build(contextName):
     context = getContext(contextName)
 

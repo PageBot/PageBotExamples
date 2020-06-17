@@ -26,7 +26,7 @@ from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.fonttoolbox.fontpaths import *
 from pagebot.fonttoolbox.objects.family import getFamilyPaths, findFamily, getFamily
 
-W, H = A3
+H, W = A3
 MAX_PAGES = 20
 P = pt(48)
 
@@ -39,9 +39,9 @@ def verboseFam(fam):
             for v in value:
                 print('   - %s' % v.path)
 
-def showAll():
+def build(contextName):
     """Shows all fonts that are shipped with PageBot."""
-    context = getContext()
+    context = getContext(contextName)
     doc = Document(w=W, h=H, autoPages=1, context=context)
     page = doc[1]
     page.padding = P
@@ -51,22 +51,23 @@ def showAll():
     c3 = (Right2Right(), Float2Top()) # Speciment condition
 
     families = getFamilyPaths()
-    fam = findFamily('Roboto')
-    print(fam)
+    pbf = getPageBotFontPaths()
+    #print(pbf.keys())
+
     fam = getFamily('Bungee')
-    print(fam)
-
-    fam = getFamily('Roboto')
-
-    #verboseFam(fam)
-    fam = getFamily('RobotoCondensed')
+    assert fam is not None
     verboseFam(fam)
 
     fam = getFamily('PageBot')
-    print(fam)
+    assert fam is not None
+    verboseFam(fam)
 
-    for s in fam.getStyles():
-        print(' - %s' % s)
+    fam = findFamily('Roboto')
+    assert fam is not None
+    verboseFam(fam)
+
+    #for s in fam.getStyles():
+    #    print(' - %s' % s)
 
     #print(families)
     print('Number of families found: %d' % len(families))
@@ -82,19 +83,20 @@ def showAll():
     i = 0
 
     for pbFont in sorted(pbFonts.keys()):
-        if 'Bungee' in pbFont or 'PageBot' in pbFont: # Filter some of the PageBot fonts.
-            f = findFont(pbFont)
-            if f is not None:
-                i += 1
-                g = newGroup(parent=page, conditions=c1, padding=7, borderTop=1, strokeWidth=0)
-                newText('%s\n' % pbFont, parent=g, conditions=c2, fontSize=16, strokeWidth=0)
-                newText('ABCDEabcde012345', parent=g, conditions=c3, font=f, fontSize=pt(44), strokeWidth=0)
-        if i > 10:
+        #if 'Bungee' in pbFont or 'PageBot' in pbFont: # Filter some of the PageBot fonts.
+        f = findFont(pbFont)
+        if f is not None:
+            i += 1
+            g = newGroup(parent=page, conditions=c1, padding=7, borderTop=1, strokeWidth=0)
+            newText('%s\n' % pbFont, parent=g, conditions=c2, fontSize=16, strokeWidth=0, w=W/2)
+            newText('ABCDEabcde012345', parent=g, conditions=c3, font=f, fontSize=pt(44), strokeWidth=0, w=W/2)
+        if i >= 8:
             page = page.next
             page.padding = P
             i = 0
 
     doc.solve()
-    doc.export('_export/04_Fonts.pdf')
+    doc.export('_export/03_Fonts-%s.pdf' % contextName)
 
-showAll()
+for contextName in ('DrawBot', 'Flat'):
+    build(contextName)
