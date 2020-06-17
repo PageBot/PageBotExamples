@@ -44,8 +44,8 @@ for contextName in ('DrawBot', 'Flat'):
     # In order to get it on the page, we define the parent.
     # Since the Text element does not have width defined, xAlign and xTextAlign
     # behave identical.
-    e = newText('Hello World', x=W/2, y=H/2, font=font, fontSize=fontSize,
-            textFill=0.2, xTextAlign=CENTER, showOrigin=True, parent=page)
+    e = newText('Hello World', x=W/2, y=H/2, font=font, fontSize=fontSize, fill=0.9,
+            textFill=0.1, xTextAlign=CENTER, showOrigin=True, parent=page)
     print('Element:', e)
 
     # Export the document page as PNG, so it shows as web image.
