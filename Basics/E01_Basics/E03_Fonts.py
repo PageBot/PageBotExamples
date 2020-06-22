@@ -90,7 +90,7 @@ def build(contextName):
             g = newGroup(parent=page, conditions=c1, padding=7, borderTop=1, strokeWidth=0)
             newText('%s\n' % pbFont, parent=g, conditions=c2, fontSize=16, strokeWidth=0, w=W/2)
             newText('ABCDEabcde012345', parent=g, conditions=c3, font=f, fontSize=pt(44), strokeWidth=0, w=W/2)
-        if i >= 8:
+        if i == 8:
             page = page.next
             page.padding = P
             i = 0

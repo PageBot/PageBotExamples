@@ -14,7 +14,7 @@
 #     the use of PageBot document, pages and components.
 #
 #     Show the role of strike in the generation of a page.
-#     Basically the strike is the seed of style information 
+#     Basically the strike is the seed of style information
 #     for spans, paragraphs and text generated from it.
 #
 #     st = strike(flatFont).color(red).size(fontSize, leading=0)
@@ -30,7 +30,7 @@ if not os.path.exists('_export'):
 # Font the PageBot Font instance
 pbFont = findFont('PageBot-Regular')
 flatFont = font.open(pbFont.path) # Make a Flat font.
-fontSize = 200
+fontSize = 20
 red = rgb(255, 20, 100)
 black = rgb(0, 0, 0)
 
@@ -41,15 +41,18 @@ st.color(red).size(fontSize, leading=0).tracking(0)
 
 S = 'Hkpx'
 P = 50 # Padding
-R = 20 # radius of origin marker
+R = fontSize / 4 # radius of origin marker
 
-# Flat has origin in top-left
-w = st.width(S)+2*P # Calculated with to fit the string + padding
-h = st.style.ascender() - st.style.descender() + 2*P
+# The Flat origin is top-left; we calculate the width and height to fit the
+# string + padding.
+w = st.width(S) + 2*P
+h0 = st.style.ascender() - st.style.descender()
+h = h0 + 2*P
+
 fDoc = document(w, h, 'pt') # Size of text + padding around
 fPage = fDoc.addpage()
 
-x, y = P, 200
+x, y = P, fontSize
 pt = fPage.place(st.text(S)) # Make PlacedText
 pt.position(x, y) # Placing on baseline
 
@@ -57,6 +60,11 @@ pt.position(x, y) # Placing on baseline
 fPage.place(figure.circle(x, y, R))
 fPage.place(figure.line(x-R, y, x+R, y))
 fPage.place(figure.line(x, y-R, x, y+R))
+
+# Baseline.
+x1 = x + st.width(S)
+y1 = y + h0
+fPage.place(figure.line(x, y1, x1, y1))
 
 # Export the document to PDF
 fDoc.pdf(EXPORT_PATH)

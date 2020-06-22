@@ -55,7 +55,9 @@ def showFilePaths(context):
     style = dict(fontSize=14, font=f)
     msg = 'Root path is %s' % rootPath
     bs = context.newString(msg, style)
-    makeText(bs, page, f, c)
+    t = makeText(bs, page, f, c)
+    #print(t.x, t.y, t.w, t.h)
+    #print(t.bs.style)
 
     resourcesPath = getResourcesPath()
     msg = 'Resources path is %s' % resourcesPath
@@ -86,8 +88,10 @@ def showFilePaths(context):
 def makeText(t, page, f, c):
     """Create a new text box with e give layout conditions
     and with page as parent."""
-    return newText(t, font=f, parent=page, conditions=c, fill=0.9,
+    t = newText(t, font=f, parent=page, conditions=c, fill=0.9,
         margin=GUTTER)
+    t.showOrigin = True
+    return t
 
 for contextName in ('DrawBot', 'Flat'):
     context = getContext(contextName)
