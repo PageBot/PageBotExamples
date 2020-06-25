@@ -30,7 +30,7 @@ for contextName in ('DrawBot', 'Flat'):
 	print('Running example with', contextName)
 	context = getContext(contextName)
 
-	FILE_NAME = '_export/10_TextByContext%s.pdf' % contextName
+	FILE_NAME = '_export/07_LinesByContext%s.pdf' % contextName
 
 	# Landscape A3.
 	H, W = A3

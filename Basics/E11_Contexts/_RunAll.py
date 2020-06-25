@@ -27,4 +27,5 @@ import E02_OvalByContext
 import E03_FitOvalByContext
 import E04_CircleByContext
 import E05_FitCircleByContext
-import E10_TextByContext
+import E06_TextByContext
+import E07_LinesByContext
