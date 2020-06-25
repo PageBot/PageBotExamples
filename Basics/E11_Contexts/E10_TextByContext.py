@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -45,7 +46,7 @@ for contextName in ('DrawBot', 'Flat'):
 	style = dict(font='PageBot-Regular', fontSize=fontSize, textFill=color(1))
 	bs = context.newString('ABCD', style)
 	# Parent of the element is the current page.
-	e = newText(bs, w=SQ, h=SQ, parent=page, conditions=Fit(), 
+	e = newText(bs, w=SQ, h=SQ, parent=page, conditions=Fit(),
 		fill=(0.8), stroke=noColor)
 	print(e.bs) # <-- $ABCD$
 	print(e.bs.cs) # FormattedString (DrawBot), <FlatBabelData (Flat)
@@ -54,8 +55,8 @@ for contextName in ('DrawBot', 'Flat'):
 	page.solve()
 
 	if contextName == 'Flat':
-		span = bs.cs.tx.paragraphs[0].spans[0]
-		print('e.bs.cs.tx.paragraphs[0].spans[0].string', span.string, span.style.width(span.string))
+		span = bs.cs.txt.paragraphs[0].spans[0]
+		print('e.bs.cs.txt.paragraphs[0].spans[0].string', span.string, span.style.width(span.string))
 		print('e.bs.cs.pt.width, e.bs.cs.pt.height', e.bs.cs.pt.width, e.bs.cs.pt.height)
 		for height, run in e.bs.cs.pt.layout.runs():
 			for rr in run:
@@ -64,12 +65,12 @@ for contextName in ('DrawBot', 'Flat'):
 		print('e.bs.getTextSize():', e.bs.getTextSize())
 		print('e.bs.getTextSize(w=e.w, h=e.h):', e.bs.getTextSize(w=e.w, h=e.h))
 
-		print('context.getTextSize(bs):', context.getTextSize(bs))
-		print('context.getTextSize(bs, w=e.w, h=e.h):', context.getTextSize(bs, w=e.w, h=e.h))
+		print('context.textSize(bs):', context.textSize(bs))
+		print('context.textSize(bs, w=e.w, h=e.h):', context.textSize(bs, w=e.w, h=e.h))
 
 
-		span = bs.cs.tx.paragraphs[0].spans[0]
-		newRect(parent=page, w=span.style.width(span.string), h=bs.th, x=page.pl, 
+		span = bs.cs.txt.paragraphs[0].spans[0]
+		newRect(parent=page, w=span.style.width(span.string), h=bs.th, x=page.pl,
 			y=page.ph-page.pt, yAlign=TOP,
 			fill=None, stroke=color(1, 0, 0), strokeWidth=0.5)
 
