@@ -22,14 +22,21 @@ from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.color import Color, color
 from pagebot.fonttoolbox.objects.font import findFont
 
-W, H = pt(800, 200)
+W, H = pt(800, 600)
+P = 50
 
 def draw(contextName):
     context = getContext(contextName)
     doc = Document(w=W, h=H, context=context)
     page = doc[1]
-    x, y = pt(50), pt(50)
+    x, y = pt(P), pt(P)
     fontName = 'PageBot-Regular'
+    h = drawFont(context, page, x, y, fontName)
+    y += h + P
+    fontName = 'Bungee-Regular'
+    h = drawFont(context, page, x, y, fontName)
+    y += h + P
+    fontName = 'Roboto-Regular'
     h = drawFont(context, page, x, y, fontName)
     doc.export('_export/E00_FontMetric-%s.pdf' % contextName)
 
@@ -42,14 +49,12 @@ def drawFont(context, page, x, y, fontName):
     # Get the font for metrics.
     upem = font.info.unitsPerEm
     ratio = fontSize / upem
-    print('Scaling ratio', ratio)
     style = dict(fontSize=fontSize, leading=em(1), font=font)
 
     # draw the text.
     bs = context.newString(txt, style=style)
     tw, th = bs.textSize
-    print('Text width & height', tw, th)
-    e = newText(bs, x=x, y=y, parent=page)
+    e = newText(bs, x=x, y=y, parent=page, showOrigin=True)
 
     # calculate the size of the text.
     textWidth, textHeight = bs.textSize
@@ -74,15 +79,15 @@ def drawFont(context, page, x, y, fontName):
         # Draw a red line with the size of the drawn text
         # Context drawing functions expect measures to be Unit instances.
         value = metric * ratio
-        #print(value)
         newLine(x=x, y=y+value, w=tw, h=0, parent=page, stroke=green, strokeWidth=0.5)
         text = '%s: %s / %s' % (name, metric, value)
         t = context.newString(text, style=style)
         newText(t, x=x+textWidth+padding, y=y+value, parent=page)
 
 
-    x1 = x + textWidth + 130
-    y1 = x + desc * ratio
+    # TODO: calculate maxwidth info text.
+    x1 = x + textWidth + 3*P
+    y1 = y + desc * ratio
     h1 = h * ratio
     y2 = y1 + h1
     y3 = (y1 + y2) / 2
@@ -92,7 +97,7 @@ def drawFont(context, page, x, y, fontName):
     newLine(parent=page, x=x1-5, y=y2, w=10, h=0, stroke=0, strokeWidth=0.5)
     text = ' upem: %s\n font size: %s\n height (asc + desc): %s / %s' % (upem, fontSize, h, h*ratio)
     t = context.newString(text, style=style)
-    newText(t, parent=page, x=x1, y=y3)
+    newText(t, parent=page, x=x1, y=y3, showOrigin=True)
     return h * ratio
 
     # Return h.
