@@ -21,8 +21,8 @@
 #
 #     TODO: Positions of icons and var-instances don't seem to work.
 #
-from pagebot import getRootPath
 from pagebot import getContext
+from pagebot.filepaths import getRootPath
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.fonttoolbox.variablefontbuilder import getVarFontInstance
 from pagebot.constants import CENTER
@@ -207,7 +207,7 @@ class KeyFrame:
             print(' * Testing with append')
             bs = c.newString('')
             # Contains a DrawBot FormattedString.
-            aa = bs.s
+            aa = bs#.s
             aa.append("123", font="Helvetica", fontSize=100, fill=(1, 0, 1))
             print(aa._font)
             print(aa._fontSize)
