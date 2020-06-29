@@ -22,22 +22,28 @@ from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.color import Color, color
 from pagebot.fonttoolbox.objects.font import findFont
 
+W, H = pt(800, 200)
+
 def draw(contextName):
     context = getContext(contextName)
-    font = findFont('PageBot-Regular')
-    W, H = pt(800, 200)
+    doc = Document(w=W, h=H, context=context)
+    page = doc[1]
+    x, y = pt(50), pt(50)
+    fontName = 'PageBot-Regular'
+    h = drawFont(context, page, x, y, fontName)
+    doc.export('_export/E00_FontMetric-%s.pdf' % contextName)
+
+def drawFont(context, page, x, y, fontName):
+    font = findFont(fontName)
     fontSize = pt(100)
-    print('Size:', fontSize)
-    txt = "Hello World"
-    x, y = pt(50, 50) # Position of the text block and relative position of the lines.
+    txt = "Hpxk"
     #context.marker(x, y)
 
     # Get the font for metrics.
-    ratio = fontSize / font.info.unitsPerEm
+    upem = font.info.unitsPerEm
+    ratio = fontSize / upem
     print('Scaling ratio', ratio)
     style = dict(fontSize=fontSize, leading=em(1), font=font)
-    doc = Document(w=W, h=H, context=context)
-    page = doc[1]
 
     # draw the text.
     bs = context.newString(txt, style=style)
@@ -54,13 +60,15 @@ def draw(contextName):
 
     # loop over all font metrics and scale to the fontSize
 
+    asc = font.getAscender()
+    desc = font.getDescender()
+    h = asc - desc
 
-    d = dict(baseline=0, descenter=font.getDescender(),
-            ascender=font.getAscender(), xheight=font.getXHeight(),
-            capheight=font.getCapHeight())
+    d = dict(baseline=0, descender=desc, ascender=asc,
+            xheight=font.getXHeight(), capheight=font.getCapHeight())
 
     padding=pt(10)
-    style = dict(fontSize=pt(10), font=font)
+    style = dict(fontSize=pt(10), font=font, leading=em(1.5))
 
     for name, metric in d.items():
         # Draw a red line with the size of the drawn text
@@ -72,7 +80,23 @@ def draw(contextName):
         t = context.newString(text, style=style)
         newText(t, x=x+textWidth+padding, y=y+value, parent=page)
 
-    doc.export('_export/E00_FontMetric-%s.pdf' % contextName)
+
+    x1 = x + textWidth + 130
+    y1 = x + desc * ratio
+    h1 = h * ratio
+    y2 = y1 + h1
+    y3 = (y1 + y2) / 2
+
+    newLine(parent=page, x=x1, y=y1, w=0, h=h1, stroke=0, strokeWidth=0.5)
+    newLine(parent=page, x=x1-5, y=y1, w=10, h=0, stroke=0, strokeWidth=0.5)
+    newLine(parent=page, x=x1-5, y=y2, w=10, h=0, stroke=0, strokeWidth=0.5)
+    text = ' upem: %s\n font size: %s\n height (asc + desc): %s / %s' % (upem, fontSize, h, h*ratio)
+    t = context.newString(text, style=style)
+    newText(t, parent=page, x=x1, y=y3)
+    return h * ratio
+
+    # Return h.
+
 
 
 for contextName in ('DrawBot', 'Flat'):
