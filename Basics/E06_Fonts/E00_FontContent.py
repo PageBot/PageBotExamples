@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -10,14 +12,14 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     ShowFontContent.py
+#     E00_FontContent.py
 #
-#     Print the values of the specified font for naming, info and features
-#     and generate a simple 1000 x 1000 PDF, showing part of the glyph set.
-#     This is the simple demo version of the FontSpecimen.py that will generate 
-#     a full specimen of the font.
-#     It does not use Document and Element, directly drawing on the context.
-#
+#     Prints the values of the specified font for naming, info and features and
+#     generate a simple 1000 x 1000 PDF, showing part of the glyph set.  This
+#     is the simple demo version of the FontSpecimen.py that will generate a
+#     full specimen of the font. It does not use Document and Element, drawing
+#     directly using the context.
+
 from pagebot import getContext
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.color import color, noColor
@@ -32,7 +34,8 @@ W = H = 1000
 GX = GY = 11
 M = 50
 
-FONT_NAME = 'Amstelvar-Roman-VF'
+FONT_NAME = 'PageBot-Regular'
+#FONT_NAME = 'Amstelvar-Roman-VF'
 
 f = findFont(FONT_NAME) # Get PageBot Font instance of Variable font.
 
@@ -95,4 +98,3 @@ else:
             c.restore()
 
     c.saveImage(EXPORT_PATH)
-
