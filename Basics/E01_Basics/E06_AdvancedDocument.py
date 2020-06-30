@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     05_StartADocument.py
+#     E06_AdvancedDocument.py
 #
 #     Shows how to start a document and export it to PNG and
 #     PDF in the simplest steps.
@@ -22,20 +22,23 @@
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt
 
-EXPORT_PATH = '_export/E05_StartADocument-%s%s' # Template for export file formats.
-
 # Document is the main instance holding all information about the document
 # together (pages, styles, etc.)
 from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.conditions import *
 from pagebot.toolbox.color import Color
+from pagebot import getContext
+
 
 W, H = pt(500, 400)
 RW = RH = pt(40)
 PADDING = pt(28)
+EXPORT_PATH = '_export/E06_AdvancedDocument-%s%s' # Template for export file formats.
 
-def makeDocument(context):
+def makeDocument(contextName):
+    context = getContext(contextName)
+
     # Export in _export folder that does not commit in Git.
     # Force to export to a few file formats:
     exportPaths = (
@@ -77,8 +80,5 @@ def makeDocument(context):
         doc.export(exportPath)
 
 if __name__ == '__main__':
-    from pagebot import getContext
-
     for contextName in ('DrawBot', 'Flat'):
-        context = getContext(contextName)
-        makeDocument(context)
+        makeDocument(contextName)

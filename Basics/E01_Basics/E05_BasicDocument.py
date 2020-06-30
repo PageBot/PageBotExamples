@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E00_DocumentWithPages.py
+#     E05_BasicDocument.py
 #
 #     Test handling of pages in a document.
 #
@@ -25,13 +25,13 @@ from pagebot.toolbox.units import pt, mm
 from pagebot.constants import CENTER, LEFT
 
 # Template for the export path, allowing to include context name
-EXPORT_PATH = '_export/E00_DocumentWithPages-%s.pdf'
 
 W, H = mm(120), pt(300)
 
 fontName = 'PageBot-Regular'
 
 def makeDocument(context):
+    export_path = '_export/E05_BasicDocument-%s.pdf'
     doc = Document(w=W, h=H, context=context)
     # Gets the first page from te document.
     page = doc[1]
@@ -46,11 +46,12 @@ def makeDocument(context):
     bs = context.newString(page.name, dict(font=fontName, fontSize=pt(50),
         xTextAlign=LEFT))
 
-    conditions = (Center2Center(), Middle2Middle())
+
     # Try other positions
-    #conditions= (Left2Left(), Top2SideTop())
-    conditions= (Right2Right(), Top2SideTop())
-    #conditions= (Center2Center(), Top2SideTop())
+    #conditions = (Center2Center(), Middle2Middle())
+    #conditions = (Left2Left(), Top2SideTop())
+    conditions = (Right2Right(), Top2SideTop())
+    #conditions = (Center2Center(), Top2SideTop())
 
     # Position rectangle in the center of the page area. Notice that the (x, y)
     # position is undefined, default is (0, 0), since will be filled by the
@@ -65,7 +66,7 @@ def makeDocument(context):
     print(e.x, e.y, e.w, e.h)
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
-    doc.export(EXPORT_PATH % context.name)
+    doc.export(export_path % context.name)
 
 for contextName in (
         'DrawBot',
