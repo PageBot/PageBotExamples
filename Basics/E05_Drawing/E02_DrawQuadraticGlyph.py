@@ -12,12 +12,11 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E40_DrawQuadraticGlyph.py
+#     E02_DrawQuadraticGlyph.py
 #
 #     Shows how to draw quadratic curves with cubic curves.
+#     TODO: test at Element level.
 #
-#    TODO: test with Flat.
-#    TODO: switch to document level.
 
 import weakref
 from fontTools.ttLib import TTFont, TTLibError
@@ -267,7 +266,7 @@ def draw(context):
     context.drawString('Cubic control point', (x, y))
     y -= 30
     context.drawString('Quadratic control point', (x, y))
-    context.saveImage("_export/E40_DrawQuadraticGlyph-%s.pdf" % context.name)
+    context.saveImage("_export/E02_DrawQuadraticGlyph-%s.pdf" % context.name)
 
 
 for contextName in ('DrawBot', 'Flat'):
