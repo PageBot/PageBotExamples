@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
+#!/usr/bin/env python3 # -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -101,22 +100,15 @@ def draw(contextName, verbose=False):
             # Offset of drawing origin.
             if glyphIndex > len(f.info.glyphSet):
                 break # Just do one page for sample demo.
-            c.save()
             w = W - 2*M
             x = M + w / GX * xIndex
             h = H - 2*M
             y = M + h / GY * (yIndex + 1)
-            #print(x, y)
-            #x = 10
-            #y = 10
             c.marker(x, y)
-            #c.translate(x, y)
             glyphName = f.info.glyphSet[glyphIndex-1]
             g = f[glyphName]
             c.drawGlyph(g, x=x, y=y, fontSize=60, fill=color(0.1), stroke=noColor)
             glyphIndex += 1
-            #c.translate(-x, -y)
-            c.restore()
 
     c.saveImage(export_path)
 
