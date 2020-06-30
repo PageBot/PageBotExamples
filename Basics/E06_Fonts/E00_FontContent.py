@@ -26,24 +26,26 @@ from pagebot.toolbox.color import color, noColor
 from pagebot.toolbox.units import pt
 
 
-def draw(contextName):
-    c = getContext(contextName)
+L = 50
+W = H = 1000
+GX = 11
+GY = 11
+M = 50
+FONT_NAME = 'PageBot-Regular'
+#FONT_NAME = 'Amstelvar-Roman-VF'
 
-    EXPORT_PATH = '_export/E00_FontContent-%s.pdf' % contextName
-
-    L = 50
-    W = H = 1000
-    GX = GY = 11
-    M = 50
-
-    FONT_NAME = 'PageBot-Regular'
-    #FONT_NAME = 'Amstelvar-Roman-VF'
-
-    f = findFont(FONT_NAME) # Get PageBot Font instance of Variable font.
+def draw(contextName, verbose=False):
+    f = findFont(FONT_NAME) # Get PageBot Font instance.
 
     if f is None:
         print('%s cannot be found' % FONT_NAME)
-    else:
+        return
+
+    c = getContext(contextName)
+    export_path = '_export/E00_FontContent-%s.pdf' % contextName
+    c.newDrawing(w=W, h=H)
+
+    if verbose:
         # Names and text fields
         print('-- Names', '-'*L)
         print('Full name:', f.info.fullName)
@@ -85,21 +87,38 @@ def draw(contextName):
         #print('Char set:', f.info.charSet)
         print('Glyph set:', f.info.glyphSet)
 
-        glyphIndex = 1
+    glyphIndex = 1
 
-        for yIndex in range(GY):
-            for xIndex in range(GX):
-                # Offset of drawing origin
-                if glyphIndex > len(f.info.glyphSet):
-                    break # Just do one page for sample demo.
-                c.save()
-                c.translate(M+(W-2*M)/GX*xIndex, H-M-(H-2*M)/GY*(yIndex+1))
-                g = f[f.info.glyphSet[glyphIndex-1]]
-                c.drawGlyph(g, x=0, y=0, fontSize=60, fill=color(0.1), stroke=noColor)
-                glyphIndex += 1
-                c.restore()
+    c.stroke((0, 1, 0))
+    c.strokeWidth(0.5)
+    c.line((M, 0), (M, H))
+    c.line((W-M, 0), (W-M, H))
+    c.line((0, M), (W, M))
+    c.line((0, H-M), (W, H-M))
 
-        c.saveImage(EXPORT_PATH)
+    for yIndex in range(GY):
+        for xIndex in range(GX):
+            # Offset of drawing origin.
+            if glyphIndex > len(f.info.glyphSet):
+                break # Just do one page for sample demo.
+            c.save()
+            w = W - 2*M
+            x = M + w / GX * xIndex
+            h = H - 2*M
+            y = M + h / GY * (yIndex + 1)
+            #print(x, y)
+            #x = 10
+            #y = 10
+            c.marker(x, y)
+            #c.translate(x, y)
+            glyphName = f.info.glyphSet[glyphIndex-1]
+            g = f[glyphName]
+            c.drawGlyph(g, x=x, y=y, fontSize=60, fill=color(0.1), stroke=noColor)
+            glyphIndex += 1
+            #c.translate(-x, -y)
+            c.restore()
+
+    c.saveImage(export_path)
 
 for contextName in ('DrawBot', 'Flat'):
     draw(contextName)
