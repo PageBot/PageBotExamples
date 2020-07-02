@@ -51,7 +51,7 @@ def build(contextName):
     # Create a new red circle element and align it on top-left,
     # floating to that position relative to what is already there.
     # Parent of the element is the current page.
-    o = newOval(w=SQ, h=SQ, parent=page, conditions=c, fill=(1, 0, 0),
+    o = newCircle(r=SQ, parent=page, conditions=c, fill=(1, 0, 0),
             stroke=0, showOrigin=True)
 
     # Create a new black diagonal line element and align it on top-left,
@@ -73,7 +73,7 @@ def build(contextName):
     # A number of circles that will float the remaining space.
     for n in range(50):
         rr = pt(40)
-        o = newOval(w=rr, h=rr, parent=page, conditions=c, fill=(1, 0, 0.5), stroke=0)
+        o = newOval(w=rr, h=rr/2, parent=page, conditions=c, fill=(1, 0, 0.5), stroke=0, strokeWidth=0.5)
 
     # Create two text boxes and align it on top-left,
     # floating to that position relative to what is already there.
