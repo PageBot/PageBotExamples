@@ -20,37 +20,3 @@ import os
 EXPORT_PATH = '_export'
 if not os.path.exists(EXPORT_PATH):
 	os.mkdir(EXPORT_PATH)
-
-import E00_BabelString
-import E00_BabelStringMetrics
-import E00_Text
-import E00_TextA1
-import E00_TextA3Box
-import E00_TextA3BoxGrid
-import E00_TextAlignment
-import E00_TextAlignment2
-import E00_TextBoxAlignment
-import E00_TextLinesAlignment
-import E00_TextMarginPadding
-import E00_TextPosition
-
-import E01_HelloCircleSquare
-
-import E08_CJKBabelString
-
-import E10_BabelStringContexts
-#import E10_BabelStringFromSketch
-import E10_BabelStringTabs
-
-import E30_ContextTextLines
-import E30_ElasticText
-
-import E40_HyphenatedColumn
-import E40_Hyphenation
-
-import E50_UseProofing
-#import E51_MakeParametricAxes
-
-#import E70_AlterGlyphCoordinates
-import E70_FindFonts
-#import E71_OS2VarFamily

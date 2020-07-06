@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
@@ -10,7 +11,7 @@
 #     Supporting usage of Flat, https://github.com/xxyxyz/flat
 # -----------------------------------------------------------------------------
 #
-#     OS2VarFamily6.py
+#     E23_OS2VarFamily.py
 #
 #     TODO: Started using context for drawing.
 #     TODO: Not done for all drawing functions yet.
