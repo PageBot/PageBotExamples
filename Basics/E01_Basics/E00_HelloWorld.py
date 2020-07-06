@@ -52,4 +52,3 @@ for contextName in ('DrawBot', 'Flat'):
     #exportPath = '_export/00_HelloWorld-%s.png' % contextName
     exportPath = '_export/00_HelloWorld-%s.pdf' % contextName
     doc.export(exportPath)
-
