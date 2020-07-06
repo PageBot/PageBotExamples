@@ -31,7 +31,7 @@ font = findFont('PageBot Regular')
 
 doc = Document(w=W, h=H)
 t = doc.context.newString('TEXT', style=dict(font=font, fontSize=36, textFill=whiteColor, xTextAlign=CENTER))
-PADDING = t.size[0]
+PADDING = t.textSize[0]
 
 page = doc[1] # Get the single page from te document.
 page.padding = PADDING

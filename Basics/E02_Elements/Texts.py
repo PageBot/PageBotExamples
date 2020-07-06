@@ -42,8 +42,10 @@ bungeeHairline = findFont('Bungee-HairlineRegular')
 bungeeOutline = findFont('Bungee-OutlineRegular')
 
 def drawBaselines(x0, y0, w, baselines, s, page):
-    fontPath = getFontPath(s.style)
-    font = Font(fontPath)
+    print(s.style)
+    #fontPath = getFontPath(s.style)
+    #font = Font(fontPath)
+    font = s.style['font']
     infoLine = 1
     baseH0 = 0
     upem = font.getUpem()
