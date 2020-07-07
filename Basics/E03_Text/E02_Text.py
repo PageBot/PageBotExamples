@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E00_Text.py
+#     E02_Text.py
 #
 #	  Create a page in A4 landscape
 #	  Setup the document view to show registration marks and cropmarks
@@ -29,6 +29,7 @@ from pagebot.elements import newText, newRect, newLine
 from pagebot.document import Document
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
+from pagebot.toolbox.transformer import path2FileName
 
 H, W = pt(A4) # Standard portrait, swapped to be used as landscape ratio.
 fontSize = pt(300)
@@ -36,11 +37,12 @@ padding = pt(40) # Outside measures to accommodate the crop makrs.
 FONT_NAME = 'PageBot-Regular'
 textColor = color(1, 0, 0) # Red of the “A4”
 bgColor = color(0.9) # Background color of the text box
+FILENAME = path2FileName(__file__)
 
 def makeText(contextName):
-    context = getContext(contextName)
-    exportPath = '_export/00_Text-%s.pdf' % contextName
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     print('Generating:', exportPath)
+    context = getContext(contextName)
 
     doc = Document(w=W, h=H, title=exportPath, context=context)
     page = doc[1] # Get page on pageNumber, first in row (this is only one now).
@@ -98,5 +100,5 @@ def makeText(contextName):
     # Export the document as PDF
     doc.export(exportPath)
 
-for contextName in ('DrawBot', 'Flat',):
+for contextName in ('DrawBot', 'Flat'):
     makeText(contextName)

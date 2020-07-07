@@ -24,11 +24,14 @@ import traceback
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.toolbox.color import color
+from pagebot.toolbox.transformer import path2FileName
 from pagebot.toolbox.units import pt, em
 
 W, H = A4 # Standard paper size from constants.
+FILENAME = path2FileName(__file__)
 
 def babelString(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     context.newPage(W, H) # Make a new A4 page.
 
@@ -66,10 +69,9 @@ def babelString(contextName):
     context.marker(x, y, r=r, fontSize=pt(10))
     context.fill(None)
     context.stroke((0, 0, 0.5))
+    #context.stroke((0, 0, 0.5), 0.5)
     context.rect(x, y, bs.tw, bs.th)
-
-
-    context.saveImage('_export/00_BabelString-%s.pdf' % contextName)
+    context.saveImage(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
     babelString(contextName)
