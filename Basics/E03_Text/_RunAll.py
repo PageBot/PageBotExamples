@@ -20,3 +20,24 @@ import os
 EXPORT_PATH = '_export'
 if not os.path.exists(EXPORT_PATH):
 	os.mkdir(EXPORT_PATH)
+
+import E01_BabelString
+import E02_Text
+import E03_TextA1
+import E04_TextA2
+import E05_TextA2Lines
+import E06_TextA3Box
+import E07_Hkpx
+import E08_CJKBabelString
+import E09_TextA3BoxGrid
+import E10_BabelStringTabs
+import E11_TextAlignment
+import E12_TextAlignment2
+import E13_TextBoxAlignment
+import E14_TextLinesAlignment
+import E15_TextMarginPadding
+import E16_TextPosition
+import E17_ElasticText
+import E18_Hyphenation
+import E19_HyphenatedColumn
+import E20_UseProofing
