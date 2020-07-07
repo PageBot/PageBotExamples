@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E00_TextAlignment.py
+#     E11_TextAlignment.py
 #
 #	  Create a page in A3 landscape
 #	  Show "Hkpx" on all alignment combination horizontal/vertical
@@ -22,7 +22,6 @@
 #     Show labels with alignment names.
 #
 from pagebot import getContext
-
 from pagebot.constants import *
 from pagebot.elements import newText, newRect, newLine
 from pagebot.document import Document
@@ -31,9 +30,9 @@ from pagebot.toolbox.color import color, blackColor, noColor
 from pagebot.toolbox.units import pt, em, mm
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.gradient import Shadow
+from pagebot.toolbox.transformer import path2FileName
 
 W, H = mm(600, 250) # Customize paper size
-
 LABEL_FONT_NAME = 'PageBot-Book'
 FONT_NAME = 'PageBot-Bold'
 #FONT_NAME = 'PageBot-Regular'
@@ -41,7 +40,7 @@ FONT_NAME = 'PageBot-Bold'
 #FONT_NAME = 'PageBot-Light'
 #FONT_NAME = 'Roboto-Regular' # Gives wrong values for vertical box position
 #FONT_NAME = 'Georgia' # Gives wrong value for /p descender positions
-
+FILENAME = path2FileName(__file__)
 fontSize = pt(64)
 textColor = blackColor
 bgColor = color(0.9) # Background color of the text box
@@ -52,12 +51,11 @@ shadow = Shadow(offset=pt(3, -3), blur=pt(3), color=0.2)
 # The _export folder is automatically created by Document.
 
 def textAlign(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    print('Generating:', exportPath)
     context = getContext(contextName)
 
-    exportPath = '_export/00_TextAlignment-%s-%s.pdf' % (FONT_NAME, contextName)
-    print('Generating:', exportPath)
     # Make a new document with one text box. Default is to make one page.
-
     doc = Document(w=W, h=H, title=exportPath, autoPages=1, context=context)
     view = doc.view # Get the current view of the document.
     view.showPadding = True # Show the page padding
@@ -69,7 +67,6 @@ def textAlign(contextName):
     colCnt = len(YALIGNS)-1
 
     # FIXME: Probably a view problem: why is one of the boxes without frame?
-
     for ix, yAlign in enumerate(YALIGNS): # Flipped, yAligns show horizontal
             for iy, xAlign in enumerate(XALIGNS):
 

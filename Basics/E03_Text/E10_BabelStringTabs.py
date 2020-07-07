@@ -22,6 +22,7 @@
 #     with its baseline on the middle
 #     Show the box of the element as gray background color.
 #
+
 from pagebot import getContext
 from pagebot.constants import A4, CENTER, LEFT, RIGHT, TOP
 from pagebot.elements import newText, newLine

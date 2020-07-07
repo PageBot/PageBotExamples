@@ -24,23 +24,20 @@
 #     https://www.microsoft.com/typography/otspec/stat.htm
 
 import os, sys, shutil
-
 from pagebot import getContext
+from pagebot.constants import CENTER, EXPORT
 from pagebot.fonttoolbox.objects.font import Font
 from pagebot.fonttoolbox.objects.family import Family
 from pagebot.fonttoolbox.analyzers.glyphanalyzer import GlyphAnalyzer
 from pagebot.fonttoolbox.analyzers.stems import Stem, Bar, BlueBar, Counter, VerticalCounter, Width, DiagonalStem
 from pagebot.toolbox.transformer import asInt, path2Name, path2ParentPath
 from pagebot.toolbox.color import Color, color, noColor, blackColor
-from pagebot.constants import CENTER
-
-c = getContext()
+from pagebot.toolbox.transformer import path2FileName
 
 SHOW_COORDINATES = True
-
 ORIGIN_OS2_WEIGHT_CLASS = 400
-
 GLYPH = 'H'
+FILENAME = path2FileName(__file__)
 
 def findFontPaths(basePath, paths=None):
     u"""Answer the recursive list of TTF non-Italic font paths that are in directory basePath."""
@@ -478,7 +475,7 @@ def drawFamilyOverview(path):
 
 for contextName in ('DrawBot', 'Flat'):
     exportPath = '_export/71_OS2VarFamily-%s.pdf' % contextName
-    CSV_PATH = exportPath.replace('.pdf', '.csv')
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     BASE_PATH = u"/Library/Fonts"
 
     #EXPORT_PATH = '_export/TYPETR-Upgrade.pdf'
@@ -512,5 +509,3 @@ for contextName in ('DrawBot', 'Flat'):
 
 
     c.saveImage(exportPath)
-
-print('Done')
