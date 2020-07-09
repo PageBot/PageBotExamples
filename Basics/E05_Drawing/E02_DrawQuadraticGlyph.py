@@ -21,6 +21,7 @@
 import weakref
 from fontTools.ttLib import TTFont, TTLibError
 from pagebot import getContext
+from pagebot.constants import EXPORT
 from pagebot.contexts.basecontext.basebezierpoint import BaseBezierPoint as BezierPoint
 from pagebot.contexts.basecontext.bezierpath import BezierPath
 from pagebot.fonttoolbox.objects.fontinfo import FontInfo
@@ -29,6 +30,7 @@ from pagebot.fonttoolbox.objects.glyph import *
 from pagebot.fonttoolbox.objects.font import Font
 from pagebot.toolbox.units import point3D
 from pagebot.toolbox.color import blueColor, redColor, greenColor, pinkColor, orangeColor, blackColor
+from pagebot.toolbox.transformer import path2FileName
 
 R = 12
 ONCURVE_COLOR = orangeColor
@@ -39,6 +41,7 @@ QUADRATIC_CONTROLPOINT_COLOR = greenColor
 QUADRATIC_CONTROLPOINT_SIZE = R
 CUBIC_CONTROLPOINT_COLOR = blackColor
 CUBIC_CONTROLPOINT_SIZE = R / 2
+FILENAME = path2FileName(__file__)
 
 def drawSegment(context, path, segment, implied, cps, verbose=False):
     """
@@ -140,6 +143,9 @@ def cross(context, x, y, d, r=1, g=0, b=0, a=1):
     context.line((x2, y2), (x3, y3))
 
 def draw(context):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    context = getContext(contextName)
+    context.fontSize(24)
     W, H = 1750, 2250
     X0 = 75
     Y0 = 500
@@ -266,10 +272,8 @@ def draw(context):
     context.drawString('Cubic control point', (x, y))
     y -= 30
     context.drawString('Quadratic control point', (x, y))
-    context.saveImage("_export/E02_DrawQuadraticGlyph-%s.pdf" % context.name)
+    context.saveImage(exportPath)
 
 
 for contextName in ('DrawBot', 'Flat'):
-    context = getContext(contextName)
-    context.fontSize(24)
-    draw(context)
+    draw(contextName)

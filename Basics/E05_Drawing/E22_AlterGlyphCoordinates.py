@@ -22,16 +22,16 @@ from pagebot.toolbox.units import pt
 from pprint import pprint
 from pagebot.toolbox.transformer import path2FileName
 
+FILENAME = path2FileName(__file__)
 f = findFont('Amstelvar-Roman-VF') # Get PageBot Font instance of Variable font.
-
 W = H = 1000
-
 # Scale em of 2048 back to page size.
 s = 0.5
 
 def makeText(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
+    context.newPage(W, H)
 
     # Offset of drawing origin.
     context.translate(pt(100), pt(100))

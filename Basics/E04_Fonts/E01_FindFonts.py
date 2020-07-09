@@ -11,7 +11,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E70_FindFont.py
+#     E01_FindFont.py
 #
 #     Some examples how to find Font instances, for the given installed fonts.
 #     PageBot scans through places where it can find font files.
@@ -23,8 +23,12 @@ from pagebot.toolbox.units import pt
 from pagebot.constants import A4
 from pagebot.fonttoolbox.objects.family import findFamily, getFamily
 from pagebot.fonttoolbox.objects.font import getFont, findFont, findFonts
+from pagebot.toolbox.transformer import path2FileName
 
-for contextName in ('DrawBot', 'Flat'):
+FILENAME = path2FileName(__file__)
+
+def makeFonts(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     #
     #    Installed fonts created a list of font names that are already installed.
@@ -89,8 +93,7 @@ for contextName in ('DrawBot', 'Flat'):
     page = doc[1]
     page.padding = pt(30)
     newText(bs, x=page.pl, y=page.pb, w=page.pw, h=page.ph, parent=page)
-
     doc.export(exportPath)
 
-print('Done')
-
+for contextName in ('DrawBot', 'Flat'):
+    makeFonts(contextName)

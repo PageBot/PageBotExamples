@@ -17,7 +17,9 @@
 
 from pagebot import getContext
 from pagebot.toolbox.units import pt
+from pagebot.constants import EXPORT
 from pagebot.toolbox.color import noColor, blackColor
+from pagebot.toolbox.transformer import path2FileName
 
 X = 0
 Y = 100
@@ -26,6 +28,7 @@ Sx = 10
 Sy = 10
 Exy = 0.58
 D = 0.5
+FILENAME = path2FileName(__file__)
 
 # Hardcoded constants.
 W = H = 1000
@@ -34,6 +37,7 @@ w = W - 2*M
 h = H - 2*H
 
 def drawSpiral(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     context.newPage(pt(W), pt(H))
     mx = W/2+X
@@ -75,7 +79,7 @@ def drawSpiral(contextName):
     context.fill(noColor)
     context.stroke(blackColor)
     context.drawPath()
-    context.saveImage("_export/E01_DrawSpirals-%s.pdf" % context.name)
+    context.saveImage(exportPath)
 
 '''
 FIXME: only works in DrawBot.

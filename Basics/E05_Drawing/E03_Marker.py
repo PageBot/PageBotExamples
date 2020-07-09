@@ -19,16 +19,17 @@
 #     Some examples showing the working of BabelString with context
 #     without the making of Document and Text elements.
 #
-import traceback
-
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
+from pagebot.toolbox.transformer import path2FileName
 
 W, H = 100, 100 #A4 # Standard paper size from constants.
+FILENAME = path2FileName(__file__)
 
-def marker(contextName):
+def drawMarkers(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     context.newPage(W, H) # Make a new A4 page.
 
@@ -37,7 +38,7 @@ def marker(contextName):
     context.marker(1, 1, fontSize=2)
     context.marker(10, 1, fontSize=2)
     context.marker(10, 10, 2, fontSize=2)
-    context.saveImage('_export/00_Marker-%s.pdf' % contextName)
+    context.saveImage(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    marker(contextName)
+    drawMarkers(contextName)

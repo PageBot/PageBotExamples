@@ -30,7 +30,7 @@ from pagebot.toolbox.units import pt, em
 W, H = A4 # Standard paper size from constants.
 FILENAME = path2FileName(__file__)
 
-def babelString(contextName):
+def makeText(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     context.newPage(W, H) # Make a new A4 page.
@@ -74,4 +74,4 @@ def babelString(contextName):
     context.saveImage(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    babelString(contextName)
+    makeText(contextName)
