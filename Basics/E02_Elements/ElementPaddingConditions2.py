@@ -51,4 +51,3 @@ page.solve()
 EXPORT_PATH = '_export/ElementConditions.pdf'
 doc.export(EXPORT_PATH)
 
-

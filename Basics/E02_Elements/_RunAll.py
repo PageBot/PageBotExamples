@@ -21,28 +21,17 @@ EXPORT_PATH = '_export'
 if not os.path.exists(EXPORT_PATH):
 	os.mkdir(EXPORT_PATH)
 
-import AlignFloatElements
-import Distance2Grid
-import DrawRedRectCenterPage
+import E01_ElementPaddingConditions
+import E02_ElementSideConditions
+import E03_ElementPaddingPositions
+import E04_TextSideConditions
+import E05_ElementPaddingMargin
+import E06_FloatElementsOnPage
+import E07_Images
+import E08_Shapes
+import E09_TextAllBaselineConditions
+import E10_TextAllPaddingConditions
+import E11_TextAllSideConditions
+import E12_TextBaselinePaddingMargin
 import ElementBleedConditions
-import ElementPaddingConditions
 import ElementPaddingConditions2
-import ElementPaddingMargin
-import ElementPaddingPositions
-import ElementSideConditions
-import FloatElementsOnPage
-import Images
-import Shapes
-import TextAllBaselineConditions
-import TextAllPaddingConditions
-import TextAllSideConditions
-import TextBaselinePaddingMargin
-import TextSideConditions
-import TextSideConditions2
-import TextSideWHConditions
-import Texts
-import UseBorders
-import UseContainerElements
-import UseDocWrap
-import UseElementProperties
-import UseShadow

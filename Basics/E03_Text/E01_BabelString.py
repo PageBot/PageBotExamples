@@ -19,8 +19,6 @@
 #     Some examples showing the working of BabelString with context
 #     without the making of Document and Text elements.
 #
-import traceback
-
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.toolbox.color import color

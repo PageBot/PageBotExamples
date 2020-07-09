@@ -11,43 +11,36 @@
 #     Supporting DrawBot, www.drawbot.com
 # -----------------------------------------------------------------------------
 #
-#     Shapes.py
+#     E08_Shapes.py
 #
 #     Tests pagebot text boxes.
 
 from pagebot import getContext
 from pagebot.conditions import *
-from pagebot.document import Document
-from pagebot.elements import *
-from pagebot.fonttoolbox.objects.font import findFont, Font
-from pagebot.toolbox.units import pt, upt
-from pagebot.toolbox.color import noColor, color
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.constants import *
-from pagebot.style import getRootStyle
+from pagebot.document import Document
+from pagebot.elements import *
 from pagebot.filepaths import getResourcesPath
+from pagebot.fonttoolbox.objects.font import findFont, Font
+from pagebot.style import getRootStyle
+from pagebot.toolbox.units import pt, upt
+from pagebot.toolbox.color import noColor, color
+from pagebot.toolbox.transformer import path2FileName
 
 H, W = A3
 W = pt(W)
 H = pt(H)
 M = 50
+FILENAME = path2FileName(__file__)
 
-'''
-robotoRegular = findFont('Roboto-Regular')
-pageBotBold = findFont('PageBot-Bold')
-pageBotRegular = findFont('PageBot-Regular')
-robotoBold = findFont('Roboto-Bold')
-bungeeRegular = findFont('Bungee-Regular')
-bungeeHairline = findFont('Bungee-HairlineRegular')
-bungeeOutline = findFont('Bungee-OutlineRegular')
-'''
-
-def test(context):
-    print("creating doc")
+def draw(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    context = getContext(contextName)
     doc = Document(w=W, h=H, context=context)
-    doc.name = 'Shapes-%s' % doc.context.name
+    # FIXME: doc.name also used as export path.
+    #doc.name = 'Shapes-%s' % doc.context.name
     page = doc[1]
-    print('# Testing shapes in %s' % doc)
 
     #path = '%s/shapes/%s' % (getResourcesPath(), 'cookbot10.jpg')
     #newImage(path, x=0, y=50, z=0, w=300, h=300, parent=page, padding=8, scaleImage=False)
@@ -60,17 +53,12 @@ def test(context):
     newRect(x=0, y=0, w=100, h=100, parent=page, style=style)
     newCircle(x=200, y=100, r=100, parent=page, style=style)
     o = newOval(x=400, y=100, w=100, h=50, parent=page, style=style)
-    print(o.box)
     coords = ((0, 0), (100, 100), (20, 200), (40, 500))
+    # TODO
     #newPolygon(coords, parent=page, style=style)
     #newOval(
-
-    print('Starting doc build')
     doc.build()
-    EXPORT_PATH = '_export/Shapes-%s.pdf' % context.name
-    doc.export(EXPORT_PATH)
+    doc.export(exportPath)
 
-#for contextName in ('Flat',):
 for contextName in ('DrawBot', 'Flat'):
-    context = getContext(contextName)
-    test(context)
+    draw(contextName)

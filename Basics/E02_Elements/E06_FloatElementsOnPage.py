@@ -12,34 +12,23 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     FloatElementsOnPage.py
+#     E06_FloatElementsOnPage.py
 #
 #     This script generates a page with aligned square,
 #     showing how conditional placement works.
 #
 
+from pagebot import getGlobals
 from pagebot import getContext
-from pagebot.filepaths import getResourcesPath
-
-#import pagebot # Import to know the path of non-Python resources.
+from pagebot.constants import CENTER, TOP, MIDDLE, EXPORT
 from pagebot.contributions.filibuster.blurb import blurb
-
-# Creation of the RootStyle (dictionary) with all available
-# default style parameters filled.
-from pagebot.constants import CENTER, TOP, MIDDLE
-
-# Document is the main instance holding all information about
-# the document togethers (pages, styles, etc.)
+from pagebot.conditions import *
 from pagebot.document import Document
 from pagebot.elements import newImage, newRect, newText
-
-# Import all layout condition classes
-from pagebot.conditions import *
+from pagebot.filepaths import getResourcesPath
 from pagebot.toolbox.color import color, noColor, whiteColor, blackColor
 from pagebot.toolbox.units import pt
-
-from pagebot.toolbox.transformer import path2ScriptId
-from pagebot import getGlobals
+from pagebot.toolbox.transformer import path2ScriptId, path2FileName
 
 scriptGlobals = getGlobals(path2ScriptId(__file__))
 
@@ -47,6 +36,7 @@ PageSize = 700
 
 G = 8 # Distance between the squares.
 SQ = 2 * G # Size of the squares
+FILENAME = path2FileName(__file__)
 
 # The standard PageBot function getRootStyle() answers a standard Python
 # dictionary, where all PageBot style entries are filled by their
@@ -65,26 +55,21 @@ Amy’s Sun paper hit by hackers. Ignoring the fact that the problem, "was resol
 """
 
 MaxPage = 1200
-
 RedWidth = 100
 RedHeight = 100
 YellowWidth = 100
 YellowHeight = 100
 BlueWidth = 100
 BlueHeight = 100
-
 ShowOrigin = True
 ShowElementInfo = False
 PageSize = 400
 
-EXPORT_PATH = '_export/FloatElements-%s.pdf'
-# Export in _export folder that does not commit in Git. Force to export PDF.
-
-
-def build(contextName):
+def draw(contextName):
+    """Makes a new document."""
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
-    """Make a new document."""
-    doc = Document(w=PageSize, h=PageSize, autoPages=1)
+    doc = Document(w=PageSize, h=PageSize, context=context)
 
     view = doc.view
     view.padding = pt(40) # Show cropmarks and such.
@@ -153,11 +138,7 @@ def build(contextName):
     score = page.solve()
     if score.fails:
         print('Condition fails', score.fails)
+    doc.export(exportPath)
 
-    doc.export(EXPORT_PATH % contextName)
-
-for contextName in (
-        'DrawBot',
-        'Flat'
-    ):
-    build(contextName)
+for contextName in ('DrawBot', 'Flat'):
+    draw(contextName)
