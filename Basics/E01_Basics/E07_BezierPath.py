@@ -11,19 +11,25 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     07_BezierPath.py
+#     E07_BezierPath.py
 #
 #     Draw a string outline as PageBotPath.
 #
-from pagebot.toolbox.units import pt
 from pagebot import getContext
-from pagebot.fonttoolbox.objects.font import findFont
+from pagebot.conditions import *
+from pagebot.constants import A3, EXPORT
 from pagebot.document import Document
 from pagebot.elements import *
-from pagebot.conditions import *
-from pagebot.constants import A3
+from pagebot.fonttoolbox.objects.font import findFont
+from pagebot.toolbox.units import pt
+from pagebot.toolbox.transformer import path2FileName
 
-def makeDocument(context):
+FILENAME = path2FileName(__file__)
+
+def draw(contextName):
+    # FIXME
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    context = getContext(contextName)
     H, W = A3
     doc = Document(w=W, h=H, context=context)
     page = doc[1]
@@ -42,8 +48,6 @@ def makeDocument(context):
     # testing the "no on-curve point" scenario
     #path.qCurveTo((0, 0), (0, 100), (100, 100), (100, 0), None)
     #path.closePath()
-
-
     #bungee = findFont('BungeeOutline-Regular')
     #c = (Right2Right(), Top2Top(), Float2Left())
     #t = newText('*PageBot Path*', parent=page, conditions=c, style={'fill': 1, 'fontSize': 32, 'stroke': 0, 'strokeWidth': 2})
@@ -58,12 +62,7 @@ def makeDocument(context):
     #newPaths(path, parent=page, fill=(1, 1, 0), stroke=0, conditions=c)
 
     page.solve()
-    doc.export('_export/07_BezierPath-%s.pdf' % context.name)
+    doc.export(exportPath)
 
-if __name__ == '__main__':
-    from pagebot import getContext
-
-    for contextName in ('DrawBot', 'Flat'):
-        context = getContext(contextName)
-        makeDocument(context)
-
+for contextName in ('DrawBot', 'Flat'):
+    draw(contextName)

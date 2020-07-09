@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -9,24 +10,35 @@
 # -----------------------------------------------------------------------------
 #
 #     E08_RedCenteredSquare.py
-
+#
+from pagebot import getContext
 from pagebot.document import Document
 from pagebot.elements import newRect
 from pagebot.conditions import Center2Center, Middle2Middle
 from pagebot.toolbox.units import pt
 from pagebot.toolbox.color import color
+from pagebot.constants import EXPORT
+from pagebot.toolbox.transformer import path2FileName
 
-W, H = pt(300, 200) # Get size units
-# Create document with default 1 page.
-doc = Document(w=W, h=H) 
-# First page in the list is uneven (right side)
-page = doc[1] 
-# Create a new rectangle element with position conditions
-newRect(parent=page, fill=color('red'), size=pt(240, 140),
-    # Show measure lines on the element.
-    showDimensions=True, 
-    conditions=[Center2Center(), Middle2Middle()])
-# Make the page apply all conditions.
-page.solve() 
-# Export the document page as png, so it shows as web image.
-doc.export('_export/E08_RedCenteredSquare.png') 
+FILENAME = path2FileName(__file__)
+W, H = pt(200, 200) # Get size units
+
+def draw(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    context = getContext(contextName)
+    # Create document with default 1 page.
+    doc = Document(w=W, h=H)
+    # First page in the list is uneven (right side)
+    page = doc[1]
+    # Create a new rectangle element with position conditions
+    newRect(parent=page, fill=color('red'), size=pt(140, 140),
+        # Show measure lines on the element.
+        showDimensions=True,
+        conditions=[Center2Center(), Middle2Middle()])
+    # Make the page apply all conditions.
+    page.solve()
+    # Export the document page as png, so it shows as web image.
+    doc.export(exportPath)
+
+for contextName in ('DrawBot', 'Flat'):
+    draw(contextName)

@@ -18,34 +18,31 @@
 #     PDF in the simplest steps.
 #
 #     TODO: Floating on second line does not seem to work currently
-
-from pagebot.toolbox.color import color
-from pagebot.toolbox.units import pt
-
-# Document is the main instance holding all information about the document
-# together (pages, styles, etc.)
+from pagebot import getContext
+from pagebot.constants import EXPORT
 from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.conditions import *
 from pagebot.toolbox.color import Color
-from pagebot import getContext
-
+from pagebot.toolbox.color import color
+from pagebot.toolbox.units import pt
+from pagebot.toolbox.transformer import path2FileName
 
 W, H = pt(500, 400)
 RW = RH = pt(40)
 PADDING = pt(28)
-EXPORT_PATH = '_export/E06_AdvancedDocument-%s%s' # Template for export file formats.
+FILENAME = path2FileName(__file__)
 
-def makeDocument(contextName):
+def draw(contextName):
     context = getContext(contextName)
 
     # Export in _export folder that does not commit in Git.
     # Force to export to a few file formats:
     exportPaths = (
-        EXPORT_PATH % (context.name, '.pdf'),
-        EXPORT_PATH % (context.name, '.jpg'),
-        EXPORT_PATH % (context.name, '.png'),
-        EXPORT_PATH % (context.name, '.svg')
+        '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName),
+        '%s/%s-%s.jpg' % (EXPORT, FILENAME, contextName),
+        '%s/%s-%s.png' % (EXPORT, FILENAME, contextName),
+        '%s/%s-%s.svg' % (EXPORT, FILENAME, contextName),
     )
     # Creates the publication/document that holds the pages.
     doc = Document(w=W, h=H, context=context)
@@ -79,6 +76,5 @@ def makeDocument(contextName):
     for exportPath in exportPaths:
         doc.export(exportPath)
 
-if __name__ == '__main__':
-    for contextName in ('DrawBot', 'Flat'):
-        makeDocument(contextName)
+for contextName in ('DrawBot', 'Flat'):
+    draw(contextName)

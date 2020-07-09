@@ -11,7 +11,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     02_Elements.py
+#     E02_Elements.py
 #
 #     Make a page with a variety of elements and use conditions to place them.
 
@@ -23,17 +23,21 @@ from pagebot.document import Document
 from pagebot.toolbox.color import blueColor, darkGrayColor, redColor, Color, noColor, color
 from pagebot.conditions import *
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.constants import A3
+from pagebot.constants import A3, EXPORT
+from pagebot.toolbox.transformer import path2FileName
 
-def build(contextName):
+FILENAME = path2FileName(__file__)
+H, W = A3
+X0 = 100
+Y0 = 100
+SQ = 150
+P  = 50
+
+def draw(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
 
     # Landscape A3.
-    H, W = A3
-    X0 = 100
-    Y0 = 100
-    SQ = 150
-    P  = 50
     font = findFont('PageBot-Regular') # TYPETR Upgrade® subset font for demo.
 
     # Create a new document for the current context. Create one automatic page.
@@ -88,7 +92,7 @@ def build(contextName):
     view.showPadding = True # Show the padding of the page, where conditions align.
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
-    doc.export('_export/02_Elements-%s.pdf' % contextName)
+    doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    build(contextName)
+    draw(contextName)

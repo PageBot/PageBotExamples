@@ -12,12 +12,12 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     03_Fonts.py
+#     E03_Fonts.py
 #
 #     Shows how to get fonts.
 #
 from pagebot import *
-from pagebot.constants import A3
+from pagebot.constants import A3, EXPORT
 from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.toolbox.units import *
@@ -25,10 +25,12 @@ from pagebot.conditions import *
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.fonttoolbox.fontpaths import *
 from pagebot.fonttoolbox.objects.family import getFamilyPaths, findFamily, getFamily
+from pagebot.toolbox.transformer import path2FileName
 
 H, W = A3
 MAX_PAGES = 20
 P = pt(48)
+FILENAME = path2FileName(__file__)
 
 def verboseFam(fam):
     print(fam)
@@ -39,8 +41,9 @@ def verboseFam(fam):
             for v in value:
                 print('   - %s' % v.path)
 
-def build(contextName):
+def draw(contextName):
     """Shows all fonts that are shipped with PageBot."""
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     doc = Document(w=W, h=H, autoPages=1, context=context)
     page = doc[1]
@@ -96,7 +99,7 @@ def build(contextName):
             i = 0
 
     doc.solve()
-    doc.export('_export/03_Fonts-%s.pdf' % contextName)
+    doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    build(contextName)
+    draw(contextName)

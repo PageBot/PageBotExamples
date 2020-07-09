@@ -17,9 +17,8 @@
 #     Shows how get PageBot file paths.  Not to be confused with BezierPaths
 #     which are paths used for drawing vectores.
 #
-
-# Import all top-level values, such as the getContext() function.
 from pagebot import *
+from pagebot.constants import A3, EXPORT
 from pagebot.filepaths import getRootPath, getResourcesPath
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.units import pt
@@ -27,15 +26,15 @@ from pagebot.conditions import *
 from pagebot.elements import *
 from pagebot.document import Document
 from pagebot.toolbox.units import pt
+from pagebot.toolbox.transformer import path2FileName
 
-# Import a standard page size tuple with format (w, h) and unpack it.
-from pagebot.constants import A3
 H, W = A3
 GUTTER = pt(12)
+FILENAME = path2FileName(__file__)
 
-def showFilePaths(context):
-    # Get the context that this script runs in, e.g. DrawBotApp.
-    print('Context:', context)
+def draw(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    context = getContext(contextName)
 
     # Make a Document instance for this size and context, intializing one page.
     doc = Document(w=W, h=H, context=context)
@@ -82,7 +81,7 @@ def showFilePaths(context):
 
     # Let the page solve all of its child element layout conditions.
     page.solve()
-    doc.export('_export/E01_FilePaths-%s.pdf' % context.name)
+    doc.export(exportPath)
 
 def makeText(t, page, f, c):
     """Create a new text box with e give layout conditions
@@ -93,5 +92,4 @@ def makeText(t, page, f, c):
     return t
 
 for contextName in ('DrawBot', 'Flat'):
-    context = getContext(contextName)
-    showFilePaths(context)
+    draw(contextName)

@@ -23,7 +23,7 @@ if not os.path.exists(EXPORT_PATH):
 
 
 import E00_HelloWorld
-import E01_Paths
+import E01_FilePaths
 import E02_Elements
 import E03_Fonts
 import E04_Units
@@ -31,3 +31,4 @@ import E05_BasicDocument
 import E06_AdvancedDocument
 import E07_BezierPath
 import E08_RedCenteredSquare
+import E09_DocumentWithPages

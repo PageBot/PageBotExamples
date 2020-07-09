@@ -8,21 +8,26 @@
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-#     Find the font with a given name
-#
 # -----------------------------------------------------------------------------
+#
+#     E00_HelloWorld.py
+#
+#     Simple hello world example.
 #
 from pagebot.document import Document
 from pagebot.elements import newText
 from pagebot.toolbox.units import pt
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.contexts import getContext
-from pagebot.constants import CENTER, LEFT
+from pagebot.constants import CENTER, LEFT, EXPORT
+from pagebot.toolbox.transformer import path2FileName
 
 W = pt(800) # Size of the document/page
 H = pt(400)
+FILENAME = path2FileName(__file__)
 
-for contextName in ('DrawBot', 'Flat'):
+def draw(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
 
     # Find the Roboto font that exist in PageBot resources.
@@ -47,8 +52,7 @@ for contextName in ('DrawBot', 'Flat'):
     e = newText('Hello World', x=W/2, y=H/2, font=font, fontSize=fontSize, fill=0.9,
             textFill=0.1, xTextAlign=CENTER, showOrigin=True, parent=page)
     print('Element:', e)
-
-    # Export the document page as PNG, so it shows as web image.
-    #exportPath = '_export/00_HelloWorld-%s.png' % contextName
-    exportPath = '_export/00_HelloWorld-%s.pdf' % contextName
     doc.export(exportPath)
+
+for contextName in ('DrawBot', 'Flat'):
+    draw(contextName)

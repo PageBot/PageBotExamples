@@ -22,14 +22,17 @@ from pagebot.elements import *
 from pagebot.conditions import *
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, mm
-from pagebot.constants import CENTER, LEFT
+from pagebot.constants import CENTER, LEFT, EXPORT
+from pagebot.toolbox.transformer import path2FileName
 
 # Template for the export path, allowing to include context name
-EXPORT_PATH = '_export/E00_DocumentWithPages-%s.pdf'
 W, H = mm(120), pt(300)
 FONT_NAME = 'PageBot-Regular'
+FILENAME = path2FileName(__file__)
 
-def makeDocument(context):
+def draw(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    context = getContext(contextName)
     doc = Document(w=W, h=H, context=context)
     # Gets the first page from te document.
     page = doc[1]
@@ -61,8 +64,7 @@ def makeDocument(context):
     #print(e.x, e.y, e.w, e.h)
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
-    doc.export(EXPORT_PATH % context.name)
+    doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    context = getContext(contextName)
-    makeDocument(context)
+    draw(contextName)
