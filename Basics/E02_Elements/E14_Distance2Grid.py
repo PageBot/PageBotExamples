@@ -12,22 +12,26 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     TextSideWHConditions.py
+#     E14_Distance2Grid.py
 #
 #     Position fixed size text elements by their page side with conditions
 #
 # Document is the main instance holding all information about
 # the document togethers (pages, styles, etc.)
-from pagebot.document import Document
-from pagebot.elements import newText
-from pagebot.toolbox.units import p, pt
-from pagebot.toolbox.color import color, whiteColor, blackColor
+from pagebot import getContext
 from pagebot.conditions import *
 from pagebot.constants import *
+from pagebot.document import Document
+from pagebot.elements import newText
 from pagebot.fonttoolbox.objects.font import findFont
+from pagebot.toolbox.units import p, pt
+from pagebot.toolbox.color import color, whiteColor, blackColor
+from pagebot.toolbox.transformer import path2FileName
 
 W = H = pt(500)
 PADDING = pt(4*12)
+font = findFont('PageBot-Regular')
+FILENAME = path2FileName(__file__)
 
 def getText(doc, font, s):
     style1 = dict(font=font, fontSize=36, leading=pt(40),
@@ -38,8 +42,9 @@ def getText(doc, font, s):
     t = doc.context.newString('\n'+s, style=style2)
     return t
 
-def makeDocument(context):
-    font = findFont('PageBot-Regular')
+def draw(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    context = getContext(contextName)
     w = pt(8*12)
     doc = Document(w=W, h=H, context=context)
 
@@ -55,7 +60,6 @@ def makeDocument(context):
     e1 = newText(getText(doc, font, 'Middle y on grid'), parent=page,
         fill=color('red'), yAlign=MIDDLE, showOrigin=True, h=50, w=100,
         conditions=[Left2Left(), Bottom2Bottom(), Baseline2Grid()])
-    '''
 
     t = getText(doc, font, 'Middle y on grid')
     e2 = newText(t, parent=page, h=100,
@@ -63,11 +67,9 @@ def makeDocument(context):
         #yAlign=MIDDLE, showOrigin=True, h=50, w=100,
         #conditions=[Left2Left(), Middle2Middle(), Baseline2Grid()])
 
-    '''
     e3 = newText(getText(doc, font, 'Middle y on grid'), parent=page,
         fill=color('yellow').darker(0.8), yAlign=MIDDLE, showOrigin=True, h=50, w=100,
         conditions=[Left2Left(), Top2Top(), Baseline2Grid()])
-    '''
 
     page.solve()
 
@@ -161,18 +163,9 @@ def makeDocument(context):
         fill=color('yellow').darker(0.8), yAlign=TOP, showOrigin=True,
         conditions=[Right2Right(), Top2Top(), BaselineDown2Grid()])
 
-
     page.solve()
-    '''
-
-    EXPORT_PATH = '_export/Distance2Grid-%s.pdf' % context.name
-    doc.export(EXPORT_PATH)
+    doc.export(exportPath)
 
 
-if __name__ == '__main__':
-    from pagebot import getContext
-
-    for contextName in ('DrawBot', 'Flat'):
-    #for contextName in ('Flat',):
-        context = getContext(contextName)
-        makeDocument(context)
+for contextName in ('DrawBot', 'Flat'):
+    draw(contextName)
