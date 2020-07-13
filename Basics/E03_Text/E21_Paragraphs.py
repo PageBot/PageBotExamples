@@ -16,22 +16,21 @@
 #     Tests pagebot texts.
 
 from pagebot import getContext
+from pagebot.constants import *
+from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.document import Document
 from pagebot.elements import *
-from pagebot.fonttoolbox.objects.font import findFont, Font
+from pagebot.fonttoolbox.objects.font import findFont, Font, getFontPath
+from pagebot.style import getRootStyle
 from pagebot.toolbox.units import pt, upt
 from pagebot.toolbox.color import noColor, color
-from pagebot.contributions.filibuster.blurb import Blurb
-from pagebot.constants import *
-from pagebot.style import getRootStyle
-from pagebot.fonttoolbox.objects.font import getFontPath
-
-# TODO: move to basics when finished.
+from pagebot.toolbox.transformer import path2FileName
 
 H, W = A3
 W = pt(W)
 H = pt(H)
 M = 50
+FILENAME = path2FileName(__file__)
 
 robotoRegular = findFont('Roboto-Regular')
 pageBotBold = findFont('PageBot-Bold')
@@ -54,7 +53,7 @@ def drawBaselines(x0, y0, w, baselines, s, page):
     ascender = ((fontSize / float(upem)) * ascender)
     descender = font.getDescender()
     descender = ((fontSize / float(upem)) * descender)
-    lineHeight = s.lineHeight
+    #lineHeight = s.lineHeight
     #print(lineHeight)
     #print('style %s' % s.style['font'])
     #print('ascdesc  %s' % (ascender - descender))
@@ -68,14 +67,14 @@ def drawBaselines(x0, y0, w, baselines, s, page):
         # Prints distances from top between lines.
         #print(baseH)
         baseH0 = baseline
-        newLine(x=x0, y=y, w=w, h=0, stroke=color(0.5), strokeWidth=0.5,
-                parent=page)
+        #newLine(x=x0, y=y, w=w, h=0, stroke=color(0.5), strokeWidth=0.5,
+        #        parent=page)
 
         if i == infoLine:
             dx = 20
             x = x0
-            newRect(x=x, y=y, w=dx, h=lineHeight, fill=color(1, 0, 0, 0.5),
-                    parent=page)
+            #newRect(x=x, y=y, w=dx, h=lineHeight, fill=color(1, 0, 0, 0.5),
+            #        parent=page)
             x += dx
             newRect(x=x, y=y + descender, w=dx, h=fontSize, fill=color(1, 1, 0, 0.5),
                     parent=page)
@@ -86,8 +85,9 @@ def drawBaselines(x0, y0, w, baselines, s, page):
             newRect(x=x, y=y, w=dx, h=ascender, fill=color(0, 0, 1, 0.5),
                     parent=page)
 
-def test(context):
-    print("creating doc")
+def draw(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    context = getContext(contextName)
     doc = Document(w=W, h=H, context=context)
 
     doc.name = 'Textes-%s' % doc.context.name
@@ -104,14 +104,14 @@ def test(context):
     sentences = txt.split('. ')
 
     # Adds a string with a style.
-    style = {'font': bungeeRegular, 'fontSize': 24, 'leading': 1.5}
+    style = {'font': bungeeRegular, 'fontSize': 24, 'leading': em(1.5)}
     t0 = sentences[0] + '. '
 
     s = context.newString(t0, style=style)
 
     # Adds another string with a different style.
     t1 = '. '.join(sentences[1:])
-    style = {'font': bungeeOutline, 'fontSize': 24, 'leading': 1.5}
+    style = {'font': bungeeOutline, 'fontSize': 24, 'leading': em(1.5)}
     s += context.newString(t1, style=style)
 
     w = W/2 - 2*M
@@ -158,5 +158,4 @@ def test(context):
     doc.build()
 
 for contextName in ('DrawBot', 'Flat'):
-    context = getContext(contextName)
-    test(context)
+    draw(contextName)

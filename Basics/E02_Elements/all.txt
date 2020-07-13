@@ -1,3 +1,4 @@
+E00_UseElementProperties.py
 E01_ElementPaddingConditions.py
 E02_ElementSideConditions.py
 E03_ElementPaddingPositions.py
@@ -10,5 +11,14 @@ E09_TextAllBaselineConditions.py
 E10_TextAllPaddingConditions.py
 E11_TextAllSideConditions.py
 E12_TextBaselinePaddingMargin.py
-ElementBleedConditions.py
-ElementPaddingConditions2.py
+E13_AlignFloatElements.py
+E14_Distance2Grid.py
+E15_DrawRedRectCenterPage.py
+E16_ElementBleedConditions.py
+E17_ElementPaddingConditions2.py
+E18_TextSideConditions.py
+E19_TextSideWHConditions.py
+E20_UseBorders.py
+E21_UseContainerElements.py
+E22_UseDocWrap.py
+_RunAll.py

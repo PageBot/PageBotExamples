@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -10,20 +11,26 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     UseContainerElements.py
+#     E21_UseContainerElements.py
 #
 #     Container element hold an ordered list of elements.
 #     Each element knows its own position.
 #
-from pagebot.elements import newRect
+from pagebot import getContext
+from pagebot.constants import EXPORT
 from pagebot.document import Document
+from pagebot.elements import newRect
+from pagebot.toolbox.transformer import path2FileName
 
 W = H = 1000
+FILENAME = path2FileName(__file__)
 
-def run():
-    doc = Document(w=W, h=H)
+def draw(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    context = getContext(contextName)
+    doc = Document(w=W, h=H, context=context)
     page = doc[1]
-    c = newRect(parent=page, name='myContainerElement', 
+    c = newRect(parent=page, name='myContainerElement',
         x=100, y=100, w=page.w/2, h=page.h/2, fill=(1, 0, 0))
 
     print('Container we made:'+str(c))
@@ -49,11 +56,8 @@ def run():
     print('-- The container behaves as a dictionary of child elements with e.eId as key.')
     print(c[eId1])
     print(c[eId2])
+    page.solve()
+    doc.export(exportPath)
 
-    doc.export('_export/UseContainerElements.pdf')
-
-
-if __name__ == '__main__':
-	run()
-	print('Done')
-
+for contextName in ('DrawBot', 'Flat'):
+    draw(contextName)
