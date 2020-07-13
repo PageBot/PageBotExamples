@@ -54,8 +54,6 @@ def draw(contextName):
     msg = 'Root path is %s' % rootPath
     bs = context.newString(msg, style)
     t = makeText(bs, page, f, c)
-    #print(t.x, t.y, t.w, t.h)
-    #print(t.bs.style)
 
     resourcesPath = getResourcesPath()
     msg = 'Resources path is %s' % resourcesPath
@@ -69,8 +67,12 @@ def draw(contextName):
     bs = context.newString(msg, style)
     c = (Right2Right(), Float2Top())
     e = makeText(bs, page, f, c)
-    e.w = page.pw/2 - 2*GUTTER
-    e.mr = 0
+    #print(e.w)
+    #print(e.h)
+    print(e.bs.th)
+    #print(e.pb)
+    #e.w = page.pw / 2 - 2*GUTTER
+    #e.mr = 0
 
     msg = 'PageBot font path is %s' % f.path
     msg = '\n\t'.join(msg.split('/'))
@@ -86,7 +88,7 @@ def draw(contextName):
 def makeText(t, page, f, c):
     """Create a new text box with e give layout conditions
     and with page as parent."""
-    t = newText(t, font=f, parent=page, conditions=c, fill=0.9,
+    t = newText(t, font=f, parent=page, conditions=c, fill=0.9, stroke=(1, 0,0), strokeWidth=1,
         margin=GUTTER)
     t.showOrigin = True
     return t
