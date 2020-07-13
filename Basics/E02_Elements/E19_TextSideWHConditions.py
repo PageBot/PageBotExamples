@@ -12,49 +12,55 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E01_ElementPaddingConditions.py
+#     E19_TextSideWHConditions.py
 #
-#     Position elements by their page padding position with conditions
+#     Position fixed size text elements by their page side with conditions
 #
 from pagebot import getContext
-from pagebot.constants import EXPORT
 from pagebot.conditions import *
+from pagebot.constants import *
 from pagebot.document import Document
-from pagebot.elements import newRect
+from pagebot.elements import newText
+from pagebot.fonttoolbox.objects.font import findFont
+from pagebot.toolbox.color import color, whiteColor
 from pagebot.toolbox.units import p, pt
-from pagebot.toolbox.color import color
 from pagebot.toolbox.transformer import path2FileName
 
 W = H = pt(500)
 PADDING = p(4)
+w = p(8)
 FILENAME = path2FileName(__file__)
+font = findFont('PageBot Regular')
 
 def draw(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
-    w = p(8)
-    doc = Document(w=W, h=H, context=context)
+    doc = Document(w=W, h=H)
     page = doc[1] # Get the single page from te document.
     page.padding = PADDING
     page.showPadding = True
-    newRect(parent=page, w=w, h=w, fill=color('red'), conditions=[Left2Left(),
-        Bottom2Bottom()])
-    newRect(parent=page, w=w, h=w, fill=color('green'),
+
+    t = doc.context.newString('TEXT', style=dict(font=font, fontSize=36,
+        textFill=whiteColor, xTextAlign=CENTER))
+    newText(t, parent=page, w=w, h=w, fill=color('red'),
+            conditions=[Left2Left(), Bottom2Bottom()])
+    newText(t, parent=page, w=w, h=w, fill=color('green'),
             conditions=[Center2Center(), Top2Top()])
-    newRect(parent=page, w=w, h=w, fill=color('blue'),
+    newText(t, parent=page, w=w, h=w, fill=color('blue'),
             conditions=[Right2Right(), Top2Top()])
-    newRect(parent=page, w=w, h=w, fill=color('orange'),
+    newText(t, parent=page, w=w, h=w, fill=color('orange'),
             conditions=[Left2Left(), Middle2Middle()])
-    newRect(parent=page, w=w, h=w, fill=color('yellow'),
+    newText(t, parent=page, w=w, h=w, fill=color('yellow').darker(0.8),
             conditions=[Left2Left(), Top2Top()])
-    newRect(parent=page, w=w, h=w, fill=color('purple'),
+    newText(t, parent=page, w=w, h=w, fill=color('purple'),
             conditions=[Bottom2Bottom(), Right2Right()])
-    newRect(parent=page, w=w, h=w, fill=color('violet'),
+    newText(t, parent=page, w=w, h=w, fill=color('violet'),
             conditions=[Middle2Middle(), Right2Right()])
-    newRect(parent=page, w=w, h=w, fill=color('cyan'),
+    newText(t, parent=page, w=w, h=w, fill=color('cyan').darker(0.8),
             conditions=[Center2Center(), Bottom2Bottom()])
-    newRect(parent=page, w=w, h=w, fill=color('black'),
+    newText(t, parent=page, w=w, h=w, fill=color('black'),
             conditions=[Center2Center(), Middle2Middle()])
+
     page.solve()
     doc.export(exportPath)
 

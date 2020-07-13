@@ -11,8 +11,7 @@
 #     Supporting DrawBot, www.drawbot.com
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
-#
-#     E14_Distance2Grid.py
+# #     E14_Distance2Grid.py
 #
 #     Position fixed size text elements by their page side with conditions
 #
