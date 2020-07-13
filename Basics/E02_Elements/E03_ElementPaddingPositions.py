@@ -32,7 +32,7 @@ W = H = 500
 PADDING = p(5)
 FILENAME = path2FileName(__file__)
 
-def makeText(contextName):
+def draw(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     doc = Document(w=W, h=H, context=context)
@@ -67,5 +67,5 @@ def makeText(contextName):
     doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    makeText(contextName)
+    draw(contextName)
 

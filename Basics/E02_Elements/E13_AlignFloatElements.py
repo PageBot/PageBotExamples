@@ -12,45 +12,46 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     AlignElements.py
+#     E13_AlignFloatElements.py
 #
-#     This script generates a page with aligned square, showing how conditional placement works.
-#     Interactive Variable() only works in DrawBot context.
+#     This script generates a page with aligned square, showing how conditional
+#     placement works. Interactive Variable() only works in DrawBot context.
 #
 # Creation of the RootStyle (dictionary) with all available default style parameters filled.
-
-from pagebot.constants import CENTER
-
-# Document is the main instance holding all information about
-# the document togethers (pages, styles, etc.)
+from pagebot import getContext
+from pagebot.conditions import *
+from pagebot.constants import CENTER, EXPORT
 from pagebot.document import Document
 from pagebot.elements import newRect
-from pagebot.toolbox.color import blueColor, darkGrayColor, redColor, Color, noColor, color
-from pagebot.conditions import *
+from pagebot.toolbox.color import (blueColor, darkGrayColor, redColor, Color,
+        noColor, color)
+from pagebot.toolbox.transformer import path2FileName
+
+FILENAME = path2FileName(__file__)
+G = 8 # Distance between the squares.
+SQ = 8 * G # Size of the squares
 
 # Variables used as interactive globals in DrawBot context.
 ShowOrigins = False
 ShowElementInfo = False
 ShowDimensions = False
 PageSize = 500
-
 W = H = PageSize
 
-G = 8 # Distance between the squares.
-SQ = 8 * G # Size of the squares
-
-def makeDocument(context):
+def draw(contextName):
     """Make a new document."""
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    context = getContext(contextName)
 
     doc = Document(w=W, h=H, autoPages=1, context=context)
     page = doc[1] # Get the single page from te document.
 
-    # Hard coded padding, just for simple demo,
-    # instead of filling padding and columns in the root style.
+    # Hard coded padding, just for simple demo, instead of filling padding and
+    # columns in the root style.
     page.padding = SQ
 
-    # Position square in the 4 corners of the page area.
-    # Notice that their alignment (left) does not matter for the conditions.
+    # Position square in the 4 corners of the page area. Notice that their
+    # alignment (left) does not matter for the conditions.
     newRect(w=SQ, h=SQ, parent=page,
             conditions=(Right2Right(), Top2Top()), fill=darkGrayColor)
     newRect(w=SQ, h=SQ, parent=page,
@@ -96,9 +97,10 @@ def makeDocument(context):
     for condition in cornerConditions:
         newRect(w=SQ, h=SQ, stroke=noColor, parent=page, xAlign=CENTER,
                 conditions=condition, fill=blueColor)
-    # Solve the layout placement conditions on the page by moving the
-    # elements that are not on the right positions (which is all of them,
-    # because we did not add point attributes when creating them.
+
+    # Solves the layout placement conditions on the page by moving the elements
+    # that are not on the right positions (which is all of them, because we did
+    # not add point attributes when creating them.
 
     score = page.solve()
     if score.fails:
@@ -109,11 +111,12 @@ def makeDocument(context):
               Bottom2SideBottom().test(e),
               e.isBottomOnSideBottom(), e.bottom)
 
-    # Get the current view of the document. This allows setting of
-    # parameters how the document is represented on output.
+    # Gets the current view of the document. This allows setting of parameters
+    # how the document is represented on output.
     view = doc.view
     view.w, view.h = W, H
-    # Set view options. Full list is in elements/views/baseviews.py
+
+    # Sets view options. Full list is in elements / views / baseviews.py
     view.padding = 30 # Showing cropmarks and registration marks
                       # need >= 20 padding of the view.
     view.showRegistrationMarks = True
@@ -122,20 +125,12 @@ def makeDocument(context):
     view.showPadding = True
     view.showNameInfo = True
 
-    # These values can be changed in the Variable window,
-    # when in DrawBot context.
+    # These values can be changed in the Variable window, when in DrawBot
+    # context.
     view.showOrigin = ShowOrigins # Show origin alignment
-                                         # markers on each element.
     view.showDimensions = ShowDimensions
     view.showElementInfo = ShowElementInfo # Show boxes with element info
+    doc.export(exportPath)
 
-    #EXPORT_PATH = '_export/AlignElements-%s.png' % context.name
-    EXPORT_PATH = '_export/AlignElements-%s.pdf' % context.name
-    doc.export(EXPORT_PATH)
-
-if __name__ == '__main__':
-    from pagebot import getContext
-
-    for contextName in ('DrawBot', 'Flat'):
-        context = getContext(contextName)
-        makeDocument(context)
+for contextName in ('DrawBot', 'Flat'):
+    draw(contextName)

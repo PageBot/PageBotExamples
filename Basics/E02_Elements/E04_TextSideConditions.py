@@ -33,7 +33,7 @@ W = H = pt(500)
 font = findFont('PageBot Regular')
 FILENAME = path2FileName(__file__)
 
-def makeText(contextName):
+def draw(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     doc = Document(w=W, h=H, context=context)
@@ -57,4 +57,4 @@ def makeText(contextName):
     doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    makeText(contextName)
+    draw(contextName)
