@@ -43,7 +43,7 @@ def draw(contextName):
     page = doc[1]
 
     # Make a set of conditions for the element positions of this page.
-    c = (Left2Left(), Fit2Right(), Float2Top())
+    c = (Left2Left(), Float2Top())#Fit2Right(), )
 
     # Find the demo font, as supplied with the PageBot library installation.
     # This is a subset of TYPETR Upgrade Regular.
@@ -53,12 +53,12 @@ def draw(contextName):
     style = dict(fontSize=14, font=f)
     msg = 'Root path is %s' % rootPath
     bs = context.newString(msg, style)
-    t = makeText(bs, page, f, c)
+    topText1 = makeText(bs, page, f, c)
 
     resourcesPath = getResourcesPath()
     msg = 'Resources path is %s' % resourcesPath
     bs = context.newString(msg, style)
-    t = makeText(bs, page, f, c)
+    topText2 = makeText(bs, page, f, c)
 
     if contextName == 'Flat':
         placedText = bs.cs.pt
@@ -67,33 +67,35 @@ def draw(contextName):
             for st, s in run:
                 print(s)
 
-    '''
+
     font = findFont('PageBot-Regular')
     msg = 'Default font path is %s' % font.path
     msg = '\n\t'.join(msg.split('/'))
     bs = context.newString(msg, style)
     c = (Right2Right(), Float2Top())
-    e = makeText(bs, page, f, c)
-    #print(e.w)
-    #print(e.h)
-    #print(e.bs.th)
-    #print(e.pb)
-    #e.w = page.pw / 2 - 2*GUTTER
-    #e.mr = 0
+    column1 = makeText(bs, page, f, c)
+
+    # Forces column width, so second column isn't pushed away.
+    column1.w = page.pw / 2 - 2*GUTTER
+    column1.mr = 0
 
 
     msg = 'PageBot font path is %s' % f.path
     msg = '\n\t'.join(msg.split('/'))
     bs = context.newString(msg, style)
     c = (Left2Left(), Float2Top())
-    e = makeText(bs, page, f, c)
-    e.w = page.pw / 2 - 2*GUTTER
-    '''
+    column2 = makeText(bs, page, f, c)
+    column2.w = page.pw / 2 - 2*GUTTER
 
     # Let the page solve all of its child element layout conditions.
     page.solve()
-    r = newRect(x=t.x, y=t.y, w=t.w, h=t.h, parent=page, stroke=(0, 1, 0),
-            strokeWidth=1, showOrigin=True)
+
+    y = column1.y - column1.h
+    r = newRect(x=column1.x, y=y, w=column1.w, h=column1.h, parent=page, stroke=(0, 1, 0),
+           strokeWidth=1, showOrigin=True)
+    y = column2.y - column2.h
+    r = newRect(x=column2.x, y=y, w=column2.w, h=column2.h, parent=page, stroke=(1, 0, 0),
+           strokeWidth=1, showOrigin=True)
     doc.export(exportPath)
 
 def makeText(t, page, f, c):
