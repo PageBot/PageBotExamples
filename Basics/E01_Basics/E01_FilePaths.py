@@ -58,9 +58,16 @@ def draw(contextName):
     resourcesPath = getResourcesPath()
     msg = 'Resources path is %s' % resourcesPath
     bs = context.newString(msg, style)
-    makeText(bs, page, f, c)
-    #print(glob.glob('%s/*' % resourcesPath))
+    t = makeText(bs, page, f, c)
 
+    if contextName == 'Flat':
+        placedText = bs.cs.pt
+        for i, (height, run) in enumerate(placedText.layout.runs()):
+            print(i, height)
+            for st, s in run:
+                print(s)
+
+    '''
     font = findFont('PageBot-Regular')
     msg = 'Default font path is %s' % font.path
     msg = '\n\t'.join(msg.split('/'))
@@ -69,29 +76,34 @@ def draw(contextName):
     e = makeText(bs, page, f, c)
     #print(e.w)
     #print(e.h)
-    print(e.bs.th)
+    #print(e.bs.th)
     #print(e.pb)
     #e.w = page.pw / 2 - 2*GUTTER
     #e.mr = 0
+
 
     msg = 'PageBot font path is %s' % f.path
     msg = '\n\t'.join(msg.split('/'))
     bs = context.newString(msg, style)
     c = (Left2Left(), Float2Top())
     e = makeText(bs, page, f, c)
-    e.w = page.pw/2 - 2*GUTTER
+    e.w = page.pw / 2 - 2*GUTTER
+    '''
 
     # Let the page solve all of its child element layout conditions.
     page.solve()
+    r = newRect(x=t.x, y=t.y, w=t.w, h=t.h, parent=page, stroke=(0, 1, 0),
+            strokeWidth=1, showOrigin=True)
     doc.export(exportPath)
 
 def makeText(t, page, f, c):
     """Create a new text box with e give layout conditions
     and with page as parent."""
-    t = newText(t, font=f, parent=page, conditions=c, fill=0.9, stroke=(1, 0,0), strokeWidth=1,
+    t = newText(t, font=f, parent=page, conditions=c, #fill=0.9, stroke=(1, 0,0), strokeWidth=1,
         margin=GUTTER)
     t.showOrigin = True
     return t
 
+#for contextName in ('Flat',):
 for contextName in ('DrawBot', 'Flat'):
     draw(contextName)
