@@ -31,8 +31,8 @@ def draw(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     H, W = A3
-    doc = Document(w=W, h=H, context=context)
-    page = doc[1]
+    #doc = Document(w=W, h=H, context=context)
+    #page = doc[1]
     style = {}
     style['fill'] = (1, 0, 0)
     style['stroke'] = (0, 0, 0)
@@ -48,21 +48,9 @@ def draw(contextName):
     # testing the "no on-curve point" scenario
     #path.qCurveTo((0, 0), (0, 100), (100, 100), (100, 0), None)
     #path.closePath()
-    #bungee = findFont('BungeeOutline-Regular')
-    #c = (Right2Right(), Top2Top(), Float2Left())
-    #t = newText('*PageBot Path*', parent=page, conditions=c, style={'fill': 1, 'fontSize': 32, 'stroke': 0, 'strokeWidth': 2})
-    #path.text('ABC', style=dict(font=bungee, fontSize=pt(120)))
-    #newPaths(path, parent=page, fill=(1, 0, 0), conditions=c)
-    #roboto = findFont('Roboto-Bold')
-    #path = BezierPath(context=context)
-    # FIXME: y-translation always same direction?
-    #path.translate((-60, 200))
-    #path.text('CDE', style=dict(font=roboto, fontSize=pt(240)))
-    #path = path.removeOverlap()
-    #newPaths(path, parent=page, fill=(1, 1, 0), stroke=0, conditions=c)
 
-    page.solve()
-    doc.export(exportPath)
+    #page.solve()
+    #doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
     draw(contextName)

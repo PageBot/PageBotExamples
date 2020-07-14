@@ -29,8 +29,8 @@ from pagebot.document import Document
 from pagebot.style import getRootStyle
 from pagebot.toolbox.color import color, noColor
 from pagebot.toolbox.units import pt
-
 from pagebot.toolbox.transformer import path2FileName
+
 ViewPadding = 64
 PageSize = 500
 GUTTER = 24 # Distance between the squares.

@@ -25,12 +25,16 @@ from pagebot.toolbox.units import pt
 from pagebot.conditions import *
 from pagebot.elements import *
 from pagebot.document import Document
-from pagebot.toolbox.units import pt
+from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.transformer import path2FileName
 
 H, W = A3
 GUTTER = pt(12)
 FILENAME = path2FileName(__file__)
+font = findFont('Roboto-Regular')
+fontSize = 14
+leading = em(1.4)
+#leading = 1.4
 
 def draw(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
@@ -45,25 +49,22 @@ def draw(contextName):
     view = doc.getView()
     view.showPadding = True
 
-
     # Make a set of conditions for the element positions of this page.
     c = (Left2Left(), Float2Top())#Fit2Right(), )
 
     # Find the demo font, as supplied with the Roboto library installation.
     # This is a subset of TYPETR Upgrade Regular.
-    f = findFont('Roboto-Regular')
 
     rootPath = getRootPath() # Location of this Roboto library
-    style = dict(fontSize=14, font=f)
+    style = dict(fontSize=fontSize, font=font, leading=leading)
     msg = 'Root path is %s' % rootPath
     bs = context.newString(msg, style)
-    topText1 = makeText(bs, page, f, c)
+    topText1 = makeText(bs, page, font, c)
 
     resourcesPath = getResourcesPath()
     msg = 'Resources path is %s' % resourcesPath
     bs = context.newString(msg, style)
-    topText2 = makeText(bs, page, f, c)
-
+    topText2 = makeText(bs, page, font, c)
 
     '''
     if contextName == 'Flat':
@@ -74,33 +75,30 @@ def draw(contextName):
                 print(s)
     '''
 
-
-    font = findFont('Roboto-Regular')
     msg = 'Default font path is %s' % font.path
     msg = '\n • '.join(msg.split('/'))
     bs = context.newString(msg, style)
     c = (Right2Right(), Float2Top())
-    column1 = makeText(bs, page, f, c)
+    column1 = makeText(bs, page, font, c)
 
     # Forces column width, so second column isn't pushed away.
     column1.w = page.pw / 2 - 2*GUTTER
     column1.mr = 0
 
-
-    msg = 'Roboto font path is %s' % f.path
+    msg = 'Roboto font path is %s' % font.path
     msg = '\n • '.join(msg.split('/'))
     bs = context.newString(msg, style)
     c = (Left2Left(), Float2Top())
-    column2 = makeText(bs, page, f, c)
+    column2 = makeText(bs, page, font, c)
     column2.w = page.pw / 2 - 2*GUTTER
 
     # Let the page solve all of its child element layout conditions.
     page.solve()
 
-    y = column1.y - column1.h
+    y = column1.y - column1.h + fontSize
     r = newRect(x=column1.x, y=y, w=column1.w, h=column1.h, parent=page, stroke=(0, 1, 0),
            strokeWidth=1, showOrigin=True)
-    y = column2.y - column2.h
+    y = column2.y - column2.h + fontSize
     r = newRect(x=column2.x, y=y, w=column2.w, h=column2.h, parent=page, stroke=(1, 0, 0),
            strokeWidth=1, showOrigin=True)
     doc.export(exportPath)
