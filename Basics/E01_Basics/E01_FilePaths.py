@@ -14,7 +14,7 @@
 #
 #     E01_FilePaths.py
 #
-#     Shows how get PageBot file paths.  Not to be confused with BezierPaths
+#     Shows how get Roboto file paths.  Not to be confused with BezierPaths
 #     which are paths used for drawing vectores.
 #
 from pagebot import *
@@ -41,15 +41,19 @@ def draw(contextName):
 
     # Get the page.
     page = doc[1]
+    page.padding = 20
+    view = doc.getView()
+    view.showPadding = True
+
 
     # Make a set of conditions for the element positions of this page.
     c = (Left2Left(), Float2Top())#Fit2Right(), )
 
-    # Find the demo font, as supplied with the PageBot library installation.
+    # Find the demo font, as supplied with the Roboto library installation.
     # This is a subset of TYPETR Upgrade Regular.
-    f = findFont('PageBot-Regular')
+    f = findFont('Roboto-Regular')
 
-    rootPath = getRootPath() # Location of this PageBot library
+    rootPath = getRootPath() # Location of this Roboto library
     style = dict(fontSize=14, font=f)
     msg = 'Root path is %s' % rootPath
     bs = context.newString(msg, style)
@@ -60,17 +64,20 @@ def draw(contextName):
     bs = context.newString(msg, style)
     topText2 = makeText(bs, page, f, c)
 
+
+    '''
     if contextName == 'Flat':
         placedText = bs.cs.pt
         for i, (height, run) in enumerate(placedText.layout.runs()):
             print(i, height)
             for st, s in run:
                 print(s)
+    '''
 
 
-    font = findFont('PageBot-Regular')
+    font = findFont('Roboto-Regular')
     msg = 'Default font path is %s' % font.path
-    msg = '\n\t'.join(msg.split('/'))
+    msg = '\n • '.join(msg.split('/'))
     bs = context.newString(msg, style)
     c = (Right2Right(), Float2Top())
     column1 = makeText(bs, page, f, c)
@@ -80,8 +87,8 @@ def draw(contextName):
     column1.mr = 0
 
 
-    msg = 'PageBot font path is %s' % f.path
-    msg = '\n\t'.join(msg.split('/'))
+    msg = 'Roboto font path is %s' % f.path
+    msg = '\n • '.join(msg.split('/'))
     bs = context.newString(msg, style)
     c = (Left2Left(), Float2Top())
     column2 = makeText(bs, page, f, c)
@@ -101,7 +108,7 @@ def draw(contextName):
 def makeText(t, page, f, c):
     """Create a new text box with e give layout conditions
     and with page as parent."""
-    t = newText(t, font=f, parent=page, conditions=c, #fill=0.9, stroke=(1, 0,0), strokeWidth=1,
+    t = newText(t, font=f, parent=page, conditions=c, stroke=(0, 0, 1), strokeWidth=1,
         margin=GUTTER)
     t.showOrigin = True
     return t
