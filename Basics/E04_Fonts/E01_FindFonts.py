@@ -16,11 +16,11 @@
 #     Some examples how to find Font instances, for the given installed fonts.
 #     PageBot scans through places where it can find font files.
 #
+from pagebot.constants import A4, EXPORT
 from pagebot.document import Document
 from pagebot.elements import *
 from pagebot import getContext
 from pagebot.toolbox.units import pt
-from pagebot.constants import A4
 from pagebot.fonttoolbox.objects.family import findFamily, getFamily
 from pagebot.fonttoolbox.objects.font import getFont, findFont, findFonts
 from pagebot.toolbox.transformer import path2FileName
@@ -83,16 +83,14 @@ def makeFonts(contextName):
 
     # Let's make a page to show all font names.
 
-    exportPath = '_export/70_FindFonts-%s.pdf' % contextName
-
-    style = dict(font='PageBot-Bold', fontSize=pt(12))
+    style = dict(font='PageBot-Bold', fontSize=pt(12), textFill=0)
     bs = context.newString('Installed fonts for %s\n' % contextName, style)
     bs += context.newString('\n'.join(allFontNames))
 
     doc = Document(size=A4, context=context)
     page = doc[1]
     page.padding = pt(30)
-    newText(bs, x=page.pl, y=page.pb, w=page.pw, h=page.ph, parent=page)
+    newText(bs, x=page.pl, y=page.pb, w=page.pw, h=page.ph, parent=page, stroke=(1, 0, 0))
     doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
