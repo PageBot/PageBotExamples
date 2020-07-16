@@ -23,23 +23,26 @@ import traceback
 
 from pagebot import getContext
 from pagebot.constants import *
+from pagebot.document import Document
+from pagebot.elements import newText, newRect, newLine
 from pagebot.toolbox.color import color
 from pagebot.toolbox.loremipsum import loremipsum
+from pagebot.toolbox.transformer import path2FileName
 from pagebot.toolbox.units import pt, em
-from pagebot.elements import newText, newRect, newLine
-from pagebot.document import Document
 
 H, W = A4 # Standard paper size from constants.
+FILENAME = path2FileName(__file__)
+
 loremIpsum = loremipsum()
 
 def babelLine(contextName):
     context = getContext(contextName)
-    exportPath = '_export/00_BabelLine-%s.pdf' % contextName
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     padding = pt(40) # Outside measures to accommodate the crop makrs.
     bgColor = color(0.9) # Background color of the text box
     black = color(0)
 
-    doc = Document(w=W, h=H, title='00_BabelLine', context=context)
+    doc = Document(w=W, h=H, context=context)
     page = doc[1] # Get page on pageNumber, first in row (this is only one now).
     page.padding = padding
     view = doc.getView() # Get the current view of the document.
@@ -53,7 +56,9 @@ def babelLine(contextName):
     #context.newPage(W, H) # Make a new A4 page.
 
     # Define font, fontSize and color of the square
-    fontName = 'PageBot-Regular'
+    # TODO: test for different fonts.
+    #fontName = 'PageBot-Regular'
+    fontName = 'Roboto-Regular'
     fontSize = pt(24)
     textColor = color(1, 0, 0)
 
@@ -67,8 +72,6 @@ def babelLine(contextName):
 
     x = pt(20)
     y = pt(H / 2)
-
-
     r = 2
     x = x
     y = y
@@ -81,19 +84,12 @@ def babelLine(contextName):
             showOrigin=True)
 
     r = newRect(parent=page, x=x, y=y, w=w, h=h, style=dict(stroke=black))
-    #r = newRect(parent=page, x=x, y=y, w=w, h=h, stroke=black)
 
+    for line in bs.lines:
+        yLine = y + h - line.y
+        l = newLine(parent=page, x=x, y=yLine, w=w, h=0, style=dict(stroke=(1, 0, 0)))
 
-    #context.stroke((1, 0, ))
-    #context.rect(x, y, bs.w, bs.h)
-
-    #for i, line in enumerate(bs.lines):
-    #    context.marker(x, y-line.y, r=r, fontSize=pt(6), prefix='#%d' % i)
-
-    #context.saveImage('_export/00_BabelLine-%s.pdf' % contextName)
     doc.export(exportPath)
-
-
 
 for contextName in ('DrawBot', 'Flat'):
     babelLine(contextName)

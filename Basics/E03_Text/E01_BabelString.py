@@ -22,8 +22,8 @@
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.toolbox.color import color
-from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.transformer import path2FileName
+from pagebot.toolbox.units import pt, em
 
 W, H = A4 # Standard paper size from constants.
 FILENAME = path2FileName(__file__)
