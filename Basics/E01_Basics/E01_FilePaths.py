@@ -50,7 +50,9 @@ def draw(contextName):
     view.showPadding = True
 
     # Make a set of conditions for the element positions of this page.
-    c = (Left2Left(), Float2Top(), Fit2Right())
+    c = (Left2Left(), Float2Top())
+    # FIXME: causes single line textboxes to have too much bottom padding in Flat.
+    # Fit2Right()
 
     # Find the demo font, as supplied with the Roboto library installation.
     # This is a subset of TYPETR Upgrade Regular.

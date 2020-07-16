@@ -27,7 +27,7 @@ from pagebot.toolbox.transformer import path2FileName
 
 # Template for the export path, allowing to include context name
 W, H = mm(120), pt(300)
-FONT_NAME = 'PageBot-Regular'
+FONT_NAME = 'Roboto-Regular'
 FILENAME = path2FileName(__file__)
 
 def draw(contextName):
@@ -44,24 +44,29 @@ def draw(contextName):
 
     style = dict(font=FONT_NAME, fontSize=pt(50), xTextAlign=LEFT)
     bs = context.newString(page.name, style=style)
-    conditions = (Center2Center(), Middle2Middle())
 
     # Try other positions
     #conditions= (Left2Left(), Top2SideTop())
-    conditions= (Right2Right(), Top2SideTop())
-    #conditions= (Center2Center(), Top2SideTop())
+    #conditions= (Right2Right(), Top2SideTop())
+    #conditions = (Center2Center(), Middle2Middle())
+    #conditions = (Center2Center(), Top2SideTop())
+    #conditions = (Left2Left(), Bottom2Bottom())
+    conditions = (Left2Left(), Float2Left(), Bottom2Bottom())
 
     # Position rectangle in the center of the page area. Notice that the (x, y)
     # position is undefined, default is (0, 0), since will be filled by the
     # condition. Size measures can be any type of units. Their type is shown
     # in the measured output.
-    e = newText(bs, w=mm(86), h=pt(164), parent=page, pl=3, pt=3,
-        showDimensions=True, showOrigin=True, xAlign=CENTER,
-        conditions=conditions, fill=color(0.8))
+    e = newText(bs, w=100, h=100, parent=page, #pl=3, pt=3,
+            showDimensions=True, showOrigin=True, #xAlign=CENTER,
+            conditions=conditions, stroke=color(1, 0, 0), strokeWidth=1)
+    f = newRect(w=100, h=100, parent=page, conditions=conditions, showOrigin=True, fill=color(0, 1, 0))
+    g = newRect(w=100, h=100, parent=page, conditions=conditions, showOrigin=True, fill=color(0, 0, 1))
 
     #print((mm(120) - mm(86))/2)
     page.solve()
     #print(e.x, e.y, e.w, e.h)
+    print(e.bs.lines[0].y)
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
     doc.export(exportPath)
