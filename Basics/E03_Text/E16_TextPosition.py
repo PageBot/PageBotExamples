@@ -44,7 +44,7 @@ def makeText(contextName):
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
     # The _export folder is automatically created.
-    exportPath = '_export/00_TextPosition-%s.pdf' % contextName
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
 
     # Make a new document with one text box.
 

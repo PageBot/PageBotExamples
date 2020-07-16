@@ -24,18 +24,19 @@
 from pagebot import getContext
 
 from pagebot.constants import *
-from pagebot.elements import newText, newRect, newLine
-from pagebot.document import Document
 from pagebot.conditions import *
+from pagebot.contributions.filibuster.blurb import Blurb
+from pagebot.document import Document
+from pagebot.elements import newText, newRect, newLine
+from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.color import color, blackColor
 from pagebot.toolbox.units import pt, em, mm
 from pagebot.toolbox.loremipsum import loremipsum
-from pagebot.contributions.filibuster.blurb import Blurb
-from pagebot.fonttoolbox.objects.font import findFont
+from pagebot.toolbox.transformer import path2FileName
 
 fontSize = pt(28)
 colWidth = mm(50)
-
+FILENAME = path2FileName(__file__)
 W, H = mm(600, 250) # Customize paper size
 padding = mm(60) # Outside measures to accommodate the crop makrs.
 FONT_NAME = 'PageBot-Regular'
@@ -48,7 +49,7 @@ def makeText(contextName):
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
     # The _export folder is automatically created.
-    exportPath = '_export/00_TextAlignment2-%s.pdf' % contextName
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     print('Generating:', exportPath)
 
     # Make a new document with one text box.

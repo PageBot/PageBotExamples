@@ -28,8 +28,8 @@ fontSize = pt(26)
 W, H = pt(750, 750)
 padding = pt(48)
 gutter = pt(18)
-FONT_NAME = 'PageBot-Regular'
-BOLD_NAME = 'PageBot-Bold'
+FONT_NAME = 'Verdana'
+BOLD_NAME = 'Verdana'
 FILENAME = path2FileName(__file__)
 s = """글자가 일상이 된다 산돌커뮤니케이션 ABCD123 Latin すべての文化集団は，独自の言語，文字，書記システムを持つ．それゆえ，個々の書記システムをサイバースペースに移転することは. ABCD123 Latin"""
 

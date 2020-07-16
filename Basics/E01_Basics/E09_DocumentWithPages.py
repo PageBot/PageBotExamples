@@ -66,7 +66,9 @@ def draw(contextName):
     #print((mm(120) - mm(86))/2)
     page.solve()
     #print(e.x, e.y, e.w, e.h)
-    print(e.bs.lines[0].y)
+    #print(e.bs.lines[0].y)
+    #print(e.bs.style)
+    #print(e.bs.lines)
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
     doc.export(exportPath)

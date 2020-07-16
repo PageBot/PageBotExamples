@@ -35,7 +35,7 @@ H = 1500
 def makeText(contextName):
     context = getContext(contextName)
 
-    exportPath = '_export/40_Hyphenation-%s.pdf' % contextName
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     doc = Document(w=W, h=H, autoPages=1, context=context)
     page = doc[1]
 
