@@ -28,14 +28,8 @@ from pagebot.toolbox.units import pt, em
 W, H = A4 # Standard paper size from constants.
 FILENAME = path2FileName(__file__)
 
-def draw(contextName):
-    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
-    context = getContext(contextName)
-    context.newPage(W, H) # Make a new A4 page.
-
-    # Define font, fontSize and color of the square
-    fontName = 'PageBot-Regular'
-    fontSize = pt(200)
+def draw(context, contextName, h, fontName):
+    fontSize = pt(150)
     textColor = color(1, 0, 0)
 
     # Define the style of the text, alignment is centered on baseline.
@@ -54,7 +48,7 @@ def draw(contextName):
     #y = H / 2 # Bottom position
 
     x = W / 2 - bs.tw / 2 # Left side of the frame
-    y = H / 2 - bs.th + bs.topLineAscender # Bottom position
+    y = h #H / 2 - bs.th + bs.topLineAscender # Bottom position
 
     # Draw the string, centered/baseline in middle of the page.
     #context.text(bs, (x, y))
@@ -68,10 +62,10 @@ def draw(contextName):
     context.fill(None)
     context.stroke((0, 0, 0.5))
 
-    context.rect(x, y, bs.tw, bs.th)
+    context.rect(x, y + bs.topLineDescender, bs.tw, bs.th)
     context.stroke((1, 0, 0))
     line = bs.lines[0]
-    y1 = y + bs.th - line.y
+    y1 = y + bs.th + bs.topLineDescender - line.y
     p1 = (x, y1)
     p2 = (x + bs.tw, y1)
     context.line(p1, p2)
@@ -82,7 +76,12 @@ def draw(contextName):
         l = newLine(parent=page, x=x, y=yLine, w=w, h=0, style=dict(stroke=(1, 0, 0)))
     '''
 
-    context.saveImage(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    draw(contextName)
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    context = getContext(contextName)
+    context.newPage(W, H) # Make a new A4 page.
+    for (h, fontName) in ((100, 'PageBot-Regular'), (300, 'Roboto-Regular'), (500, 'Bungee-Regular')):
+        # Define font, fontSize and color of the square
+        draw(context, contextName, h, fontName)
+    context.saveImage(exportPath)
