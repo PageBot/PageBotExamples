@@ -35,7 +35,7 @@ FILENAME = path2FileName(__file__)
 
 loremIpsum = loremipsum()
 
-def babelLine(contextName):
+def draw(contextName):
     context = getContext(contextName)
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     padding = pt(40) # Outside measures to accommodate the crop makrs.
@@ -68,7 +68,6 @@ def babelLine(contextName):
 
     # Have the context create a BabelString with the style.
     bs = context.newString(loremIpsum, style=style)
-    #print(bs.h)
 
     x = pt(20)
     y = pt(H / 2)
@@ -92,4 +91,4 @@ def babelLine(contextName):
     doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    babelLine(contextName)
+    draw(contextName)

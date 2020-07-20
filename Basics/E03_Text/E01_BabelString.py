@@ -28,7 +28,7 @@ from pagebot.toolbox.units import pt, em
 W, H = A4 # Standard paper size from constants.
 FILENAME = path2FileName(__file__)
 
-def makeText(contextName):
+def draw(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     context.newPage(W, H) # Make a new A4 page.
@@ -67,9 +67,22 @@ def makeText(contextName):
     context.marker(x, y, r=r, fontSize=pt(10))
     context.fill(None)
     context.stroke((0, 0, 0.5))
-    #context.stroke((0, 0, 0.5), 0.5)
+
     context.rect(x, y, bs.tw, bs.th)
+    context.stroke((1, 0, 0))
+    line = bs.lines[0]
+    y1 = y + bs.th - line.y
+    p1 = (x, y1)
+    p2 = (x + bs.tw, y1)
+    context.line(p1, p2)
+
+    '''
+    for line in bs.lines:
+        yLine = y + h - line.y
+        l = newLine(parent=page, x=x, y=yLine, w=w, h=0, style=dict(stroke=(1, 0, 0)))
+    '''
+
     context.saveImage(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    makeText(contextName)
+    draw(contextName)
