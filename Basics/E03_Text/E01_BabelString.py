@@ -70,13 +70,6 @@ def draw(context, contextName, h, fontName):
     p2 = (x + bs.tw, y1)
     context.line(p1, p2)
 
-    '''
-    for line in bs.lines:
-        yLine = y + h - line.y
-        l = newLine(parent=page, x=x, y=yLine, w=w, h=0, style=dict(stroke=(1, 0, 0)))
-    '''
-
-
 for contextName in ('DrawBot', 'Flat'):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)

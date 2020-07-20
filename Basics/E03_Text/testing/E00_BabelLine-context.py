@@ -32,7 +32,7 @@ from pagebot.document import Document
 H, W = A4 # Standard paper size from constants.
 loremIpsum = loremipsum()
 
-def babelLine(contextName):
+def draw(contextName):
     context = getContext(contextName)
     exportPath = '_export/00_BabelLine-context-%s.pdf' % contextName
     padding = pt(40) # Outside measures to accommodate the crop makrs.
@@ -89,4 +89,4 @@ def babelLine(contextName):
 
 
 for contextName in ('DrawBot', 'Flat'):
-    babelLine(contextName)
+    draw(contextName)
