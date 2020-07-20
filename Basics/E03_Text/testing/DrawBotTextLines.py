@@ -26,18 +26,21 @@ from AppKit import NSFont
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.toolbox.units import pt, em
+from pagebot.toolbox.loremipsum import loremipsum
 from pagebot.toolbox.transformer import path2FileName
 FILENAME = path2FileName(__file__)
+loremIpsum = loremipsum()
 
 
-def draw():
+def draw(fontName, fontSize, leading):
     w = 400
     h = 200
-    exportPath = '%s/%s.pdf' % (EXPORT, FILENAME)
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, fontName)
     context = getContext('DrawBot')
     context.newPage(w, h)
-    style = dict(font='PageBot-Regular', fontSize=pt(16), leading=em(1))
-    bs = context.newString('Bla', style=style)
+    style = dict(font=fontName, fontSize=fontSize, leading=leading)
+    #style = dict(font='PageBot-Regular', fontSize=pt(16), leading=em(1))
+    bs = context.newString(loremIpsum, style=style)
     lines = bs.lines
     fs = bs.cs
     attrString = fs.getNSObject()
@@ -49,7 +52,21 @@ def draw():
     ctBox = CTFramesetterCreateFrame(setter, (x, y), path, None)
     ctLines = CTFrameGetLines(ctBox)
     origins = CTFrameGetLineOrigins(ctBox, (0, len(ctLines)), None)
-    print(origins)
+    #print(origins)
+
+    context.drawText(bs, (x, y, w, h))
+    context.stroke((1, 0, 0))
+
+    for origin in origins:
+        yLine = origin.y#y + h - origin.y
+        p1 = (x, yLine)
+        p2 = (x + bs.tw, yLine)
+
+        context.line(p1, p2)
     context.saveImage(exportPath)
 
-draw()
+
+for fontName in ('Roboto-Regular', 'PageBot-Regular', 'Bungee-Regular'):
+    fontSize=16
+    leading=em(1.2)
+    draw(fontName, fontSize, leading)
