@@ -37,6 +37,7 @@ def draw(fontName, fontSize, leading):
     h = 200
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, fontName)
     context = getContext('DrawBot')
+    context.newDrawing()
     context.newPage(w, h)
     style = dict(font=fontName, fontSize=fontSize, leading=leading)
     #style = dict(font='PageBot-Regular', fontSize=pt(16), leading=em(1))
@@ -48,6 +49,7 @@ def draw(fontName, fontSize, leading):
     path = CGPathCreateMutable()
     x = 0
     y = 0
+    r = 2
     CGPathAddRect(path, None, CGRectMake(x, y, w, h))
     ctBox = CTFramesetterCreateFrame(setter, (x, y), path, None)
     ctLines = CTFrameGetLines(ctBox)
@@ -55,18 +57,22 @@ def draw(fontName, fontSize, leading):
     #print(origins)
 
     context.drawText(bs, (x, y, w, h))
-    context.stroke((1, 0, 0))
 
+
+    offsetY = h - origins[-1].y - origins[0].y
+    print(offsetY)
     for origin in origins:
         yLine = origin.y#y + h - origin.y
         p1 = (x, yLine)
         p2 = (x + bs.tw, yLine)
-
+        context.stroke((1, 0, 0))
         context.line(p1, p2)
+        context.marker(x, yLine, r=r, fontSize=pt(5))
     context.saveImage(exportPath)
+    context.clear()
 
 
 for fontName in ('Roboto-Regular', 'PageBot-Regular', 'Bungee-Regular'):
     fontSize=16
-    leading=em(1.2)
+    leading=em(1.5)
     draw(fontName, fontSize, leading)

@@ -65,7 +65,7 @@ def draw(context, contextName, h, fontName):
     context.rect(x, y + bs.topLineDescender, bs.tw, bs.th)
     context.stroke((1, 0, 0))
     line = bs.lines[0]
-    y1 = y + bs.th + bs.topLineDescender - line.y
+    y1 = y #+ bs.th + bs.topLineDescender - line.y
     p1 = (x, y1)
     p2 = (x + bs.tw, y1)
     context.line(p1, p2)
