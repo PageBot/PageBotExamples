@@ -39,10 +39,9 @@ def draw(fontName, fontSize, leading):
     context = getContext('DrawBot')
     context.newDrawing()
     context.newPage(w, h)
-    style = dict(font=fontName, fontSize=fontSize, leading=leading)
+    style = dict(font=fontName, fontSize=fontSize, leading=em(leading))
     #style = dict(font='PageBot-Regular', fontSize=pt(16), leading=em(1))
     bs = context.newString(loremIpsum, style=style)
-    lines = bs.lines
     fs = bs.cs
     attrString = fs.getNSObject()
     setter = CTFramesetterCreateWithAttributedString(attrString)
@@ -59,20 +58,28 @@ def draw(fontName, fontSize, leading):
     context.drawText(bs, (x, y, w, h))
 
 
-    offsetY = h - origins[-1].y - origins[0].y
+    '''
+    lineHeight = fontSize * leading
+    offsetY = h - origins[0].y - lineHeight
     print(offsetY)
-    for origin in origins:
-        yLine = origin.y#y + h - origin.y
+    context.fill((0, 1, 0))
+    context.rect(0, h-offsetY, w, offsetY)
+    context.fill(None)
+    '''
+    print(bs.h)
+    print(bs.getTextLines())
+
+    for i, origin in enumerate(origins):
+        yLine = origin.y
         p1 = (x, yLine)
         p2 = (x + bs.tw, yLine)
         context.stroke((1, 0, 0))
         context.line(p1, p2)
-        context.marker(x, yLine, r=r, fontSize=pt(5))
+        context.marker(x, yLine, r=r, fontSize=pt(5), prefix='# %s' % i)
     context.saveImage(exportPath)
     context.clear()
 
-
 for fontName in ('Roboto-Regular', 'PageBot-Regular', 'Bungee-Regular'):
     fontSize=16
-    leading=em(1.5)
+    leading=2
     draw(fontName, fontSize, leading)

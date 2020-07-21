@@ -28,13 +28,21 @@ from pagebot.toolbox.units import pt, em
 W, H = A4 # Standard paper size from constants.
 FILENAME = path2FileName(__file__)
 
+# Some notes:
+# Flat text height corresponds to ascender + descender.
+# DrawBot height corresponds to fontsize * leading.
+
 def draw(context, contextName, h, fontName):
     fontSize = pt(150)
     textColor = color(1, 0, 0)
 
     # Define the style of the text, alignment is centered on baseline.
-    style = dict(font=fontName, fontSize=fontSize,# tracking=-em(0.02),
-            leading=em(1), textFill=0) #, xTextAlign=CENTER)
+    style = dict(font=fontName, fontSize=fontSize,
+            # tracking=-em(0.02),
+            leading=em(1),
+            #leading=em(1.4),
+            #, xTextAlign=CENTER)
+            textFill=0)
     # Have the context create a BabelString with the style.
     bs = context.newString('Hkpx', style)
 
@@ -58,17 +66,36 @@ def draw(context, contextName, h, fontName):
     x = pt(x)
     y = pt(y)
     r = pt(r)
-    context.marker(x, y, r=r, fontSize=pt(10))
+    context.marker(x, y, r=r, fontSize=pt(10), prefix=fontName)
     context.fill(None)
     context.stroke((0, 0, 0.5))
+    #print(fontName, bs.th)
 
     context.rect(x, y + bs.topLineDescender, bs.tw, bs.th)
     context.stroke((1, 0, 0))
     line = bs.lines[0]
-    y1 = y #+ bs.th + bs.topLineDescender - line.y
-    p1 = (x, y1)
-    p2 = (x + bs.tw, y1)
+    p1 = (x, y)
+    p2 = (x + bs.tw, y)
     context.line(p1, p2)
+
+    context.stroke((0, 1, 0))
+    x1 = x + bs.tw + 10
+    y1 = y + bs.ascender
+    p3 = (x1, y)
+    p4 = (x1, y1)
+    context.line(p3, p4)
+    x2 = x1 + 10
+    y2 = y + ((y1 - y) / 2)
+    context.drawString('ascender', (x2, y2))
+
+    context.stroke((0, 0, 1))
+    y1 = y + bs.descender
+    p3 = (x1, y)
+    p4 = (x1, y1)
+    context.line(p3, p4)
+    x2 = x1 + 10
+    y2 = y + ((y1 - y) / 2)
+    context.drawString('descender', (x2, y2))
 
 for contextName in ('DrawBot', 'Flat'):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
