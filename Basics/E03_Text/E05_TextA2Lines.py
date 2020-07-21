@@ -60,10 +60,11 @@ def makeText(contextName):
     style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=0,
             leading=em(1), textFill=textColor, xTextAlign=CENTER)
     bs = context.newString('A2\nLines of text\n%s' % context.name, style)
-    print('“A2” text size:', bs.textSize)
+    #print('“A2” text size:', bs.textSize)
     t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True,
             xAlign=CENTER, yAlign=BASELINE) # Origin on baseline of first line
     print('Text in box size:', t.w, t.h)
+    print(bs.lines)
 
     # Horizontal and vertial lines, to show text center/middle position,
     newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.8), strokeWidth=0.5)

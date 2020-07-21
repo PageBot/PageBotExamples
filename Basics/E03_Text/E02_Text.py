@@ -60,15 +60,21 @@ def makeText(contextName):
     # and xTextAlign a equivalent. yAlign is positioning on middle of the
     # capHeight.
     style = dict(font=FONT_NAME, fontSize=fontSize, tracking=0,#-em(0.02),
-            textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP)
+            textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP, leading=em(1) )
     bs = context.newString('A4', style)
 
     w = h = None # If not defined, the textSize will be equal to the contained string.
+    #w = h = 400 # If not defined, the textSize will be equal to the contained string.
     #w, h = page.ph, h=page.ph
-    t = newText(bs, parent=page, x=page.w/2, y=page.h/2, w=w, h=h, fill=bgColor,
-            xAlign=CENTER, yAlign=MIDDLE, # Used for Text, in case (w, h) is defined.
-            showOrigin=True)
 
+    t = newText(bs, parent=page, x=page.w/2, y=page.h/2, w=w, h=h, fill=bgColor,
+            xAlign=CENTER, yAlign=MIDDLE,
+            #xAlign=CENTER, yAlign=MIDDLE,
+            showOrigin=True)
+    print(bs.w, bs.h)
+    print(bs.lines)
+
+    '''
     print('Context:', contextName)
     print('t.w: %0.2f, t.h: %0.2f, bs.w: %s, bs.h: %s, bs.tw: %0.2f, bs.th: %0.2f' % (t.w, t.h, bs.w, bs.h, bs.tw, bs.th))
     print('bs.textSize:', bs.textSize)
@@ -81,21 +87,25 @@ def makeText(contextName):
     print('bs.topLineAscender_h:', bs.topLineAscender_h)
     print('bs.bottomLineDescender_p:', bs.bottomLineDescender_p)
     print('bs.bottomLineDescender:', bs.bottomLineDescender)
-    print()
+    '''
 
     # Horizontal lines to mark top and bottom of elastic text box
-    newLine(parent=page, x=t.x, y=t.bottom, w=t.w, h=0, stroke=(1, 0, 0), strokeWidth=0.5, xAlign=CENTER)
-    newLine(parent=page, x=t.x, y=t.top, w=t.w, h=0, stroke=(0, 1, 0.3), strokeWidth=0.5, xAlign=CENTER)
+    newLine(parent=page, x=t.x, y=t.bottom, w=t.w, h=0, stroke=(1, 0, 0),
+            strokeWidth=0.5, xAlign=CENTER)
+    newLine(parent=page, x=t.x, y=t.top, w=t.w, h=0, stroke=(0, 1, 0.3),
+            strokeWidth=0.5, xAlign=CENTER)
 
     # Vertical lines to mark left and right of elastic text box
-    newLine(parent=page, x=t.left, y=t.y, w=0, h=t.h, stroke=(1, 0, 0), strokeWidth=0.5, yAlign=MIDDLE)
-    newLine(parent=page, x=t.right, y=t.y, w=0, h=t.h, stroke=(0, 1, 0.3), strokeWidth=0.5, yAlign=MIDDLE)
+    newLine(parent=page, x=t.left, y=t.y, w=0, h=t.h, stroke=(1, 0, 0),
+            strokeWidth=0.5, yAlign=MIDDLE)
+    newLine(parent=page, x=t.right, y=t.y, w=0, h=t.h, stroke=(0, 1, 0.3),
+            strokeWidth=0.5, yAlign=MIDDLE)
 
     # Horizontal and vertical lines, to show text center/middle position,
-    newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.8), strokeWidth=0.5)
-    newLine(parent=page, x=page.w/2, y=0, w=0, h=page.h, stroke=(0, 0, 0.8), strokeWidth=0.5)
-
-    #print('23@@@', t.bs.textSize)
+    newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.8),
+            strokeWidth=0.5)
+    newLine(parent=page, x=page.w/2, y=0, w=0, h=page.h, stroke=(0, 0, 0.8),
+            strokeWidth=0.5)
 
     # Export the document as PDF
     doc.export(exportPath)
