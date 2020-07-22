@@ -39,7 +39,7 @@ def draw(context, contextName, h, fontName):
     # Define the style of the text, alignment is centered on baseline.
     style = dict(font=fontName, fontSize=fontSize,
             # tracking=-em(0.02),
-            leading=em(1),
+            leading=em(1.2),
             #leading=em(1.4),
             #, xTextAlign=CENTER)
             textFill=0)
@@ -66,12 +66,17 @@ def draw(context, contextName, h, fontName):
     x = pt(x)
     y = pt(y)
     r = pt(r)
-    context.marker(x, y, r=r, fontSize=pt(10), prefix=fontName)
+    #context.marker(x, y, r=r, fontSize=pt(10), prefix=fontName)
     context.fill(None)
     context.stroke((0, 0, 0.5))
     #print(fontName, bs.th)
 
-    context.rect(x, y + bs.topLineDescender, bs.tw, bs.th)
+    tw, th = context.textSize(bs, ascDesc=False)
+    context.rect(x, y + bs.topLineDescender, tw, th)
+    context.stroke((0, 0.5, 0.0))
+    tw, th = context.textSize(bs, ascDesc=True)
+    context.rect(x, y + bs.topLineDescender, tw, th)
+
     context.stroke((1, 0, 0))
     line = bs.lines[0]
     p1 = (x, y)
@@ -86,7 +91,7 @@ def draw(context, contextName, h, fontName):
     context.line(p3, p4)
     x2 = x1 + 10
     y2 = y + ((y1 - y) / 2)
-    context.drawString('ascender', (x2, y2))
+    #context.drawString('ascender', (x2, y2))
 
     context.stroke((0, 0, 1))
     y1 = y + bs.descender
@@ -95,7 +100,7 @@ def draw(context, contextName, h, fontName):
     context.line(p3, p4)
     x2 = x1 + 10
     y2 = y + ((y1 - y) / 2)
-    context.drawString('descender', (x2, y2))
+    #context.drawString('descender', (x2, y2))
 
 for contextName in ('DrawBot', 'Flat'):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)

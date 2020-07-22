@@ -58,7 +58,7 @@ def makeText(contextName):
     page.padding = padding
 
     style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=0,
-            leading=em(1), textFill=textColor, xTextAlign=CENTER)
+            leading=em(1.2), textFill=textColor, xTextAlign=CENTER)
     bs = context.newString('A2\nLines of text\n%s' % context.name, style)
     #print('“A2” text size:', bs.textSize)
     t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True,
