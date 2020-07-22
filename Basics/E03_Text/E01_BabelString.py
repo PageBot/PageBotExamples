@@ -66,7 +66,7 @@ def draw(context, contextName, h, fontName):
     x = pt(x)
     y = pt(y)
     r = pt(r)
-    #context.marker(x, y, r=r, fontSize=pt(10), prefix=fontName)
+    context.marker(x, y, r=r, fontSize=pt(10), prefix=fontName)
     context.fill(None)
     context.stroke((0, 0, 0.5))
     #print(fontName, bs.th)
@@ -91,7 +91,7 @@ def draw(context, contextName, h, fontName):
     context.line(p3, p4)
     x2 = x1 + 10
     y2 = y + ((y1 - y) / 2)
-    #context.drawString('ascender', (x2, y2))
+    context.drawString('ascender', (x2, y2))
 
     context.stroke((0, 0, 1))
     y1 = y + bs.descender
@@ -100,7 +100,7 @@ def draw(context, contextName, h, fontName):
     context.line(p3, p4)
     x2 = x1 + 10
     y2 = y + ((y1 - y) / 2)
-    #context.drawString('descender', (x2, y2))
+    context.drawString('descender', (x2, y2))
 
 for contextName in ('DrawBot', 'Flat'):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
