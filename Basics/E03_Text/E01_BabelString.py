@@ -73,7 +73,7 @@ def draw(context, contextName, h, fontName):
 
     tw, th = context.textSize(bs, ascDesc=False)
     context.rect(x, y + bs.topLineDescender, tw, th)
-    context.drawString('font size * leading', (x, y + bs.topLineDescender + th))
+    context.drawString('font size x leading', (x, y + bs.topLineDescender + th))
     context.stroke((0, 0.5, 0.0))
     tw, th = context.textSize(bs, ascDesc=True)
     context.rect(x, y + bs.topLineDescender, tw, th)

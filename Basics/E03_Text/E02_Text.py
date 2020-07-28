@@ -34,7 +34,7 @@ from pagebot.toolbox.transformer import path2FileName
 H, W = pt(A4) # Standard portrait, swapped to be used as landscape ratio.
 fontSize = pt(300)
 padding = pt(40) # Outside measures to accommodate the crop makrs.
-FONT_NAME = 'PageBot-Regular'
+FONT_NAME = 'Roboto-Regular'
 textColor = color(1, 0, 0) # Red of the “A4”
 bgColor = color(0.9) # Background color of the text box
 FILENAME = path2FileName(__file__)
@@ -63,16 +63,21 @@ def makeText(contextName):
             textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP, leading=em(1) )
     bs = context.newString('A4', style)
 
-    w = h = None # If not defined, the textSize will be equal to the contained string.
+    #w = h = None # If not defined, the textSize will be equal to the contained string.
     #w = h = 400 # If not defined, the textSize will be equal to the contained string.
     #w, h = page.ph, h=page.ph
 
-    t = newText(bs, parent=page, x=page.w/2, y=page.h/2, w=w, h=h, fill=bgColor,
-            xAlign=CENTER, yAlign=MIDDLE,
-            #xAlign=CENTER, yAlign=MIDDLE,
+    x = page.w / 2
+    y = page.h / 2
+
+    t = newText(bs, parent=page, x=x, y=y,
+            fill=bgColor,
+            #xAlign=CENTER,
+            #yAlign=MIDDLE,
             showOrigin=True)
-    print(bs.w, bs.h)
-    print(bs.lines)
+    #print(bs.w, bs.h)
+    print(t.h, bs.th, bs.lines[0].y)
+    print(t.pt, t.pb)
 
     '''
     print('Context:', contextName)
