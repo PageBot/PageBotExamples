@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document><pre><code>section = content.newSection()
+box = section.newMain()
+</code></pre>
+
+<p><a name="coding-in-python1"/></p>
+<h2>Basic coding in Python #1</h2>
+<h3>Design by parameters</h3>
+<h4>Start August 24<span class="sup">th</span> 2020 • 2 weeks • €290</h4>
+<pre><code>box = box.newInfo()
+</code></pre>
+
+<p>Take one of your designs and try to find the rules that are behind the composition. Learn to express that information in Python code. Then discover how the program can generate alternative versions of your original design, by the use of color themes, different page sizes and other parameters.</p>
+<pre><code>box = section.newCropped()
+</code></pre>
+
+<p><img alt="cover y=top x=center" src="images/DrawBotHomePage.png" /></p>
+<pre><code>section = content.newSection()
+box = section.newMain()
+</code></pre>
+
+<p><a name="coding-in-python2"/></p>
+<h2>Basic coding in Python #2</h2>
+<h3>Functions, methods and classes</h3>
+<h4>Start September 7<span class="sup">th</span> 2020 • 2 weeks • €290</h4>
+<pre><code>box = box.newInfo()
+</code></pre>
+
+<p>After finishing <a href="#coding-in-python1">Basic coding in Python #1</a>, you have made a program that is doing one specific task. Great as that may be, it is hard to reuse that code for other projects. How nice would it be, to create a <strong>“library”</strong> with knowledge, that can be called for similar designs, without writing everything from scratch again?</p>
+<pre><code>box = section.newCropped()
+</code></pre>
+
+<p><img alt="cover y=top x=center" src="images/pageBotCode.png" /></p></document>
