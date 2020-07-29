@@ -32,7 +32,7 @@ from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.transformer import path2FileName
 
 H, W = pt(A4) # Standard portrait, swapped to be used as landscape ratio.
-fontSize = pt(300)
+fontSize = pt(200)
 padding = pt(40) # Outside measures to accommodate the crop makrs.
 FONT_NAME = 'Roboto-Regular'
 textColor = color(1, 0, 0) # Red of the “A4”
@@ -61,7 +61,7 @@ def makeText(contextName):
     # capHeight.
     style = dict(font=FONT_NAME, fontSize=fontSize, tracking=0,#-em(0.02),
             textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP, leading=em(1) )
-    bs = context.newString('A4', style)
+    bs = context.newString('Hpxk', style)
 
     #w = h = None # If not defined, the textSize will be equal to the contained string.
     #w = h = 400 # If not defined, the textSize will be equal to the contained string.
@@ -70,14 +70,15 @@ def makeText(contextName):
     x = page.w / 2
     y = page.h / 2
 
-    t = newText(bs, parent=page, x=x, y=y,
-            fill=bgColor,
-            #xAlign=CENTER,
-            #yAlign=MIDDLE,
-            showOrigin=True)
+    #t = newText(bs, parent=page, x=x, y=y, fill=bgColor, xAlign=LEFT,
+    #        yAlign=BOTTOM, showOrigin=True)
+    # xAlign can be LEFT, CENTER and RIGHT.
+    # yAlign can be ...
+    t = newText(bs, parent=page, x=x, y=y, fill=bgColor, xAlign=CENTER,
+            yAlign=BOTTOM, showOrigin=True)
     #print(bs.w, bs.h)
-    print(t.h, bs.th, bs.lines[0].y)
-    print(t.pt, t.pb)
+    baseline = bs.lines[0].y
+    print(t.h, bs.th, baseline)
 
     '''
     print('Context:', contextName)
@@ -94,21 +95,35 @@ def makeText(contextName):
     print('bs.bottomLineDescender:', bs.bottomLineDescender)
     '''
 
-    # Horizontal lines to mark top and bottom of elastic text box
-    newLine(parent=page, x=t.x, y=t.bottom, w=t.w, h=0, stroke=(1, 0, 0),
-            strokeWidth=0.5, xAlign=CENTER)
-    newLine(parent=page, x=t.x, y=t.top, w=t.w, h=0, stroke=(0, 1, 0.3),
-            strokeWidth=0.5, xAlign=CENTER)
 
+    x = x - bs.tw / 2
+    y = baseline
+    w = t.w
+
+    # Horizontal lines to mark top and bottom of elastic text box
+    newLine(parent=page, x=x, y=y, w=w, h=0, stroke=(1, 0, 0),
+            strokeWidth=0.5)#, xAlign=CENTER)
+
+    '''
+    y = t.top
+    newLine(parent=page, x=x, y=y, w=w, h=0, stroke=(0, 1, 0.3),
+            strokeWidth=0.5, xAlign=CENTER)
+    '''
+
+
+    '''
     # Vertical lines to mark left and right of elastic text box
     newLine(parent=page, x=t.left, y=t.y, w=0, h=t.h, stroke=(1, 0, 0),
             strokeWidth=0.5, yAlign=MIDDLE)
+
     newLine(parent=page, x=t.right, y=t.y, w=0, h=t.h, stroke=(0, 1, 0.3),
             strokeWidth=0.5, yAlign=MIDDLE)
+    '''
 
     # Horizontal and vertical lines, to show text center/middle position,
     newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.8),
             strokeWidth=0.5)
+
     newLine(parent=page, x=page.w/2, y=0, w=0, h=page.h, stroke=(0, 0, 0.8),
             strokeWidth=0.5)
 
