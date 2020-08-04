@@ -61,7 +61,7 @@ def makeText(contextName):
     # capHeight.
 
     style = dict(font=FONT_NAME, fontSize=fontSize, tracking=0,#-em(0.02),
-            textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP, leading=em(1) )
+            textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP, leading=em(1.2) )
     bs = context.newString('Hpxk', style)
 
     #w = h = None # If not defined, the textSize will be equal to the contained string.
@@ -113,14 +113,18 @@ def makeText(contextName):
     bs2 = context.newString('ascender', style)
     newText(bs2, parent=page, x=x, y=y2, yAlign=BOTTOM)
 
-    y1 = y + bs.topLineDescender + bs.th
-    newLine(parent=page, x=x, y=y1, w=w, h=0, stroke=(0, 1, 0), strokeWidth=0.5)
+    y1 = y + bs.topLineDescender
+    bs1 = context.newString('font size x leading', style)
+    newLine(parent=page, x=x, y=y1, w=0, h=bs.th, stroke=(0, 1, 0), strokeWidth=0.5)
+    newText(bs1, parent=page, x=x, y=y1 + bs.th, yAlign=BOTTOM)
 
     y3 = baseline
 
     # Horizontal lines to mark top and bottom of elastic text box
     newLine(parent=page, x=x, y=y3, w=w, h=0, stroke=(1, 0, 0),
             strokeWidth=0.5)#, xAlign=CENTER)
+    bs3 = context.newString('baseline', style)
+    newText(bs3, parent=page, x=x, y=y3, yAlign=BOTTOM)
 
 
     '''
