@@ -27,7 +27,7 @@ from pagebot.constants import *
 from pagebot.conditions import *
 from pagebot.elements import newText, newRect, newLine
 from pagebot.document import Document
-from pagebot.toolbox.color import color
+from pagebot.toolbox.color import color, blackColor
 from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.transformer import path2FileName
 
@@ -59,6 +59,7 @@ def makeText(contextName):
     # centered on the (x, y) position. For strings without defined width xAlign
     # and xTextAlign a equivalent. yAlign is positioning on middle of the
     # capHeight.
+
     style = dict(font=FONT_NAME, fontSize=fontSize, tracking=0,#-em(0.02),
             textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP, leading=em(1) )
     bs = context.newString('Hpxk', style)
@@ -95,14 +96,32 @@ def makeText(contextName):
     print('bs.bottomLineDescender:', bs.bottomLineDescender)
     '''
 
+    style = dict(font=FONT_NAME, fontSize=10, textFill=blackColor,
+            leading=em(1))
 
     x = x - bs.tw / 2
-    y = baseline
     w = t.w
 
+    y0 = y + bs.topLineDescender
+    newLine(parent=page, x=x, y=y0, w=w, h=0, stroke=(0, 0, 1), strokeWidth=0.5)
+    bs0 = context.newString('descender', style)
+    newText(bs0, parent=page, x=x, y=y0, yAlign=BOTTOM)
+
+
+    y2 = y + bs.topLineAscender
+    newLine(parent=page, x=x, y=y2, w=w, h=0, stroke=(0, 1, 1), strokeWidth=0.5)
+    bs2 = context.newString('ascender', style)
+    newText(bs2, parent=page, x=x, y=y2, yAlign=BOTTOM)
+
+    y1 = y + bs.topLineDescender + bs.th
+    newLine(parent=page, x=x, y=y1, w=w, h=0, stroke=(0, 1, 0), strokeWidth=0.5)
+
+    y3 = baseline
+
     # Horizontal lines to mark top and bottom of elastic text box
-    newLine(parent=page, x=x, y=y, w=w, h=0, stroke=(1, 0, 0),
+    newLine(parent=page, x=x, y=y3, w=w, h=0, stroke=(1, 0, 0),
             strokeWidth=0.5)#, xAlign=CENTER)
+
 
     '''
     y = t.top
