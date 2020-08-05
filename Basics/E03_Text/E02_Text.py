@@ -28,7 +28,7 @@ from pagebot.conditions import *
 from pagebot.elements import newText, newRect, newLine
 from pagebot.document import Document
 from pagebot.toolbox.color import color, blackColor
-from pagebot.toolbox.units import pt, em
+from pagebot.toolbox.units import upt, pt, em
 from pagebot.toolbox.transformer import path2FileName
 
 H, W = pt(A4) # Standard portrait, swapped to be used as landscape ratio.
@@ -104,28 +104,33 @@ def makeText(contextName):
 
     y0 = y + bs.topLineDescender
     newLine(parent=page, x=x, y=y0, w=w, h=0, stroke=(0, 0, 1), strokeWidth=0.5)
-    bs0 = context.newString('descender', style)
+    bs0 = context.newString('descender: y=%d' % pt(y0), style)
     newText(bs0, parent=page, x=x, y=y0, yAlign=BOTTOM)
 
 
-    y2 = y + bs.topLineAscender
-    newLine(parent=page, x=x, y=y2, w=w, h=0, stroke=(0, 1, 1), strokeWidth=0.5)
-    bs2 = context.newString('ascender', style)
-    newText(bs2, parent=page, x=x, y=y2, yAlign=BOTTOM)
+    y1 = y + bs.topLineAscender
+    newLine(parent=page, x=x, y=y1, w=w, h=0, stroke=(0, 1, 1), strokeWidth=0.5)
+    bs2 = context.newString('ascender: y=%d' % y1, style)
+    newText(bs2, parent=page, x=x, y=y1, yAlign=BOTTOM)
 
-    y1 = y + bs.topLineDescender
-    bs1 = context.newString('font size x leading', style)
-    newLine(parent=page, x=x, y=y1, w=0, h=bs.th, stroke=(0, 1, 0), strokeWidth=0.5)
-    newText(bs1, parent=page, x=x, y=y1 + bs.th, yAlign=BOTTOM)
+    y2 = y + bs.topLineDescender + bs.th
+    bs1 = context.newString('font size x leading: y=%s' % round(upt(y2)), style)
+    newLine(parent=page, x=x, y=y2, w=0, h=bs.th, stroke=(0, 1, 0), strokeWidth=0.5)
+    newText(bs1, parent=page, x=x, y=y2, yAlign=BOTTOM)
 
-    y3 = baseline
+    if contextName == 'Flat':
+        y3 = y1 - baseline
+    else:
+        y3 = y2 - baseline
 
     # Horizontal lines to mark top and bottom of elastic text box
     newLine(parent=page, x=x, y=y3, w=w, h=0, stroke=(1, 0, 0),
             strokeWidth=0.5)#, xAlign=CENTER)
-    bs3 = context.newString('baseline', style)
+    bs3 = context.newString('baseline: y=%d' % y3, style)
     newText(bs3, parent=page, x=x, y=y3, yAlign=BOTTOM)
 
+    bs4 = context.newString('y=%d' % y, style)
+    newText(bs4, parent=page, x=x+w, y=y, yAlign=BOTTOM)
 
     '''
     y = t.top
