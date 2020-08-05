@@ -61,7 +61,7 @@ def makeText(contextName):
     # capHeight.
 
     style = dict(font=FONT_NAME, fontSize=fontSize, tracking=0,#-em(0.02),
-            textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP, leading=em(1) )
+            textFill=textColor, xTextAlign=CENTER, yAlign=MIDDLE_CAP, leading=em(2) )
     bs = context.newString('Hpxk', style)
 
     #w = h = None # If not defined, the textSize will be equal to the contained string.
@@ -131,6 +131,12 @@ def makeText(contextName):
 
     bs4 = context.newString('y=%d' % y, style)
     newText(bs4, parent=page, x=x+w, y=y, yAlign=BOTTOM)
+
+    bs5 = context.newString('BabelString w=%d, h=%d' % (bs.tw, bs.th), style)
+    newText(bs5, parent=page, x=x+w, y=y0, yAlign=BOTTOM)
+
+    bs6 = context.newString('Text w=%d, h=%d' % (t.w, t.h), style)
+    newText(bs6, parent=page, x=x+w, y=y1, yAlign=BOTTOM)
 
     '''
     y = t.top
