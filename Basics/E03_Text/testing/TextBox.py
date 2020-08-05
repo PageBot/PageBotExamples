@@ -1,20 +1,28 @@
-# To run in DrawBot.
+# To run– in DrawBot.
 
 from pagebot.fonttoolbox.objects.font import findFont
 f = findFont('Roboto-Regular')
 font(f.path)
-newPage(600, 600)
-fontSize(200) 
 
+X = 10
+Y = -50
+W = 600
+H = 400
+newPage(W, H)
+fontSize(200) 
 print(fontAscender() - fontDescender())
-txt = 'Hpxk sfsdf'
-box = (0, 0, 600, 400)
+txt = 'Hpxk'
+box = (X, Y, W, H)
 w, h = textSize(txt)
-print(w, h)
+print('width: %s, height: %s' % (w, h))
 textBox(txt, box)
 
 stroke(1, 0, 0)
+
 for x, y in textBoxBaselines(txt, box):
         line((x, y), (x + w, y))
+
+line((0, H), (X, H+Y))
+
 fill(None)
-rect(0, 400-h, w, h)
+rect(X, H + Y - h, w, h)
