@@ -33,15 +33,16 @@ loremIpsum = loremipsum()
 
 
 def draw(fontName, fontSize, leading):
-    w = 400
-    h = 200
+    w = 600
+    h = 400
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, fontName)
     context = getContext('DrawBot')
     context.newDrawing()
     context.newPage(w, h)
     style = dict(font=fontName, fontSize=fontSize, leading=em(leading))
     #style = dict(font='PageBot-Regular', fontSize=pt(16), leading=em(1))
-    bs = context.newString(loremIpsum, style=style)
+    #bs = context.newString(loremIpsum, style=style)
+    bs = context.newString('Hpxk', style=style)
     fs = bs.cs
     attrString = fs.getNSObject()
     setter = CTFramesetterCreateWithAttributedString(attrString)
@@ -53,9 +54,10 @@ def draw(fontName, fontSize, leading):
     ctBox = CTFramesetterCreateFrame(setter, (x, y), path, None)
     ctLines = CTFrameGetLines(ctBox)
     origins = CTFrameGetLineOrigins(ctBox, (0, len(ctLines)), None)
-    #print(origins)
+    print('bla', origins)
 
     context.drawText(bs, (x, y, w, h))
+    context.drawString(bs, (x, y))
 
 
     '''
@@ -66,20 +68,34 @@ def draw(fontName, fontSize, leading):
     context.rect(0, h-offsetY, w, offsetY)
     context.fill(None)
     '''
-    print(bs.h)
+    print(bs.th)
     print(bs.getTextLines())
 
     for i, origin in enumerate(origins):
+        # Baseline.
         yLine = origin.y
         p1 = (x, yLine)
         p2 = (x + bs.tw, yLine)
         context.stroke((1, 0, 0))
         context.line(p1, p2)
         context.marker(x, yLine, r=r, fontSize=pt(5), prefix='# %s' % i)
+
+        # Height from baseline.
+        context.stroke((0, 1, 0))
+        p3 = (x + bs.tw, yLine)
+        p4 = (x + bs.tw, yLine + bs.th - origin.y)
+        context.line(p3, p4)
+
+        context.stroke((0, 0, 1))
+        p3 = (x + bs.tw + 10, h)
+        p4 = (x + bs.tw + 10, h - bs.th)
+        context.line(p3, p4)
+        print('origin.y', origin.y)
+
     context.saveImage(exportPath)
     context.clear()
 
-for fontName in ('Roboto-Regular', 'PageBot-Regular', 'Bungee-Regular'):
-    fontSize=16
-    leading=2
+for fontName in ('Roboto-Regular',):#'PageBot-Regular', 'Bungee-Regular'):
+    fontSize=200
+    leading=1.3
     draw(fontName, fontSize, leading)
