@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
-#
-#     P A G E B O T  E X A M P L E S
+# #     P A G E B O T  E X A M P L E S
 #
 #     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
@@ -14,12 +13,11 @@
 #
 #     E05_TextA2Lines.py
 #
-#	  Create a page in A2 portrait (as it could be start of a poster)
-#	  Setup the document view to show registration marks and cropmarks
-#     Show the page frame and padding frame in blue
-#     Show the generated PDF file name on top of the page.
-#	  Show red A1 centered on the page as Text element,
-#     with its baseline on the middle of page height
+#     Create a page in A2 portrait (as it could be start of a poster). Set up
+#     the document view to show registration marks and cropmarks. Show the
+#     page frame and padding frame in blue. Show the generated PDF file name
+#     on top of the page. Show red A1 centered on the page as Text element,
+#     with its baseline on the middle of page height.
 #
 from pagebot import getContext
 
@@ -40,7 +38,7 @@ FILENAME = path2FileName(__file__)
 
 def makeText(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
-    print('Generating:', exportPath)
+    #print('Generating:', exportPath)
     context = getContext(contextName)
 
 
@@ -63,12 +61,12 @@ def makeText(contextName):
     #print('“A2” text size:', bs.textSize)
     t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True,
             xAlign=CENTER, yAlign=BASELINE) # Origin on baseline of first line
-    print('Text in box size:', t.w, t.h)
-    print(bs.lines)
+    #print('Text in box size:', t.w, t.h)
+    #print(bs.lines)
 
     # Horizontal and vertial lines, to show text center/middle position,
-    newLine(parent=page, x=0, y=page.h/2, w=page.w, h=0, stroke=(0, 0, 0.8), strokeWidth=0.5)
-    newLine(parent=page, x=page.w/2, y=0, w=0, h=page.h, stroke=(0, 0, 0.8), strokeWidth=0.5)
+    newLine(parent=page, x=0, y=page.h/2, w=page.w, h=1, stroke=(0, 0, 0.8), strokeWidth=0.5)
+    newLine(parent=page, x=page.w/2, y=0, w=1, h=page.h, stroke=(0, 0, 0.8), strokeWidth=0.5)
     doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):

@@ -19,7 +19,7 @@ textBox(txt, box)
 
 stroke(1, 0, 0)
 
-for x, y in textBoxBaselines(txt, box):
+for x, y in textBoxBasexlines(txt, box):
         line((x, y), (x + w, y))
 
 line((0, H), (X, H+Y))
