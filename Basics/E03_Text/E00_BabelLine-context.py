@@ -87,6 +87,5 @@ def draw(contextName):
     context.saveImage(exportPath)
 
 
-
 for contextName in ('DrawBot', 'Flat'):
     draw(contextName)

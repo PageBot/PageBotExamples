@@ -37,10 +37,9 @@ bgColor = color(0.9) # Background color of the text box
 FILENAME = path2FileName(__file__)
 
 def makeText(contextName):
+    print('*', contextName)
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
-    #print('Generating:', exportPath)
     context = getContext(contextName)
-
 
     # Make a new document with one text box.
 
@@ -58,9 +57,11 @@ def makeText(contextName):
     style = dict(font='PageBot-Regular', fontSize=fontSize, tracking=0,
             leading=em(1.2), textFill=textColor, xTextAlign=CENTER)
     bs = context.newString('A2\nLines of text\n%s' % context.name, style)
-    #print('“A2” text size:', bs.textSize)
     t = newText(bs, parent=page, x=page.w/2, y=page.h/2, fill=bgColor, showOrigin=True,
             xAlign=CENTER, yAlign=BASELINE) # Origin on baseline of first line
+    #print(bs.textSize)
+    print(t.baselines)
+
     #print('Text in box size:', t.w, t.h)
     #print(bs.lines)
 
