@@ -79,23 +79,37 @@ def draw(fontName, fontSize, leading):
         context.stroke((1, 0, 0))
         context.line(p1, p2)
         context.marker(x, yLine, r=r, fontSize=pt(5), prefix='# %s' % i)
+        #context.fontSize(5)
 
         # Height from baseline.
         context.stroke((0, 1, 0))
-        p3 = (x + bs.tw, yLine)
-        p4 = (x + bs.tw, yLine + bs.th - origin.y)
+        x0 = x + bs.tw + 5
+        p3 = (x0, yLine)
+        p4 = (x0, yLine + bs.th)
         context.line(p3, p4)
+        context.text('height fr. baseline', p4)
 
+        # Total text height.
         context.stroke((0, 0, 1))
-        p3 = (x + bs.tw + 10, h)
-        p4 = (x + bs.tw + 10, h - bs.th)
-        context.line(p3, p4)
+        x0 = x + bs.tw + 10
+        y0 = h
+        y1 = h - bs.th
+        y2 = y1 + (y0 - y1) / 2
+
+        p0 = (x0, y0)
+        p1 = (x0, y1)
+        p2 = (x0 + 5, y2)
+        context.line(p0, p1)
         print('origin.y', origin.y)
+        context.text('bs.th = %d' % bs.th, p2)
+        context.fill(None)
+        context.stroke((1, 0, 1))
+        context.rect(0, y1, bs.tw, bs.th)
 
     context.saveImage(exportPath)
     context.clear()
 
-for fontName in ('Roboto-Regular',):#'PageBot-Regular', 'Bungee-Regular'):
+for fontName in ('Roboto-Regular','PageBot-Regular', 'Bungee-Regular'):
     fontSize=200
     leading=1.3
     draw(fontName, fontSize, leading)
