@@ -133,7 +133,7 @@ def draw(fontName, fontSize, leading):
     context.saveImage(exportPath)
     context.clear()
 
-for fontName in ('PageBot-Regular', ):#'Roboto-Regular', 'Bungee-Regular'):
+for fontName in ('PageBot-Regular', 'Roboto-Regular', 'Bungee-Regular'):
     fontSize=200
     leading=1.2
     draw(fontName, fontSize, leading)
