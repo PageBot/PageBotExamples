@@ -23,6 +23,8 @@ from CoreText import (CTFontDescriptorCreateWithNameAndSize, CGPathAddRect,
         CTLineGetGlyphRuns, CTRunGetAttributes)
 from AppKit import NSFont
 
+
+from drawBot import textBoxBaselines
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.toolbox.units import pt, em
@@ -37,20 +39,24 @@ P = 10
 def drawWord(context, x, y, word, fontSize, leading):
     style = dict(font=fontName, fontSize=fontSize, leading=em(leading))
     bs = context.newString(word, style=style)
+    print('bs', bs.tw, bs.th)
     fs = bs.cs
     attrString = fs.getNSObject()
     setter = CTFramesetterCreateWithAttributedString(attrString)
     path = CGPathCreateMutable()
     r = 2
-    CGPathAddRect(path, None, CGRectMake(0, 0, W, H))
+    CGPathAddRect(path, None, CGRectMake(0, 0, bs.tw, bs.th))
     ctBox = CTFramesetterCreateFrame(setter, (0, 0), path, None)
     ctLines = CTFrameGetLines(ctBox)
     origins = CTFrameGetLineOrigins(ctBox, (0, len(ctLines)), None)
-    print('Coretext origins', origins)
+
+    print('Coretext origins', origins, len(origins))
+    box = 0, 0, bs.tw, bs.th
+    baselines = textBoxBaselines(fs, box)
+    print('DrawBot baselines', baselines)
 
     context.drawText(bs, (x, y, W, H))
     context.drawString(bs, (x, y))
-
 
     '''
     lineHeight = fontSize * leading
@@ -65,13 +71,15 @@ def drawWord(context, x, y, word, fontSize, leading):
 
     for i, origin in enumerate(origins):
         # Baseline.
-        yLine = origin.y + y
-        p1 = (x, yLine)
-        p2 = (x + bs.tw, yLine)
+        dyTopOfBox = bs.th - (origin.y) - y
+        print('dyTopOfBox', dyTopOfBox)
+        y0 = H - dyTopOfBox
+        p1 = (x, y0)
+        p2 = (x + bs.tw, y0)
         context.stroke((1, 0, 0))
         context.line(p1, p2)
         x0 = x + bs.tw
-        context.marker(x0, yLine, r=r, fontSize=pt(5), prefix='# %s = %dpt' % (i, origin.y))
+        context.marker(x0, y0, r=r, fontSize=pt(5), prefix='# %s: %dpt from top of box' % (i, dyTopOfBox))
 
         '''
         # Height from baseline.
@@ -116,13 +124,12 @@ def draw(fontName, fontSize, leading):
     context = getContext('DrawBot')
     context.newDrawing()
     context.newPage(W, H)
-    drawWord(context, P, P, 'Aa', fontSize, leading)
+    #drawWord(context, P, P, 'Aa', fontSize, leading)
     drawWord(context, W/2, P, 'Hp\nxk', fontSize, leading)
-    #context.drawword('Hp\nxk')
     context.saveImage(exportPath)
     context.clear()
 
-for fontName in ('Roboto-Regular','PageBot-Regular', 'Bungee-Regular'):
+for fontName in ('PageBot-Regular', ):#'Roboto-Regular', 'Bungee-Regular'):
     fontSize=200
     leading=1.3
     draw(fontName, fontSize, leading)
