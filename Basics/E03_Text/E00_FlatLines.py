@@ -39,6 +39,8 @@ P = 10
 def drawWord(context, x, y, word, fontSize, leading):
     style = dict(font=fontName, fontSize=fontSize, leading=em(leading))
     bs = context.newString(word, style=style)
+
+    '''
     fs = bs.cs
     attrString = fs.getNSObject()
     setter = CTFramesetterCreateWithAttributedString(attrString)
@@ -53,6 +55,7 @@ def drawWord(context, x, y, word, fontSize, leading):
     box = 0, 0, bs.tw, bs.th
     baselines = textBoxBaselines(fs, box)
     print('DrawBot baselines', baselines)
+    '''
 
     context.drawText(bs, (x, -y, W, H))
     #context.drawString(bs, (x, y))
@@ -68,6 +71,7 @@ def drawWord(context, x, y, word, fontSize, leading):
     print(bs.th)
     print(bs.getTextLines())
 
+    '''
     for i, origin in enumerate(origins):
         # Baseline.
         dyTopOfBox = bs.th - (origin.y) + y
@@ -80,16 +84,7 @@ def drawWord(context, x, y, word, fontSize, leading):
         context.line(p1, p2)
         x0 = x + bs.tw
         context.marker(x0, y0, r=r, fontSize=pt(5), prefix='# %s: %dpt from top, %dpt from below' % (i, dyTopOfBox, origin.y))
-
-        '''
-        # Height from baseline.
-        context.stroke((0, 1, 0))
-        x0 = x + bs.tw + 5
-        p3 = (x0, yLine)
-        p4 = (x0, yLine + bs.th)
-        context.line(p3, p4)
-        context.text('height fr. baseline', p4)
-        '''
+    '''
 
     # Total text height.
     context.stroke((0, 0, 1))
@@ -103,8 +98,8 @@ def drawWord(context, x, y, word, fontSize, leading):
     p2 = (x0 + P/2, y2)
     context.line(p0, p1)
     msg = 'bs.th = %dpt' % bs.th
-    hTotal = len(origins) * fontSize * leading
-    msg += '\n%d * %d * %s == %d' % (len(origins), fontSize, leading, hTotal)
+    #hTotal = len(origins) * fontSize * leading
+    #msg += '\n%d * %d * %s == %d' % (len(origins), fontSize, leading, hTotal)
     context.text(msg, p2)
 
     x0 = x
@@ -118,14 +113,16 @@ def drawWord(context, x, y, word, fontSize, leading):
     context.line(p0, p1)
     context.text('bs.tw = %dpt' % bs.tw, p2)
 
+    y0 = H - y
+    y1 = y0 - bs.th
     context.fill(None)
     context.stroke((1, 0, 1))
     context.rect(x, y1, bs.tw, bs.th)
 
 def draw(fontName, fontSize, leading):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, fontName)
-    context = getContext('DrawBot')
-    context.newDrawing()
+    context = getContext('Flat')
+    context.newDrawing(w=W, h=H)
     context.newPage(W, H)
     #drawWord(context, P, P, 'Aa', fontSize, leading)
     drawWord(context, P, P, 'Hp\nXx\nKk', fontSize, leading)
