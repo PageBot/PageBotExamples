@@ -32,7 +32,7 @@ from pagebot.toolbox.loremipsum import loremipsum
 from pagebot.toolbox.transformer import path2FileName
 FILENAME = path2FileName(__file__)
 loremIpsum = loremipsum()
-W = 800
+W = 1500
 H = 1000
 P = 10
 
@@ -49,47 +49,35 @@ def drawWord(context, x, y, word, fontSize, leading):
     ctLines = CTFrameGetLines(ctBox)
     origins = CTFrameGetLineOrigins(ctBox, (0, len(ctLines)), None)
 
-    print('Coretext origins', origins, len(origins))
     box = 0, 0, bs.tw, bs.th
     baselines = textBoxBaselines(fs, box)
-    print('DrawBot baselines', baselines)
-
     context.drawText(bs, (x, -y, W, H))
-    #context.drawString(bs, (x, y))
 
-    '''
-    lineHeight = fontSize * leading
-    offsetY = h - origins[0].y - lineHeight
-    print(offsetY)
-    context.fill((0, 1, 0))
-    context.rect(0, h-offsetY, w, offsetY)
-    context.fill(None)
-    '''
-    print(bs.th)
-    print(bs.getTextLines())
-
+    # (Native OSX) origins.
     for i, origin in enumerate(origins):
         # Baseline.
-        dyTopOfBox = bs.th - (origin.y) + y
         print('origin.y', origin.y)
-        print('dyTopOfBox', dyTopOfBox)
-        y0 = H - dyTopOfBox
-        p1 = (x, y0)
+        # Offset from top of textbox.
+        dy = bs.th - (origin.y) + y
+        # Abs value.
+        y0 = H - dy
+        #print('y0', y0)
+        p1 = (x + bs.tw / 2, y0)
         p2 = (x + bs.tw, y0)
         context.stroke((1, 0, 0))
         context.line(p1, p2)
-        x0 = x + bs.tw
-        context.marker(x0, y0, r=r, fontSize=pt(5), prefix='# %s: %dpt from top, %dpt from below' % (i, dyTopOfBox, origin.y))
 
-        '''
-        # Height from baseline.
+        yBaseline = baselines[i][1]
+        # Offset from top of textbox.
+        dy = bs.th - yBaseline + y
+        y1 = H - dy
+        p3 = (x, y1)
+        p4 = (x + bs.tw / 2, y1)
         context.stroke((0, 1, 0))
-        x0 = x + bs.tw + 5
-        p3 = (x0, yLine)
-        p4 = (x0, yLine + bs.th)
         context.line(p3, p4)
-        context.text('height fr. baseline', p4)
-        '''
+
+        x0 = x + bs.tw
+        context.marker(x0, y0, r=r, fontSize=pt(5), prefix='# %s: %dpt from top, %dpt from below' % (i, dy, origin.y))
 
     # Total text height.
     context.stroke((0, 0, 1))
@@ -127,13 +115,13 @@ def draw(fontName, fontSize, leading):
     context = getContext('DrawBot')
     context.newDrawing()
     context.newPage(W, H)
-    #drawWord(context, P, P, 'Aa', fontSize, leading)
-    drawWord(context, P, P, 'Hp\nXx\nKk', fontSize, leading)
-    drawWord(context, W/2, 10*P, 'Hp\nXx\nKk', fontSize, leading)
+    drawWord(context, P, P, 'Hh', fontSize, leading)
+    drawWord(context, W/3, 5*P, 'Hp\nxk', fontSize, leading)
+    drawWord(context, W/3*2, 10*P, 'Hp\nXx\nKk', fontSize, leading)
     context.saveImage(exportPath)
     context.clear()
 
-for fontName in ('PageBot-Regular', 'Roboto-Regular', 'Bungee-Regular'):
+for fontName in ('PageBot-Regular',):#, 'Roboto-Regular'):#, 'Bungee-Regular'):
     fontSize=200
     leading=1.2
     draw(fontName, fontSize, leading)
