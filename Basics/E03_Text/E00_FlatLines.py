@@ -41,15 +41,14 @@ def drawWord(context, x, y, word, fontSize, leading):
     for i, baseline in enumerate(baselines):
         yBaseline = baseline.y
         # Offset from top of textbox.
-        dy = bs.th - yBaseline + y
-        y1 = H - dy
+        y1 = H - y - yBaseline
         p3 = (x, y1)
         p4 = (x + bs.tw, y1)
         context.stroke((0, 1, 0))
         context.line(p3, p4)
 
         x0 = x + bs.tw
-        context.marker(x + bs.tw, y1, r=R, fontSize=pt(5), prefix='# %s: %dpt from top, %dpt from below' % (i, dy, yBaseline))
+        context.marker(x + bs.tw, y1, r=R, fontSize=pt(5), prefix='# %s: %dpt from top' % (i, yBaseline))
 
 
     # Total text height.

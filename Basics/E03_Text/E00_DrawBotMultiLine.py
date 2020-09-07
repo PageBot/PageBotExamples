@@ -63,24 +63,28 @@ def drawWord(context, x, y, word, fontSize, leading):
         # Offset from top of textbox.
         dy0 = bs.th - (origin.y)
         # Abs value.
-        y0 = H - dy0 - y
-        p1 = (x + bs.tw / 2, y0)
-        p2 = (x + bs.tw, y0)
+        y0 = H - y - dy0
+        x0 = x + bs.tw / 2
+        x1 = x + bs.tw
+        p1 = (x0, y0)
+        p2 = (x1, y0)
         context.stroke((1, 0, 0))
         context.line(p1, p2)
+        prefix = '# %s: %dpt from top, %dpt from below' % (i, dy0, origin.y)
+        context.marker(x1, y0, r=R, fontSize=pt(5), prefix=prefix)
 
         #yBaseline = dbBaselines[i][1]
         yBaseline = pbBaselines[i].y
         # Offset from top of textbox.
-        dy1 = bs.th - yBaseline + y
-        y1 = H - dy1
-        p3 = (x, y1)
-        p4 = (x + bs.tw / 2, y1)
+        y1 = H - y - yBaseline
+        x0 = x
+        x1 = x + bs.tw / 2
+        p3 = (x0, y1)
+        p4 = (x1, y1)
         context.stroke((0, 1, 0))
         context.line(p3, p4)
-
-        x0 = x + bs.tw
-        context.marker(x0, y0, r=R, fontSize=pt(5), prefix='# %s: %dpt from top, %dpt from below' % (i, dy0, origin.y))
+        prefix = '# %s: %dpt from top' % (i, yBaseline)
+        context.marker(x1, y1, r=R, fontSize=pt(5), color=(0, 1, 0), prefix=prefix)
 
     # Total text height.
     context.stroke((0, 0, 1))
