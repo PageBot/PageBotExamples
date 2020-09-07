@@ -35,6 +35,7 @@ loremIpsum = loremipsum()
 W = 1500
 H = 1000
 P = 10
+R = 2
 
 def drawWord(context, x, y, word, fontSize, leading):
     style = dict(font=fontName, fontSize=fontSize, leading=em(leading))
@@ -50,34 +51,36 @@ def drawWord(context, x, y, word, fontSize, leading):
     origins = CTFrameGetLineOrigins(ctBox, (0, len(ctLines)), None)
 
     box = 0, 0, bs.tw, bs.th
-    baselines = textBoxBaselines(fs, box)
+    dbBaselines = textBoxBaselines(fs, box)
+    # TODO: compare to pagebot textBox.
     context.drawText(bs, (x, -y, W, H))
+    pbBaselines = bs.getTextLines()
 
     # (Native OSX) origins.
     for i, origin in enumerate(origins):
-        # Baseline.
+        # baseline origin.
         print('origin.y', origin.y)
         # Offset from top of textbox.
-        dy = bs.th - (origin.y) + y
+        dy0 = bs.th - (origin.y)
         # Abs value.
-        y0 = H - dy
-        #print('y0', y0)
+        y0 = H - dy0 - y
         p1 = (x + bs.tw / 2, y0)
         p2 = (x + bs.tw, y0)
         context.stroke((1, 0, 0))
         context.line(p1, p2)
 
-        yBaseline = baselines[i][1]
+        #yBaseline = dbBaselines[i][1]
+        yBaseline = pbBaselines[i].y
         # Offset from top of textbox.
-        dy = bs.th - yBaseline + y
-        y1 = H - dy
+        dy1 = bs.th - yBaseline + y
+        y1 = H - dy1
         p3 = (x, y1)
         p4 = (x + bs.tw / 2, y1)
         context.stroke((0, 1, 0))
         context.line(p3, p4)
 
         x0 = x + bs.tw
-        context.marker(x0, y0, r=r, fontSize=pt(5), prefix='# %s: %dpt from top, %dpt from below' % (i, dy, origin.y))
+        context.marker(x0, y0, r=R, fontSize=pt(5), prefix='# %s: %dpt from top, %dpt from below' % (i, dy0, origin.y))
 
     # Total text height.
     context.stroke((0, 0, 1))
