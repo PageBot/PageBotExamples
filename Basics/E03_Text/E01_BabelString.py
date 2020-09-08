@@ -25,24 +25,27 @@ from pagebot.toolbox.color import color
 from pagebot.toolbox.transformer import path2FileName
 from pagebot.toolbox.units import pt, em
 
-W, H = A4 # Standard paper size from constants.
+H, W = A3 # Standard paper size from constants.
 FILENAME = path2FileName(__file__)
 
 # Some notes:
 # Flat text height corresponds to ascender + descender.
 # DrawBot height corresponds to fontsize * leading.
+FONTSIZE = 200
+LEADING = 1.2
 
-def draw(context, contextName, h, fontName):
-    fontSize = pt(150)
+def draw(context, contextName, y, fontName):
+    fontSize = pt(FONTSIZE)
     textColor = color(1, 0, 0)
 
     # Define the style of the text, alignment is centered on baseline.
     style = dict(font=fontName, fontSize=fontSize,
             # tracking=-em(0.02),
-            leading=em(1.2),
+            leading=em(LEADING),
             #leading=em(1.4),
             #, xTextAlign=CENTER)
             textFill=0)
+
     # Have the context create a BabelString with the style.
     bs = context.newString('Hkpx', style)
 
@@ -56,7 +59,6 @@ def draw(context, contextName, h, fontName):
     #y = H / 2 # Bottom position
 
     x = W / 2 - bs.tw / 2 # Left side of the frame
-    y = h #H / 2 - bs.th + bs.topLineAscender # Bottom position
 
     # Draw the string, centered/baseline in middle of the page.
     #context.text(bs, (x, y))
@@ -71,12 +73,15 @@ def draw(context, contextName, h, fontName):
     context.stroke((0, 0, 0.5))
     #print(fontName, bs.th)
 
-    tw, th = context.textSize(bs, ascDesc=False)
-    context.rect(x, y + bs.topLineDescender, tw, th)
-    context.drawString('font size x leading', (x, y + bs.topLineDescender + th))
+    tw, th0 = context.textSize(bs, ascDesc=False)
+    context.rect(x, y + bs.topLineDescender, tw, th0)
+    context.drawString('font size x leading = %s' % th0, (x, y + bs.topLineDescender + th0))
     context.stroke((0, 0.5, 0.0))
-    tw, th = context.textSize(bs, ascDesc=True)
-    context.rect(x, y + bs.topLineDescender, tw, th)
+    tw, th1 = context.textSize(bs, ascDesc=True)
+    context.rect(x, y + bs.topLineDescender, tw, th1)
+    x3 = x + tw + 10
+    y3 = y + bs.topLineDescender + th1
+    context.drawString('asc-desc = %s' % th1, (x3, y3))
 
     context.stroke((1, 0, 0))
     line = bs.lines[0]
@@ -92,7 +97,7 @@ def draw(context, contextName, h, fontName):
     context.line(p3, p4)
     x2 = x1 + 10
     y2 = y + ((y1 - y) / 2)
-    context.drawString('ascender', (x2, y2))
+    context.drawString('ascender = %s' % bs.ascender, (x2, y2))
 
     context.stroke((0, 0, 1))
     y1 = y + bs.descender
@@ -101,13 +106,17 @@ def draw(context, contextName, h, fontName):
     context.line(p3, p4)
     x2 = x1 + 10
     y2 = y + ((y1 - y) / 2)
-    context.drawString('descender', (x2, y2))
+    context.drawString('descender = %s' % bs.descender, (x2, y2))
+    return th0
 
 for contextName in ('DrawBot', 'Flat'):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     context.newPage(W, H) # Make a new A4 page.
+    P = 20
+    y = 4*P
     for (h, fontName) in ((100, 'PageBot-Regular'), (300, 'Roboto-Regular'), (500, 'Bungee-Regular')):
         # Define font, fontSize and color of the square
-        draw(context, contextName, h, fontName)
+        h = draw(context, contextName, y, fontName)
+        y += h + P
     context.saveImage(exportPath)

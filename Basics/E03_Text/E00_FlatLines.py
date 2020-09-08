@@ -25,7 +25,8 @@ from pagebot.toolbox.loremipsum import loremipsum
 from pagebot.toolbox.transformer import path2FileName
 
 FILENAME = path2FileName(__file__)
-loremIpsum = loremipsum()
+FONTSIZE = 200
+LEADING = 1.2
 W = 1500
 H = 1000
 P = 10
@@ -48,7 +49,8 @@ def drawWord(context, x, y, word, fontSize, leading):
         context.line(p3, p4)
 
         x0 = x + bs.tw
-        context.marker(x + bs.tw, y1, r=R, fontSize=pt(5), prefix='# %s: %dpt from top' % (i, yBaseline))
+        prefix = '#%d: %dpt from top' % (i, yBaseline)
+        context.marker(x + bs.tw, y1, r=R, fontSize=pt(5), prefix=prefix)
 
 
     # Total text height.
@@ -96,6 +98,6 @@ def draw(fontName, fontSize, leading):
     context.clear()
 
 for fontName in ('PageBot-Regular', ):#'Roboto-Regular', 'Bungee-Regular'):
-    fontSize=200
-    leading=1.2
+    fontSize=FONTSIZE
+    leading=LEADING
     draw(fontName, fontSize, leading)
