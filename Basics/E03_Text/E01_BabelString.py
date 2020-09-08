@@ -36,12 +36,13 @@ LEADING = 1.2
 
 def draw(context, contextName, y, fontName):
     fontSize = pt(FONTSIZE)
+    leading = em(LEADING)
     textColor = color(1, 0, 0)
 
     # Define the style of the text, alignment is centered on baseline.
     style = dict(font=fontName, fontSize=fontSize,
             # tracking=-em(0.02),
-            leading=em(LEADING),
+            leading=leading,
             #leading=em(1.4),
             #, xTextAlign=CENTER)
             textFill=0)
@@ -68,6 +69,7 @@ def draw(context, contextName, y, fontName):
     x = pt(x)
     y = pt(y)
     r = pt(r)
+
     context.marker(x, y, r=r, fontSize=pt(10), prefix=fontName)
     context.fill(None)
     context.stroke((0, 0, 0.5))
@@ -75,13 +77,19 @@ def draw(context, contextName, y, fontName):
 
     tw, th0 = context.textSize(bs, ascDesc=False)
     context.rect(x, y + bs.topLineDescender, tw, th0)
-    context.drawString('font size x leading = %s' % th0, (x, y + bs.topLineDescender + th0))
+    msg = 'font size (%s) x leading (%s) = %s' % (fontSize, leading, th0)
+    y0 = y + bs.topLineDescender + th0
+    context.drawString(msg, (x, y0))
+
     context.stroke((0, 0.5, 0.0))
     tw, th1 = context.textSize(bs, ascDesc=True)
     context.rect(x, y + bs.topLineDescender, tw, th1)
-    x3 = x + tw + 10
+    x3 = x + tw + 20
     y3 = y + bs.topLineDescender + th1
     context.drawString('asc-desc = %s' % th1, (x3, y3))
+
+    msg = 'y = %s' % y
+    context.drawString(msg, (x3, y))
 
     context.stroke((1, 0, 0))
     line = bs.lines[0]
