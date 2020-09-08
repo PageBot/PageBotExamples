@@ -73,6 +73,26 @@ def drawWord(context, x, y, word, fontSize, leading):
         prefix = '# %s: %dpt from top, %dpt from below' % (i, dy0, origin.y)
         context.marker(x1, y0, r=R, fontSize=pt(5), prefix=prefix)
 
+        context.stroke((0, 0, 1))
+        x0 = x - 5
+        y1 = y0 + bs.descender
+        x2 = x
+        y2 = y1 + (y0 - y1) / 2
+        p0 = (x0, y0)
+        p1 = (x0, y1)
+        context.line(p0, p1)
+        context.text('descender = %s' % bs.descender, (x2, y2))
+
+        context.stroke((0, 1, 0))
+        x0 = x - 5
+        y1 = y0 + bs.ascender
+        x2 = x
+        y2 = y1 + (y0 - y1) / 2
+        p0 = (x0, y0)
+        p1 = (x0, y1)
+        context.line(p0, p1)
+        context.text('ascender = %s' % bs.ascender, (x2, y2))
+
         #yBaseline = dbBaselines[i][1]
         yBaseline = pbBaselines[i].y
         # Offset from top of textbox.
@@ -118,7 +138,7 @@ def drawWord(context, x, y, word, fontSize, leading):
     context.rect(x, y1, bs.tw, bs.th)
 
 def draw(fontName, fontSize, leading):
-    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, fontName)
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, fontName, FILENAME)
     context = getContext('DrawBot')
     context.newDrawing()
     context.newPage(W, H)
@@ -128,7 +148,7 @@ def draw(fontName, fontSize, leading):
     context.saveImage(exportPath)
     context.clear()
 
-for fontName in ('PageBot-Regular',):#, 'Roboto-Regular'):#, 'Bungee-Regular'):
+for fontName in ('PageBot-Regular', 'Roboto-Regular', 'Bungee-Regular'):
     fontSize=200
     leading=1.2
     draw(fontName, fontSize, leading)
