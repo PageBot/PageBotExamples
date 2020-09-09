@@ -53,24 +53,24 @@ def drawWord(context, x, y, word, fontSize, leading):
         context.marker(x + bs.tw, y0, r=R, fontSize=pt(5), prefix=prefix)
 
         context.stroke((0, 0, 1))
-        x0 = x - 5
+        x0 = x + bs.tw + 2*P
+        x1 = x0 + P/2
         y1 = y0 + bs.descender
-        x2 = x
         y2 = y1 + (y0 - y1) / 2
         p0 = (x0, y0)
         p1 = (x0, y1)
         context.line(p0, p1)
-        context.text('descender = %s' % bs.descender, (x2, y2))
+        context.text('descender = %s' % bs.descender, (x1, y2))
+        j = bs.ascender - bs.descender
 
         context.stroke((0, 1, 0))
-        x0 = x - 5
         y1 = y0 + bs.ascender
-        x2 = x
         y2 = y1 + (y0 - y1) / 2
         p0 = (x0, y0)
         p1 = (x0, y1)
         context.line(p0, p1)
-        context.text('ascender = %s' % bs.ascender, (x2, y2))
+        context.text('ascender = %s' % bs.ascender, (x1, y2))
+        context.text('asc-desc = %s' % j, (x1, y1))
 
     # Total text height.
     context.stroke((0, 0, 1))
