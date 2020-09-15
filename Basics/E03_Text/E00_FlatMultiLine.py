@@ -26,8 +26,8 @@ from pagebot.toolbox.transformer import path2FileName
 
 FILENAME = path2FileName(__file__)
 FONTSIZE = 200
-LEADING = 1.2
-#LEADING = 1
+LEADING = 1
+#LEADING = 2
 W = 1500
 H = 1000
 P = 10
@@ -36,6 +36,9 @@ R = 2
 def drawWord(context, x, y, word, fontSize, leading):
     style = dict(font=fontName, fontSize=fontSize, leading=em(leading))
     bs = context.newString(word, style=style)
+    _, th0 = context.textSize(bs, ascDesc=False)
+    diff = th0 - bs.th
+    y += diff
 
     #context.drawString(bs, (x, 40))
     context.drawText(bs, (x, -y, W, H))
@@ -87,8 +90,9 @@ def drawWord(context, x, y, word, fontSize, leading):
     p2 = (x0 + P/2, y2)
     context.line(p0, p1)
     msg = 'bs.th = %dpt' % bs.th
-    #hTotal = len(origins) * fontSize * leading
-    #msg += '\n%d * %d * %s == %d' % (len(origins), fontSize, leading, hTotal)
+    n = len(baselines)
+    hTotal = n * fontSize * leading
+    msg += '\n%d * %d * %s == %d' % (n, fontSize, leading, hTotal)
     context.text(msg, p2)
 
     x0 = x
@@ -107,9 +111,7 @@ def drawWord(context, x, y, word, fontSize, leading):
     context.fill(None)
     context.stroke((1, 0, 1))
     context.rect(x, y1, bs.tw, bs.th)
-
-    _, th0 = context.textSize(bs, ascDesc=False)
-    print('textsize', th0)
+    context.rect(x, y1, bs.tw, th0)
 
 def draw(fontName, fontSize, leading):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, fontName, FILENAME)

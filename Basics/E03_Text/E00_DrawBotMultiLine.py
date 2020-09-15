@@ -61,7 +61,6 @@ def drawWord(context, x, y, word, fontSize, leading):
     # (Native OSX) origins.
     for i, origin in enumerate(origins):
         # baseline origin.
-        print('origin.y', origin.y)
         # Offset from top of textbox.
         dy0 = bs.th - (origin.y)
         # Abs value.
