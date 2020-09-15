@@ -33,6 +33,7 @@ FILENAME = path2FileName(__file__)
 # DrawBot height corresponds to fontsize * leading.
 FONTSIZE = 200
 LEADING = 1.2
+P = 10
 
 def draw(context, contextName, y, fontName):
     fontSize = pt(FONTSIZE)
@@ -43,7 +44,6 @@ def draw(context, contextName, y, fontName):
     style = dict(font=fontName, fontSize=fontSize,
             # tracking=-em(0.02),
             leading=leading,
-            #leading=em(1.4),
             #, xTextAlign=CENTER)
             textFill=0)
 
@@ -69,6 +69,7 @@ def draw(context, contextName, y, fontName):
     x = pt(x)
     y = pt(y)
     r = pt(r)
+    context.text('context.drawString(bs, (%d, %d))' % (x, y), (x, y - P))
 
     context.marker(x, y, r=r, fontSize=pt(10), prefix=fontName)
     context.fill(None)

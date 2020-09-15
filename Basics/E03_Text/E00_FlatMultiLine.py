@@ -27,6 +27,7 @@ from pagebot.toolbox.transformer import path2FileName
 FILENAME = path2FileName(__file__)
 FONTSIZE = 200
 LEADING = 1.2
+#LEADING = 1
 W = 1500
 H = 1000
 P = 10
@@ -36,7 +37,9 @@ def drawWord(context, x, y, word, fontSize, leading):
     style = dict(font=fontName, fontSize=fontSize, leading=em(leading))
     bs = context.newString(word, style=style)
 
+    #context.drawString(bs, (x, 40))
     context.drawText(bs, (x, -y, W, H))
+
     baselines = bs.getTextLines()
 
     for i, baseline in enumerate(baselines):
@@ -119,7 +122,7 @@ def draw(fontName, fontSize, leading):
     context.saveImage(exportPath)
     context.clear()
 
-for fontName in ('PageBot-Regular', 'Roboto-Regular', 'Bungee-Regular'):
+for fontName in ('Bungee-Regular', 'PageBot-Regular', 'Roboto-Regular',):
     fontSize=FONTSIZE
     leading=LEADING
     draw(fontName, fontSize, leading)

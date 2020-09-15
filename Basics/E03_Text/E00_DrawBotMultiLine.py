@@ -52,7 +52,9 @@ def drawWord(context, x, y, word, fontSize, leading):
 
     box = 0, 0, bs.tw, bs.th
     dbBaselines = textBoxBaselines(fs, box)
+
     # TODO: compare to pagebot textBox.
+    #context.drawString(bs, (x, H-y))
     context.drawText(bs, (x, -y, W, H))
     pbBaselines = bs.getTextLines()
 

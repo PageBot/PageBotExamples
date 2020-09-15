@@ -33,19 +33,19 @@ from pagebot.document import Document
 H, W = A4 # Standard paper size from constants.
 FILENAME = path2FileName(__file__)
 LOREM_IPSUM = loremipsum()
+P = 10
 
-def draw(contextName):
-    print('*', contextName)
-    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+def draw(contextName, fontName):
+    fontSize = pt(64)
+    exportPath = '%s/%s-%s-%s.pdf' % (EXPORT, FILENAME, fontName, contextName)
     context = getContext(contextName)
     padding = pt(40) # Outside measures to accommodate the crop makrs.
     bgColor = color(0.9) # Background color of the text box
     black = color(0)
+    context.newDrawing(w=W, h=H)
     context.newPage(W, H) # Make a new A4 page.
 
     # Define font, fontSize and color of the square
-    fontName = 'PageBot-Regular'
-    fontSize = pt(24)
     textColor = color(1, 0, 0)
 
     # Define the style of the text, alignment is centered on baseline.
@@ -66,18 +66,15 @@ def draw(contextName):
 
     # This doesn't give the same results.
     #context.drawString(bs, (x, y))
+    context.text('context.drawText(bs, (%d, %d, %d, %d))' % (x, y ,w, h), (x, y - P))
     context.drawText(bs, (x, y, w, h))
-
     context.marker(x, y, r=r, fontSize=pt(10))
     context.fill(None)
     context.stroke((0, 1, 0))
     context.rect(x, y, w, h)
-
-
     context.stroke((1, 0, 0))
     context.strokeWidth(1)
     context.rect(x, y, w, h)
-    context.line((20, 400), (400, 400))
     #context.rect(x, y, bs.w, bs.h)
 
     for i, line in enumerate(bs.lines):
@@ -91,6 +88,9 @@ def draw(contextName):
         context.line((x, yLine), (x+w, yLine))
 
     context.saveImage(exportPath)
+    print('* Saved', exportPath)
+    context.clear()
 
 for contextName in ('DrawBot', 'Flat'):
-    draw(contextName)
+    for fontName in ('PageBot-Regular', 'Roboto-Regular', 'Bungee-Regular'):
+        draw(contextName, fontName)
