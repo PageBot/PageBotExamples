@@ -26,7 +26,7 @@ from pagebot.toolbox.transformer import path2FileName
 
 FILENAME = path2FileName(__file__)
 FONTSIZE = 200
-LEADING = 1
+LEADING = 1.2
 #LEADING = 2
 W = 1500
 H = 1000
@@ -39,10 +39,10 @@ def drawWord(context, x, y, word, fontSize, leading):
     _, th0 = context.textSize(bs, ascDesc=False)
     diff = th0 - bs.th
     y += diff
+    j = bs.ascender - bs.descender
 
     #context.drawString(bs, (x, 40))
     context.drawText(bs, (x, -y, W, H))
-
     baselines = bs.getTextLines()
 
     for i, baseline in enumerate(baselines):
@@ -66,8 +66,6 @@ def drawWord(context, x, y, word, fontSize, leading):
         p0 = (x0, y0)
         p1 = (x0, y1)
         context.line(p0, p1)
-        context.text('descender = %s' % bs.descender, (x1, y2))
-        j = bs.ascender - bs.descender
 
         context.stroke((0, 1, 0))
         y1 = y0 + bs.ascender
@@ -75,8 +73,8 @@ def drawWord(context, x, y, word, fontSize, leading):
         p0 = (x0, y0)
         p1 = (x0, y1)
         context.line(p0, p1)
-        context.text('ascender = %s' % bs.ascender, (x1, y2))
-        context.text('asc-desc = %s' % j, (x1, y1))
+        if i == 0:
+            context.text('asc-desc = %s' % j, (x1, y1))
 
     # Total text height.
     context.stroke((0, 0, 1))
@@ -91,8 +89,7 @@ def drawWord(context, x, y, word, fontSize, leading):
     context.line(p0, p1)
     msg = 'bs.th = %dpt' % bs.th
     n = len(baselines)
-    hTotal = n * fontSize * leading
-    msg += '\n%d * %d * %s == %d' % (n, fontSize, leading, hTotal)
+    msg += '\n%d * %s == %s' % (n, j, bs.th)
     context.text(msg, p2)
 
     x0 = x
@@ -109,9 +106,10 @@ def drawWord(context, x, y, word, fontSize, leading):
     y0 = H - y
     y1 = y0 - bs.th
     context.fill(None)
+    context.stroke((0, 0, 1))
+    context.rect(x, y1, bs.tw, th0)
     context.stroke((1, 0, 1))
     context.rect(x, y1, bs.tw, bs.th)
-    context.rect(x, y1, bs.tw, th0)
 
 def draw(fontName, fontSize, leading):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, fontName, FILENAME)
