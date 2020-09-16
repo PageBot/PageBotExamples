@@ -82,7 +82,7 @@ def drawWord(context, x, y, word, fontSize, leading):
         p0 = (x0, y0)
         p1 = (x0, y1)
         context.line(p0, p1)
-        context.text('descender = %s' % bs.descender, (x2, y2))
+        #context.text('descender = %s' % bs.descender, (x2, y2))
 
         context.stroke((0, 1, 0))
         x0 = x - 5
@@ -92,7 +92,7 @@ def drawWord(context, x, y, word, fontSize, leading):
         p0 = (x0, y0)
         p1 = (x0, y1)
         context.line(p0, p1)
-        context.text('ascender = %s' % bs.ascender, (x2, y2))
+        #context.text('ascender = %s' % bs.ascender, (x2, y2))
 
         #yBaseline = dbBaselines[i][1]
         yBaseline = pbBaselines[i].y

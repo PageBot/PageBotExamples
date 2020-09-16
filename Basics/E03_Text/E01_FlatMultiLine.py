@@ -76,6 +76,7 @@ def drawWord(context, x, y, word, fontSize, leading):
         if i == 0:
             context.text('asc-desc = %s' % j, (x1, y1))
 
+    context.text('diff = %s' % diff, (x0, H - y + diff / 2))
     # Total text height.
     context.stroke((0, 0, 1))
     x0 = x + bs.tw + P
@@ -83,13 +84,19 @@ def drawWord(context, x, y, word, fontSize, leading):
     y1 = y0 - bs.th
     y2 = y1 + (y0 - y1) / 2
 
+
     p0 = (x0, y0)
     p1 = (x0, y1)
     p2 = (x0 + P/2, y2)
     context.line(p0, p1)
     msg = 'bs.th = %dpt' % bs.th
     n = len(baselines)
-    msg += '\n%d * %s == %s' % (n, j, bs.th)
+    if diff > 0:
+        d = (n-1) * diff
+
+        msg += '\n%d * %s + %s == %s' % (n, j, d, bs.th)
+    else:
+        msg += '\n%d * %s == %s' % (n, j, bs.th)
     context.text(msg, p2)
 
     x0 = x
