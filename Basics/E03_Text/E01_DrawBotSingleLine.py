@@ -46,8 +46,6 @@ def drawWord(context, x, y, word, fontSize, leading):
     ctBox = CTFramesetterCreateFrame(setter, (0, 0), path, None)
     ctLines = CTFrameGetLines(ctBox)
     origins = CTFrameGetLineOrigins(ctBox, (0, len(ctLines)), None)
-    print('Coretext origins', origins)
-
     context.drawText(bs, (x, y, W, H))
     context.drawString(bs, (x, y))
 
@@ -95,7 +93,6 @@ def draw(fontName, fontSize, leading):
     context.newDrawing()
     context.newPage(W, H)
     drawWord(context, P, P, 'Hpxk', fontSize, leading)
-    #context.drawword('Hp\nxk')
     context.saveImage(exportPath)
     context.clear()
 
