@@ -52,10 +52,10 @@ def draw(contextName):
     # Parent of the element is the current page.
     #c = (Float2Top(), Float2Left())
     #c = ()
+    #c = (Float2Top())
     c = (Right2Right(), Float2Top(), Float2Left())
+    #c = (Right2Right()) #Float2Top(), Float2Left())
     #c = (Left2Left(), Top2Top())
-    #r = newRect(w=SQ, h=SQ, parent=page, conditions=c,
-    #        fill=(0,0,1), stroke=0, showOrigin=True)
 
     # Create a new red circle element and align it on top-left,
     # floating to that position relative to what is already there.
@@ -65,9 +65,12 @@ def draw(contextName):
         r = F
         g = 0
         b = F/2
-
-        o = newCircle(r=SQ, parent=page, conditions=c, fill=(i*r, i*g, i*b),
-                stroke=0, showOrigin=True)
+        if i % 2 == 0:
+            o = newCircle(r=SQ, parent=page, conditions=c, fill=(i*r, i*g, i*b),
+                    stroke=0, showOrigin=True)
+        else:
+            o = newRect(r=SQ, parent=page, conditions=c, fill=(i*r, i*g, i*b),
+                    stroke=0, showOrigin=True)
     '''
 
     # Create a new black diagonal line element and align it on top-left,
@@ -102,7 +105,7 @@ def draw(contextName):
     '''
 
     # Solve conditions of all placed elements on the page
-    page.solve()
+    score = page.solve()
 
     # Set some viewing parameters.
     view = doc.view
