@@ -41,22 +41,28 @@ def draw(contextName):
     font = findFont('PageBot-Regular') # TYPETR Upgrade® subset font for demo.
 
     # Create a new document for the current context. Create one automatic page.
-    doc = Document(w=W, h=H, autoPages=1, context=context)
+    doc = Document(w=W, h=H, context=context)
     page = doc[1] # Get the one and single page of the document.
     page.padding = P # Set the page padding.
 
     # Create a new blue rectangle element and align it on top-left,
     # floating to that position in case something is already there.
     # Parent of the element is the current page.
+    #c = (Float2Top(), Float2Left())
+    #c = ()
     c = (Right2Right(), Float2Top(), Float2Left())
-    r = newRect(w=SQ, h=SQ, parent=page, conditions=(Left2Left(), Top2Top()),
-            fill=(0,0,1), stroke=0, showOrigin=True)
+    #c = (Left2Left(), Top2Top())
+    #r = newRect(w=SQ, h=SQ, parent=page, conditions=c,
+    #        fill=(0,0,1), stroke=0, showOrigin=True)
 
     # Create a new red circle element and align it on top-left,
     # floating to that position relative to what is already there.
     # Parent of the element is the current page.
     o = newCircle(r=SQ, parent=page, conditions=c, fill=(1, 0, 0),
             stroke=0, showOrigin=True)
+    o = newCircle(r=SQ, parent=page, conditions=c, fill=(1, 0, 0),
+            stroke=0, showOrigin=True)
+    '''
 
     # Create a new black diagonal line element and align it on top-left,
     # floating to that position relative to what is already there.
@@ -73,16 +79,21 @@ def draw(contextName):
             strokeWidth=20, textFill=0.5, font=font)
     newText('Text Box', parent=page, conditions=c, stroke=0, strokeWidth=0.5, fill=(1, 1, 0),
             fontSize=30, font=font, textFill=(0, 0, 1))
+    '''
 
+    '''
     # A number of circles that will float the remaining space.
     for n in range(50):
         rr = pt(40)
         o = newOval(w=rr, h=rr/2, parent=page, conditions=c, fill=(1, 0, 0.5), stroke=0, strokeWidth=0.5)
+    '''
 
+    '''
     # Create two text boxes and align it on top-left,
     # floating to that position relative to what is already there.
     newRect(parent=page, conditions=(Left2Left(), Fit2Width(), Float2Top(), Fit2Bottom()),
             fill=0.9, showOrigin=True)
+    '''
 
     # Solve conditions of all placed elements on the page
     page.solve()

@@ -31,7 +31,7 @@ def draw(contextName):
     context = getContext(contextName)
 
     # Find the Roboto font that exist in PageBot resources.
-    font = findFont('PageBot-Regular') # PageBot version of TYPETR Upgrade
+    font = findFont('Roboto-Regular')
     fontSize = pt(140)
 
     # Create document with default 1 page.

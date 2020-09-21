@@ -68,15 +68,6 @@ def draw(contextName):
     bs = context.newString(msg, style)
     topText2 = makeText(bs, page, font, c)
 
-    '''
-    if contextName == 'Flat':
-        placedText = bs.cs.pt
-        for i, (height, run) in enumerate(placedText.layout.runs()):
-            print(i, height)
-            for st, s in run:
-                print(s)
-    '''
-
     msg = 'Default font path is %s' % font.path
     msg = '\n • '.join(msg.split('/'))
     bs = context.newString(msg, style)
@@ -96,21 +87,14 @@ def draw(contextName):
 
     # Let the page solve all of its child element layout conditions.
     page.solve()
-
-    y = column1.y - column1.h + fontSize
-    r = newRect(x=column1.x, y=y, w=column1.w, h=column1.h, parent=page, stroke=(0, 1, 0),
-           strokeWidth=1, showOrigin=True)
-    y = column2.y - column2.h + fontSize
-    r = newRect(x=column2.x, y=y, w=column2.w, h=column2.h, parent=page, stroke=(1, 0, 0),
-           strokeWidth=1, showOrigin=True)
     doc.export(exportPath)
 
 def makeText(t, page, f, c):
     """Create a new text box with e give layout conditions
     and with page as parent."""
-    t = newText(t, font=f, parent=page, conditions=c, stroke=(0, 0, 1), strokeWidth=1,
+    t = newText(t, font=f, parent=page, conditions=c, strokeWidth=1,
         margin=GUTTER)
-    t.showOrigin = True
+    #t.showOrigin = True
     return t
 
 #for contextName in ('Flat',):
