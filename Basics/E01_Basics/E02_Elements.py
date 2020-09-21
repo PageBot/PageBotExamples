@@ -30,8 +30,10 @@ FILENAME = path2FileName(__file__)
 H, W = A3
 X0 = 100
 Y0 = 100
-SQ = 150
+SQ = 50
 P  = 50
+N = 70
+F = 1.0 / N
 
 def draw(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
@@ -58,10 +60,14 @@ def draw(contextName):
     # Create a new red circle element and align it on top-left,
     # floating to that position relative to what is already there.
     # Parent of the element is the current page.
-    o = newCircle(r=SQ, parent=page, conditions=c, fill=(1, 0, 0),
-            stroke=0, showOrigin=True)
-    o = newCircle(r=SQ, parent=page, conditions=c, fill=(1, 0, 0),
-            stroke=0, showOrigin=True)
+
+    for i in range(N):
+        r = F
+        g = 0
+        b = F/2
+
+        o = newCircle(r=SQ, parent=page, conditions=c, fill=(i*r, i*g, i*b),
+                stroke=0, showOrigin=True)
     '''
 
     # Create a new black diagonal line element and align it on top-left,
