@@ -61,40 +61,28 @@ def draw(contextName):
     # floating to that position relative to what is already there.
     # Parent of the element is the current page.
 
+
     for i in range(N):
         r = F
         g = 0
         b = F/2
-        if i % 2 == 0:
-            o = newCircle(r=SQ, parent=page, conditions=c, fill=(i*r, i*g, i*b),
+        f = (i*r, i*g, i*b)
+
+        if i % 3 == 0:
+            newCircle(r=SQ, parent=page, conditions=c, fill=f,
                     stroke=0, showOrigin=True)
+        elif i % 3 == 1:
+            newOval(w=2*SQ, h=2*SQ/2, parent=page, conditions=c, fill=f, stroke=0, strokeWidth=0.5)
         else:
-            o = newRect(r=SQ, parent=page, conditions=c, fill=(i*r, i*g, i*b),
+            newRect(r=SQ, parent=page, conditions=c, fill=f,
                     stroke=0, showOrigin=True)
     '''
-
-    # Create a new black diagonal line element and align it on top-left,
-    # floating to that position relative to what is already there.
-    l = newLine(parent=page, x=0, y=0, w=100, h=100, conditions=c, stroke=0, strokeWidth=10)
-    points=[(0,0), (100, 0), (150, 50), (150, 100), (100, 200)]
-    # A quire is a drawboard
-    q = newQuire(parent=page, conditions=c, fill=1, strokeWidth=5, stroke=0.5)
-    # Make a rect with  more height, so it will push down any floating from below.
-    r = newRect(w=SQ, h=2*SQ, parent=page, conditions=c, fill=noColor, stroke=0, strokeWidth=1)
-
     # Create two text boxes and align it on top-left,
     # floating to that position relative to what is already there.
     newText('Text    !', parent=page, conditions=c, fontSize=60, stroke=(1, 1, 0),
             strokeWidth=20, textFill=0.5, font=font)
     newText('Text Box', parent=page, conditions=c, stroke=0, strokeWidth=0.5, fill=(1, 1, 0),
             fontSize=30, font=font, textFill=(0, 0, 1))
-    '''
-
-    '''
-    # A number of circles that will float the remaining space.
-    for n in range(50):
-        rr = pt(40)
-        o = newOval(w=rr, h=rr/2, parent=page, conditions=c, fill=(1, 0, 0.5), stroke=0, strokeWidth=0.5)
     '''
 
     '''
