@@ -28,6 +28,10 @@ from pagebot.fonttoolbox.objects.family import getFamilyPaths, findFamily, getFa
 from pagebot.toolbox.transformer import path2FileName
 
 H, W = A3
+H = pt(H)
+W = pt(W)
+print(W, H)
+MAX_PER_PAGE = 7
 MAX_PAGES = 20
 P = pt(48)
 FILENAME = path2FileName(__file__)
@@ -55,45 +59,39 @@ def draw(contextName):
 
     families = getFamilyPaths()
     pbf = getPageBotFontPaths()
-    #print(pbf.keys())
 
     fam = getFamily('Bungee')
     assert fam is not None
-    verboseFam(fam)
+    #verboseFam(fam)
 
     fam = getFamily('PageBot')
     assert fam is not None
-    verboseFam(fam)
+    #verboseFam(fam)
 
     fam = findFamily('Roboto')
     assert fam is not None
-    verboseFam(fam)
+    #verboseFam(fam)
 
-    #for s in fam.getStyles():
-    #    print(' - %s' % s)
-
-    #print(families)
-    print('Number of families found: %d' % len(families))
+    #print('Number of families found: %d' % len(families))
     fontPaths = getFontPaths()
-    print('Number of fonts found: %d' % len(fontPaths))
+    #print('Number of fonts found: %d' % len(fontPaths))
     tfp = getTestFontsPath()
     pbFonts = getPageBotFontPaths()
-    print('Number of fonts shipped with PageBot: %d' % len(pbFonts))
-    #print(sorted(pbFonts.keys()))
+    #print('Number of fonts shipped with PageBot: %d' % len(pbFonts))
     font = findFont('Roboto-Black')
-    print('The Font object from the pagebot.fonttoolbox.objects module: %s' % font)
-    print('It has %d glyphs.' % len(font))
+    #print('The Font object from the pagebot.fonttoolbox.objects module: %s' % font)
+    #print('It has %d glyphs.' % len(font))
     i = 0
 
     for pbFont in sorted(pbFonts.keys()):
-        #if 'Bungee' in pbFont or 'PageBot' in pbFont: # Filter some of the PageBot fonts.
         f = findFont(pbFont)
         if f is not None:
             i += 1
-            g = newGroup(parent=page, conditions=c1, padding=7, borderTop=1, strokeWidth=0)
-            newText('%s\n' % pbFont, parent=g, conditions=c2, fontSize=16, strokeWidth=0, w=W/2)
+            g = newGroup(parent=page, conditions=c1, padding=7, strokeWidth=0)
+            t = newText('%s\n' % pbFont, parent=g, conditions=c2, fontSize=16, border=1, stroke=(1, 0, 0), strokeWidth=0, w=W/2)
+            print(t.w, t.getTextSize())
             newText('ABCDEabcde012345', parent=g, conditions=c3, font=f, fontSize=pt(44), strokeWidth=0, w=W/2)
-        if i == 8:
+        if i == MAX_PER_PAGE:
             page = page.next
             page.padding = P
             i = 0
