@@ -30,7 +30,6 @@ from pagebot.toolbox.transformer import path2FileName
 H, W = A3
 H = pt(H)
 W = pt(W)
-print(W, H)
 MAX_PER_PAGE = 7
 MAX_PAGES = 20
 P = pt(48)
@@ -85,12 +84,14 @@ def draw(contextName):
 
     for pbFont in sorted(pbFonts.keys()):
         f = findFont(pbFont)
+        if i == 4:
+            break
         if f is not None:
             i += 1
-            g = newGroup(parent=page, conditions=c1, padding=7, strokeWidth=1, stroke=(0, 1, 0), w=W)
-            print("group", g.w)
-            newText('%s\n' % pbFont, parent=g, conditions=c2, fontSize=16, border=1, stroke=(1, 0, 0), strokeWidth=1, w=pt(300))
-            t = newText('ABCDEabcde012345', parent=g, conditions=c2, font=f, fontSize=pt(24), stroke=(0, 0, 1), strokeWidth=1, w=pt(300))
+            g = newGroup(parent=page, conditions=c1, showFrame=True, padding=7, strokeWidth=1, stroke=(0, 1, 0), w=W)
+            #newRect(parent=page, conditions=c3, showFrame=True, fontSize=16, border=1, stroke=(1, 0, 0), strokeWidth=1, fill=(0, 1, 0), w=pt(300))
+            newText('%s\n' % pbFont, parent=page, conditions=c2, fontSize=16, border=1, stroke=(1, 0, 0), strokeWidth=1, fill=(0, 1, 0), w=pt(300))
+            newText('ABCDEabcde012345', parent=page, conditions=c3, font=f, fontSize=pt(48), stroke=(0, 0, 1), strokeWidth=1, w=pt(500))
         if i == MAX_PER_PAGE:
             page = page.next
             page.padding = P
