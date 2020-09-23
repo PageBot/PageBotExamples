@@ -26,14 +26,16 @@ from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.fonttoolbox.fontpaths import *
 from pagebot.fonttoolbox.objects.family import getFamilyPaths, findFamily, getFamily
 from pagebot.toolbox.transformer import path2FileName
+from pagebot.toolbox.loremipsum import  loremipsum
 
 H, W = A3
 H = pt(H)
 W = pt(W)
-MAX_PER_PAGE = 7
+MAX_PER_PAGE = 5
 MAX_PAGES = 20
 P = pt(48)
 FILENAME = path2FileName(__file__)
+LOREMIPSUM = loremipsum()
 
 def verboseFam(fam):
     print(fam)
@@ -81,17 +83,19 @@ def draw(contextName):
     #print('The Font object from the pagebot.fonttoolbox.objects module: %s' % font)
     #print('It has %d glyphs.' % len(font))
     i = 0
+    boxHeight = 150
+
+    x1 = (W - 2*P) / 4
+    w0 = (W - 2*P) / 4
+    w1 = (W - 2*P) / 4 * 3
 
     for pbFont in sorted(pbFonts.keys()):
         f = findFont(pbFont)
-        if i == 4:
-            break
-        if f is not None:
+        if f is not None and not f.name.startswith('Amstel'):
             i += 1
-            g = newGroup(parent=page, conditions=c1, showFrame=True, padding=7, strokeWidth=1, stroke=(0, 1, 0), w=W)
-            #newRect(parent=page, conditions=c3, showFrame=True, fontSize=16, border=1, stroke=(1, 0, 0), strokeWidth=1, fill=(0, 1, 0), w=pt(300))
-            newText('%s\n' % pbFont, parent=page, conditions=c2, fontSize=16, border=1, stroke=(1, 0, 0), strokeWidth=1, fill=(0, 1, 0), w=pt(300))
-            newText('ABCDEabcde012345', parent=page, conditions=c3, font=f, fontSize=pt(48), stroke=(0, 0, 1), strokeWidth=1, w=pt(500))
+            g = newGroup(parent=page, conditions=c1, showFrame=True, strokeWidth=1, stroke=(0, 1, 0), w=W, h=pt(boxHeight))
+            newText('%s\n' % pbFont, parent=g, conditions=c2, fontSize=16, border=1, stroke=(1, 0, 0), strokeWidth=1, fill=(0, 1, 0), w=pt(w0), h=pt(boxHeight))
+            t = newText(LOREMIPSUM, parent=g, conditions=c3, font=f, fontSize=pt(48), stroke=(0, 0, 1), strokeWidth=1, w=pt(w1), h=pt(boxHeight), x=pt(x1))
         if i == MAX_PER_PAGE:
             page = page.next
             page.padding = P
