@@ -87,10 +87,10 @@ def draw(contextName):
         f = findFont(pbFont)
         if f is not None:
             i += 1
-            g = newGroup(parent=page, conditions=c1, padding=7, strokeWidth=0)
-            t = newText('%s\n' % pbFont, parent=g, conditions=c2, fontSize=16, border=1, stroke=(1, 0, 0), strokeWidth=0, w=W/2)
-            print(t.w, t.getTextSize())
-            newText('ABCDEabcde012345', parent=g, conditions=c3, font=f, fontSize=pt(44), strokeWidth=0, w=W/2)
+            g = newGroup(parent=page, conditions=c1, padding=7, strokeWidth=1, stroke=(0, 1, 0), w=W)
+            print("group", g.w)
+            newText('%s\n' % pbFont, parent=g, conditions=c2, fontSize=16, border=1, stroke=(1, 0, 0), strokeWidth=1, w=pt(300))
+            t = newText('ABCDEabcde012345', parent=g, conditions=c2, font=f, fontSize=pt(24), stroke=(0, 0, 1), strokeWidth=1, w=pt(300))
         if i == MAX_PER_PAGE:
             page = page.next
             page.padding = P

@@ -23,7 +23,7 @@ from pagebot.toolbox.units import em, p, pt, inch, degrees
 from pagebot.conditions import * # Import all conditions for convenience.
 from pagebot.constants import *
 from pagebot.elements import newText
-from pagebot.elements.pbimage2 import Image
+from pagebot.elements.image2 import Image
 
 #context = FlatContext()
 context = getContext('DrawBot')
@@ -50,9 +50,9 @@ page = doc[1]
 page.padding = PADDING
 
 
-if 1: 
+if 1:
     # Make image box as child element of the page and set its layout conditions.
-    im = Image(imagePath, h=IH, w=IH, fill=(1, 0, 0, 0.5), parent=page, 
+    im = Image(imagePath, h=IH, w=IH, fill=(1, 0, 0, 0.5), parent=page,
         conditions=[Right2Right(), Float2Top(), Float2Left()], mr=G, mb=G)
     style1 = dict(fontSize=14, textFill=0, xTextAlign=CENTER)
     bs = context.newString('1', style=style1)
@@ -61,7 +61,7 @@ if 1:
 
 if 1:
     # Make image box as child element of the page and set its layout conditions.
-    im = Image(imagePath, h=IH, w=IH, fill=(1, 1, 0, 0.5), parent=page, 
+    im = Image(imagePath, h=IH, w=IH, fill=(1, 1, 0, 0.5), parent=page,
         conditions=[Right2Right(), Float2Top(), Float2Left()], mr=G, mb=G)
     style2 = dict(fontSize=14, textFill=0, xTextAlign=CENTER)
     bs = context.newString('2', style=style2)
@@ -70,7 +70,7 @@ if 1:
 
 if 1:
     # Make image box as child element of the page and set its layout conditions.
-    im = Image(imagePath, h=IH, w=IH, fill=(1, 0, 1, 0.5), parent=page, 
+    im = Image(imagePath, h=IH, w=IH, fill=(1, 0, 1, 0.5), parent=page,
         conditions=[Right2Right(), Float2Top(), Float2Left()], mr=G, mb=G)
     bs = context.newString('3', style=dict(fontSize=14, textFill=0, xTextAlign=CENTER))
     newText(bs, parent=im, w=IH, fill=noColor,

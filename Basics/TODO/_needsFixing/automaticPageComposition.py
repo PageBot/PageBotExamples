@@ -21,7 +21,7 @@ from time import time
 from pagebot.style import getRootStyle
 from pagebot.constants import LEFT
 from pagebot.document import Document
-from pagebot.elements.pbpage import Template
+from pagebot.elements.page import Template
 from pagebot.composer import Composer
 from pagebot.typesetter import Typesetter
 from pagebot.elements import Galley
