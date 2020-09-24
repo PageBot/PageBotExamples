@@ -35,6 +35,7 @@ MAX_PER_PAGE = 5
 MAX_PAGES = 20
 P = pt(48)
 FILENAME = path2FileName(__file__)
+BOXHEIGHT = (H - 2*P) / MAX_PER_PAGE
 
 def verboseFam(fam):
     print(fam)
@@ -82,7 +83,6 @@ def draw(contextName):
     #print('The Font object from the pagebot.fonttoolbox.objects module: %s' % font)
     #print('It has %d glyphs.' % len(font))
     i = 0
-    boxHeight = 150
 
     x1 = (W - 2*P) / 4
     w0 = (W - 2*P) / 4
@@ -93,9 +93,9 @@ def draw(contextName):
         if f is not None and not f.name.startswith('Amstel'):
             i += 1
             txt = loremIpsum(doShuffle=True)
-            g = newGroup(parent=page, conditions=c1, showFrame=True, strokeWidth=1, stroke=(0, 1, 0), w=W, h=pt(boxHeight))
-            newText('%s\n' % pbFont, parent=g, conditions=c2, fontSize=16, border=1, stroke=(1, 0, 0), strokeWidth=1, fill=(0, 1, 0), w=pt(w0), h=pt(boxHeight))
-            t = newText(txt, parent=g, conditions=c3, font=f, fontSize=pt(48), stroke=(0, 0, 1), strokeWidth=1, w=pt(w1), h=pt(boxHeight), x=pt(x1))
+            g = newGroup(parent=page, conditions=c1, showFrame=True, strokeWidth=1, stroke=(0, 1, 0), w=W, h=pt(BOXHEIGHT))
+            newText('%s\n' % pbFont, parent=g, conditions=c2, fontSize=16, border=1, stroke=(1, 0, 0), strokeWidth=1, fill=(0, 1, 0), w=pt(w0), h=pt(BOXHEIGHT))
+            t = newText(txt, parent=g, conditions=c3, font=f, fontSize=pt(48), stroke=(0, 0, 1), strokeWidth=1, w=pt(w1), h=pt(BOXHEIGHT), x=pt(x1))
         if i == MAX_PER_PAGE:
             page = page.next
             page.padding = P

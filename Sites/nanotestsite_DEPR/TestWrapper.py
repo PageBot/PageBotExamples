@@ -20,8 +20,8 @@ import webbrowser
 
 from pagebot.publications.publication import Publication
 from pagebot.constants import *
-from pagebot.composer import Composer
-from pagebot.typesetter import Typesetter
+from pagebot.base.composer import Composer
+from pagebot.base.typesetter import Typesetter
 from pagebot.elements import *
 from pagebot.conditions import *
 from pagebot.toolbox.color import color, whiteColor, blackColor

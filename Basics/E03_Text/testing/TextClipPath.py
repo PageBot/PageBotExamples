@@ -20,7 +20,7 @@ from pagebot.document import Document
 from pagebot.constants import *
 from pagebot.toolbox.units import p, pt, em, upt
 from pagebot.toolbox.color import color, noColor
-from pagebot.typesetter import Typesetter
+from pagebot.base.typesetter import Typesetter
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.conditions import *
 from pagebot.elements import *

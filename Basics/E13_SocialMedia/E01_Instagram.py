@@ -23,7 +23,7 @@ from pagebot.publications.instagram import InstagramPost
 from pagebot.toolbox.units import px, em, pt
 from pagebot.toolbox.color import color, noColor
 from pagebot.constants import InstagramSquare, CinemaWide, MAX_IMAGE_WIDTH
-from pagebot.typesetter import Typesetter
+from pagebot.base.typesetter import Typesetter
 
 context = getContext()
 

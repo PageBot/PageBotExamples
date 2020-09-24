@@ -22,8 +22,8 @@ from pagebot.style import getRootStyle
 from pagebot.constants import LEFT
 from pagebot.document import Document
 from pagebot.elements import *
-from pagebot.composer import Composer
-from pagebot.typesetter import Typesetter
+from pagebot.base.composer import Composer
+from pagebot.base.typesetter import Typesetter
 from pagebot.toolbox.units import em
 
 SHOW_TIMER = False

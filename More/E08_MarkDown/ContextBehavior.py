@@ -21,8 +21,8 @@ from pagebot.contexts.htmlcontext import HtmlContext
 from pagebot.document import Document
 from pagebot.elements import *
 from pagebot.conditions import *
-from pagebot.typesetter import Typesetter
-from pagebot.composer import Composer
+from pagebot.base.typesetter import Typesetter
+from pagebot.base.composer import Composer
 from pagebot.toolbox.color import color, blackColor
 from pagebot.constants import A4
 from pagebot.toolbox.units import pt, em

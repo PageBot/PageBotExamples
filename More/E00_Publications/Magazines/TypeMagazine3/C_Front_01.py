@@ -39,8 +39,8 @@ from pagebot.style import getRootStyle
 # Document is the main instance holding all information
 # about the document togethers (pages, styles, etc.)
 from pagebot.document import Document
-from pagebot.typesetter import Typesetter
-from pagebot.composer import Composer
+from pagebot.base.typesetter import Typesetter
+from pagebot.base.composer import Composer
 
 # Import element layout conditions.
 from pagebot.conditions import *

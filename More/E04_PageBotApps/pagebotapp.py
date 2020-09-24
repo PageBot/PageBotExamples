@@ -19,8 +19,8 @@ from pagebot.apps.baseapp import BaseApp
 from pagebot.publications import PublicationCategories
 from pagebot.elements import newGroup, newText, newRect
 from pagebot.constants import *
-from pagebot.composer import Composer
-from pagebot.typesetter import Typesetter
+from pagebot.base.composer import Composer
+from pagebot.base.typesetter import Typesetter
 from pagebot.themes import ThemeClasses, BaseTheme, DEFAULT_THEME_CLASS
 from pagebot import getContext
 from pagebot.fonttoolbox.objects.font import findFont

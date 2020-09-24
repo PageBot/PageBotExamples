@@ -19,8 +19,8 @@ context = getContext()
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.style import RIGHT
 from pagebot.document import Document
-from pagebot.typesetter import Typesetter
-from pagebot.composer import Composer
+from pagebot.base.typesetter import Typesetter
+from pagebot.base.composer import Composer
 from pagebot.elements import *
 from pagebot.conditions import *
 

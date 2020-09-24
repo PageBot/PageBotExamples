@@ -19,7 +19,7 @@
 import os
 from pagebot.publications.publication import Publication
 from pagebot.constants import URL_JQUERY, URL_MEDIA
-from pagebot.typesetter import Typesetter
+from pagebot.base.typesetter import Typesetter
 from pagebot.elements import *
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import em

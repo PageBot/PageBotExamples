@@ -22,8 +22,8 @@ from pagebot.style import getRootStyle
 from pagebot.constants import LEFT
 from pagebot.document import Document
 from pagebot.elements.page import Template
-from pagebot.composer import Composer
-from pagebot.typesetter import Typesetter
+from pagebot.base.composer import Composer
+from pagebot.base.typesetter import Typesetter
 from pagebot.elements import Galley
 from pagebot.fonttoolbox.variablefontbuilder import generateInstance
 
