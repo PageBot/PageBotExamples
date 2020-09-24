@@ -17,7 +17,7 @@
 
 import os
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.toolbox.loremipsum import loremipsum
+from pagebot.toolbox.loremipsum import loremIpsum
 from pagebot.contexts import getContext
 from pagebot.toolbox.units import pt
 from pagebot.document import Document
@@ -29,7 +29,7 @@ font = findFont('PageBot-Regular')
 fontSize = pt(16)
 
 style = dict(font=font, fontSize=fontSize)
-txt = loremipsum()
+txt = loremIpsum()
 
 bs = context.newString(txt, style)
 print('BabelString runs:', len(bs.runs))

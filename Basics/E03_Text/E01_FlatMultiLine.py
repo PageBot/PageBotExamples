@@ -21,7 +21,6 @@ from drawBot import textBoxBaselines
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.toolbox.units import pt, em
-from pagebot.toolbox.loremipsum import loremipsum
 from pagebot.toolbox.transformer import path2FileName
 
 FILENAME = path2FileName(__file__)

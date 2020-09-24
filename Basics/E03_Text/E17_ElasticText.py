@@ -27,7 +27,7 @@ from pagebot.elements import *
 from pagebot.document import Document
 from pagebot.toolbox.color import color, noColor
 from pagebot.toolbox.units import pt, em
-from pagebot.toolbox.loremipsum import loremipsum
+from pagebot.toolbox.loremipsum import loremIpsum
 from pagebot.toolbox.transformer import path2FileName
 
 FONT_NAME = 'PageBot-Regular'
@@ -52,7 +52,7 @@ def makeText(contextName):
     page = doc[1] # Get page on pageNumber, first in row (this is only one now).
     page.padding = padding
     cw = (page.pw - 2*gutter)/3 # Calculate the column with for 3 cols.
-    txt = loremipsum(words=80)
+    txt = loremIpsum(words=80)
 
     # Make Text elements, directly from attributes, instead of style dictionary
     # or BabelString.

@@ -31,7 +31,6 @@ from pagebot.elements import newText, newRect, newLine
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.color import color, blackColor
 from pagebot.toolbox.units import pt, em, mm
-from pagebot.toolbox.loremipsum import loremipsum
 from pagebot.toolbox.transformer import path2FileName
 
 fontSize = pt(28)

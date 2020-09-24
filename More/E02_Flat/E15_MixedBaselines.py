@@ -15,7 +15,7 @@
 import os
 from flat import rgb, font, shape, strike, document, paragraph, text
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.toolbox.loremipsum import loremipsum
+from pagebot.toolbox.loremipsum import loremIpsum
 
 EXPORT_PATH = '_export/15_MixedBaselines.pdf'
 if not os.path.exists('_export'):
@@ -41,7 +41,7 @@ R = 20 # radius of origin marker
 fDoc = document(W, H, 'pt')
 fPage = fDoc.addpage()
 
-txt = loremipsum()
+txt = loremIpsum()
 
 # Text has to be split, not to contain newlines, into paragraphs.
 P = 80 # Padding

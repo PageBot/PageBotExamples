@@ -14,7 +14,7 @@ import os
 from pagebot.contexts import getContext
 from pagebot.document import Document
 from pagebot.elements import *
-from pagebot.toolbox.loremipsum import loremipsum
+from pagebot.toolbox.loremipsum import loremIpsum
 from pagebot.toolbox.units import pt
 from pagebot.fonttoolbox.objects.font import findFont
 
@@ -35,7 +35,7 @@ for context in contexts:
 	doc = Document(w=W, h=H, context=context)
 	page = doc[1]
 	page.padding = padding
-	bs = context.newString(loremipsum(), style)
+	bs = context.newString(loremIpsum(), style)
 	newText(bs, parent=page, x=padding, y=padding, w=page.pw, h=page.ph)
 
 	doc.export(EXPORT_PATH % context.name)

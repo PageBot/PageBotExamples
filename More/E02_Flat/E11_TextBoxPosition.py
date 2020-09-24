@@ -18,7 +18,7 @@
 import os
 from flat import rgb, font, shape, strike, document, paragraph, text
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.toolbox.loremipsum import loremipsum
+from pagebot.toolbox.loremipsum import loremIpsum
 
 EXPORT_PATH = '_export/11_TextBoxPosition.pdf'
 if not os.path.exists('_export'):
@@ -43,7 +43,7 @@ st = strike(flatFont).color(red).size(fontSize).tracking(0.1)
 fDoc = document(W, H, 'pt')
 fPage = fDoc.addpage()
 
-txt = loremipsum()
+txt = loremIpsum()
 
 # Text has to be split, not to contain newlines, into paragraphs.
 M = 80 # Margin

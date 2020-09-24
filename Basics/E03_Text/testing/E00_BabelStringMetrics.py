@@ -24,10 +24,10 @@ import traceback
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.toolbox.color import color
-from pagebot.toolbox.loremipsum import loremipsum
+from pagebot.toolbox.loremipsum import loremIpsum
 from pagebot.toolbox.units import pt, em
 
-txt = loremipsum()
+txt = loremIpsum()
 print(len(txt))
 
 def babelStringMetrics(contextName):

@@ -13,7 +13,7 @@
 import os
 from flat import rgb, font, shape, strike, document, paragraph, text
 from pagebot.fonttoolbox.objects.font import findFont
-from pagebot.toolbox.loremipsum import loremipsum
+from pagebot.toolbox.loremipsum import loremIpsum
 
 EXPORT_PATH = '_export/12_TextSize.pdf'
 
@@ -43,7 +43,7 @@ figure = shape().stroke(black).width(1)
 # Flat has origin in top-left
 fDoc = document(W, H, 'pt')
 fPage = fDoc.addpage()
-txt = loremipsum()
+txt = loremIpsum()
 P = 80 # Page padding
 x = P
 

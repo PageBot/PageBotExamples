@@ -29,7 +29,6 @@ from pagebot.document import Document
 from pagebot.conditions import *
 from pagebot.toolbox.color import color, blackColor
 from pagebot.toolbox.units import pt, em, mm
-from pagebot.toolbox.loremipsum import loremipsum
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.transformer import path2FileName

@@ -26,7 +26,7 @@ from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.fonttoolbox.fontpaths import *
 from pagebot.fonttoolbox.objects.family import getFamilyPaths, findFamily, getFamily
 from pagebot.toolbox.transformer import path2FileName
-from pagebot.toolbox.loremipsum import  loremipsum
+from pagebot.toolbox.loremipsum import  loremIpsum
 
 H, W = A3
 H = pt(H)
@@ -35,7 +35,6 @@ MAX_PER_PAGE = 5
 MAX_PAGES = 20
 P = pt(48)
 FILENAME = path2FileName(__file__)
-LOREMIPSUM = loremipsum()
 
 def verboseFam(fam):
     print(fam)
@@ -93,9 +92,10 @@ def draw(contextName):
         f = findFont(pbFont)
         if f is not None and not f.name.startswith('Amstel'):
             i += 1
+            txt = loremIpsum(doShuffle=True)
             g = newGroup(parent=page, conditions=c1, showFrame=True, strokeWidth=1, stroke=(0, 1, 0), w=W, h=pt(boxHeight))
             newText('%s\n' % pbFont, parent=g, conditions=c2, fontSize=16, border=1, stroke=(1, 0, 0), strokeWidth=1, fill=(0, 1, 0), w=pt(w0), h=pt(boxHeight))
-            t = newText(LOREMIPSUM, parent=g, conditions=c3, font=f, fontSize=pt(48), stroke=(0, 0, 1), strokeWidth=1, w=pt(w1), h=pt(boxHeight), x=pt(x1))
+            t = newText(txt, parent=g, conditions=c3, font=f, fontSize=pt(48), stroke=(0, 0, 1), strokeWidth=1, w=pt(w1), h=pt(boxHeight), x=pt(x1))
         if i == MAX_PER_PAGE:
             page = page.next
             page.padding = P

@@ -26,10 +26,10 @@ from AppKit import NSFont
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.toolbox.units import pt, em
-from pagebot.toolbox.loremipsum import loremipsum
+from pagebot.toolbox.loremipsum import loremIpsum
 from pagebot.toolbox.transformer import path2FileName
 FILENAME = path2FileName(__file__)
-loremIpsum = loremipsum()
+loremIpsum = loremIpsum()
 W = 800
 H = 800
 P = 10

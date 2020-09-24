@@ -26,14 +26,14 @@ from pagebot.constants import *
 from pagebot.document import Document
 from pagebot.elements import newText, newRect, newLine
 from pagebot.toolbox.color import color
-from pagebot.toolbox.loremipsum import loremipsum
+from pagebot.toolbox.loremipsum import loremIpsum
 from pagebot.toolbox.transformer import path2FileName
 from pagebot.toolbox.units import pt, em
 
 H, W = A4 # Standard paper size from constants.
 FILENAME = path2FileName(__file__)
 
-loremIpsum = loremipsum()
+loremIpsum = loremIpsum()
 
 def draw(contextName):
     context = getContext(contextName)
