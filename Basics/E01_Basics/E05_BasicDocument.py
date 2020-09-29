@@ -47,6 +47,7 @@ def draw(contextName):
 
     # Try other positions
     #conditions = (Left2Left(), Bottom2Bottom())
+    #conditions = ()
     conditions = (Right2Right(), Float2Top(), Float2Left(), )
     f = color(0.8)
 
@@ -55,18 +56,26 @@ def draw(contextName):
     condition. Size measures can be any type of units. Their type is shown in
     the measured output.'''
 
-    newRect(r=SQ, parent=page, conditions=conditions, fill=f, stroke=0,
-            showOrigin=True)
+    rectangle = newRect(r=SQ, x=0, y=0, parent=page, conditions=conditions, fill=f, stroke=0,
+            showOrigin=True, showElementINfo=True,)
 
-    newCircle(r=SQ, parent=page, conditions=conditions, fill=f, stroke=0,
-            showOrigin=True)
+    #newCircle(r=SQ, parent=page, conditions=conditions, fill=f, stroke=0,
+    #        showOrigin=True)
 
     # FIXME: text box doesn't align correctly.
-    e = newText(bs, w=2*SQ, h=2*SQ, parent=page, showDimensions=True,
+    textBox = newText(bs, x=100, y=0, w=2*SQ, h=2*SQ, parent=page, showDimensions=True,
             showFrame=True, showOrigin=True, conditions=conditions, fill=f,
-            showElementInfo=True)
+            showElementInfo=True, yAlign='bottom')
 
+    print(rectangle.mTop)
+    print(rectangle.top)
+    print(rectangle.mBottom)
+    print(rectangle.bottom)
 
+    print(textBox.mTop)
+    print(textBox.top)
+    print(textBox.mBottom)
+    print(textBox.bottom)
     page.solve()
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
