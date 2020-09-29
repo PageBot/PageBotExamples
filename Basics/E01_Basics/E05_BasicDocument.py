@@ -24,6 +24,7 @@ from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, mm
 from pagebot.constants import CENTER, LEFT, EXPORT
 from pagebot.toolbox.transformer import path2FileName
+from pagebot.toolbox.loremipsum import  loremIpsum
 
 # Template for the export path, allowing to include context name
 W, H = pt(800), pt(600)
@@ -39,26 +40,32 @@ def draw(contextName):
     page = doc[1]
     page.name = 'First page'
     page.padding = 20
-    print('One page in the document of %s x %s' % (page.w, page.h))
     view = doc.getView()
     view.showPadding = True
-    bs = context.newString(page.name, dict(font=fontName, fontSize=pt(24)))
+    txt = loremIpsum(doShuffle=True)
+    bs = context.newString(txt, dict(font=fontName, fontSize=pt(24)))
 
     # Try other positions
     #conditions = (Left2Left(), Bottom2Bottom())
-    conditions = (Left2Left(), Top2Top())
+    conditions = (Right2Right(), Float2Top(), Float2Left(), )
     f = color(0.8)
 
     '''Position rectangle in the center of the page area. Notice that the (x, y)
     position is undefined, default is (0, 0), since will be filled by the
     condition. Size measures can be any type of units. Their type is shown in
     the measured output.'''
-    e = newText(bs, w=300, h=50, parent=page, #pl=3, pt=3,
-        showDimensions=True, showFrame=True, showOrigin=True, conditions=conditions,
-        fill=f, showElementInfo=True)
 
     newRect(r=SQ, parent=page, conditions=conditions, fill=f, stroke=0,
             showOrigin=True)
+
+    newCircle(r=SQ, parent=page, conditions=conditions, fill=f, stroke=0,
+            showOrigin=True)
+
+    # FIXME: text box doesn't align correctly.
+    e = newText(bs, w=2*SQ, h=2*SQ, parent=page, showDimensions=True,
+            showFrame=True, showOrigin=True, conditions=conditions, fill=f,
+            showElementInfo=True)
+
 
     page.solve()
 
