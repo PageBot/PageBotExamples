@@ -29,7 +29,7 @@ from pagebot.toolbox.loremipsum import  loremIpsum
 # Template for the export path, allowing to include context name
 W, H = pt(800), pt(600)
 FILENAME = path2FileName(__file__)
-fontName = 'PageBot-Regular'
+FONTNAME = 'Bungee-Regular'
 SQ = 50
 
 def draw(contextName):
@@ -41,10 +41,12 @@ def draw(contextName):
     page.name = 'First page'
     page.padding = 20
     txt = 'Hello World'
-    bs = context.newString(txt, dict(font=fontName, fontSize=pt(96)))
-    f = color(0.8)
-    textBox = newText(bs, x=W/2, y=W/4, w=W/2, h=H/2, parent=page, showDimensions=True,
-            showFrame=True, showOrigin=True, xTextAlign=CENTER, fill=f, showElementInfo=True)
+    f = color(0.7)
+    textBox = newText('Hello World', font=FONTNAME, fontSize=96, x=W/4, y=W/4, w=W/2, h=H/2,
+            parent=page, showDimensions=True, showFrame=True, showOrigin=True,
+            fill=f, showElementInfo=True)
+            # TODO: test these:
+            #xTextAlign=CENTER, yTextAlign=CENTER)
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
     doc.export(exportPath)

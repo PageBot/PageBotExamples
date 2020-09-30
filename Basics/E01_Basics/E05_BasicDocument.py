@@ -45,9 +45,6 @@ def draw(contextName):
     txt = loremIpsum(doShuffle=True)
     bs = context.newString(txt, dict(font=fontName, fontSize=pt(24)))
 
-    # Try other positions
-    #conditions = (Left2Left(), Bottom2Bottom())
-    #conditions = ()
     conditions = (Right2Right(), Float2Top(), Float2Left(), )
     f = color(0.8)
 
@@ -56,16 +53,15 @@ def draw(contextName):
     condition. Size measures can be any type of units. Their type is shown in
     the measured output.'''
 
-    rectangle = newRect(r=SQ, x=0, y=0, parent=page, conditions=conditions, fill=f, stroke=0,
-            showOrigin=True, showElementInfo=True,)
+    rectangle = newRect(r=SQ, parent=page, conditions=conditions, fill=f, stroke=0,
+            showOrigin=True, showDimensions=True,)
 
     # FIXME: text box doesn't align correctly.
     textBox = newText(bs, w=2*SQ, h=2*SQ, parent=page, showDimensions=True,
-            showFrame=True, showOrigin=True, conditions=conditions, fill=f,
-            showElementInfo=True)#, yAlign='bottom')
+            showFrame=True, showOrigin=True, conditions=conditions, fill=f)
 
     newCircle(r=SQ, parent=page, conditions=conditions, fill=f, stroke=0,
-            showOrigin=True)
+            showOrigin=True, showDimensions=True)
 
 
     '''
