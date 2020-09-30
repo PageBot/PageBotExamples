@@ -57,16 +57,18 @@ def draw(contextName):
     the measured output.'''
 
     rectangle = newRect(r=SQ, x=0, y=0, parent=page, conditions=conditions, fill=f, stroke=0,
-            showOrigin=True, showElementINfo=True,)
-
-    #newCircle(r=SQ, parent=page, conditions=conditions, fill=f, stroke=0,
-    #        showOrigin=True)
+            showOrigin=True, showElementInfo=True,)
 
     # FIXME: text box doesn't align correctly.
-    textBox = newText(bs, x=100, y=0, w=2*SQ, h=2*SQ, parent=page, showDimensions=True,
+    textBox = newText(bs, w=2*SQ, h=2*SQ, parent=page, showDimensions=True,
             showFrame=True, showOrigin=True, conditions=conditions, fill=f,
-            showElementInfo=True, yAlign='bottom')
+            showElementInfo=True)#, yAlign='bottom')
 
+    newCircle(r=SQ, parent=page, conditions=conditions, fill=f, stroke=0,
+            showOrigin=True)
+
+
+    '''
     print(rectangle.mTop)
     print(rectangle.top)
     print(rectangle.mBottom)
@@ -76,6 +78,7 @@ def draw(contextName):
     print(textBox.top)
     print(textBox.mBottom)
     print(textBox.bottom)
+    '''
     page.solve()
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
