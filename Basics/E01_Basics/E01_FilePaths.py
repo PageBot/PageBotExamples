@@ -29,7 +29,7 @@ from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.transformer import path2FileName
 
 H, W = A3
-GUTTER = pt(12)
+GUTTER = pt(20)
 FILENAME = path2FileName(__file__)
 font = findFont('Roboto-Regular')
 fontSize = 14
@@ -45,12 +45,12 @@ def draw(contextName):
 
     # Get the page.
     page = doc[1]
-    page.padding = 20
+    page.padding = GUTTER
     view = doc.getView()
     view.showPadding = True
 
     # Make a set of conditions for the element positions of this page.
-    c = (Float2Left(), Float2Top())
+    c = (Right2Right(), Float2Top(), Float2Left(), )
     # FIXME: causes single line textboxes to have too much bottom padding in Flat.
     # Fit2Right()
 
@@ -61,30 +61,24 @@ def draw(contextName):
     style = dict(fontSize=fontSize, font=font, leading=leading)
     msg = 'Root path is %s' % rootPath
     bs = context.newString(msg, style)
-    w = W / 2 - 2*GUTTER
-    h = H / 2 - 2*GUTTER
-    topText1 = makeText(bs, page, font, c, w=w, h=h)
+    w = (W - 2*GUTTER) / 2 - 0.5
+    h = (H - 2*GUTTER) / 2
+    makeText(bs, page, font, c, w=w, h=h)
 
     resourcesPath = getResourcesPath()
     msg = 'Resources path is %s' % resourcesPath
     bs = context.newString(msg, style)
-    topText2 = makeText(bs, page, font, c, w=w, h=h)
+    makeText(bs, page, font, c, w=w, h=h)
 
     msg = 'Default font path is %s' % font.path
-    msg = '\n • '.join(msg.split('/'))
+    msg = '\n • /'.join(msg.split('/'))
     bs = context.newString(msg, style)
-    #c = (Right2Right(), Float2Top())
-    column1 = makeText(bs, page, font, c, w=w, h=h)
-
-    # Forces column width, so second column isn't pushed away.
-    #column1.w = page.pw / 2 - 2*GUTTER
-    #column1.mr = 0
+    makeText(bs, page, font, c, w=w, h=h)
 
     msg = 'Roboto font path is %s' % font.path
-    msg = '\n • '.join(msg.split('/'))
+    msg = '\n • /'.join(msg.split('/'))
     bs = context.newString(msg, style)
-    #c = (Left2Left(), Float2Top())
-    column2 = makeText(bs, page, font, c, w=w, h=h)
+    makeText(bs, page, font, c, w=w, h=h)
 
     # Let the page solve all of its child element layout conditions.
     page.solve()
@@ -93,10 +87,9 @@ def draw(contextName):
 def makeText(t, page, f, c, w=None, h=None):
     """Create a new text box with e give layout conditions
     and with page as parent."""
-    t = newText(t, font=f, w=w, h=h, parent=page, conditions=c, strokeWidth=1,
-        margin=0, showFrame=True, showDimensions=True, showOrigin=True)
-    #t.showOrigin = True
-    return t
+    newText(t, font=f, w=w, h=h, parent=page, conditions=c, strokeWidth=1,
+            margin=0, padding=10, showDimensions=True, showFrame=True,
+            showOrigin=True)
 
 #for contextName in ('Flat',):
 for contextName in ('DrawBot', 'Flat'):
