@@ -50,7 +50,7 @@ def draw(contextName):
     view.showPadding = True
 
     # Make a set of conditions for the element positions of this page.
-    c = (Left2Left(), Float2Top())
+    c = (Float2Left(), Float2Top())
     # FIXME: causes single line textboxes to have too much bottom padding in Flat.
     # Fit2Right()
 
@@ -61,39 +61,40 @@ def draw(contextName):
     style = dict(fontSize=fontSize, font=font, leading=leading)
     msg = 'Root path is %s' % rootPath
     bs = context.newString(msg, style)
-    topText1 = makeText(bs, page, font, c)
+    w = W / 2 - 2*GUTTER
+    h = H / 2 - 2*GUTTER
+    topText1 = makeText(bs, page, font, c, w=w, h=h)
 
     resourcesPath = getResourcesPath()
     msg = 'Resources path is %s' % resourcesPath
     bs = context.newString(msg, style)
-    topText2 = makeText(bs, page, font, c)
+    topText2 = makeText(bs, page, font, c, w=w, h=h)
 
     msg = 'Default font path is %s' % font.path
     msg = '\n • '.join(msg.split('/'))
     bs = context.newString(msg, style)
-    c = (Right2Right(), Float2Top())
-    column1 = makeText(bs, page, font, c)
+    #c = (Right2Right(), Float2Top())
+    column1 = makeText(bs, page, font, c, w=w, h=h)
 
     # Forces column width, so second column isn't pushed away.
-    column1.w = page.pw / 2 - 2*GUTTER
-    column1.mr = 0
+    #column1.w = page.pw / 2 - 2*GUTTER
+    #column1.mr = 0
 
     msg = 'Roboto font path is %s' % font.path
     msg = '\n • '.join(msg.split('/'))
     bs = context.newString(msg, style)
-    c = (Left2Left(), Float2Top())
-    column2 = makeText(bs, page, font, c)
-    column2.w = page.pw / 2 - 2*GUTTER
+    #c = (Left2Left(), Float2Top())
+    column2 = makeText(bs, page, font, c, w=w, h=h)
 
     # Let the page solve all of its child element layout conditions.
     page.solve()
     doc.export(exportPath)
 
-def makeText(t, page, f, c):
+def makeText(t, page, f, c, w=None, h=None):
     """Create a new text box with e give layout conditions
     and with page as parent."""
-    t = newText(t, font=f, parent=page, conditions=c, strokeWidth=1,
-        margin=GUTTER)
+    t = newText(t, font=f, w=w, h=h, parent=page, conditions=c, strokeWidth=1,
+        margin=0, showFrame=True, showDimensions=True, showOrigin=True)
     #t.showOrigin = True
     return t
 
