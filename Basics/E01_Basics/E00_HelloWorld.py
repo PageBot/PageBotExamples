@@ -33,7 +33,6 @@ FONTNAME = 'Bungee-Regular'
 SQ = 50
 
 def draw(contextName):
-    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     doc = Document(w=W, h=H, context=context)
     # Gets the first page from te document.
@@ -49,6 +48,7 @@ def draw(contextName):
             #xTextAlign=CENTER, yTextAlign=CENTER)
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, doc.context.name)
     doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):

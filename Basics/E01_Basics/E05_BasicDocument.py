@@ -54,14 +54,14 @@ def draw(contextName):
     the measured output.'''
 
     rectangle = newRect(r=SQ, parent=page, conditions=conditions, fill=f, stroke=0,
-            showOrigin=True, showDimensions=True,)
+            showOrigin=True, showDimensions=True, showElementInfo=True)
 
     # FIXME: text box doesn't align correctly.
     textBox = newText(bs, w=2*SQ, h=2*SQ, parent=page, showDimensions=True,
-            showFrame=True, showOrigin=True, conditions=conditions, fill=f)
+            showFrame=True, showOrigin=True, conditions=conditions, fill=f, showElementInfo=True)
 
     newCircle(r=SQ, parent=page, conditions=conditions, fill=f, stroke=0,
-            showOrigin=True, showDimensions=True)
+            showOrigin=True, showDimensions=True, showElementInfo=True)
 
 
     '''
