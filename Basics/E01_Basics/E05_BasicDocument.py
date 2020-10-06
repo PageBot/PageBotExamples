@@ -52,29 +52,14 @@ def draw(contextName):
     position is undefined, default is (0, 0), since will be filled by the
     condition. Size measures can be any type of units. Their type is shown in
     the measured output.'''
+    options = dict(parent=page, showOrigin=True, showDimensions=True,
+            showElementInfo=True, showFlowConnections=True,
+            conditions=conditions, fill=f, stroke=0)
 
-    rectangle = newRect(r=SQ, parent=page, conditions=conditions, fill=f, stroke=0,
-            showOrigin=True, showDimensions=True, showElementInfo=True)
+    rectangle = newRect(r=SQ ,**options)
+    textBox = newText(bs, w=2*SQ, h=2*SQ, **options)
+    newCircle(r=SQ, **options)
 
-    # FIXME: text box doesn't align correctly.
-    textBox = newText(bs, w=2*SQ, h=2*SQ, parent=page, showDimensions=True,
-            showFrame=True, showOrigin=True, conditions=conditions, fill=f, showElementInfo=True)
-
-    newCircle(r=SQ, parent=page, conditions=conditions, fill=f, stroke=0,
-            showOrigin=True, showDimensions=True, showElementInfo=True)
-
-
-    '''
-    print(rectangle.mTop)
-    print(rectangle.top)
-    print(rectangle.mBottom)
-    print(rectangle.bottom)
-
-    print(textBox.mTop)
-    print(textBox.top)
-    print(textBox.mBottom)
-    print(textBox.bottom)
-    '''
     page.solve()
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
