@@ -41,13 +41,22 @@ def draw(contextName):
     page.padding = 20
     txt = 'Hello World'
     f = color(0.7)
-    textBox = newText('Hello World', font=FONTNAME, fontSize=96, x=W/4, y=W/4, w=W/2, h=H/2,
-            parent=page, showDimensions=True, showFrame=True, showOrigin=True,
-            fill=f, showElementInfo=True)
-            # TODO: test these:
-            #xTextAlign=CENTER, yTextAlign=CENTER)
 
-    # Export in _export folder that does not commit in Git. Force to export PDF.
+    # TODO: test these:
+    #xTextAlign=CENTER
+    #yTextAlign=CENTER
+    # showFlowConnections
+    options = dict(
+            showDimensions=True,
+            showFrame=True,
+            showOrigin=True,
+            showElementInfo=True)
+
+    textBox = newText('Hello World', parent=page, font=FONTNAME, fontSize=96,
+            x=W/4, y=W/4, w=W/2, h=H/2, fill=f, **options)
+
+    # Export in _export folder that does not commit in Git. Force to export
+    # PDF.
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, doc.context.name)
     doc.export(exportPath)
 

@@ -40,6 +40,7 @@ def draw(contextName):
     page = doc[1]
     page.name = 'First page'
     page.padding = 20
+
     view = doc.getView()
     view.showPadding = True
     txt = loremIpsum(doShuffle=True)
@@ -56,10 +57,10 @@ def draw(contextName):
             showElementInfo=True, showFlowConnections=True,
             conditions=conditions, fill=f, stroke=0)
 
-    rectangle = newRect(r=SQ ,**options)
-    textBox = newText(bs, w=2*SQ, h=2*SQ, **options)
-    newCircle(r=SQ, **options)
-    newPolygon(points=[(0, 0), (100, 100)], **options)
+    rectangle = newRect(name='rect', r=SQ ,**options)
+    textBox = newText(bs, name='text', w=2*SQ, h=2*SQ, **options)
+    newCircle(name='circle', r=SQ, **options)
+    newPolygon(name='polygon', points=[(0, 0), (100, 100)], **options)
 
     page.solve()
 
