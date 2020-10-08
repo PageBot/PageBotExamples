@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E03_Fonts.py
+#     E05_Fonts.py
 #
 #     Shows how to get fonts.
 #

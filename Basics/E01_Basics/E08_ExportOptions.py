@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E06_AdvancedDocument.py
+#     E08_ExportOptions.py
 #
 #     Shows how to start a document and export it to PNG and
 #     PDF in the simplest steps.

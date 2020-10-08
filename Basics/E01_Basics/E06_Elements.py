@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E05_BasicDocument.py
+#     E06_Elements.py
 #
 #     Test handling of pages in a document.
 #
@@ -59,6 +59,7 @@ def draw(contextName):
     rectangle = newRect(r=SQ ,**options)
     textBox = newText(bs, w=2*SQ, h=2*SQ, **options)
     newCircle(r=SQ, **options)
+    newPolygon(points=[(0, 0), (100, 100)], **options)
 
     page.solve()
 

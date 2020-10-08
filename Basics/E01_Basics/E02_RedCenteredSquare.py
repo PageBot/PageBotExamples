@@ -9,7 +9,7 @@
 #
 # -----------------------------------------------------------------------------
 #
-#     E08_RedCenteredSquare.py
+#     E02_RedCenteredSquare.py
 #
 from pagebot import getContext
 from pagebot.document import Document
@@ -21,23 +21,28 @@ from pagebot.constants import EXPORT
 from pagebot.toolbox.transformer import path2FileName
 
 FILENAME = path2FileName(__file__)
-W, H = pt(200, 200) # Get size units
+
+# Get size units.
+W, H = pt(200, 200)
 
 def draw(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     # Create document with default 1 page.
     doc = Document(w=W, h=H)
-    # First page in the list is uneven (right side)
+    # First page in the list is uneven (right side).
     page = doc[1]
-    # Create a new rectangle element with position conditions
+
+    # Creates a new rectangle element with position conditions.
     newRect(parent=page, fill=color('red'), size=pt(140, 140),
         # Show measure lines on the element.
         showDimensions=True,
         conditions=[Center2Center(), Middle2Middle()])
+
     # Make the page apply all conditions.
     page.solve()
-    # Export the document page as png, so it shows as web image.
+
+    # Exports the document page as PDF.
     doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):

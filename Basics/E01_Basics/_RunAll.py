@@ -21,14 +21,13 @@ EXPORT_PATH = '_export'
 if not os.path.exists(EXPORT_PATH):
 	os.mkdir(EXPORT_PATH)
 
-
 import E00_HelloWorld
 import E01_FilePaths
-import E02_Elements
-import E03_Fonts
+import E02_RedCenteredSquare
+import E03_FloatingElements
 import E04_Units
-import E05_BasicDocument
-import E06_AdvancedDocument
+import E05_Fonts
+import E06_Elements
 import E07_BezierPath
-import E08_RedCenteredSquare
-import E09_DocumentWithPages
+import E08_ExportOptions
+import E09_Pages

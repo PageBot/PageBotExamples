@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E00_DocumentWithPages.py
+#     E09_Pages.py
 #
 #     Test handling of pages in a document.
 #

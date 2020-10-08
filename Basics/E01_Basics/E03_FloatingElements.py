@@ -11,7 +11,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E02_Elements.py
+#     E03_FloatingElements.py
 #
 #     Make a page with a variety of elements and use conditions to place them.
 
@@ -47,21 +47,14 @@ def draw(contextName):
     page = doc[1] # Get the one and single page of the document.
     page.padding = P # Set the page padding.
 
-    # Create a new blue rectangle element and align it on top-left,
-    # floating to that position in case something is already there.
-    # Parent of the element is the current page.
+    c = (Right2Right(), Float2Top(), Float2Left())
     #c = (Float2Top(), Float2Left())
     #c = ()
     #c = (Float2Top())
-    c = (Right2Right(), Float2Top(), Float2Left())
     #c = (Right2Right()) #Float2Top(), Float2Left())
     #c = (Left2Left(), Top2Top())
 
-    # Create a new red circle element and align it on top-left,
-    # floating to that position relative to what is already there.
-    # Parent of the element is the current page.
-
-
+    # Creates new geometric elements and aligns them.
     for i in range(N):
         r = F
         g = 0
@@ -76,28 +69,15 @@ def draw(contextName):
         else:
             newRect(r=SQ, parent=page, conditions=c, fill=f,
                     stroke=0, showOrigin=True)
-    '''
-    # Create two text boxes and align it on top-left,
-    # floating to that position relative to what is already there.
-    newText('Text    !', parent=page, conditions=c, fontSize=60, stroke=(1, 1, 0),
-            strokeWidth=20, textFill=0.5, font=font)
-    newText('Text Box', parent=page, conditions=c, stroke=0, strokeWidth=0.5, fill=(1, 1, 0),
-            fontSize=30, font=font, textFill=(0, 0, 1))
-    '''
-
-    '''
-    # Create two text boxes and align it on top-left,
-    # floating to that position relative to what is already there.
-    newRect(parent=page, conditions=(Left2Left(), Fit2Width(), Float2Top(), Fit2Bottom()),
-            fill=0.9, showOrigin=True)
-    '''
 
     # Solve conditions of all placed elements on the page
     score = page.solve()
 
     # Set some viewing parameters.
     view = doc.view
-    view.showPadding = True # Show the padding of the page, where conditions align.
+
+    # Show the padding of the page, where conditions align.
+    view.showPadding = True
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
     doc.export(exportPath)
