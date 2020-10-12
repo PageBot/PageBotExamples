@@ -31,8 +31,8 @@ def draw(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     H, W = A3
-    #doc = Document(w=W, h=H, context=context)
-    #page = doc[1]
+    doc = Document(w=W, h=H, context=context)
+    page = doc[1]
     style = {}
     style['fill'] = (1, 0, 0)
     style['stroke'] = (0, 0, 0)
@@ -49,8 +49,8 @@ def draw(contextName):
     #path.qCurveTo((0, 0), (0, 100), (100, 100), (100, 0), None)
     #path.closePath()
 
-    #page.solve()
-    #doc.export(exportPath)
+    page.solve()
+    doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
     draw(contextName)

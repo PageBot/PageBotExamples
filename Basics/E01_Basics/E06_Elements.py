@@ -60,7 +60,14 @@ def draw(contextName):
     rectangle = newRect(name='rect', r=SQ ,**options)
     textBox = newText(bs, name='text', w=2*SQ, h=2*SQ, **options)
     newCircle(name='circle', r=SQ, **options)
-    newPolygon(name='polygon', points=[(0, 0), (100, 100)], **options)
+    newPolygon(name='polygon', points=[(0, 0), (20, 100), (40, 0), (60, 100), (80, 0), (100, 100)], **options)
+    #newPaths(**options)
+
+    from pagebot.fonttoolbox.fontpaths import getTestFontsPath
+    from pagebot.fonttoolbox.objects.font import Font
+    fontPath = getTestFontsPath() + '/google/roboto/Roboto-Medium.ttf'
+    font = Font(fontPath)
+    e = newGlyphPath(font['e'], **options)
 
     page.solve()
 
