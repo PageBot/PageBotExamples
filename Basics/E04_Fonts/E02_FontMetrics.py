@@ -15,17 +15,22 @@
 #     E01_FontMetrics.py
 #
 
+from pagebot import getContext
+from pagebot.constants import EXPORT
 from pagebot.document import Document
 from pagebot.elements import newLine, newText
-from pagebot import getContext
 from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.color import Color, color
 from pagebot.fonttoolbox.objects.font import findFont
+from pagebot.toolbox.transformer import path2FileName
+
+FILENAME = path2FileName(__file__)
 
 W, H = pt(800, 600)
 P = 50
 
 def draw(contextName):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     doc = Document(w=W, h=H, context=context)
     page = doc[1]
@@ -38,7 +43,7 @@ def draw(contextName):
     y += h + P
     fontName = 'Roboto-Regular'
     h = drawFont(context, page, x, y, fontName)
-    doc.export('_export/E00_FontMetric-%s.pdf' % contextName)
+    doc.export(exportPath)
 
 def drawFont(context, page, x, y, fontName):
     font = findFont(fontName)

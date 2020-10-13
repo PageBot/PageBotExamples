@@ -12,17 +12,20 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     GlyphContourCircles.py
+#     E05_GlyphCircleIntersection.py
 #
 #     Draw a number of circles on the contour with equal distance.
 #
+from math import radians, sin, cos
+from pagebot.constants import EXPORT
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot import getContext
 from pagebot.toolbox.color import color, noColor, blackColor
+from pagebot.toolbox.transformer import path2FileName
+
+FILENAME = path2FileName(__file__)
 
 GLYPH_NAME = 'ampersand'
-
-from math import radians, sin, cos
 
 def drawIntersectingCircle(m, rr, spokes, c, x, y):
     """Draw intersecting circle with spokes. Similar to
@@ -42,14 +45,12 @@ def drawIntersectingCircle(m, rr, spokes, c, x, y):
         p1 = p
 
 def draw(contextName, verbose=False):
-    c = getContext(contextName)
-
-    c.newPage(1000, 1000)
-    c.scale(0.5)
-
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     font = findFont('Roboto-Regular')
     glyph = font[GLYPH_NAME]
-
+    c = getContext(contextName)
+    c.newPage(1000, 1000)
+    c.scale(0.5)
     c.stroke(blackColor, 1)
     c.fill(None)
     print('Left margin:', glyph.leftMargin)
@@ -84,10 +85,8 @@ def draw(contextName, verbose=False):
         for p in contour:
             c.oval(x+p[0]-r/2, y+p[1]-r/2, r, r)
 
-    # Draw intersecting points with a circle
-
-
-    # Calculate the intersecting circle and draw it
+    # Draw intersecting points with a circle Calculate the intersecting circle
+    # and draw it.
     spokes = 128 # Accuracy of the intersections
     m = (glyph.width/2, font.info.capHeight/2) # Middle point of the intersection circle
     rr = glyph.width/3 # Radius of the intersection circle
@@ -100,7 +99,7 @@ def draw(contextName, verbose=False):
     for p in c.intersectGlyphWithCircle(glyph, m, rr, spokes):
         c.oval(x+p[0]-r/2, y+p[1]-r/2, r, r)
 
-    c.saveImage('_export/E20_GlyphCircleIntersection-%s.pdf' % contextName)
+    c.saveImage(exportPath)
 
 for contextName in ('DrawBot',):
 #for contextName in ('DrawBot', 'Flat'):

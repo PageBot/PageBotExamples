@@ -22,8 +22,8 @@ if not os.path.exists(EXPORT_PATH):
 	os.mkdir(EXPORT_PATH)
 
 import E01_FindFonts
-import E02_FontContent
 import E02_FontMetrics
 import E03_BabelStringMetrics
 import E04_OS2VarFamily
 import E05_GlyphCircleIntersection
+import E06_FontContent

@@ -27,15 +27,12 @@ from pagebot.toolbox.transformer import path2FileName
 
 FILENAME = path2FileName(__file__)
 
-def makeFonts(contextName):
+def draw(contextName):
+    """Creates a list of installed fonts, skipping the fonts supported inside
+    the PageBot library. For now we just check on Verdana and Georgia, which
+    are supported in most contexts."""
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
-    #
-    #    Installed fonts created a list of font names that are already installed.
-    #    This will miss out the fonts supported inside the PageBot library.
-    #    So for now, we'll just check on Verdana and Georgia,
-    #    which is supposed to exist in all contexts.
-
     allFontNames = context.installedFonts()
     # Shows something like: Total installed fonts: 1993
     print('Total installed fonts: %d' % len(allFontNames))
@@ -49,7 +46,8 @@ def makeFonts(contextName):
     print('Found font names:', fontNames) # Filtering on full family-style name.
 
     fontNames = context.installedFonts(['Verdana', 'Georgia'])
-    # ['Georgia', 'Georgia-Bold', 'Georgia-BoldItalic', 'Georgia-Italic', 'Verdana', 'Verdana-Bold', 'Verdana-BoldItalic', 'Verdana-Italic']
+    # ['Georgia', 'Georgia-Bold', 'Georgia-BoldItalic', 'Georgia-Italic',
+    # 'Verdana', 'Verdana-Bold', 'Verdana-BoldItalic', 'Verdana-Italic']
     print('Fount font names:', fontNames) # Filtering on multiple patterns as "or"
 
     # The PageBot method to look for fonts is find a fanily with an exact name match
@@ -82,16 +80,14 @@ def makeFonts(contextName):
     print('Answer the default font:', font)
 
     # Let's make a page to show all font names.
-
-    style = dict(font='PageBot-Bold', fontSize=pt(12), textFill=0)
-    bs = context.newString('Installed fonts for %s\n' % contextName, style)
-    bs += context.newString('\n'.join(allFontNames))
-
     doc = Document(size=A4, context=context)
     page = doc[1]
     page.padding = pt(30)
+    style = dict(font='PageBot-Bold', fontSize=pt(12), textFill=0)
+    bs = context.newString('Installed fonts for %s\n' % contextName, style)
+    bs += context.newString('\n'.join(allFontNames))
     newText(bs, x=page.pl, y=page.pb, w=page.pw, h=page.ph, parent=page, stroke=(1, 0, 0))
     doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    makeFonts(contextName)
+    draw(contextName)

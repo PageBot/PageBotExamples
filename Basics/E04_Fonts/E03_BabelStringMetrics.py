@@ -11,41 +11,38 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E02_BabelStringMetrics.py
+#     E03_BabelStringMetrics.py
 #
 #     Show some principles of FlatContext usage.
 
 from pagebot import getContext
 from pagebot.document import Document
-from pagebot.constants import A3, TOP
+from pagebot.constants import A3, TOP, EXPORT
 from pagebot.conditions import *
 from pagebot.elements import *
 from pagebot.toolbox.units import *
 from pagebot.toolbox.color import noColor, color
-"""
-from pagebot.toolbox.color import Color, blackColor, blueColor, greenColor
-from pagebot.elements.paths.pagebotpath import PageBotPath
-"""
-for contextName in ('DrawBot', 'Flat'):
-    print('Running example with', contextName)
-    context = getContext(contextName)
+from pagebot.toolbox.transformer import path2FileName
 
-    FILE_NAME = '_export/E02_BabelStringMetrics-%s.pdf' % contextName
+FILENAME = path2FileName(__file__)
+
+def draw(contextName):
+    context = getContext(contextName)
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
 
     # Landscape A3.
     H, W = A3
     SQ = 150
     P  = 50
 
-    # Create a new document for the current context. Create one automatic page.
     doc = Document(w=W, h=H, context=context)
-    page = doc[1] # Get the one and single page of the document.
-    page.padding = P, P, 2*P, P # Set the page padding, not equal to test vertical position.
+    page = doc[1]
+    # Sets the page padding, not equal to test vertical position.
+    page.padding = P, P, 2*P, P
     style = dict(font='PageBot-Regular', fontSize=pt(100), textFill=color(0))#, w=800)
     bs = context.newString('ABCD', style)#, w=800)
     bs.add('EFGH', dict(fontSize=200, textFill=color(0, 1, 0)))
     tw, th = bs.textSize
-    print(bs.w)
     newText(bs, x=P, y=P, parent=page)#, conditions=Fit())
     newLine(x=P, y=P, w=tw, h=0, stroke=0, parent=page)#, conditions=Fit())
 
@@ -76,9 +73,9 @@ for contextName in ('DrawBot', 'Flat'):
     page.solve()
 
     view = doc.view
-    #view.showPadding = True
-
-    # Export in _export folder that does not commit in Git. Force to export PDF.
-    doc.export(FILE_NAME)
+    view.showPadding = True
+    doc.export(exportPath)
 
 
+for contextName in ('DrawBot', 'Flat'):
+    draw(contextName)

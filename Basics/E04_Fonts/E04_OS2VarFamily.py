@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# -----------------------------------------------------------------------------
+#!/usr/bin/env python3 # -----------------------------------------------------------------------------
 #     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #
@@ -11,14 +10,15 @@
 #     Supporting usage of Flat, https://github.com/xxyxyz/flat
 # -----------------------------------------------------------------------------
 #
-#     E23_OS2VarFamily.py
+#     E04_OS2VarFamily.py
 #
 #     TODO: Started using context for drawing.
 #     TODO: Not done for all drawing functions yet.
 #
 #     https://www.typenetwork.com/brochure/opentype-font-variations/
 #     https://variationsguide.typenetwork.com/#xopq
-#     "wght" 134, "wdth" 369, "opsz" 36, “GRAD” 88 , ”XOPQ" 88, "XTRA" 402, "YOPQ" 50, "YTLC" 500, "YTSE" 18;
+#     "wght" 134, "wdth" 369, "opsz" 36, “GRAD” 88 , ”XOPQ" 88, "XTRA" 402,
+#     "YOPQ" 50, "YTLC" 500, "YTSE" 18;
 #
 #     STAT table
 #     https://www.microsoft.com/typography/otspec/stat.htm
@@ -485,20 +485,10 @@ def drawFamilyOverview(context, path):
 
     return varFamily
 
-def makeText(contextName):
-    exportPath = '_export/E23_OS2VarFamily-%s.pdf' % contextName
-    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
-    BASE_PATH = "/Library/Fonts"
-    #f = findFont('Amstelvar-Roman-VF') # Get PageBot Font instance of Variable font.
-    family = getFamily('Amstelvar')
-    paths = family.fonts
-
-
-    context = getContext(contextName)
-
+def draw(contextName):
+    """
     #EXPORT_PATH = '_export/TYPETR-Upgrade.pdf'
     #BASE_PATH = "/Users/petr/Desktop/TYPETR-git/TYPETR-Upgrade/scripts/export/"
-
     #EXPORT_PATH = '_export/GoogleFontFamilies.pdf'
     #BASE_PATH = "/Users/petr/Desktop/git/fonts/ofl/"
 
@@ -508,21 +498,25 @@ def makeText(contextName):
     # Old data
     #EXPORT_GIF = '_export/FontBureauFamilies.gif'
     #BASE_PATH = '/FontDevelopment/WebType-Raw/WT-TTF/'
-
-
+    """
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    BASE_PATH = "/Library/Fonts"
+    family = getFamily('Amstelvar')
+    paths = family.fonts
+    context = getContext(contextName)
     CSV_PATH  = '%s/%s.csv' % (EXPORT, FILENAME)
     exportCSV = open(CSV_PATH, 'w')
-    #exportCSV.write('StyleName,em,H-stem,%H-stem,H-width,%H-width,OS/2-width,OS/2-weight,capHeight,%capHeight\n')
+    exportCSV.write('StyleName,em,H-stem,%H-stem,H-width,%H-width,OS/2-width,OS/2-weight,capHeight,%capHeight\n')
     index = 0
 
     for path in paths:
-        print(path)
-
         if path.startswith('.'):
             continue
+
         dirPath = BASE_PATH + path
         if not os.path.isdir(dirPath):
             continue
+
         drawFamilyOverview(context, dirPath)
         index += 1
         if index > 3:
@@ -532,4 +526,4 @@ def makeText(contextName):
     #context.saveImage(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    makeText(contextName)
+    draw(contextName)

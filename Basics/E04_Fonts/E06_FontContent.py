@@ -11,7 +11,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E00_FontContent.py
+#     E06_FontContent.py
 #
 #     Prints the values of the specified font for naming, info and features and
 #     generate a simple 1000 x 1000 PDF, showing part of the glyph set.  This
@@ -20,10 +20,11 @@
 #     directly using the context.
 
 from pagebot import getContext
+from pagebot.constants import EXPORT
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.color import color, noColor
 from pagebot.toolbox.units import pt
-
+from pagebot.toolbox.transformer import path2FileName
 
 L = 50
 W = H = 1000
@@ -31,9 +32,10 @@ GX = 11
 GY = 11
 M = 50
 FONT_NAME = 'PageBot-Regular'
-#FONT_NAME = 'Amstelvar-Roman-VF'
+FILENAME = path2FileName(__file__)
 
 def draw(contextName, verbose=False):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     f = findFont(FONT_NAME) # Get PageBot Font instance.
 
     if f is None:
@@ -41,7 +43,6 @@ def draw(contextName, verbose=False):
         return
 
     c = getContext(contextName)
-    export_path = '_export/E00_FontContent-%s.pdf' % contextName
     c.newDrawing(w=W, h=H)
 
     if verbose:
@@ -110,7 +111,7 @@ def draw(contextName, verbose=False):
             c.drawGlyph(g, x=x, y=y, fontSize=60, fill=color(0.1), stroke=noColor)
             glyphIndex += 1
 
-    c.saveImage(export_path)
+    c.saveImage(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
     draw(contextName)
