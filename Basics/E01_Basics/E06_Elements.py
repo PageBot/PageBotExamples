@@ -40,7 +40,6 @@ def draw(contextName):
     page = doc[1]
     page.name = 'First page'
     page.padding = 20
-
     view = doc.getView()
     view.showPadding = True
     txt = loremIpsum(doShuffle=True)
@@ -68,6 +67,9 @@ def draw(contextName):
     fontPath = getTestFontsPath() + '/google/roboto/Roboto-Medium.ttf'
     font = Font(fontPath)
     e = newGlyphPath(font['e'], **options)
+
+    points = []
+    #newBezierPath()
 
     page.solve()
 
