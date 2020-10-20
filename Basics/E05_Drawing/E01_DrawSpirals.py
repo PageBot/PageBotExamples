@@ -49,6 +49,8 @@ def drawSpiral(contextName):
     context.moveTo(coords)
     s = '%s, %s' % coords
     context.text(s, coords)
+    context.fill(noColor)
+    context.stroke(blackColor)
 
     for n in range(0, int(N), 4):
         dx1 = n*Sx*D
@@ -76,8 +78,6 @@ def drawSpiral(contextName):
 
         runs = True
 
-    context.fill(noColor)
-    context.stroke(blackColor)
     context.drawPath()
     context.saveImage(exportPath)
 
