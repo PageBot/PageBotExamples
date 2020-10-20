@@ -41,9 +41,9 @@ def draw(contextName):
             #conditions=conditions)
 
     curve = newBezierCurve(x=0, y=0, **options)
-    curve.beginPath('TestID')
-    #curve.moveTo((0, 0))
-    #curve.lineTo((0, 100))
+    curve.newPath('TestID')
+    curve.moveTo((0, 0))
+    curve.lineTo((0, 100))
     #curve.curveTo((50, 75), (60, 50), (50, 25), (0, 0))
     '''
     [(50.0, 50.0)]

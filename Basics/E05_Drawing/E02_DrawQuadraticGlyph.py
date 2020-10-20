@@ -44,12 +44,12 @@ CUBIC_CONTROLPOINT_SIZE = R / 2
 FILENAME = path2FileName(__file__)
 
 def drawSegment(context, path, segment, implied, cps, verbose=False):
-    """
-    Draws a quadratic segment as a cubic Bézier curve in drawBot. Each segment
-    starts and ends with an oncurve point with 0 ... n offcurve control points.
+    """Draws a quadratic segment as a cubic Bézier curve in drawBot. Each
+    segment starts and ends with an oncurve point with 0 ... n offcurve control
+    points.
 
-    NOTE: PageBot implementation in glyph adds the first oncurve
-    as a separate `cp` parameter.
+    NOTE: PageBot implementation in glyph adds the first oncurve as a separate
+    `cp` parameter.
 
     >>> p0 = BezierPoint(100, 100, True)
     >>> p1 = BezierPoint(200, 100, False)

@@ -94,9 +94,6 @@ class BarChart(Rect):
             # If there are child elements, recursively draw them over the pixel image.
             self.buildChildElements(view, origin)
 
-        if self.drawAfter is not None: # Call if defined
-            self.drawAfter(self, view, origin)
-
         b._div()
         b.addJs("""
         var data = %(data)s;
