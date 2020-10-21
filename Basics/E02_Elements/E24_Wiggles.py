@@ -73,8 +73,8 @@ def drawCurvesSequence(wigglePoints):
 
 
 ### Variables
-pt1 = Point(50, 50)
-pt2 = Point(150, 60)
+pt1 = Point(0, 0)
+pt2 = Point(100, 100)
 
 ### Instructions
 size(400, 400)
