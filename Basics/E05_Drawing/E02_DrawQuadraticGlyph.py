@@ -22,8 +22,8 @@ import weakref
 from fontTools.ttLib import TTFont, TTLibError
 from pagebot import getContext
 from pagebot.constants import EXPORT
-from pagebot.contexts.basecontext.basebezierpoint import BaseBezierPoint as BezierPoint
-from pagebot.contexts.basecontext.bezierpath import BezierPath
+from pagebot.contexts.basecontext.basebezierpoint import BaseBezierPoint
+#from pagebot.contexts.basecontext.bezierpath import BezierPath
 from pagebot.fonttoolbox.objects.fontinfo import FontInfo
 from pagebot.fonttoolbox.fontpaths import getFontPaths
 from pagebot.fonttoolbox.objects.glyph import *
@@ -32,6 +32,9 @@ from pagebot.toolbox.units import point3D
 from pagebot.toolbox.color import blueColor, redColor, greenColor, pinkColor, orangeColor, blackColor
 from pagebot.toolbox.transformer import path2FileName
 
+W, H = 1750, 2250
+X0 = 75
+Y0 = 500
 R = 12
 ONCURVE_COLOR = orangeColor
 ONCURVE_SIZE = R
@@ -51,12 +54,12 @@ def drawSegment(context, path, segment, implied, cps, verbose=False):
     NOTE: PageBot implementation in glyph adds the first oncurve as a separate
     `cp` parameter.
 
-    >>> p0 = BezierPoint(100, 100, True)
-    >>> p1 = BezierPoint(200, 100, False)
-    >>> p2 = BezierPoint(200, 200, True)
+    >>> p0 = BaseBezierPoint(100, 100, True)
+    >>> p1 = BaseBezierPoint(200, 100, False)
+    >>> p2 = BaseBezierPoint(200, 200, True)
     >>> segment = [p0, p1, p2]
-    >>> path = BezierPath()
     >>> context = getContext()
+    >>> path = context.newPath()
     >>> drawSegment(context, path, segment)
     """
     assert len(segment) > 1
@@ -107,7 +110,7 @@ def drawSegment(context, path, segment, implied, cps, verbose=False):
         offCurve1 = segment[2]
         x = offCurve0.x + (offCurve1.x - offCurve0.x) * 0.5
         y = offCurve0.y + (offCurve1.y - offCurve0.y) * 0.5
-        newOnCurve = BezierPoint(x, y, True)
+        newOnCurve = BaseBezierPoint(x, y, onCurve=True)
 
         # Store these so they can be used in the infographic.
         implied.append(newOnCurve)
@@ -147,11 +150,13 @@ def drawCoordinates(context, glyph):
     # to contours."""
     contours = []
     contour = None
+    #c = glyph.contours
+    #pbSegments = glyph._segments
     coordinates = glyph.ttGlyph.coordinates
 
     for i, (x, y) in enumerate(coordinates):
         start = i - 1 in glyph.endPtsOfContours
-        p = BezierPoint(x, y, glyph.flags[i])
+        p = BaseBezierPoint(x, y, onCurve=glyph.flags[i])
 
         if i == 0:
             contour = [p]
@@ -173,81 +178,14 @@ def drawCoordinates(context, glyph):
 
     return contours
 
-def draw(context):
-    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
-    context = getContext(contextName)
-    context.fontSize(24)
-    W, H = 1750, 2250
-    X0 = 75
-    Y0 = 500
-    C = 0.5
-    F = 2 / 3
-    glyphName = 'Q'
-    x = 50
-    context.newPage(W, H)
-    PATH = getFontPaths()['Roboto-Black']
-    font = Font(PATH)
-    glyph = font[glyphName]
-    path = context.newPath()
-    context.fill((0, 1, 1, 0.2))
-
-    # Move glyph up so we can see results below descender level.
-    context.translate(X0, Y0)
-
-    # Draws the glyph.
-    c = glyph.contours
-    pbSegments = glyph._segments
-    context.stroke((0, 0.3, 0.3))
-    context.drawGlyphPath(glyph)
-    context.stroke(None)
-    context.fill(0)
-    contours = drawCoordinates(context, glyph)
-
-    segments = []
-    implied = []
-    cps = []
-
-    for n, contour in enumerate(contours):
-        point = contour[0]
-        segment = [point]
-        path.moveTo((point.x, point.y))
-
-        for i, point in enumerate(contour[1:]):
-            if point.onCurve:
-                segment.append(point)
-                segments.append(segment)
-                segment = [point]
-            else:
-                segment.append(point)
-
-        for j, segment in enumerate(segments):
-            # Lets this script calculate and draw implied points and derived cubic
-            # control points. Optionally draw path itself later by calling
-            # drawPath(path) (see below.)
-            drawSegment(context, path, segment, implied, cps)
-
-    # Draws oncurve points and offcurve control points.
-    for contour in contours:
-        for i, point in enumerate(contour):
-            x = point.x
-            y = point.y
-
-            if point.onCurve:
-                context.fill(ONCURVE_COLOR)
-                context.circle(x, y, ONCURVE_SIZE)
-            else:
-                # Quadratic offcurves.
-                context.fill(QUADRATIC_CONTROLPOINT_COLOR)
-                context.circle(x, y, QUADRATIC_CONTROLPOINT_SIZE)
-
+def drawLegend(context):
     x = 500
     y = 400
     d = 30
-    context.fill(0.2)
 
+    context.fill(0.2)
     context.stroke((1, 0, 0))
     context.line((0, 0), (W -2*X0, 0))
-
     x = 0
     y = -100 + 24
     context.line((x, y), (x, y - 114))
@@ -278,6 +216,73 @@ def draw(context):
     context.drawString('Cubic control point', (x, y))
     y -= 30
     context.drawString('Quadratic control point', (x, y))
+
+def drawSegments(context, contours):
+    segments = []
+    implied = []
+    cps = []
+    path = context.newPath()
+
+    for n, contour in enumerate(contours):
+        point = contour[0]
+        segment = [point]
+        path.moveTo((point.x, point.y))
+
+        for i, point in enumerate(contour[1:]):
+            if point.onCurve:
+                segment.append(point)
+                segments.append(segment)
+                segment = [point]
+            else:
+                segment.append(point)
+
+        for j, segment in enumerate(segments):
+            # Lets this script calculate and draw implied points and derived cubic
+            # control points. Optionally draw path itself later by calling
+            # drawPath(path) (see below.)
+            drawSegment(context, path, segment, implied, cps)
+
+def drawPoints(context, contours):
+    # Draws oncurve points and offcurve control points.
+    for contour in contours:
+        for i, point in enumerate(contour):
+            x = point.x
+            y = point.y
+
+            if point.onCurve:
+                context.fill(ONCURVE_COLOR)
+                context.circle(x, y, ONCURVE_SIZE)
+            else:
+                # Quadratic offcurves.
+                context.fill(QUADRATIC_CONTROLPOINT_COLOR)
+                context.circle(x, y, QUADRATIC_CONTROLPOINT_SIZE)
+
+def draw(context):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    context = getContext(contextName)
+    context.fontSize(24)
+    C = 0.5
+    F = 2 / 3
+    glyphName = 'Q'
+    x = 50
+    context.newPage(W, H)
+    PATH = getFontPaths()['Roboto-Black']
+    font = Font(PATH)
+    glyph = font[glyphName]
+    context.fill((0, 1, 1, 0.2))
+
+    # Move glyph up so we can see results below descender level.
+    context.translate(X0, Y0)
+
+    # Draws the glyph.
+    context.stroke((0, 0.3, 0.3))
+    context.drawGlyphPath(glyph)
+    context.stroke(None)
+    context.fill(0)
+    contours = drawCoordinates(context, glyph)
+    drawSegments(context, contours)
+    drawPoints(context, contours)
+    drawLegend(context)
     context.saveImage(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
