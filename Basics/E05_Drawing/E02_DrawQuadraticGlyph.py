@@ -150,8 +150,6 @@ def drawCoordinates(context, glyph):
     # to contours."""
     contours = []
     contour = None
-    #c = glyph.contours
-    #pbSegments = glyph._segments
     coordinates = glyph.ttGlyph.coordinates
 
     for i, (x, y) in enumerate(coordinates):

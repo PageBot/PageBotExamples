@@ -59,12 +59,12 @@ def calcWiggle(pt1, pt2, waveLength, waveHeight, curveSquaring=.57):
 
     return wigglePoints
 
-
 def drawCurvesSequence(wigglePoints):
     myBez = BezierPath()
     myBez.moveTo(wigglePoints[0])
     for eachBcpOut, eachBcpIn, eachAnchor in wigglePoints[1:]:
         myBez.curveTo(eachBcpOut, eachBcpIn, eachAnchor)
+        print(eachBcpOut, eachBcpIn, eachAnchor)
     myBez.endPath()
     for contour in myBez:
         for seg in contour:
