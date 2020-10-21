@@ -81,26 +81,26 @@ def drawSpiral(contextName):
     context.drawPath()
     context.saveImage(exportPath)
 
-'''
-FIXME: only works in DrawBot.
-#dict(name='ElementOrigin', ui='CheckBox', args=dict(value=False)),
-context.Variable(
-  [dict(name='X', ui='Slider',
-        args=dict(minValue=-W/2, value=0, maxValue=W/2)),
-   dict(name='Y', ui='Slider',
-        args=dict(minValue=-H/2, value=0, maxValue=H/2)),
-   dict(name='N', ui='Slider',
-        args=dict(minValue=8*2, value=8*8, maxValue=8*32)),
-   dict(name='Sx', ui='Slider',
-        args=dict(minValue=2, value=10, maxValue=40)),
-   dict(name='Sy', ui='Slider',
-        args=dict(minValue=2, value=10, maxValue=40)),
-   dict(name='Exy', ui='Slider',
-        args=dict(minValue=0.01, value=0.58, maxValue=1)),
-   dict(name='D', ui='Slider',
-        args=dict(minValue=0.1, value=0.5, maxValue=5))
-  ], globals())
-'''
+    '''
+    FIXME: only works from inside DrawBot.
+    #dict(name='ElementOrigin', ui='CheckBox', args=dict(value=False)),
+    context.Variable(
+      [dict(name='X', ui='Slider',
+            args=dict(minValue=-W/2, value=0, maxValue=W/2)),
+       dict(name='Y', ui='Slider',
+            args=dict(minValue=-H/2, value=0, maxValue=H/2)),
+       dict(name='N', ui='Slider',
+            args=dict(minValue=8*2, value=8*8, maxValue=8*32)),
+       dict(name='Sx', ui='Slider',
+            args=dict(minValue=2, value=10, maxValue=40)),
+       dict(name='Sy', ui='Slider',
+            args=dict(minValue=2, value=10, maxValue=40)),
+       dict(name='Exy', ui='Slider',
+            args=dict(minValue=0.01, value=0.58, maxValue=1)),
+       dict(name='D', ui='Slider',
+            args=dict(minValue=0.1, value=0.5, maxValue=5))
+      ], globals())
+    '''
 
 for contextName in ('DrawBot', 'Flat'):
     drawSpiral(contextName)

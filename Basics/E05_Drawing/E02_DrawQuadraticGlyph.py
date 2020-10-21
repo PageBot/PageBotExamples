@@ -142,39 +142,13 @@ def cross(context, x, y, d, r=1, g=0, b=0, a=1):
     context.line((x0, y0), (x1, y1))
     context.line((x2, y2), (x3, y3))
 
-def draw(context):
-    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
-    context = getContext(contextName)
-    context.fontSize(24)
-    W, H = 1750, 2250
-    X0 = 75
-    Y0 = 500
-    C = 0.5
-    F = 2 / 3
-    glyphName = 'Q'
-    x = 50
-    context.newPage(W, H)
-    PATH = getFontPaths()['Roboto-Black']
-    font = Font(PATH)
-    glyph = font[glyphName]
-    path = context.newPath()
+def drawCoordinates(context, glyph):
+    """Converts coordinates to PageBot BezierPoints and assigns points
+    # to contours."""
     contours = []
     contour = None
     coordinates = glyph.ttGlyph.coordinates
-    context.fill((0, 1, 1, 0.2))
-    # Move glyph up so we can see results below descender level.
-    context.translate(X0, Y0)
 
-    # Draws the glyph.
-    c = glyph.contours
-    pbSegments = glyph._segments
-    context.stroke((0, 0.3, 0.3))
-    context.drawGlyphPath(glyph)
-    context.stroke(None)
-    context.fill(0)
-
-    # Converts coordinates to PageBot BezierPoints and assigns points
-    # to contours.
     for i, (x, y) in enumerate(coordinates):
         start = i - 1 in glyph.endPtsOfContours
         p = BezierPoint(x, y, glyph.flags[i])
@@ -196,6 +170,38 @@ def draw(context):
         x += d
         y += d
         context.drawString('%d' % i, (x, y))
+
+    return contours
+
+def draw(context):
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    context = getContext(contextName)
+    context.fontSize(24)
+    W, H = 1750, 2250
+    X0 = 75
+    Y0 = 500
+    C = 0.5
+    F = 2 / 3
+    glyphName = 'Q'
+    x = 50
+    context.newPage(W, H)
+    PATH = getFontPaths()['Roboto-Black']
+    font = Font(PATH)
+    glyph = font[glyphName]
+    path = context.newPath()
+    context.fill((0, 1, 1, 0.2))
+
+    # Move glyph up so we can see results below descender level.
+    context.translate(X0, Y0)
+
+    # Draws the glyph.
+    c = glyph.contours
+    pbSegments = glyph._segments
+    context.stroke((0, 0.3, 0.3))
+    context.drawGlyphPath(glyph)
+    context.stroke(None)
+    context.fill(0)
+    contours = drawCoordinates(context, glyph)
 
     segments = []
     implied = []
@@ -273,7 +279,6 @@ def draw(context):
     y -= 30
     context.drawString('Quadratic control point', (x, y))
     context.saveImage(exportPath)
-
 
 for contextName in ('DrawBot', 'Flat'):
     draw(contextName)
