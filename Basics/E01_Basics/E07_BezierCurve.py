@@ -58,7 +58,6 @@ def draw(contextName):
         ((104.84704544295052, 87.0279545570495), (106.72204544295052, 88.9029545570495), (100.00000000000001, 100.0)),
     ]
 
-
     curve = newBezierCurve(x=0, y=0, closed=False, points=points, **options)
     page.solve()
     doc.export(exportPath)
