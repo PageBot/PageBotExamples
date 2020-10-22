@@ -56,7 +56,7 @@ def draw(contextName):
     the measured output.'''
     options = dict(parent=page, showOrigin=True, showDimensions=True,
             showElementInfo=True, showFlowConnections=True,
-            conditions=conditions, fill=f, stroke=0)
+            conditions=conditions, fill=f, stroke=0, strokeWidth=0.5)
 
     rectangle = newRect(name='rect', r=SQ ,**options)
     textBox = newText(bs, name='text', w=2*SQ, h=2*SQ, **options)
@@ -103,7 +103,7 @@ def draw(contextName):
 
     fontPath = getTestFontsPath() + '/google/roboto/Roboto-Medium.ttf'
     font = Font(fontPath)
-    e = newGlyphPath(font['e'], **options)
+    e = newGlyphPath(font['Q'], **options)
 
     page.solve()
 
