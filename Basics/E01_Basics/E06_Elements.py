@@ -16,6 +16,7 @@
 #
 #     Test handling of pages in a document.
 #
+
 from pagebot.contexts import getContext
 from pagebot.document import Document
 from pagebot.elements import *
@@ -28,11 +29,21 @@ from pagebot.constants import CENTER, LEFT, EXPORT
 from pagebot.toolbox.transformer import path2FileName
 from pagebot.toolbox.loremipsum import  loremIpsum
 
-# Template for the export path, allowing to include context name
+# Template for the export path, allowing to include context name.
 W, H = pt(800), pt(600)
 FILENAME = path2FileName(__file__)
 fontName = 'PageBot-Regular'
 SQ = 50
+"""Types of elements: rectangle, circle, text, polygon, curve, glyph."""
+N = 6
+F = 1.0 / N
+
+def getColor(i):
+    r = F
+    g = 1
+    b = F/2
+    f = (i*r, i*g, i*b)
+    return f
 
 def draw(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
@@ -47,24 +58,27 @@ def draw(contextName):
     txt = loremIpsum(doShuffle=True)
     bs = context.newString(txt, dict(font=fontName, fontSize=pt(24)))
 
-    conditions = (Right2Right(), Float2Top(), Float2Left(), )
-    f = color(0.8)
+    # TODO: findFont instead.
+    fontPath = getTestFontsPath() + '/google/roboto/Roboto-Medium.ttf'
+    font = Font(fontPath)
 
-    '''Position rectangle in the center of the page area. Notice that the (x, y)
-    position is undefined, default is (0, 0), since will be filled by the
-    condition. Size measures can be any type of units. Their type is shown in
-    the measured output.'''
+    '''Positions the elements to the top left of the page area. Notice that the
+    (x, y) position is undefined, default is (0, 0), since it will be
+    determined by the condition. Size measures can be any type of units. Their
+    type is shown in the measured output.'''
+    conditions = (Right2Right(), Float2Top(), Float2Left(), )
+
     options = dict(parent=page, showOrigin=True, showDimensions=True,
             showElementInfo=True, showFlowConnections=True,
-            conditions=conditions, fill=f, stroke=0, strokeWidth=0.5)
+            conditions=conditions, stroke=0, strokeWidth=0.5)
 
-    rectangle = newRect(name='rect', r=SQ ,**options)
-    textBox = newText(bs, name='text', w=2*SQ, h=2*SQ, **options)
-    newCircle(name='circle', r=SQ, **options)
-
+    newRect(name='rect', r=SQ, fill=getColor(1), **options)
+    newText(bs, name='text', w=2*SQ, h=2*SQ, fill=getColor(2), **options)
+    newCircle(name='circle', r=SQ, fill=getColor(3), **options)
     points = [(0, 0), (20, 100), (40, 0), (60, 100), (80, 0), (100, 100)]
-    newPolygon(name='polygon', points=points, **options)
+    newPolygon(name='polygon', points=points, fill=getColor(4), **options)
 
+    # Bézier curve points.
     points = [(0, 0),
         ((-6.722045442950497, 11.097045442950499), (-4.847045442950498,
             12.972045442950499), (6.250000000000001, 6.25)),
@@ -99,16 +113,15 @@ def draw(contextName):
         ((104.84704544295052, 87.0279545570495), (106.72204544295052,
             88.9029545570495), (100.00000000000001, 100.0)),
      ]
-    curve = newBezierCurve(closed=False, points=points, **options)
 
-    fontPath = getTestFontsPath() + '/google/roboto/Roboto-Medium.ttf'
-    font = Font(fontPath)
-    e = newGlyphPath(font['Q'], **options)
-
+    newBezierCurve(closed=False, points=points, fill=getColor(5), **options)
+    newGlyphPath(font['Q'], fill=getColor(6), **options)
     page.solve()
 
     # Export in _export folder that does not commit in Git. Force to export PDF.
     doc.export(exportPath)
+
+
 
 for contextName in ('DrawBot', 'Flat'):
     draw(contextName)

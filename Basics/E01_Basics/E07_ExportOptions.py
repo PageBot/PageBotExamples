@@ -12,12 +12,13 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E08_ExportOptions.py
+#     E07_ExportOptions.py
 #
 #     Shows how to start a document and export it to PNG and
 #     PDF in the simplest steps.
 #
 #     TODO: Floating on second line does not seem to work currently
+
 from pagebot import getContext
 from pagebot.constants import EXPORT
 from pagebot.document import Document

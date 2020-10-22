@@ -12,10 +12,11 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E09_Pages.py
+#     E08_Pages.py
 #
 #     Test handling of pages in a document.
 #
+
 from pagebot.contexts import getContext
 from pagebot.document import Document
 from pagebot.elements import *

@@ -28,6 +28,5 @@ import E03_FloatingElements
 import E04_Units
 import E05_Fonts
 import E06_Elements
-import E07_BezierPath
-import E08_ExportOptions
-import E09_Pages
+import E07_ExportOptions
+import E08_Pages
