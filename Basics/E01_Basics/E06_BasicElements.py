@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E06_Elements.py
+#     E06_BasicElements.py
 #
 #     Test handling of pages in a document.
 #
