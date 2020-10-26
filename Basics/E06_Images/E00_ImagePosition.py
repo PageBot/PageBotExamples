@@ -13,26 +13,26 @@
 #
 #     E00_ImagePosition.py
 #
-#     Position an image element in the page.
-#
-import os # Import module that communicates with the file system.
+#     Position an image element on the page.
+
+import os
 import sys
-
-from pagebot.document import Document
-from pagebot.filepaths import getResourcesPath
-from pagebot.toolbox.units import pt, mm
 from pagebot import getContext
-from pagebot.constants import A4, LEFT, RIGHT, BOTTOM, TOP
-from pagebot.elements import *
 from pagebot.conditions import *
+from pagebot.constants import A4, LEFT, RIGHT, BOTTOM, TOP, EXPORT
+from pagebot.document import Document
+from pagebot.elements import *
+from pagebot.filepaths import getResourcesPath
+from pagebot.toolbox.transformer import path2FileName
+from pagebot.toolbox.units import pt, mm
 
-def imagePosition(contextName):
+FILENAME = path2FileName(__file__)
+W, H = pt(400, 400)
+P = pt(30) # Page padding.
+
+def draw(contextName):
     context = getContext(contextName)
-    W, H = pt(400, 400)
-
-    P = pt(30) # Padding of the page
-
-    EXPORT_PATH = '_export/00_ImagePosition-%s.pdf' % contextName
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
 
     # Define the path where to find the example image.
     path = getResourcesPath() + "/images/cookbot1.jpg"
@@ -57,10 +57,7 @@ def imagePosition(contextName):
     newImage(path, x=page.w-P, y=page.h-P, h=page.ph/2, parent=page,
             xAlign=RIGHT, yAlign=TOP, fill=(1, 1, 0, 0.5), rotate=90)
 
-    doc.export(EXPORT_PATH)
+    doc.export(exportPath)
 
-for contextName in (
-    'DrawBot',
-    'Flat',
-    ):
-    imagePosition(contextName)
+for contextName in ('DrawBot', 'Flat'):
+    draw(contextName)

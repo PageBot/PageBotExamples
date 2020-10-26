@@ -489,3 +489,4 @@ Transitions from one image to another by creating a circular wave that expands f
 ##swipeTransition(targetImage=None, extent=None, color=None, time=None, angle=None, width=None, opacity=None)
 Transitions from one image to another by simulating a swiping action.
 *Attributes: targetImage an Image object, extent a tuple (x, y, w, h), color RGBA tuple Color (r, g, b, a), time a float, angle a float in degrees, width a float, opacity a float.*
+* 

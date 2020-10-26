@@ -116,9 +116,12 @@ def draw(contextName):
 
     newBezierCurve(closed=False, points=points, fill=getColor(5), **options)
     newGlyphPath(font['Q'], fill=getColor(6), **options)
-    page.solve()
+    #newImage()
 
-    # Export in _export folder that does not commit in Git. Force to export PDF.
+
+
+    # Sets alignmetns and saves the results as a PDF.
+    page.solve()
     doc.export(exportPath)
 
 

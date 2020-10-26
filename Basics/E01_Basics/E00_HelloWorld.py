@@ -34,6 +34,7 @@ SQ = 50
 
 def draw(contextName):
     context = getContext(contextName)
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, doc.context.name)
     doc = Document(w=W, h=H, context=context)
     # Gets the first page from te document.
     page = doc[1]
@@ -55,9 +56,6 @@ def draw(contextName):
     textBox = newText('Hello World', parent=page, font=FONTNAME, fontSize=96,
             x=W/4, y=W/4, w=W/2, h=H/2, fill=f, **options)
 
-    # Export in _export folder that does not commit in Git. Force to export
-    # PDF.
-    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, doc.context.name)
     doc.export(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
