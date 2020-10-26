@@ -11,50 +11,57 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E00_ImagePosition.py
+#     E05_ImageCondition.py
 #
 #     Position an image element in the page.
 #
-import os # Import module that communicates with the file system.
+import os
 import sys
 
+from pagebot import getContext
+from pagebot.constants import A4, LEFT, RIGHT, BOTTOM, TOP, EXPORT
+from pagebot.conditions import *
 from pagebot.document import Document
+from pagebot.elements import *
 from pagebot.filepaths import getResourcesPath
 from pagebot.toolbox.units import pt, mm
-from pagebot import getContext
-from pagebot.constants import A4, LEFT, RIGHT, BOTTOM, TOP
-from pagebot.elements import *
-from pagebot.conditions import *
+from pagebot.toolbox.transformer import path2FileName
 
-context = getContext('DrawBot')
-
+FILENAME = path2FileName(__file__)
 W, H = pt(400, 400)
-
 P = pt(30) # Padding of the page
 
-EXPORT_PATH = '_export/00_ImagePosition.pdf'
+def draw(contextName):
+    context = getContext(contextName)
+    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
 
-# Define the path where to find the example image.
-path = getResourcesPath() + "/images/cookbot1.jpg"
-# Use the standard DrawBot function to get the width/height of the image from the file.
-doc = Document(w=W, h=H, context=context) # New simple document with default padding.
-doc.view.showPadding = True
+    # Define the path where to find the example image.
+    path = getResourcesPath() + "/images/cookbot1.jpg"
 
-page = doc[1] # Get first (and only) automatic page.
-page.padding = P
+    doc = Document(w=W, h=H, context=context)
+    doc.view.showPadding = True
 
-# Position the image on bottom-left of the page padding.
-# Height of the image is 50% of usable space.
-newImage(path, x=P, y=P, h=page.ph/2, parent=page, showOrigin=True)
-# Position the image on bottom-right of the page padding.
-# Add opaque red overlay.
-newImage(path, x=page.w-P, y=P, h=page.ph/2, parent=page, fill=(1, 0, 0, 0.5),
-	xAlign=RIGHT, yAlign=BOTTOM)
-# Position at top-right, rotated, yellow opaque overlay.
-newImage(path, x=P, y=page.h-P, h=page.ph/2, parent=page,
-	xAlign=LEFT, yAlign=TOP, fill=(0, 1, 1, 0.5), rotate=90)
-# Position at top-right, rotated, yellow opaque overlay.
-newImage(path, x=page.w-P, y=page.h-P, h=page.ph/2, parent=page,
-	xAlign=RIGHT, yAlign=TOP, fill=(1, 1, 0, 0.5), rotate=90)
+    page = doc[1]
+    page.padding = P
 
-doc.export(EXPORT_PATH)
+    # Position the image on bottom-left of the page padding.
+    # Height of the image is 50% of usable space.
+    newImage(path, x=P, y=P, h=page.ph/2, parent=page, showOrigin=True)
+
+    # Position the image on bottom-right of the page padding.
+    # Add opaque red overlay.
+    newImage(path, x=page.w-P, y=P, h=page.ph/2, parent=page, fill=(1, 0, 0, 0.5),
+            xAlign=RIGHT, yAlign=BOTTOM)
+
+    # Position at top-right, rotated, yellow opaque overlay.
+    newImage(path, x=P, y=page.h-P, h=page.ph/2, parent=page,
+            xAlign=LEFT, yAlign=TOP, fill=(0, 1, 1, 0.5), rotate=90)
+
+    # Position at top-right, rotated, yellow opaque overlay.
+    newImage(path, x=page.w-P, y=page.h-P, h=page.ph/2, parent=page,
+            xAlign=RIGHT, yAlign=TOP, fill=(1, 1, 0, 0.5), rotate=90)
+
+    doc.export(exportPath)
+
+for contextName in ('DrawBot', 'Flat'):
+    draw(contextName)
