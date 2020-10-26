@@ -20,6 +20,7 @@
 from pagebot.contexts import getContext
 from pagebot.document import Document
 from pagebot.elements import *
+from pagebot.filepaths import getResourcesPath
 from pagebot.fonttoolbox.fontpaths import getTestFontsPath
 from pagebot.fonttoolbox.objects.font import Font
 from pagebot.conditions import *
@@ -116,15 +117,14 @@ def draw(contextName):
 
     newBezierCurve(closed=False, points=points, fill=getColor(5), **options)
     newGlyphPath(font['Q'], fill=getColor(6), **options)
-    #newImage()
 
-
+    path = getResourcesPath() + "/images/cookbot1.jpg"
+    im = newImage(path, **options)
+    print(im.x, im.y, im.w, im.h)
 
     # Sets alignmetns and saves the results as a PDF.
     page.solve()
     doc.export(exportPath)
-
-
 
 for contextName in ('DrawBot', 'Flat'):
     draw(contextName)

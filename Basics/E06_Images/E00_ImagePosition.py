@@ -34,26 +34,27 @@ def draw(contextName):
     context = getContext(contextName)
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
 
-    # Define the path where to find the example image.
+    # Defines the path where to find the example image.
     path = getResourcesPath() + "/images/cookbot1.jpg"
-    # Use the standard DrawBot function to get the width/height of the image from the file.
-    doc = Document(w=W, h=H, context=context) # New simple document with default padding.
+    doc = Document(w=W, h=H, context=context)
     doc.view.showPadding = True
-
     page = doc[1] # Get first (and only) automatic page.
     page.padding = P
 
-    # Position the image on bottom-left of the page padding.
-    # Height of the image is 50% of usable space.
+    # Positions the image on bottom-left of the page padding. Height of the
+    # image is 50% of usable space.
     newImage(path, x=P, y=P, h=page.ph/2, parent=page, showOrigin=True)
-    # Position the image on bottom-right of the page padding.
-    # Add opaque red overlay.
+
+    # Positions the image on bottom-right of the page padding. Adds a opaque
+    # red overlay.
     newImage(path, x=page.w-P, y=P, h=page.ph/2, parent=page, fill=(1, 0, 0, 0.5),
             xAlign=RIGHT, yAlign=BOTTOM)
-    # Position at top-right, rotated, yellow opaque overlay.
+
+    # Positions at top-right, rotated, yellow opaque overlay.
     newImage(path, x=P, y=page.h-P, h=page.ph/2, parent=page,
             xAlign=LEFT, yAlign=TOP, fill=(0, 1, 1, 0.5), rotate=90)
-    # Position at top-right, rotated, yellow opaque overlay.
+
+    # Positions at top-right, rotated, yellow opaque overlay.
     newImage(path, x=page.w-P, y=page.h-P, h=page.ph/2, parent=page,
             xAlign=RIGHT, yAlign=TOP, fill=(1, 1, 0, 0.5), rotate=90)
 
