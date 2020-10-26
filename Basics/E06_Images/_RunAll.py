@@ -21,18 +21,10 @@ EXPORT_PATH = '_export'
 if not os.path.exists(EXPORT_PATH):
 	os.path.mkdir(EXPORT_PATH)
 
-# Simple image position, scaling and layout
-import E00_ImagePosition
 import E01_CacheScaledImage
-import E01_ImageCondition
-import E01_ImageElements
-import E02_ImageAlignment
-
-# Clipping images on bezierPath shapes.
-import E05_ImageClipping
-
-# Filters
-#import E07_ImageObjectFilters
-
-# Outline tracing
-import E20_TraceImagesByDrawBot
+import E02_ScaleAnImage
+import E03_ImageAlignment
+import E04_ImageElements
+import E05_ImageCondition
+import E06_ImageClipping
+import E07_ImageClippingValues
