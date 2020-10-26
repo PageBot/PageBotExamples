@@ -33,8 +33,10 @@ from pagebot.toolbox.transformer import path2FileName
 
 FILENAME = path2FileName(__file__)
 W, H = mm(1000, 240)
-M = pt(12) # Margin between the images.
-P = mm(30) # Padding of the page.
+# Margin between the images.
+M = pt(12)
+# Page padding.
+P = mm(30)
 
 def draw(contextName):
     context = getContext(contextName)
@@ -49,7 +51,7 @@ def draw(contextName):
     # Incremental scale division factor of the image width.
     factor = 5
 
-    # Stop before they become invisibly small
+    # Stop before image becomes invisibly small.
     for n in range(15):
             # Create a range of scaled imaged that try to fit by floating
             # conditions.
