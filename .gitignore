@@ -105,4 +105,5 @@ venv.bak/
 
 _export
 _local
+_scaled
 .DS_Store
