@@ -24,8 +24,8 @@ from pagebot.elements import *
 from pagebot.filepaths import getResourcesPath
 from pagebot.document import Document
 from pagebot.toolbox.color import color, noColor
-from pagebot.toolbox.units import em, p, pt, inch, degrees
 from pagebot.toolbox.transformer import path2FileName
+from pagebot.toolbox.units import em, p, pt, inch, degrees
 
 FILENAME = path2FileName(__file__)
 
