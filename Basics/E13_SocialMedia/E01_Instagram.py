@@ -111,13 +111,6 @@ def draw(contextName):
             xAlign = None
             x = 0
 
-        sc = h/ih
-        #x = y
-        '''
-        w0 = upt(iw*sc)
-        h0 = upt(ih*sc)
-        context.size(w0, h0)
-        '''
         context.image(imagePath, x)
         newImage(path=imagePath, parent=page, x=x, y=0, w=iw, h=ih, xAlign=xAlign)
 
