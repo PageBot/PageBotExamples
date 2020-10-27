@@ -103,7 +103,12 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+
+# OS X
+.DS_Store
+
+# PageBot.
 _export
 _local
 _scaled
-.DS_Store
+_images
