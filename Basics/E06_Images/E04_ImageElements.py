@@ -28,7 +28,7 @@ from pagebot.toolbox.units import pt
 from pagebot.toolbox.transformer import path2FileName
 
 PADDING = 30
-W = H = 400
+W = H = 1000
 FILENAME = path2FileName(__file__)
 
 def draw(contextName):

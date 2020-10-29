@@ -38,7 +38,7 @@ def draw(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
 
     # Example image that has nice areas to put text as example.
-    imagePath = getResourcesPath() + '/images/peppertom_lowres_398x530.png'
+    imagePath = getResourcesPath() + '/images/peppertom.png'
 
     # Create a new document with 1 page. Set overall size and padding.
     doc = Document(w=W, h=H, padding=PADDING, context=context)

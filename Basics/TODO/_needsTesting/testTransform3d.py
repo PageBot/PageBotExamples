@@ -1,6 +1,8 @@
 from pagebot.filepaths import getResourcesPath
 from pagebot.toolbox.transform3d import Transform3D
 
+# NOTE: already applied in Flat context. Might be useful to compare Flat context getTransform() and translatePoint() results.
+
 def circle(cpt, r):
     cx, cy = cpt
     d = r * 2
@@ -8,12 +10,10 @@ def circle(cpt, r):
 
 
 translate(width()/2, height()/2)
-
 t = Transform3D()  # identity transform
 
 print(t.transformPoint((100, 200, 300)))  # transform one point)
 print(t.transformPoints((100, 200, 300)))  # transform a seq. of points)
-
 print(t)
 
 radius = 222
@@ -30,7 +30,7 @@ t = t.rotateZ(radians(--10))
 
 affine = t.getAffineTransform2D(2)
 
-imagePath = getResourcesPath() + "/images/peppertom_lowres_398x530.png"
+imagePath = getResourcesPath() + "/images/peppertom.png"
 w, h = imageSize(imagePath)
 
 fontSize(40)

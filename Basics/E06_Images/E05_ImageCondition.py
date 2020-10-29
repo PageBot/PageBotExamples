@@ -28,7 +28,7 @@ from pagebot.toolbox.units import pt, mm
 from pagebot.toolbox.transformer import path2FileName
 
 FILENAME = path2FileName(__file__)
-W, H = pt(400, 400)
+W, H = pt(800, 800)
 P = pt(30) # Padding of the page
 
 def draw(contextName):
