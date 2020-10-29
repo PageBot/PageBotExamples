@@ -62,7 +62,7 @@ def draw(contextName):
                    yAlign=TOP,
                    fill=color(0, 1, 0, 0.3),
                    stroke=color(1, 0, 0),
-                   scaleImage=False)
+                   scaleImage=True)
 
     newImage(path, padding=0,
                    parent=page,

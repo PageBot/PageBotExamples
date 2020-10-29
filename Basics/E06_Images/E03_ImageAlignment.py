@@ -28,7 +28,7 @@ from pagebot.toolbox.units import em, p, pt, inch, degrees
 from pagebot.toolbox.transformer import path2FileName
 
 # Example image that has nice areas to put text as example.
-IMAGEPATH = getResourcesPath() + '/images/peppertom_lowres_398x530.png'
+IMAGEPATH = getResourcesPath() + '/images/peppertom.png'
 FILENAME = path2FileName(__file__)
 BLEED = pt(6)
 
