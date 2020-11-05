@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E22_AlterGlyphCoordinates.py
+#     E08_AlterGlyphCoordinates.py
 #
 
 from pagebot.constants import EXPORT
@@ -28,7 +28,7 @@ W = H = 1000
 # Scale em of 2048 back to page size.
 s = 0.5
 
-def makeText(contextName):
+def draw(contextName):
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
     context = getContext(contextName)
     context.newPage(W, H)
@@ -84,4 +84,4 @@ def makeText(contextName):
     context.saveImage(exportPath)
 
 for contextName in ('DrawBot', 'Flat'):
-    makeText(contextName)
+    draw(contextName)
