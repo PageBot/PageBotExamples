@@ -11,9 +11,8 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E21_MakeParametricAxes.py
+#     E05_ParametricAxes.py
 #
-#     This script is using getContext(), so it should be able to run it with flexContext.
 #
 
 from pagebot import getContext
@@ -23,6 +22,7 @@ from pagebot.toolbox.transformer import path2FileName
 
 f = findFont('Amstelvar-Roman-VF')
 W = H = 1000
+
 # Scale em of 2048 back to page size.
 s = 0.5
 FILENAME = path2FileName(__file__)

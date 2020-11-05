@@ -25,14 +25,20 @@ from pagebot.toolbox.transformer import path2FileName
 FILENAME = path2FileName(__file__)
 
 def makeDrawing(contextName):
+    '''
+    Traceback (most recent call last):
+  File "./E04_TextInPath.py", line 72, in <module>
+    makeDrawing(contextName)
+  File "./E04_TextInPath.py", line 36, in makeDrawing
+    path = context.BezierPath()
+  File "/Users/michiel/VirtualEnvironments/pagebot/lib/python3.8/site-packages/pagebot/contexts/basecontext/basecontext.py", line 1206, in BezierPath
+    return self.b.BezierPath(path=path, glyphSet=glyphSet)
+AttributeError: module 'flat' has no attribute 'BezierPath'
+    '''
+
     exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
-    context = getContext('DrawBot')
+    context = getContext(contextName)
     font = findFont(DEFAULT_FONT)
-
-    # FIXME: don't use DrawBot functions.
-    #from drawBot import BezierPath, width, height, translate, scale, drawPath, \
-    #        font, fontSize, fill, textBox, saveImage
-
     path = context.BezierPath()
     context.fill(1)
     # draw some text
