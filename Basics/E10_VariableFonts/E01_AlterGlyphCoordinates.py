@@ -12,7 +12,7 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     E08_AlterGlyphCoordinates.py
+#     E01_AlterGlyphCoordinates.py
 #
 
 from pagebot.constants import EXPORT
