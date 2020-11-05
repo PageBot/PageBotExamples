@@ -119,7 +119,7 @@ def draw(contextName):
     newGlyphPath(font['Q'], fill=getColor(6), **options)
 
     path = getResourcesPath() + "/images/cookbot1.jpg"
-    im = newImage(path, **options)
+    im = newImage(path, w=2*SQ, h=2*SQ, **options)
     print(im.x, im.y, im.w, im.h)
 
     # Sets alignmetns and saves the results as a PDF.
