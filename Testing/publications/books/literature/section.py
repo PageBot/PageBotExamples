@@ -1,34 +1,32 @@
 #!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
-#
-#     P A G E B O T  E X A M P L E S
-#
-#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
+#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
+#
+#     P A G E B O T
+#
 #     Licensed under MIT conditions
 #
 #     Supporting DrawBot, www.drawbot.com
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     MakeABookCover.py
+#     section.py
 #
 #     Needs filling in with content.
 #
 from random import random # Used for random color palet.
 
 # Create random title and names
-from pagebot.contributions.filibuster.blurb import Blurb
+from pagebot.contributions.filibuster.blurb import blurb
 from pagebot.toolbox.color import color, noColor, whiteColor
 
 # Get function to find the Roboto family (in this case installed in the
 # PageBot repository).
 from pagebot.fonttoolbox.objects.family import getFamily
 from pagebot.fonttoolbox.objects.font import findFont
-# Creation of the RootStyle (dictionary) with all
-# available default style parameters filled.
-from pagebot.style import getRootStyle
+
+# Get the constants that we need
 from pagebot.constants import B4, CENTER, MIDDLE, TOP
 
 # Document is the main instance holding all information
@@ -67,8 +65,6 @@ def makeDocument():
     # Initially make all pages default with template
     # One page, just the cover.
     doc = Document(w=W, h=H, title='A Demo Book Cover', autoPages=1)
-
-    blurb = Blurb()
 
     page = doc[1] # Get the first/single page of the document.
     page.name = 'Cover'

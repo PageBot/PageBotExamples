@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
+
+#     P A G E B O T
 #
-#     P A G E B O T  E X A M P L E S
-#
-#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
+#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
@@ -12,13 +12,12 @@
 #     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
-#     MakeSamplePhotoBook.py
+#     tx.py
 #
-from pagebot import getContext
-from pagebot.publications.books import PhotoBook
 
-context = getContext('DrawBot')
-bk = PhotoBook()
-doc = bk.makeSample(context)
-doc.export('_export/PhotoBookSample.pdf')
+def getScale(font, size):
+    """Vector size to screen size factor."""
+    return float(size) / float(font.info.unitsPerEm)
 
+def getAscenderHeight(font, size):
+    return font.info.ascender * getScale(font, size)

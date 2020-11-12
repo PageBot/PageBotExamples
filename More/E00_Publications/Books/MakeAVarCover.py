@@ -56,7 +56,7 @@ fontRegular = getVarFontInstance(varFont, dict(wdth=75))
 #print(varFont.axes)
 fontBold = varFont#family.findFont('Bold')
 fontItalic = varFont#family.findFont('Italic')
-ampersandFont = findFont('Georgia')
+ampersandFont = findFont('Roboto-Regular')
 
 def makeDocument():
     """Demo random book cover generator."""
@@ -66,6 +66,7 @@ def makeDocument():
     # Initially make all pages default with template
     # One page, just the cover.
     doc = Document(w=W, h=H, title='A Demo Book Cover', autoPages=1)
+    blurb = Blurb()
 
     page = doc[1] # Get the first/single page of the document.
     page.name = 'Cover'
