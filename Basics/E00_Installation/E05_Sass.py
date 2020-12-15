@@ -4,15 +4,12 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#    02_Sass.py
+#    E02_Sass.py
 #
 #    Test working on exteral scss/sass application to compile into css.
 #

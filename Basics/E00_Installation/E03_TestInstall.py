@@ -4,15 +4,12 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#    03_TestInstall.py
+#    E03_TestInstall.py
 #
 
 # Python version.

@@ -4,15 +4,12 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#    04_RTDExample.py
+#    E04_RTDExample.py
 #
 
 from pagebot import getContext
