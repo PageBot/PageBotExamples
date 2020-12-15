@@ -4,18 +4,16 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     DrawRedRectCenterPage.py
 #
 #     Needs debugging in dimension showing of views.
 #
+
 from pagebot import getContext
 from pagebot.conditions import *
 from pagebot.constants import A5, CENTER, MIDDLE, EXPORT

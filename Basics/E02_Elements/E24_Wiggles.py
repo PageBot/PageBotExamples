@@ -1,12 +1,19 @@
-##############################
-# Draw Wiggles using Drawbot #
-##############################
-
-"""
-Script by Roberto Arista, you can find the related tutorial here: https://medium.com/@roberto_arista/how-to-draw-a-wiggle-between-two-points-with-python-and-drawbot-788006c18fb0
-You can find drawbot here: http://www.drawbot.com/
-Code distributed with no guarantee, use at your own risk
-"""
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+# -----------------------------------------------------------------------------
+#
+#     P A G E B O T  E X A M P L E S
+#
+#     www.pagebot.io
+#     Licensed under MIT conditions
+#
+# -----------------------------------------------------------------------------
+#
+# Draw Wiggles using Drawbot:
+# TODO: convert to PageBot script.
+#
+# Original script by Roberto Arista, you can find the related tutorial here:
+# https://medium.com/@roberto_arista/how-to-draw-a-wiggle-between-two-points-with-python-and-drawbot-788006c18fb0
 
 ### Modules
 from math import radians, atan2, sqrt, sin, cos

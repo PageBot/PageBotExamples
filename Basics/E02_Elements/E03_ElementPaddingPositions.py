@@ -4,12 +4,9 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E03_ElementPaddingPositions.py
@@ -19,6 +16,7 @@
 #      Document is the main instance holding all information about the document
 #      togethers (pages, styles, etc.)
 #
+
 from pagebot import getContext
 from pagebot.constants import EXPORT
 from pagebot.conditions import *

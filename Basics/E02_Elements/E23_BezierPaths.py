@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E23_BezierPaths.py
 #
+
 
 from pagebot import getContext
 from pagebot.constants import EXPORT

@@ -4,18 +4,16 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E12_TextBaselinePaddingMargin.py
 #
 #     Shows element padding and margin.
 #
+
 from pagebot import getContext
 from pagebot.conditions import *
 from pagebot.constants import EXPORT

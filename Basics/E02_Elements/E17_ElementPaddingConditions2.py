@@ -4,20 +4,18 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     ElementConditions.py
+#     E17_ElementPaddingConditions2.py
 #
 #     Position elements by their page padding position with conditions
 #
 # Document is the main instance holding all information about
 # the document togethers (pages, styles, etc.)
+
 from pagebot import getContext
 from pagebot.conditions import *
 from pagebot.constants import EXPORT

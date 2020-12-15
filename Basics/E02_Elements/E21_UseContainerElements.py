@@ -3,12 +3,9 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E21_UseContainerElements.py
@@ -16,6 +13,7 @@
 #     Container element hold an ordered list of elements.
 #     Each element knows its own position.
 #
+
 from pagebot import getContext
 from pagebot.constants import EXPORT
 from pagebot.document import Document

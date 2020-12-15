@@ -8,13 +8,13 @@
 #
 #     Licensed under MIT conditions
 #
-
 # -----------------------------------------------------------------------------
 #
 #     E07_Images.py
 #
 #     Tests pagebot text boxes.
 #
+
 from pagebot import getContext
 from pagebot.conditions import *
 from pagebot.constants import *
@@ -27,8 +27,6 @@ from pagebot.style import getRootStyle
 from pagebot.toolbox.units import pt, upt
 from pagebot.toolbox.color import noColor, color
 from pagebot.toolbox.transformer import path2FileName
-
-H, W = A3
 W = pt(W)
 H = pt(H)
 M = 50

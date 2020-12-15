@@ -4,12 +4,9 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E13_AlignFloatElements.py
@@ -18,6 +15,7 @@
 #     placement works. Interactive Variable() only works in DrawBot context.
 #
 # Creation of the RootStyle (dictionary) with all available default style parameters filled.
+
 from pagebot import getContext
 from pagebot.conditions import *
 from pagebot.constants import CENTER, EXPORT
