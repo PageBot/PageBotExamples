@@ -1,23 +1,22 @@
-#!/usr/bin/env python3 # -*- coding: UTF-8 -*-
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
-#     P A G E B O T  E X A M P L E S
+#    P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
-#     www.pagebot.io
-#     Licensed under MIT conditions
+#    www.pagebot.io
+#    Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     E06_FontContent.py
+#    E06_FontContent.py
 #
-#     Prints the values of the specified font for naming, info and features and
-#     generate a simple 1000 x 1000 PDF, showing part of the glyph set.  This
-#     is the simple demo version of the FontSpecimen.py that will generate a
-#     full specimen of the font. It does not use Document and Element, drawing
-#     directly using the context.
+#    Prints the values of the specified font for naming, info and features and
+#    generate a simple 1000 x 1000 PDF, showing part of the glyph set.  This
+#    is the simple demo version of the FontSpecimen.py that will generate a
+#    full specimen of the font. It does not use Document and Element, drawing
+#    directly using the context.
+#
 
 from pagebot import getContext
 from pagebot.constants import EXPORT

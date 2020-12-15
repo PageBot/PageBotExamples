@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
-#     P A G E B O T  E X A M P L E S
+#    P A G E B O T  E X A M P L E S
 #
-
-#     www.pagebot.io
-#     Licensed under MIT conditions
+#    www.pagebot.io
+#    Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     E03_BabelStringMetrics.py
+#    E03_BabelStringMetrics.py
 #
-#     Show some principles of FlatContext usage.
+#    Show some principles of FlatContext usage.
 
 from pagebot import getContext
 from pagebot.document import Document

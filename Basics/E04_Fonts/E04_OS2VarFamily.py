@@ -1,27 +1,25 @@
-#!/usr/bin/env python3 # -----------------------------------------------------------------------------
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
-#     www.pagebot.io
-#
-#     P A G E B O T  E X A M P L E S
-#
-#     Licensed under MIT conditions
-#
-#     Supporting usage of DrawBot, www.drawbot.com
-#     Supporting usage of Flat, https://github.com/xxyxyz/flat
+#!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
-#     E04_OS2VarFamily.py
+#    P A G E B O T  E X A M P L E S
 #
-#     TODO: Started using context for drawing.
-#     TODO: Not done for all drawing functions yet.
+#    www.pagebot.io
+#    Licensed under MIT conditions
 #
-#     https://www.typenetwork.com/brochure/opentype-font-variations/
-#     https://variationsguide.typenetwork.com/#xopq
-#     "wght" 134, "wdth" 369, "opsz" 36, “GRAD” 88 , ”XOPQ" 88, "XTRA" 402,
-#     "YOPQ" 50, "YTLC" 500, "YTSE" 18;
+# -----------------------------------------------------------------------------
 #
-#     STAT table
-#     https://www.microsoft.com/typography/otspec/stat.htm
+#    E04_OS2VarFamily.py
+#
+#    TODO: Started using context for drawing.
+#    TODO: Not done for all drawing functions yet.
+#
+#    https://www.typenetwork.com/brochure/opentype-font-variations/
+#    https://variationsguide.typenetwork.com/#xopq
+#    "wght" 134, "wdth" 369, "opsz" 36, “GRAD” 88 , ”XOPQ" 88, "XTRA" 402,
+#    "YOPQ" 50, "YTLC" 500, "YTSE" 18;
+#
+#    STAT table
+#    https://www.microsoft.com/typography/otspec/stat.htm
 
 import os, sys, shutil
 from pagebot import getContext

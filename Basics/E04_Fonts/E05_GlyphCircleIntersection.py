@@ -2,28 +2,24 @@
 # -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
-#     P A G E B O T  E X A M P L E S
+#    P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
-#     www.pagebot.io
-#     Licensed under MIT conditions
+#    www.pagebot.io
+#    Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     E05_GlyphCircleIntersection.py
+#    E05_GlyphCircleIntersection.py
 #
-#     Draw a number of circles on the contour with equal distance.
+#    Draw a number of circles on the contour with equal distance.
 #
+
 from math import radians, sin, cos
 from pagebot.constants import EXPORT
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot import getContext
 from pagebot.toolbox.color import color, noColor, blackColor
 from pagebot.toolbox.transformer import path2FileName
-
-FILENAME = path2FileName(__file__)
 
 GLYPH_NAME = 'ampersand'
 

@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
-#     P A G E B O T  E X A M P L E S
+#    P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
-#     www.pagebot.io
-#     Licensed under MIT conditions
+#    Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
+#    www.pagebot.io
+#    Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     E01_FindFont.py
+#    E01_FindFont.py
 #
-#     Some examples how to find Font instances, for the given installed fonts.
-#     PageBot scans through places where it can find font files.
+#    Some examples how to find Font instances, for the given installed fonts.
+#    PageBot scans through places where it can find font files.
 #
+
 from pagebot.constants import A4, EXPORT
 from pagebot.document import Document
 from pagebot.elements import *
@@ -24,8 +23,6 @@ from pagebot.toolbox.units import pt
 from pagebot.fonttoolbox.objects.family import findFamily, getFamily
 from pagebot.fonttoolbox.objects.font import getFont, findFont, findFonts
 from pagebot.toolbox.transformer import path2FileName
-
-FILENAME = path2FileName(__file__)
 
 def draw(contextName):
     """Creates a list of installed fonts, skipping the fonts supported inside
