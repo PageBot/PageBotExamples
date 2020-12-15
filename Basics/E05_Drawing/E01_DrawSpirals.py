@@ -13,10 +13,10 @@
 #
 
 from pagebot import getContext
-from pagebot.toolbox.units import pt
 from pagebot.constants import EXPORT
 from pagebot.toolbox.color import noColor, blackColor
 from pagebot.toolbox.transformer import path2FileName
+from pagebot.toolbox.units import pt
 
 X = 0
 Y = 100
