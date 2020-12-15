@@ -7,8 +7,6 @@
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E20_UseProofing.py

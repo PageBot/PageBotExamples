@@ -4,18 +4,15 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E11_TextAlignment.py
 #
-#	  Create a page in A3 landscape
-#	  Show "Hkpx" on all alignment combination horizontal/vertical
+#     Create a page in A3 landscape
+#     Show "Hkpx" on all alignment combination horizontal/vertical
 #     Show origins of the text boxes
 #     Add shadow to the text boxes
 #     Show alignment lines

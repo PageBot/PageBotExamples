@@ -4,24 +4,22 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E02_Text.py
 #
-#	  Create a page in A4 landscape
-#	  Setup the document view to show registration marks and cropmarks
+#     Create a page in A4 landscape
+#     Setup the document view to show registration marks and cropmarks
 #     Show the page frame and padding frame in blue
 #     Show the generated PDF file name on top of the page.
-#	  Show red “A4” centered on the page as Text element,
+#     Show red “A4” centered on the page as Text element,
 #     with its middle capHeight on the middle of page height
 #     Draw the background of the Text element in light gray
 #
+
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.conditions import *

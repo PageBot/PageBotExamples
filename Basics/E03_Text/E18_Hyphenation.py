@@ -4,15 +4,12 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     E40_Hyphenation.py
+#     E18_Hyphenation.py
 
 from pagebot.document import Document
 from pagebot import getContext

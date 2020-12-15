@@ -4,18 +4,14 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     E00_DrawBotTextLines.py
+#     E01_FlatMultiLine.py
 #
 #     DrawBot only example to test text lines.
-
 
 from drawBot import textBoxBaselines
 from pagebot import getContext

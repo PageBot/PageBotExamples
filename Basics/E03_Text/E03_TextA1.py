@@ -9,22 +9,21 @@
 #     Licensed under MIT conditions
 #
 
-
 # -----------------------------------------------------------------------------
 #
 #     E03_TextA1.py
 #
-#	  Create a page in A1 portrait (as it could be start of a poster)
-#	  Setup the document view to show registration marks and cropmarks
+#     Create a page in A1 portrait (as it could be start of a poster)
+#     Setup the document view to show registration marks and cropmarks
 #     Show the page frame and padding frame in blue
 #     Show the generated PDF file name on top of the page.
-#	  Show red A1 centered on the page as Text element,
+#     Show red A1 centered on the page as Text element,
 #     with its baseline on the middle of page height
 #
-from pagebot import getContext
 
-from pagebot.constants import *
+from pagebot import getContext
 from pagebot.elements import newText, newRect, newLine
+
 from pagebot.document import Document
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em

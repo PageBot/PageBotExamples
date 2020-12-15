@@ -8,19 +8,18 @@
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E04_TextA2.py
 #
-#	  Create a page in A2 portrait (as it could be start of a poster)
-#	  Setup the document view to show registration marks and cropmarks
+#     Create a page in A2 portrait (as it could be start of a poster)
+#     Setup the document view to show registration marks and cropmarks
 #     Show the page frame and padding frame in blue
 #     Show the generated PDF file name on top of the page.
-#	  Show red A1 centered on the page as Text element,
+#     Show red A1 centered on the page as Text element,
 #     with its baseline on the middle of page height
 #
+
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.elements import newText, newRect, newLine
@@ -28,8 +27,6 @@ from pagebot.document import Document
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.transformer import path2FileName
-
-fontSize = pt(500)
 H, W = A2 # Standard portrait, swapped to be used as landscape ratio.
 padding = pt(40) # Outside measures to accommodate the crop makrs.
 sw = pt(0.5) # Stroke width of guide lines

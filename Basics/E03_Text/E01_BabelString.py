@@ -4,12 +4,9 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E01_BabelString.py
@@ -19,6 +16,7 @@
 #     Some examples showing the working of BabelString with context
 #     without the making of Document and Text elements.
 #
+
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.toolbox.color import color

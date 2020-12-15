@@ -4,23 +4,15 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     E00_BabelLine.py
+#     E22_BabelLines.py
 #
-#     For demo, run this in DrawBot, with PageBot installed.
-#
-#     Some examples showing the working of BabelString with context
-#     without the making of Document and Text elements.
-#
-import traceback
 
+import traceback
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.document import Document

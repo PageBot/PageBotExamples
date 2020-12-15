@@ -4,22 +4,19 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E17_ElasticText.py
 #
-#     Create a Document of a given size
-#     Draw 3 columns with the same text on the same width
-#     The text box height are elastic, depending on the
-#     content and the typographic parameters. Caclulating
-#     their hieghts, allows other elements to float up.
+#     Creates a Document of a given size. Draws 3 columns with the same text
+#     on the same width. The text box height are elastic, depending on the
+#     content and the typographic parameters. Caclulating their hieghts, allows
+#     other elements to float up.
 #
+
 from pagebot import getContext
 from pagebot.constants import A4, LEFT, TOP, BOTTOM, XHEIGHT, EXPORT
 from pagebot.conditions import *

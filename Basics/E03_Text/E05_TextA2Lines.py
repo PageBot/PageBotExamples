@@ -1,29 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
-# #     P A G E B O T  E X A M P L E S
+#     P A G E B O T  E X A M P L E S
 #
 #     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E05_TextA2Lines.py
 #
-#     Create a page in A2 portrait (as it could be start of a poster). Set up
-#     the document view to show registration marks and cropmarks. Show the
-#     page frame and padding frame in blue. Show the generated PDF file name
-#     on top of the page. Show red A1 centered on the page as Text element,
-#     with its baseline on the middle of page height.
+#     Creates a page in A2 portrait (as it could be start of a poster). Set up
+#     the document view to show registration marks and cropmarks. Show the page
+#     frame and padding frame in blue. Show the generated PDF file name on top
+#     of the page. Show red A1 centered on the page as Text element, with its
+#     baseline on the middle of page height.
 #
-from pagebot import getContext
 
-from pagebot.constants import *
-from pagebot.elements import newText, newRect, newLine
+from pagebot import getContext
 from pagebot.document import Document
+from pagebot.elements import newText, newRect, newLine
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.transformer import path2FileName

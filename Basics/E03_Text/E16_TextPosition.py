@@ -9,19 +9,19 @@
 #     Licensed under MIT conditions
 #
 
-
 # -----------------------------------------------------------------------------
 #
-#     E00_TextPosition.py
+#     E16_TextPosition.py
 #
-#	  Create a page in A4 landscape
-#	  Setup the document view to show registration marks and cropmarks
+#     Create a page in A4 landscape
+#     Setup the document view to show registration marks and cropmarks
 #     Show the page frame and padding frame in blue
 #     Show the generated PDF file name on top of the page.
-#	  Show red “Hkpx” centered on the page as Text element,
+#     Show red “Hkpx” centered on the page as Text element,
 #     with its x-height on the middle of page height
 #     Show the box of the element as blue guidelines with labels.
 #
+
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.elements import newText, newRect, newLine
@@ -29,8 +29,6 @@ from pagebot.document import Document
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.transformer import path2FileName
-
-FONT_NAME = 'PageBot-Regular'
 fontSize = pt(300)
 H, W = A4 # Standard portrait, swapped to be used as landscape ratio.
 padding = pt(40) # Outside measures to accommodate the crop makrs.

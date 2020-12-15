@@ -8,19 +8,18 @@
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E15_TextMarginPadding.py
 #
-#	  Create a page in A4 landscape
-#	  Setup the document view to show registration marks and cropmarks
-#	  Show red “Hkpx” centered on the page as Text element,
+#     Create a page in A4 landscape
+#     Setup the document view to show registration marks and cropmarks
+#     Show red “Hkpx” centered on the page as Text element,
 #     with its x-height on the middle of page height
 #     Show padding and maring of the text box, in addition to calculatate size.
 #     Show the box of the element as blue guidelines with labels.
 #
+
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.elements import newText, newRect, newLine
@@ -28,8 +27,6 @@ from pagebot.document import Document
 from pagebot.toolbox.color import color
 from pagebot.toolbox.units import pt, em
 from pagebot.toolbox.transformer import path2FileName
-
-FONT_NAME = 'PageBot-Regular'
 fontSize = pt(200)
 H, W = A4 # Standard portrait, swapped to be used as landscape ratio.
 padding = pt(40) # Outside measures to accommodate the crop makrs.

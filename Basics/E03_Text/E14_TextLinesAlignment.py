@@ -4,25 +4,22 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E14_TextLinesAlignment.py
 #
-#	  Create a page in A3 landscape
-#	  Show text running over multiple lines without defined box
+#     Create a page in A3 landscape
+#     Show text running over multiple lines without defined box
 #     on all alignment combination horizontal/vertical
 #     Show origins of the text lines
 #     Show alignment lines
 #     Show labels with alignment names.
 #
-from pagebot import getContext
 
+from pagebot import getContext
 from pagebot.constants import *
 from pagebot.elements import newText, newRect, newLine
 from pagebot.document import Document

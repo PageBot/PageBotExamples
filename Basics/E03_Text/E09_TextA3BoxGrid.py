@@ -4,24 +4,22 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E09_TextA3Box.py
 #
-#	  Create a page in A3 landscape
-#	  Setup the document view to show registration marks and cropmarks
+#     Create a page in A3 landscape
+#     Setup the document view to show registration marks and cropmarks
 #     Show the page frame and padding frame in blue
 #     Show the generated PDF file name on top of the page.
-#	  Show red “A4” centered on the page as Text element,
+#     Show red “A4” centered on the page as Text element,
 #     with its baseline on the middle
 #     Show the box of the element as gray background color.
 #
+
 from pagebot import getContext
 from pagebot.constants import *
 from pagebot.elements import newText, newRect, newLine
@@ -33,8 +31,6 @@ from pagebot.toolbox.loremipsum import loremIpsum
 from pagebot.contributions.filibuster.blurb import Blurb
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.transformer import path2FileName
-
-DO_BLURB = True
 fontSize = pt(24)
 W, H = A3 # Standard portrait
 padding = mm(30) # Outside measures to accommodate the crop makrs.

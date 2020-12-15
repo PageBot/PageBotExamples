@@ -4,25 +4,22 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E13_TextBoxAlignment.py
 #
-#	  Create a landscape page
-#	  Show text box with multiple lines, mixed styles and fixed width,
+#     Create a landscape page
+#     Show text box with multiple lines, mixed styles and fixed width,
 #     on all alignment combination horizontal/vertical
 #     Show origins of the text boxes
 #     Show alignment lines
 #     Show labels with alignment names.
 #
-from pagebot import getContext
 
+from pagebot import getContext
 from pagebot.constants import *
 from pagebot.elements import newText, newRect, newLine
 from pagebot.document import Document
