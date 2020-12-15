@@ -4,15 +4,12 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     07_MarkDownForPrint.py
+#     E07_MarkDownForPrint.py
 #
 #     Show the placement of text from a MarkDown file using Typesetter,
 #     where there is already a chain of text boxes spread over several pages.

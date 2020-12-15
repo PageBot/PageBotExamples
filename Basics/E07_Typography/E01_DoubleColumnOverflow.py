@@ -1,20 +1,20 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     01_DoubleColumnOverflow.py
+#     E01_DoubleColumnOverflow.py
 #
-#     Draw a two columns with a single text, showing overflow from one column
-#     into the other. Use some view.showGrid options to show the grid.
-#     Use view.showBaselineGrid = True to show the default baselines of the text.
+#     Draws a two columns with a single text, showing overflow from one column
+#     into the other. Use some view.showGrid options to show the grid.  Use
+#     view.showBaselineGrid = True to show the default baselines of the text.
+#
 
 from pagebot import getContext
 from pagebot.fonttoolbox.objects.font import findFont

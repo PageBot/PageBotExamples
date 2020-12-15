@@ -1,20 +1,20 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     00_SingleColumn.py
+#     E00_SingleColumn.py
 #
 #     Draw one column that fills the entire usable space of the page (self.pw, self.ph)
 #     by applying the layout condition Fit() with doc.solve()
 #     The usable area of the page is defined by the remainder of page.padding.
+#
 
 from pagebot import getContext
 from pagebot.fonttoolbox.objects.font import findFont

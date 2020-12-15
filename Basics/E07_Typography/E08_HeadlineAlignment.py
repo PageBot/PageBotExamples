@@ -1,18 +1,17 @@
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     08-HeadlineAlignment.py
+#     E08_HeadlineAlignment.py
 #
+
 from pagebot import getContext
 from pagebot.fonttoolbox.objects.font import findFont
 from pagebot.toolbox.units import em, p, pt

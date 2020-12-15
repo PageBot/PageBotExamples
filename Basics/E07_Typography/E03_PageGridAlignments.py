@@ -1,16 +1,15 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     03_PageGridAlignments.py
+#     E03_PageGridAlignments.py
 #
 #     Draw a words on different positions of vertical alignment, based on the
 #     typographic metrics and the postion of baselines.

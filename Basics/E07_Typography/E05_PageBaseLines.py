@@ -4,15 +4,12 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     050_PageBaselines.py
+#     E05_PageBaselines.py
 #
 #     Show the baseline grid of the page (drawn by the PageView)
 #     and the relation with the usable page padding area.

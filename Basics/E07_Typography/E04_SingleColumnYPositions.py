@@ -1,16 +1,15 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     04_SingleColumnYPositions.py
+#     E04_SingleColumnYPositions.py
 #
 #     Draw a single columns with various typographic styles inside and show the
 #     baselines, using the view.showBaselineGrid = True display option.
@@ -61,7 +60,7 @@ page = doc[1]
 # Default behavior of the text is to align the text at "top of the em-square".
 c1 = newText(t, parent=page, w=500, stroke=(1, 0, 0), yAlign=TOP,
     showOrigin=True,
-    showBaselineGrid=False, 
+    showBaselineGrid=False,
     conditions=[Left2Left(), Top2Top(), Fit2Height(), Fit2Width()])
 # Solve the page/element conditions, so the text box as it's position and size.
 doc.solve()

@@ -1,16 +1,15 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     06_TextBaselinePlacing.py
+#     E06_TextBaselinePlacing.py
 #
 #     Draw a two columns with a single text, showing overflow from one column
 #     into the other. Use some view.showGrid options to show the grid.
@@ -69,14 +68,14 @@ view.showBaselineGrid = False # Show default setting of baseline grid of the col
 page = doc[1]
 # Make text box as child element of the page and set its layout conditions
 # to fit the padding of the page and the condition that checks on text overflow.
-c1 = newText(t, w=CW, h=CH, y=page.h/2, name='c1', parent=page, nextElement='c2', 
-    yAlign=BASELINE, showOrigin=True, 
+c1 = newText(t, w=CW, h=CH, y=page.h/2, name='c1', parent=page, nextElement='c2',
+    yAlign=BASELINE, showOrigin=True,
     showBaselineGrid=(BASE_LINE, BASE_INDEX_LEFT, BASE_Y_RIGHT), # Overwrite view setting.
     conditions=[Left2Left(), Bottom2Bottom(), Baseline2Grid(), Overflow2Next()])
 # Text without initial content, will be filled by overflow of c1.
 # Not showing the [+] marker, as the overflow text fits in the second column.
-c2 = newText(w=CW, h=CH, y=page.h/2, name='c2', parent=page, 
-    yAlign=BASELINE, showOrigin=True, 
+c2 = newText(w=CW, h=CH, y=page.h/2, name='c2', parent=page,
+    yAlign=BASELINE, showOrigin=True,
     showBaselineGrid=(BASE_LINE, BASE_INDEX_LEFT, BASE_Y_RIGHT), # Overwrite view setting.
     conditions=[Right2Right(), Bottom2Bottom(), Baseline2Grid()])
 

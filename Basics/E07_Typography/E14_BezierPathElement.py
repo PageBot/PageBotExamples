@@ -12,9 +12,9 @@
 #
 #     14_BezierPaths.py
 #
-#     This script shows the behavior and functions of BezierPaths as they exist 
+#     This script shows the behavior and functions of BezierPaths as they exist
 #     the DrawBotContext. Most of the functions are directly defined by the
-#     OSX defintion of BezierPaths. 
+#     OSX defintion of BezierPaths.
 #     (Note that BezierPaths sometimes get referred to as "path", but there is
 #     not relation with the often used "path" in PageBot filepaths.)
 #     In DrawBotContext the BezierPath is an integral part of the API.
@@ -22,7 +22,7 @@
 #     it is possible to use the booleanOperator for the FlatContext version,
 #     if the path description gets close to the code of BezierPath in DrawBot.
 #
-#     
+#
 
 from pagebot import getContext
 from pagebot.fonttoolbox.objects.font import findFont
