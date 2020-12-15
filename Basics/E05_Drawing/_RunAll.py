@@ -22,7 +22,4 @@ import E01_DrawSpirals
 import E02_DrawQuadraticGlyph
 import E03_Marker
 import E04_TextInPath
-#import E05_GraphicDesign
-#import E06_DataViz
-#import E07_ParametricAxes
-#import E08_AlterGlyphCoordinates
+import E05_PenroseTiles

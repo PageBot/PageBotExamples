@@ -4,17 +4,15 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E04_ImageElements.py
 #
-#     This script generates a page with random color squares, indicating where their position is.
+#     This script generates a page with random color squares, indicating where
+#     their position is.
 #
 
 from pagebot.filepaths import getResourcesPath

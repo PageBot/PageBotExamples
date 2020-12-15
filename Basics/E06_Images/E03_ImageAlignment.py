@@ -1,23 +1,20 @@
 #!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E03_ImageAlignment.py
 #
 #     Draw images aligned on various positions
 #
-from random import random
 
-from pagebot import getContext
+from random import random
 from pagebot.conditions import * # Import all conditions for convenience.
 from pagebot.constants import *
 from pagebot.document import Document

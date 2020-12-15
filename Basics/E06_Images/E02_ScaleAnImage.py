@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
-# 
+#
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     E01_ScalingAnImage.py
+#     E02_ScaleAnImage.py
 #
 
-import os
 import sys
 
 from pagebot import getContext

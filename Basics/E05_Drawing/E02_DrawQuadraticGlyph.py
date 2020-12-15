@@ -2,23 +2,20 @@
 # -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
-#     P A G E B O T  E X A M P L E S
+#    P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
-#     www.pagebot.io
-#     Licensed under MIT conditions
+#    Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
+#    www.pagebot.io
+#    Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     E02_DrawQuadraticGlyph.py
+#    E02_DrawQuadraticGlyph.py
 #
-#     Shows how to draw quadratic curves with cubic curves.
-#     TODO: test at Element level.
+#    Shows how to draw quadratic curves with cubic curves.
+#    TODO: test at Element level.
 #
 
-import weakref
 from fontTools.ttLib import TTFont, TTLibError
 from pagebot import getContext
 from pagebot.constants import EXPORT

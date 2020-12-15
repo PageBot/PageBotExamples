@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # -----------------------------------------------------------------------------
 #
-#     P A G E B O T  E X A M P L E S
+#    P A G E B O T  E X A M P L E S
 #
-#     www.pagebot.io
-#     Licensed under MIT conditions
+#    www.pagebot.io
+#    Licensed under MIT conditions
 #
 # -----------------------------------------------------------------------------
 #
-#     E04_TextInPath.py
+#    E04_TextInPath.py
 #
 #    Example from http://www.drawbot.com/content/text/drawingText.html
 #    FIXME: Currently only works in DrawBotContext, need to implement with

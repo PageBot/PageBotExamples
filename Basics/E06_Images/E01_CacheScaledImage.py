@@ -1,23 +1,21 @@
 #!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
-#     P A G E B O T  E X A M P L E S
+#    P A G E B O T  E X A M P L E S
 #
-
-#     www.pagebot.io
-#     Licensed under MIT conditions
+#    www.pagebot.io
+#    Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     E01_CacheScaledImage.py
+#    E01_CacheScaledImage.py
 #
-#     How to scale an image (without being an element).
-#     Because DrawBot doesn't support setting the width and height attributes
-#     explicitly, scaling needs to be done using the scale() function. This
-#     also changes to (x, y) position, therefore it also  must be inversely
-#     scaled. However, in this example scaled image is positioned at (0, 0).
+#    How to scale an image (without being an element).
+#    Because DrawBot doesn't support setting the width and height attributes
+#    explicitly, scaling needs to be done using the scale() function. This
+#    also changes to (x, y) position, therefore it also  must be inversely
+#    scaled. However, in this example scaled image is positioned at (0, 0).
 
 import os
 import sys

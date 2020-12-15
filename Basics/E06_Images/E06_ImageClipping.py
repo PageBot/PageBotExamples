@@ -1,21 +1,18 @@
 #!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
 #     E06_ImageClipping.py
 #
 #     Draw images with clipping paths and rotation.
 
-from random import random
 
 from pagebot import getContext
 from pagebot.conditions import *

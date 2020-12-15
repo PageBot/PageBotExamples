@@ -2,14 +2,14 @@
 # -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
-#     P A G E B O T  E X A M P L E S
+#    P A G E B O T  E X A M P L E S
 #
-#     www.pagebot.io
-#     Licensed under MIT conditions
+#    www.pagebot.io
+#    Licensed under MIT conditions
 #
 # -----------------------------------------------------------------------------
 #
-#     E01_DrawSpirals.py
+#    E01_DrawSpirals.py
 #
 
 from pagebot import getContext
