@@ -3,18 +3,16 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-#     Supporting DrawBot, www.drawbot.com
-#     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
 #     E04_TextInPath.py
 #
 #    Example from http://www.drawbot.com/content/text/drawingText.html
-#    Currently only works in DrawBotContext
+#    FIXME: Currently only works in DrawBotContext, need to implement with
+#    PageBot BezierPath.
 #
 
 from pagebot.contexts import getContext

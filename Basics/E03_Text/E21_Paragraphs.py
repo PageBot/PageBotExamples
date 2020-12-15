@@ -8,7 +8,7 @@
 #
 #     Licensed under MIT conditions
 #
-#     Supporting DrawBot, www.drawbot.com
+
 # -----------------------------------------------------------------------------
 #
 #     Texts.py

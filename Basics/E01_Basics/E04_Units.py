@@ -4,18 +4,16 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-#     Supporting DrawBot, www.drawbot.com
-#     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
 #     E04_Units.py
 #
 #     See pagebot.toolbox.units for example docstring too.
 #
+
 from pagebot.toolbox.units import Unit, mm, px, pt, fr, em, perc, col, units
 
 def useUnits():

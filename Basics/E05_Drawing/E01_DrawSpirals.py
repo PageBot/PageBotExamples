@@ -4,12 +4,9 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-#     Supporting DrawBot, www.drawbot.com
-#     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
 #     E01_DrawSpirals.py
@@ -102,5 +99,5 @@ def drawSpiral(contextName):
       ], globals())
     '''
 
-for contextName in ('DrawBot', 'Flat'):
+for contextName in ('DrawBot', 'Flat', 'Svg'):
     drawSpiral(contextName)

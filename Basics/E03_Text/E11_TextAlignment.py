@@ -8,8 +8,8 @@
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-#     Supporting DrawBot, www.drawbot.com
-#     Supporting Flat, xxyxyz.org/flat
+
+
 # -----------------------------------------------------------------------------
 #
 #     E11_TextAlignment.py

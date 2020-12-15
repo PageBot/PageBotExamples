@@ -4,12 +4,9 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-#     Supporting DrawBot, www.drawbot.com
-#     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
 #     E01_FilePaths.py
@@ -17,6 +14,7 @@
 #     Shows how get Roboto file paths.  Not to be confused with BezierPaths
 #     which are paths used for drawing vectores.
 #
+
 from pagebot import *
 from pagebot.constants import A3, EXPORT
 from pagebot.filepaths import getRootPath, getResourcesPath

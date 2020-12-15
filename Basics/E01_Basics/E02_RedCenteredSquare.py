@@ -11,6 +11,7 @@
 #
 #     E02_RedCenteredSquare.py
 #
+
 from pagebot import getContext
 from pagebot.document import Document
 from pagebot.elements import newRect

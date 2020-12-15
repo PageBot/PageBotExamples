@@ -4,12 +4,9 @@
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2017 Thom Janssen <https://github.com/thomgb>
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-#     Supporting DrawBot, www.drawbot.com
-#     Supporting Flat, xxyxyz.org/flat
 # -----------------------------------------------------------------------------
 #
 #     E07_ExportOptions.py
@@ -17,7 +14,7 @@
 #     Shows how to start a document and export it to PNG and
 #     PDF in the simplest steps.
 #
-#     TODO: Floating on second line does not seem to work currently
+#     FIXME: Solve floating on second line.
 
 from pagebot import getContext
 from pagebot.constants import EXPORT

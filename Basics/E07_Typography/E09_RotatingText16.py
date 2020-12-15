@@ -6,8 +6,8 @@
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-#     Supporting DrawBot, www.drawbot.com
-#     Supporting Flat, xxyxyz.org/flat
+
+
 # -----------------------------------------------------------------------------
 #
 #     09_RotatingText16.py
