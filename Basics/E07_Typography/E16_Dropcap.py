@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -6,11 +8,9 @@
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     14_Dropcap.py
+#     E16_Dropcap.py
 #
 #     Draw one column that fills the entire usable space of the page,
 #     add a positioned element, containing a dropcap and fill the rest

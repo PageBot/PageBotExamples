@@ -24,7 +24,7 @@ from pagebot.toolbox.color import color
 from pagebot.toolbox.units import em, p, pt
 from pagebot.conditions import * # Import all conditions for convenience.
 from pagebot.constants import GRID_COL_BG, GRID_ROW_BG, GRID_SQR_BG, LANGUAGE_EN
-from pagebot.mining.filibuster.samplecontent import SampleContent
+from pagebot.contributions.filibuster.samplecontent import SampleContent
 
 sampleContent = SampleContent()
 # Uncomment to show the attribute names of
@@ -66,7 +66,7 @@ view.showBaselineGrid = True # Show default baseline grid of the column lines.
 # Get the page, with size/padding inheriting from the document setting.
 page = doc[1]
 # Make text box as child element of the page and set its layout conditions
-# to fit the padding of the page and the condition Overflow2Next() that 
+# to fit the padding of the page and the condition Overflow2Next() that
 # checks on text overflow.
 c1 = newText(t, w=CW, name='c1', parent=page, nextElement='c2',
     conditions=[Left2Left(), Top2Top(), Fit2Height(), Overflow2Next()])
@@ -81,7 +81,7 @@ c3 = newText(w=CW, name='c3', parent=page,
     conditions=[Left2Col(2), Top2Top(), Fit2Height()])
 # Solve the page/element conditions. It will test the conditions (in page
 # order, element order and order of the conditions list), adjusting the
-# position and size of the text boxes and checking of the there is text 
+# position and size of the text boxes and checking of the there is text
 # overflow that needs to be linked to boxes marked by nextElement.
 doc.solve()
 

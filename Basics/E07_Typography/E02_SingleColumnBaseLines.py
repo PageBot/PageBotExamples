@@ -24,7 +24,7 @@ from pagebot.toolbox.color import color
 from pagebot.toolbox.units import em, pt
 from pagebot.conditions import * # Import all conditions for convenience.
 from pagebot.constants import BASE_LINE, BASE_INDEX_LEFT, BASE_Y_RIGHT
-from pagebot.mining.filibuster.samplecontent import SampleContent
+from pagebot.contributions.filibuster.samplecontent import SampleContent
 
 sampleContent = SampleContent()
 # Uncomment to show the attribute names of
@@ -46,7 +46,7 @@ bold = findFont('PageBot-Bold')
 # Defined styles
 headStyle = dict(font=bold, fontSize=36, leading=BASELINE, textFill=0.1, hyphenation=False,
     paragraphBottomSpacing=em(0.5))
-subHeadStyle = dict(font=bold, fontSize=24, leading=em(1.4), textFill=0.1, 
+subHeadStyle = dict(font=bold, fontSize=24, leading=em(1.4), textFill=0.1,
     paragraphBottomSpacing=em(0.2), paragraphTopSpacing=em(0.8))
 style = dict(font=font, fontSize=24, leading=BASELINE, textFill=0.15, hyphenation=False)
 footNoteRefStyle = dict(font=font, fontSize=12, baselineShift=em(0.2), textFill=0.2)

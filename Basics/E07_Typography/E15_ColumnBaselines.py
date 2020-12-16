@@ -1,18 +1,15 @@
 #!/usr/bin/env python3
-# encoding: utf-8
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
 #
-
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     TextBaselines.py
+#     E15_ColumnBaselines.py
 #
 #     Show how alignment of baselines work for
 

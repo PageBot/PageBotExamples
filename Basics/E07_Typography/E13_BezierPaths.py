@@ -1,16 +1,15 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
 #
-#     Copyright (c) 2016+ Buro Petr van Blokland + Claudia Mens
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     14_BezierPaths.py
+#     E13_BezierPaths.py
 #
 #     This script shows the behavior and functions of BezierPaths as they exist
 #     the DrawBotContext. Most of the functions are directly defined by the
