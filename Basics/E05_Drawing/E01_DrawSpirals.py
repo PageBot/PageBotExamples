@@ -34,7 +34,7 @@ w = W - 2*M
 h = H - 2*H
 
 def drawSpiral(contextName):
-    exportPath = '%s/%s-%s.pdf' % (EXPORT, FILENAME, contextName)
+    exportName = '%s-%s.pdf' % (FILENAME, contextName)
     context = getContext(contextName)
     context.newPage(pt(W), pt(H))
     mx = W/2+X
@@ -76,7 +76,7 @@ def drawSpiral(contextName):
         runs = True
 
     context.drawPath()
-    context.saveImage(exportPath)
+    context.export(exportName)
 
     '''
     FIXME: only works from inside DrawBot.

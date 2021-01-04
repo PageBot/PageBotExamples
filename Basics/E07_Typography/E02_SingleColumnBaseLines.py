@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # -----------------------------------------------------------------------------
 #
 #     P A G E B O T  E X A M P L E S
@@ -6,11 +8,9 @@
 #     www.pagebot.io
 #     Licensed under MIT conditions
 #
-
-
 # -----------------------------------------------------------------------------
 #
-#     02_SingleColumnBaselines.py
+#     E02_SingleColumnBaselines.py
 #
 #     Draw a single columns with various typographic styles inside and show their
 #     vertical positions. This allows for alignment on parts of the headline.
